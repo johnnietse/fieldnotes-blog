@@ -1,0 +1,368 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A Flask and LangChain chatbot answers questions about a selected PDF using GPT-3.5-turbo."><title>Asking a PDF questions in plain language · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>Asking a PDF questions in plain language</h1><p class="dek">A Flask and LangChain chatbot answers questions about a selected PDF using GPT-3.5-turbo.</p></div><img src="https://github.com/user-attachments/assets/d9a56ba3-254d-4bbd-b1f6-7c97a3b33611" alt="Screenshot (1181)" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started May 21, 2025</span><span>Updated February 26, 2026</span><span>~8 min read</span></div><div class="tags"><span class="tag">Flask</span><span class="tag">LangChain</span><span class="tag">LLMs</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The repository frames document question-answering as a way to search information beyond keyword matching.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A Flask and LangChain chatbot answers questions about a selected PDF using GPT-3.5-turbo.. The repository history snapshot records 71 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The repository frames document question-answering as a way to search information beyond keyword matching.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The spark is a practical one: useful knowledge often lives inside long documents that are hard to navigate.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A Flask and LangChain chatbot answers questions about a selected PDF using GPT-3.5-turbo.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The README contains 1173 words. This visible excerpt keeps the core purpose and setup close to the story, while the full document is available below and at the source repository.</p><h1 id="pdf-chatbot-with-flask-and-langchain-1">PDF Chatbot with Flask and Langchain</h1>
+<p>A chatbot that interacts with users via text and answers questions based on the content of a specific PDF document. Built with Flask, Langchain, and OpenAI&#39;s GPT-3.5-turbo.</p>
+<h2 id="why-build-a-chatbot-to-analyze-pdf-documents-using-llm-1">Why Build a Chatbot to Analyze PDF Documents Using LLM?</h2>
+<p>In organizations, thousands of pages of PDFs (manuals, reports, contracts) hold critical knowledge. Manually reading them is time-consuming and error-prone. This project solves that: Create an AI assistant that digests PDFs in seconds and answers questions like a human expert about what it had read, while processing sensitive PDFs locally (no cloud uploads) to ensure data privacy. This is especially critical to scenarios where you need to keep thousands of pages of information confidential for sensitive materials like internal manuals, proprietary reports, legal contracts, or medical records, while also requiring an AI-powered personal assistant chatbot to summarize the reading for you in seconds.</p>
+<p><img src="https://github.com/user-attachments/assets/d9a56ba3-254d-4bbd-b1f6-7c97a3b33611" alt="Screenshot (1181)" loading="lazy"> <img src="https://github.com/user-attachments/assets/049ecb09-833e-46b1-bfe9-fcd8f127a505" alt="Screenshot (1182)" loading="lazy"></p>
+<h2 id="features-1">Features</h2>
+<ul>
+<li><strong>PDF Processing</strong>: Upload and process PDF documents for conversational retrieval.</li>
+<li><strong>AI-Powered Responses</strong>: Utilizes OpenAI&#39;s GPT-3.5-turbo for intelligent responses.</li>
+<li><strong>Interactive UI</strong>: Ready-to-use frontend with HTML, CSS, and JavaScript.</li>
+<li><strong>Light/Dark Mode</strong>: Toggle between light and dark themes.</li>
+<li><strong>Easy Deployment</strong>: Docker support for consistent deployment across environments.</li>
+</ul>
+<h2 id="table-of-contents-1">Table of Contents</h2>
+<ol>
+<li><a href="#build-a-chatbot-for-your-data" target="_blank" rel="noopener noreferrer">Build a Chatbot for your Data</a></li>
+<li><a href="#setting-up-and-understanding-the-user-interface" target="_blank" rel="noopener noreferrer">Setting Up and Understanding the User Interface</a></li>
+<li><a href="#using-the-chatbot" target="_blank" rel="noopener noreferrer">Using the Chatbot</a></li>
+<li><a href="#troubleshooting" target="_blank" rel="noopener noreferrer">Troubleshooting</a></li>
+<li><a href="#docker-deployment-optional" target="_blank" rel="noopener noreferrer">Docker Deployment (Optional)</a></li>
+<li><a href="#frontend-overview" target="_blank" rel="noopener noreferrer">Frontend Overview</a></li>
+<li><a href="#understanding-the-worker-document-processing-and-conversation-management" target="_blank" rel="noopener noreferrer">Understanding The Worker: Document Processing and Conversation Management</a></li>
+<li><a href="#understanding-the-server" target="_blank" rel="noopener noreferrer">Understanding The Server</a></li>
+<li><a href="#conclusions" target="_blank" rel="noopener noreferrer">Conclusions</a></li>
+<li><a href="#project-attribution" target="_blank" rel="noopener noreferrer">Project Attribution</a></li>
+<li><a href="#important-notice-local-llm-version-available" target="_blank" rel="noopener noreferrer">Important Notice: Local LLM Version Available</a></li>
+<li><a href="#demo-video" target="_blank" rel="noopener noreferrer">Demo Video</a></li>
+</ol>
+<p>---</p>
+<h2 id="build-a-chatbot-for-your-data-1">Build a Chatbot for your Data</h2>
+<h3 id="introduction-1">Introduction</h3>
+<p>Create a chatbot for your PDF files using Flask (web framework) and Langchain (for Large Language Models). The chatbot comprehends and answers questions about document content.</p>
+<h3 id="key-technologies-1">Key Technologies</h3>
+<ul>
+<li><strong>Flask</strong>: Lightweight Python web framework for backend development.</li>
+<li><strong>Langchain</strong>: Framework for AI-driven language applications (text retrieval, summarization, etc.).</li>
+<li><strong>Chatbots</strong>: Human-like conversation software for diverse domains (customer service, education, etc.).</li>
+</ul>
+<h3 id="tech-stack-1">Tech Stack</h3>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Python</li>
+</ul>
+<h3 id="learning-objectives-1">Learning Objectives</h3>
+<ul>
+<li>Understand Langchain and AI applications.</li>
+<li>Set up a development environment with Python Flask.</li>
+<li>Implement PDF upload functionality.</li>
+<li>Integrate with OpenAI&#39;s GPT-3 model.</li>
+<li>(Optional) Deploy to a web server.</li>
+</ul>
+<h3 id="prerequisites-1">Prerequisites</h3>
+<p>Basic knowledge of HTML/CSS, JavaScript, and Python is helpful but not required.</p>
+<p>---</p>
+<h2 id="setting-up-and-understanding-the-user-interface-1">Setting Up and Understanding the User Interface</h2>
+<h3 id="initial-setup-1">Initial Setup</h3>
+<ol>
+<li>Download the ZIP File from the repository and extract it</li>
+</ol>
+<ul>
+<li>Locate the downloaded ZIP file (e.g., my_project.zip).</li>
+<li>Right-click → Extract All (Windows) or double-click (Mac/Linux).</li>
+<li>Save the extracted folder to a preferred location (e.g., Documents/ or Downloads/).</li>
+</ul>
+<ol>
+<li>Open a Terminal</li>
+</ol>
+<ul>
+<li>Navigate to the extracted folder:</li>
+</ul>
+<pre><code>cd path/to/extracted_folder</code></pre>
+<p>Note: (Replace path/to/extracted_folder with your actual path.)</p>
+<ol>
+<li>Create a virtual environment:</li>
+</ol>
+<pre><code>pip3 install virtualenv
+virtualenv my_env</code></pre>
+<ul>
+<li>For Windows:</li>
+</ul>
+<pre><code>my_env\Scripts\activate</code></pre>
+<ul>
+<li>For Mac/Linux:</li>
+</ul>
+<pre><code>source my_env/bin/activate</code></pre>
+<ol>
+<li>Install dependencies:</li>
+</ol>
+<pre><code>pip install Flask Flask_Cors langchain==0.0.299 openai==0.28 pdf2image chromadb==0.4.15 pypdf tiktoken</code></pre>
+<ol>
+<li>Since the project includes a requirements.txt, use &quot;pip install -r requirements.txt&quot; in addition to running the above command.</li>
+</ol>
+<ol>
+<li>Add your OpenAI API key</li>
+</ol>
+<ul>
+<li>Get a key from OpenAI.</li>
+<li>In <code>worker.py</code>, add your actual key into the quotations -&gt; <code>api_key = &amp;quot; &amp;quot;</code>.</li>
+</ul>
+<ol>
+<li>Running the Application:</li>
+</ol>
+<h3 id="local-execution-1">Local Execution</h3>
+<pre><code>python3 server.py</code></pre>
+<p>Access the app at <code>http://127.0.0.1:8080</code>. Visit it to use the chatbot.</p>
+<h2 id="using-the-chatbot-1">Using the Chatbot</h2>
+<ol>
+<li>Upload a PDF via the web interface.</li>
+<li>Ask questions about the document content.</li>
+<li>Reset the chat anytime to start over.</li>
+</ol>
+<h2 id="troubleshooting-1">Troubleshooting</h2>
+<ul>
+<li><strong>&quot;API key not found&quot;</strong>: Ensure your OpenAI key is set in <code>worker.py</code>.</li>
+<li><strong>PDF upload fails</strong>: Check if the file is valid (e.g., not corrupted).</li>
+<li><strong>Slow responses</strong>: Reduce <code>chunk_size</code> in <code>CharacterTextSplitter</code>.</li>
+<li><strong>Port 8080 busy</strong>: To fix it,	Run <code>lsof -i :8080</code> (Mac/Linux) or <code>netstat -ano findstr :8080</code> (Windows) to free the port.</li>
+<li>*<strong>Port conflicts</strong>: Change the port in server.py (e.g., port=8000).</li>
+<li><strong>Missing modules</strong>: Reinstall dependencies with <code>pip install -r requirements.txt</code>.</li>
+</ul>
+<h2 id="docker-deployment-optional-1">Docker Deployment (Optional)</h2>
+<ol>
+<li>Build the image:</li>
+</ol>
+<pre><code>docker build -t build_chatbot_for_your_data .</code></pre>
+<ol>
+<li>Run the container:</li>
+</ol>
+<pre><code>docker run -p 8080:8080 build_chatbot_for_your_data</code></pre>
+<h2 id="frontend-overview-1">Frontend Overview</h2>
+<ul>
+<li>HTML/CSS/JavaScript: Ready-to-use interface with Bootstrap, Font Awesome, and jQuery.</li>
+<li>Key Files:</li>
+<li><code>index.html</code>: Layout and structure.</li>
+<li><code>style.css</code>: Visual styling and animations.</li>
+<li><code>script.js</code>: Interactivity (messaging, theme toggling, etc.).</li>
+</ul><span id="build-a-chatbot-for-your-data-2"></span><span id="setting-up-and-understanding-the-user-interface-2"></span><span id="using-the-chatbot-2"></span><span id="troubleshooting-2"></span><span id="docker-deployment-optional-2"></span><span id="frontend-overview-2"></span><span id="understanding-the-worker-document-processing-and-conversation-management-1"></span><span id="understanding-the-server-1"></span><span id="conclusions-1"></span><span id="project-attribution-1"></span><span id="important-notice-local-llm-version-available-1"></span><span id="demo-video-1"></span><details class="history-details"><summary>Expand the full repository README (1173 words)</summary><h1 id="pdf-chatbot-with-flask-and-langchain">PDF Chatbot with Flask and Langchain</h1>
+<p>A chatbot that interacts with users via text and answers questions based on the content of a specific PDF document. Built with Flask, Langchain, and OpenAI&#39;s GPT-3.5-turbo.</p>
+<h2 id="why-build-a-chatbot-to-analyze-pdf-documents-using-llm">Why Build a Chatbot to Analyze PDF Documents Using LLM?</h2>
+<p>In organizations, thousands of pages of PDFs (manuals, reports, contracts) hold critical knowledge. Manually reading them is time-consuming and error-prone. This project solves that: Create an AI assistant that digests PDFs in seconds and answers questions like a human expert about what it had read, while processing sensitive PDFs locally (no cloud uploads) to ensure data privacy. This is especially critical to scenarios where you need to keep thousands of pages of information confidential for sensitive materials like internal manuals, proprietary reports, legal contracts, or medical records, while also requiring an AI-powered personal assistant chatbot to summarize the reading for you in seconds.</p>
+<p><img src="https://github.com/user-attachments/assets/d9a56ba3-254d-4bbd-b1f6-7c97a3b33611" alt="Screenshot (1181)" loading="lazy"> <img src="https://github.com/user-attachments/assets/049ecb09-833e-46b1-bfe9-fcd8f127a505" alt="Screenshot (1182)" loading="lazy"></p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>PDF Processing</strong>: Upload and process PDF documents for conversational retrieval.</li>
+<li><strong>AI-Powered Responses</strong>: Utilizes OpenAI&#39;s GPT-3.5-turbo for intelligent responses.</li>
+<li><strong>Interactive UI</strong>: Ready-to-use frontend with HTML, CSS, and JavaScript.</li>
+<li><strong>Light/Dark Mode</strong>: Toggle between light and dark themes.</li>
+<li><strong>Easy Deployment</strong>: Docker support for consistent deployment across environments.</li>
+</ul>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#build-a-chatbot-for-your-data" target="_blank" rel="noopener noreferrer">Build a Chatbot for your Data</a></li>
+<li><a href="#setting-up-and-understanding-the-user-interface" target="_blank" rel="noopener noreferrer">Setting Up and Understanding the User Interface</a></li>
+<li><a href="#using-the-chatbot" target="_blank" rel="noopener noreferrer">Using the Chatbot</a></li>
+<li><a href="#troubleshooting" target="_blank" rel="noopener noreferrer">Troubleshooting</a></li>
+<li><a href="#docker-deployment-optional" target="_blank" rel="noopener noreferrer">Docker Deployment (Optional)</a></li>
+<li><a href="#frontend-overview" target="_blank" rel="noopener noreferrer">Frontend Overview</a></li>
+<li><a href="#understanding-the-worker-document-processing-and-conversation-management" target="_blank" rel="noopener noreferrer">Understanding The Worker: Document Processing and Conversation Management</a></li>
+<li><a href="#understanding-the-server" target="_blank" rel="noopener noreferrer">Understanding The Server</a></li>
+<li><a href="#conclusions" target="_blank" rel="noopener noreferrer">Conclusions</a></li>
+<li><a href="#project-attribution" target="_blank" rel="noopener noreferrer">Project Attribution</a></li>
+<li><a href="#important-notice-local-llm-version-available" target="_blank" rel="noopener noreferrer">Important Notice: Local LLM Version Available</a></li>
+<li><a href="#demo-video" target="_blank" rel="noopener noreferrer">Demo Video</a></li>
+</ol>
+<p>---</p>
+<h2 id="build-a-chatbot-for-your-data">Build a Chatbot for your Data</h2>
+<h3 id="introduction">Introduction</h3>
+<p>Create a chatbot for your PDF files using Flask (web framework) and Langchain (for Large Language Models). The chatbot comprehends and answers questions about document content.</p>
+<h3 id="key-technologies">Key Technologies</h3>
+<ul>
+<li><strong>Flask</strong>: Lightweight Python web framework for backend development.</li>
+<li><strong>Langchain</strong>: Framework for AI-driven language applications (text retrieval, summarization, etc.).</li>
+<li><strong>Chatbots</strong>: Human-like conversation software for diverse domains (customer service, education, etc.).</li>
+</ul>
+<h3 id="tech-stack">Tech Stack</h3>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Python</li>
+</ul>
+<h3 id="learning-objectives">Learning Objectives</h3>
+<ul>
+<li>Understand Langchain and AI applications.</li>
+<li>Set up a development environment with Python Flask.</li>
+<li>Implement PDF upload functionality.</li>
+<li>Integrate with OpenAI&#39;s GPT-3 model.</li>
+<li>(Optional) Deploy to a web server.</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Basic knowledge of HTML/CSS, JavaScript, and Python is helpful but not required.</p>
+<p>---</p>
+<h2 id="setting-up-and-understanding-the-user-interface">Setting Up and Understanding the User Interface</h2>
+<h3 id="initial-setup">Initial Setup</h3>
+<ol>
+<li>Download the ZIP File from the repository and extract it</li>
+</ol>
+<ul>
+<li>Locate the downloaded ZIP file (e.g., my_project.zip).</li>
+<li>Right-click → Extract All (Windows) or double-click (Mac/Linux).</li>
+<li>Save the extracted folder to a preferred location (e.g., Documents/ or Downloads/).</li>
+</ul>
+<ol>
+<li>Open a Terminal</li>
+</ol>
+<ul>
+<li>Navigate to the extracted folder:</li>
+</ul>
+<pre><code>cd path/to/extracted_folder</code></pre>
+<p>Note: (Replace path/to/extracted_folder with your actual path.)</p>
+<ol>
+<li>Create a virtual environment:</li>
+</ol>
+<pre><code>pip3 install virtualenv
+virtualenv my_env</code></pre>
+<ul>
+<li>For Windows:</li>
+</ul>
+<pre><code>my_env\Scripts\activate</code></pre>
+<ul>
+<li>For Mac/Linux:</li>
+</ul>
+<pre><code>source my_env/bin/activate</code></pre>
+<ol>
+<li>Install dependencies:</li>
+</ol>
+<pre><code>pip install Flask Flask_Cors langchain==0.0.299 openai==0.28 pdf2image chromadb==0.4.15 pypdf tiktoken</code></pre>
+<ol>
+<li>Since the project includes a requirements.txt, use &quot;pip install -r requirements.txt&quot; in addition to running the above command.</li>
+</ol>
+<ol>
+<li>Add your OpenAI API key</li>
+</ol>
+<ul>
+<li>Get a key from OpenAI.</li>
+<li>In <code>worker.py</code>, add your actual key into the quotations -&gt; <code>api_key = &amp;quot; &amp;quot;</code>.</li>
+</ul>
+<ol>
+<li>Running the Application:</li>
+</ol>
+<h3 id="local-execution">Local Execution</h3>
+<pre><code>python3 server.py</code></pre>
+<p>Access the app at <code>http://127.0.0.1:8080</code>. Visit it to use the chatbot.</p>
+<h2 id="using-the-chatbot">Using the Chatbot</h2>
+<ol>
+<li>Upload a PDF via the web interface.</li>
+<li>Ask questions about the document content.</li>
+<li>Reset the chat anytime to start over.</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><strong>&quot;API key not found&quot;</strong>: Ensure your OpenAI key is set in <code>worker.py</code>.</li>
+<li><strong>PDF upload fails</strong>: Check if the file is valid (e.g., not corrupted).</li>
+<li><strong>Slow responses</strong>: Reduce <code>chunk_size</code> in <code>CharacterTextSplitter</code>.</li>
+<li><strong>Port 8080 busy</strong>: To fix it,	Run <code>lsof -i :8080</code> (Mac/Linux) or <code>netstat -ano findstr :8080</code> (Windows) to free the port.</li>
+<li>*<strong>Port conflicts</strong>: Change the port in server.py (e.g., port=8000).</li>
+<li><strong>Missing modules</strong>: Reinstall dependencies with <code>pip install -r requirements.txt</code>.</li>
+</ul>
+<h2 id="docker-deployment-optional">Docker Deployment (Optional)</h2>
+<ol>
+<li>Build the image:</li>
+</ol>
+<pre><code>docker build -t build_chatbot_for_your_data .</code></pre>
+<ol>
+<li>Run the container:</li>
+</ol>
+<pre><code>docker run -p 8080:8080 build_chatbot_for_your_data</code></pre>
+<h2 id="frontend-overview">Frontend Overview</h2>
+<ul>
+<li>HTML/CSS/JavaScript: Ready-to-use interface with Bootstrap, Font Awesome, and jQuery.</li>
+<li>Key Files:</li>
+<li><code>index.html</code>: Layout and structure.</li>
+<li><code>style.css</code>: Visual styling and animations.</li>
+<li><code>script.js</code>: Interactivity (messaging, theme toggling, etc.).</li>
+</ul>
+<h2 id="understanding-the-worker-document-processing-and-conversation-management">Understanding The Worker: Document Processing and Conversation Management</h2>
+<h3 id="key-functions">Key Functions</h3>
+<ol>
+<li><strong>Language Model Initialization</strong>:</li>
+</ol>
+<ul>
+<li>Uses OpenAI&#39;s GPT-3.5-turbo.</li>
+<li>Requires an API key (set in environment variables).</li>
+</ul>
+<ol>
+<li><strong>PDF Processing</strong>:</li>
+</ol>
+<ul>
+<li>Loads PDFs with <code>PyPDFLoader</code>.</li>
+<li>Splits documents into chunks with <code>CharacterTextSplitter</code>.</li>
+<li>Creates a vector store (<code>Chroma</code>) for retrieval.</li>
+</ul>
+<ol>
+<li><strong>Prompt Handling</strong>:</li>
+</ol>
+<ul>
+<li>Processes user messages with <code>ConversationalRetrievalChain</code>.</li>
+<li>Maintains chat history for context.</li>
+</ul>
+<h2 id="understanding-the-server">Understanding The Server</h2>
+<h3 id="flask-backend">Flask Backend</h3>
+<ul>
+<li>Routes:</li>
+<li><code>/</code>: Serves the frontend (<code>index.html</code>).</li>
+<li><code>/process-document</code>: Handles PDF uploads.</li>
+<li><code>/process-message</code>: Processes user queries.</li>
+</ul>
+<h3 id="cors-policy">CORS Policy</h3>
+<p>Configured to allow requests from any domain (&#39;<code>*</code>&#39;).</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>You’ve built a chatbot capable of:</p>
+<ul>
+<li><strong>Retrieval-Augmented Search and Generation</strong>: Leveraging document content for answers &amp; Combine LLMs with document data.</li>
+<li><strong>Langchain Integration</strong>: Using embeddings and vector stores &amp; Processing documents with embeddings and vector stores.</li>
+<li><strong>Full-Stack Development</strong>: Combining Flask, JavaScript, and AI models &amp; Using Flask to build a backend for handling requests.</li>
+</ul>
+<p>---</p>
+<h2 id="project-attribution">Project Attribution</h2>
+<p>This chatbot was developed as part of a guided project tutorial provided by the IBM Cognitive Class AI platform. The project demonstrates the integration of Flask, LangChain, and Large Language Models (LLMs) to build an AI-powered assistant capable of analyzing and answering questions about PDF documents.</p>
+<p>---</p>
+<h1 id="important-notice-local-llm-version-available">Important Notice: Local LLM Version Available</h1>
+<p>If you want to test this chatbot but don&#39;t have an OpenAI or DeepSeek API key with available credit, I have created a special version that uses local LLMs instead of paid APIs:</p>
+<p>Here it is: https://github.com/johnnietse/localLLM-pdf-chatbot.git</p>
+<p>This alternative version:</p>
+<ul>
+<li>💰 Requires no API keys or credits</li>
+<li>🖥️ Runs entirely on your local machine</li>
+<li>🚫 Has no usage costs</li>
+<li>🔒 Processes your documents locally (no data leaves your computer)</li>
+<li>🧠 Uses open-source language models like TinyLlama and Mistral</li>
+</ul>
+<p>Key Features of the Local Version:</p>
+<ul>
+<li>PDF document processing and question answering</li>
+<li>Light/dark mode interface</li>
+<li>Conversation history</li>
+<li>Support for multiple open-source LLMs</li>
+<li>GPU acceleration option (for faster responses)</li>
+</ul>
+<p>Why Use the Local Version?</p>
+<ol>
+<li>No API Costs: Avoid monthly subscriptions or pay-per-use fees</li>
+<li>Privacy: Your documents never leave your computer</li>
+<li>Always Available: No dependency on external services</li>
+<li>Customizable: Use different open-source models as needed</li>
+</ol>
+<p>The local version provides similar functionality to this API-based version but with no ongoing costs. You only need to download the model files once (about 600MB for TinyLlama, or 4-6GB for larger models).</p>
+<h2 id="demo-video">Demo Video</h2>
+<p>A short walkthrough of the local LLM PDF Chatbot is available below. This demo highlights all core features, including attendee management, sponsorship controls, job postings, and session scheduling.</p>
+<p>▶️ Watch the full demo here: https://youtu.be/uIYhWCeb01A?si=WXNgxuzdTUaVYU11</p></details><p><a href="https://github.com/johnnietse/pdf-chatbot/blob/main/README.md" target="_blank" rel="noopener noreferrer">Open README on main</a></p></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><ul>
+<li><strong>Flask</strong>: Lightweight Python web framework for backend development.</li>
+</ul></li><li><ul>
+<li>Python</li>
+</ul></li><li><ul>
+<li>Set up a development environment with Python Flask.</li>
+</ul></li><li><p>Basic knowledge of HTML/CSS, JavaScript, and Python is helpful but not required.</p></li><li><h3 id="initial-setup-2">Initial Setup</h3></li><li><ol>
+<li>Create a virtual environment:</li>
+</ol></li><li><p>pip3 install virtualenv</p></li><li><ol>
+<li>Install dependencies:</li>
+</ol></li><li><p>pip install Flask Flask_Cors langchain==0.0.299 openai==0.28 pdf2image chromadb==0.4.15 pypdf tiktoken</p></li><li><ol>
+<li>Since the project includes a requirements.txt, use &quot;pip install -r requirements.txt&quot; in addition to running the above command.</li>
+</ol></li><li><ol>
+<li>Running the Application:</li>
+</ol></li><li><ul>
+<li><strong>Missing modules</strong>: Reinstall dependencies with <code>pip install -r requirements.txt</code>.</li>
+</ul></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/a65c0836244b185def5fabe3f5d376a4d4cda52f" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>a65c083</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/3ffa7c55a111dd92cd735bac70898d4458d44b51" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>3ffa7c5</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b32c46f3e075a869a7f84872ab6972e05c550093" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b32c46f</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/225be2d192d8f0978a0dca629c830fccd8afae6d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>225be2d</code></div></li><li><time>2025-05-27</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/df46e36894b86499e7e1754ac5d37e839244b698" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>df46e36</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b6c5a4ca4feb480457f08506514bd5eb6487ff4a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b6c5a4c</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/baca680432a4939001173b295adda9dd2139f715" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>baca680</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/8fb7c36c2eebdd13fd38da4f7211956c098353b4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>8fb7c36</code></div></li></ol><details class="history-details"><summary>Show all 71 commits on main</summary><ol class="timeline compact"><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/a65c0836244b185def5fabe3f5d376a4d4cda52f" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>a65c083</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/3ffa7c55a111dd92cd735bac70898d4458d44b51" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>3ffa7c5</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/48b6bc4386ffad975df56e4a47955a788a9ed242" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>48b6bc4</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/a61fdd8bd74d331610a40aa939126f8196a7ca80" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>a61fdd8</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/4f8fdc989c0220483fb204dc430c8ba2f8888a38" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>4f8fdc9</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b928bfcb5acbec6e79792d51f38c74d5e40dff50" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b928bfc</code></div></li><li><time>2025-05-21</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/824f14c1085fd43f0435219aff798132c966de67" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>824f14c</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/3fa5de678c73276c4d5a2bf6b1f149e67fb5554c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3fa5de6</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/4aa460de089c55fd8132b5663fa5fef61455b360" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>4aa460d</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b7664e8ed44fb2b16079b5200b62b88ddf7e2ef4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b7664e8</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/db49b15d226ba51af2e00a9fed9ec5cd249f47cb" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>db49b15</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/f5ef10311961a79590214df08550942293cec001" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>f5ef103</code></div></li><li><time>2025-05-22</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/3f1ba71cb32d226282be6d4f107ae83b50546541" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3f1ba71</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/919cf614f9cafe00c2c259ccadb1bbc8ef41caa2" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>919cf61</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/fe27ac0ec01171590ed3e14565da385b705f88ed" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fe27ac0</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b32c46f3e075a869a7f84872ab6972e05c550093" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b32c46f</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/c32ea2e6e36faaf31d0cb6641dcd65870386c4f6" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c32ea2e</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/6c008c7ec970b36c622883c29aeb2e283d3579ef" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6c008c7</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/3d4d634a7bece83bf2ed5a7f75b26fa7ef2d253c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3d4d634</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/42cc3cb587c5d5a7aa00157854fd1230b3bafb6a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>42cc3cb</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/ed7fd753025d5d9b27b43e014d0ee9e544d0e3fa" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>ed7fd75</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/d5fbc68193bf3b8bbf0f750a796bd87ccf91bdbe" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d5fbc68</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/933ec79f4663dbeac24b3996234f6343f3e344a8" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>933ec79</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/0e386ce2627108be8520e938a3f435cda5930b7f" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>0e386ce</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/386f8a099b6bf215bec26e17cd9918d7f6b72767" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>386f8a0</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/82ee46364ec5823c9b49415a34169e1f085cb0cf" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>82ee463</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/e8422545edac0d21524401d7802acd726cb32036" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e842254</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/740b0e33a9b3f66c8df923dc09d46978c854c09f" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>740b0e3</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/33ab9ff9174d6e3d996a3926dd742f28ea6bf2ff" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>33ab9ff</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/8141892be34b6e3dc824c259fe8196b1c5465f8b" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>8141892</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/391acf3f38f7afe680eab198bc98e2be7dc6e336" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>391acf3</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/225be2d192d8f0978a0dca629c830fccd8afae6d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>225be2d</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/bb38f44abaaaa0f44d12db83e187cb47533376a0" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>bb38f44</code></div></li><li><time>2025-05-23</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/976bd6e850b23d7c2e730a60bef408eaf4c40bf2" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>976bd6e</code></div></li><li><time>2025-05-24</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/51b90a354d9e1264de926c67a860bf48e2759bd4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>51b90a3</code></div></li><li><time>2025-05-24</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/70833b1962772d30fe67b7faa8c33020f7914adb" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>70833b1</code></div></li><li><time>2025-05-24</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/27f877e49722ae3c09c51a52bb7dff6271f57774" target="_blank" rel="noopener noreferrer">Create .gitattributes</a></strong><code>27f877e</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/a21b08ff347641f7d77ffd30c9e97f9a3a2f83f2" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>a21b08f</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/02708f8514f59f233b7b2ba2032a8d3ad213acb4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>02708f8</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/91386bd96a45139a1d995d38e0f3c10b5278eb23" target="_blank" rel="noopener noreferrer">Create a</a></strong><code>91386bd</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/2b10e918147b1aa5b23080ceccb30c5c685ac065" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>2b10e91</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/6844a07e61ca4ce1cc197c389c4faaa83535e0ac" target="_blank" rel="noopener noreferrer">Delete .theia/a</a></strong><code>6844a07</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/ea9510fadbb1970f9c9657efe97144f5d475d88d" target="_blank" rel="noopener noreferrer">Create a</a></strong><code>ea9510f</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/55baf730c3baf1703f71f66a45c4857e94e97e78" target="_blank" rel="noopener noreferrer">Create a</a></strong><code>55baf73</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/2f637993440b9a4a3ca473980c02316b56af88d0" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>2f63799</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/4325a5b3fab5275d3a54f0824129c12ed704c7d2" target="_blank" rel="noopener noreferrer">Delete .gitattributes</a></strong><code>4325a5b</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/0fa19f92a38f23d7ab0c016721d6ac6d109944c5" target="_blank" rel="noopener noreferrer">Delete .theia directory</a></strong><code>0fa19f9</code></div></li><li><time>2025-05-25</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/c5d808e0cd68a580b9533912d89225a5db7e5679" target="_blank" rel="noopener noreferrer">Delete build_chatbot_for_your_data directory</a></strong><code>c5d808e</code></div></li><li><time>2025-05-27</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/df46e36894b86499e7e1754ac5d37e839244b698" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>df46e36</code></div></li><li><time>2025-05-27</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/d217fa4f9fdfef43eed054b720656956bd1266dc" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d217fa4</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/00e16f7702b911b6c7784c888783abbf60858630" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>00e16f7</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/32a886dac43b07cb681f18faffa50a93a5d4d861" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>32a886d</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/7e502c23fdc38c17550e1cc59795f97ef801d0ac" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>7e502c2</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/579d3f9c072ffa69ea61951b8651cef87bc311d5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>579d3f9</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/cbaef5fecb6a81f4b7f7dd909e8a15e85969f87e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>cbaef5f</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/cbbbe5b9d24db4de76beae3449665f7b2e9414c9" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>cbbbe5b</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/e4f7bd9d0e0816cee980c277af58e3f02809b5cf" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e4f7bd9</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/855ed29dd3a09daa32428bec78a9dbefafb92763" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>855ed29</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/c226d13acfe2b3fea20ee0708380cd6cd8626312" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c226d13</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/b6c5a4ca4feb480457f08506514bd5eb6487ff4a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b6c5a4c</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/c9cdf4f01c575e74b57b0eb017c7849da5956375" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c9cdf4f</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/248a397608338c02897609abb55ba7fba511f5ad" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>248a397</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/7ac5993e0e658df0ea39aadc137e62fc9f8ee583" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>7ac5993</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/e22fbfd3efb83f57270abfec8955fdbc5f33cf6e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e22fbfd</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/65adcc68448ef60cf6095f84bdbb50aee8da7a36" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>65adcc6</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/0b5ef487988b3ea7a4e27c6db8270cf09aa33ce0" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>0b5ef48</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/f57848a0b8b2d397a6e7275a4659865b80391442" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>f57848a</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/91b0095a2e27a5b380aad8079bc094cc1b2557f7" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>91b0095</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/1553a8771a552d3186e6a228ebe52b8f8ea6c7d0" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1553a87</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/baca680432a4939001173b295adda9dd2139f715" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>baca680</code></div></li><li><time>2026-02-26</time><div><strong><a href="https://github.com/johnnietse/pdf-chatbot/commit/8fb7c36c2eebdd13fd38da4f7211956c098353b4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>8fb7c36</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 71 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/pdf-chatbot/tree/main" target="_blank" rel="noopener noreferrer">main</a> · 8fb7c36 · 2026-02-26 · Update README.md</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The public commit history is mostly documentation snapshots, so the article focuses on the documented architecture and does not invent a troubleshooting sequence.</p><p>The lasting lesson is specific to this record: The spark is a practical one: useful knowledge often lives inside long documents that are hard to navigate. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/pdf-chatbot" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/pdf-chatbot</a></li><li><a href="https://github.com/johnnietse/pdf-chatbot" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/pdf-chatbot/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/pdf-chatbot/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./my-contributor-playground-fork-pr-adding-a-learner-profile.html"><small>NEWER STORY</small><strong>← My contributor-playground fork PR: adding a learner profile</strong></a><a class="older" href="./a-greenhouse-operating-system-for-strawberry-phenotyping.html"><small>OLDER STORY</small><strong>A greenhouse operating system for strawberry phenotyping →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: pdf-chatbot · Evidence reviewed November 8, 2026</span></footer></main></body></html>

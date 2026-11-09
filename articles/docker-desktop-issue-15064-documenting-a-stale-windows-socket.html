@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="I reported that the Secrets Engine could still fail to start when an inaccessible AF_UNIX reparse point remained after an ungraceful shutdown."><title>Docker Desktop issue #15064: documenting a stale Windows socket · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">docker · docker/for-win</p><div class="title-cover"><div><h1>Docker Desktop issue #15064: documenting a stale Windows socket</h1><p class="dek">I reported that the Secrets Engine could still fail to start when an inaccessible AF_UNIX reparse point remained after an ungraceful shutdown.</p></div><img src="../covers/docker-desktop-issue-15064-documenting-a-stale-windows-socket.svg" alt="Docker Desktop issue #15064: documenting a stale Windows socket · open-source contribution" loading="eager" decoding="async"></div><div class="meta"><span>Open source</span><span>Started September 13, 2026</span><span>Updated November 4, 2026</span><span>~8 min read</span></div><div class="tags"><span class="tag">Authored open-source issue</span><span class="tag">Windows</span><span class="tag">Docker Desktop</span><span class="tag">Troubleshooting</span><span class="tag">Open</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after</h2><div class="before-after"><article><h3>Before</h3><p>After an ungraceful shutdown, the Secrets Engine could fail because a stale AF_UNIX reparse point could not be accessed or renamed; Windows reported ERROR_CANT_ACCESS_FILE (1920).</p></article><article><h3>After</h3><p>The open issue captured Windows 10 build 19045, Docker Desktop 4.88.1–4.90.0, WSL2, failed cleanup attempts, and a parent-directory rename workaround. The bindflt theory remains unproven.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The issue records a repeatable failure on Windows 10 build 19045 with Docker Desktop 4.88.1–4.90.0 and WSL2.</p><p>This is a field note about one contribution trail: what I saw in the issue or pull request, how the change was shaped by review, what the public record says was tested, and what is still uncertain. The linked repository remains the authority for the current upstream state.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>Deleting or renaming the socket failed with Windows error 1920, while renaming its parent directory worked because it did not open the child path.</p><p>The practical value is in making this piece of project work reviewable. A small change has to fit the surrounding conventions, give maintainers enough context, and make its limits clear. The thread and diff are the evidence for that process; this post keeps the proposed scope and recorded outcome distinct.</p></section><section class="story-section"><h2>The clue came from a failed cleanup</h2><p>Rebooting and checking disk space, permissions, and antivirus did not remove the failure. Deleting or renaming the socket failed with error 1920, but renaming its parent directory worked.</p><p>That narrows the reproduction to an inaccessible reparse point without pretending the root cause is known.</p></section><section class="story-section"><h2>A hypothesis stays a hypothesis</h2><p>The report mentions Windows bindflt as a possible connection, but does not prove it caused the stale point. The result is a better bug report and a workaround, not a product fix.</p></section><section class="story-section"><h2>Environment and verification</h2><p>The public thread scan did not capture a reproducible toolchain or test transcript for this contribution. I link the original thread and patch rather than inferring that the project’s CI or a local test ran.</p></section><section class="story-section"><h2>Contribution record: linked threads, states, and chronology</h2><p>These records distinguish a proposal from an accepted change. A closed pull request may be merged or closed without a merge; an issue discussion is not the same thing as an authored fix. The status below comes from the public GitHub scan. Each thread is linked so the full exchange remains available.</p><ul class="record-list"><li><a href="https://github.com/docker/for-win/issues/15064" target="_blank" rel="noopener noreferrer">Issue #15064 · Open</a><span>docker/for-win</span></li></ul><h3>What I put in the issue description</h3><p>The text below is my original public description, preserved so the scope and evidence are inspectable. It is useful context for reading later commits and review comments; it is not a substitute for the final merged code.</p><div class="authored-description"><h1 id="secrets-engine-startup-fix-in-4890-does-not-work-rename-of-enginesock-fails-the-same-way-remove-did">Secrets Engine startup fix in 4.89.0 does not work: rename of engine.sock fails the same way remove did</h1>
+<p>File at: https://github.com/docker/for-win/issues</p>
+<h2 id="summary">Summary</h2>
+<p>Docker Desktop 4.89.0 shipped &quot;Fixed a bug where Docker Desktop could fail to start after an ungraceful shutdown left behind a stuck socket file.&quot; On this machine that fix does not work. The startup failure is identical; only the failing syscall changed, from <code>remove</code> to <code>rename</code>.</p>
+<p>The cause is that the fix operates on the socket <strong>file</strong>, which requires opening it. On this machine the orphaned AF_UNIX reparse point cannot be opened by anything. Renaming the <strong>parent directory</strong> succeeds, because a rename never opens the child. That is a one-line change in strategy and it fixes the failure completely.</p>
+<h2 id="error-text-before-and-after-the-fix">Error text, before and after the fix</h2>
+<p>4.88.1.237512:</p>
+<pre><code>starting services: initializing Secrets Engine: listening on
+unix://C:/Users/&lt;user&gt;/AppData/Local/docker-secrets-engine/engine.sock:
+remove C:/Users/&lt;user&gt;/AppData/Local/docker-secrets-engine/engine.sock:
+The file cannot be accessed by the system.
+(listener: The file cannot be accessed by the system.)</code></pre>
+<p>4.90.0.238679:</p>
+<pre><code>starting services: initializing Secrets Engine: listening on
+unix://C:/Users/&lt;user&gt;/AppData/Local/docker-secrets-engine/engine.sock:
+rename C:/Users/&lt;user&gt;/AppData/Local/docker-secrets-engine/engine.sock
+C:/Users/&lt;user&gt;/AppData/Local/docker-secrets-engine/engine.sock.stale:
+The file cannot be accessed by the system.
+(listener: The file cannot be accessed by the system.)</code></pre>
+<p>Underlying Windows error in both cases: ERROR_CANT_ACCESS_FILE (1920, 0x780).</p>
+<h2 id="reproduction">Reproduction</h2>
+<p>On 4.90.0.238679:</p>
+<ol>
+<li>Start Docker Desktop, let the engine come up.</li>
+<li>Kill the backend ungracefully:</li>
+</ol>
+<p><code>Get-Process &amp;#39;Docker Desktop&amp;#39;,&amp;#39;com.docker.backend&amp;#39; | Stop-Process -Force</code></p>
+<ol>
+<li>Confirm <code>%LOCALAPPDATA%\docker-secrets-engine\engine.sock</code> still exists.</li>
+<li>Launch <code>Docker Desktop.exe</code>.</li>
+<li>Startup fails with the 4.90.0 error above.</li>
+</ol>
+<p>Reproduced reliably. This has occurred roughly ten times over two weeks on this machine, on both 4.88.1 and 4.90.0.</p>
+<h2 id="the-orphaned-socket-cannot-be-opened-by-any-userspace-call">The orphaned socket cannot be opened by any userspace call</h2>
+<p>With Docker fully stopped, every one of these fails with ERROR_CANT_ACCESS_FILE on <code>engine.sock</code>:</p>
+<ul>
+<li><code>[System.IO.File]::Delete()</code></li>
+<li><code>Remove-Item</code></li>
+<li><code>cmd /c del /f /q</code></li>
+<li><code>robocopy &amp;lt;empty&amp;gt; &amp;lt;dir&amp;gt; /MIR</code></li>
+<li><code>fsutil reparsepoint delete</code> (elevated)</li>
+<li><code>fsutil reparsepoint query</code> (elevated)</li>
+</ul>
+<p>The file is 0 bytes with attributes <code>Archive, ReparsePoint</code>.</p>
+<h2 id="the-working-fix-rename-the-directory-not-the-file">The working fix: rename the directory, not the file</h2>
+<p>Renaming the parent directory succeeds every time, because rename does not open the child:</p>
+<pre><code>Rename-Item -LiteralPath &quot;$env:LOCALAPPDATA\docker-secrets-engine&quot; `
+            -NewName &quot;docker-secrets-engine.broken-$(Get-Date -f yyyyMMddHHmmss)&quot;</code></pre>
+<p>Docker Desktop then recreates a clean <code>docker-secrets-engine</code> directory and starts normally, in 15 to 30 seconds. This has worked on every occurrence, on both versions.</p>
+<h3 id="suggested-change">Suggested change</h3>
+<p>When the Secrets Engine cannot remove or rename a stale <code>engine.sock</code>, fall back to moving the containing directory aside and recreating it, rather than failing startup. Binding into a freshly created uniquely-named directory would also sidestep the problem entirely.</p>
+<p>The orphaned directories are inert and roughly 0 bytes, and they cannot be deleted afterward, so a periodic best-effort sweep would be worthwhile too.</p>
+<h2 id="environment">Environment</h2>
+<ul>
+<li>Docker Desktop 4.90.0.238679 (previously 4.88.1.237512, same failure)</li>
+<li>Windows 10 Home 19045</li>
+<li>WSL2 backend, distros <code>Ubuntu</code> and <code>docker-desktop</code>, both version 2</li>
+<li>Engine 29.7.2</li>
+</ul>
+<h2 id="ruled-out-by-testing">Ruled out by testing</h2>
+<p>These were each tested and eliminated, so they do not need revisiting:</p>
+<ul>
+<li><strong>Disk space.</strong> Free space raised from 4.85 GB to 36.99 GB. No effect on the</li>
+</ul>
+<p>delete or the failure.</p>
+<ul>
+<li><strong>Reboot and uptime.</strong> The orphaned sockets survive a reboot and remain</li>
+</ul>
+<p>undeletable. The fault recurred the day after a reboot.</p>
+<ul>
+<li><strong>Antivirus.</strong> Norton is present but loads no filesystem minifilter;</li>
+</ul>
+<p><code>fltmc filters</code> shows only Microsoft filters.</p>
+<ul>
+<li><strong>Privilege level.</strong> Elevated attempts fail identically.</li>
+<li><strong>Docker version.</strong> 4.88.1 to 4.90.0 changed the failing call, not the outcome.</li>
+</ul>
+<h2 id="possibly-relevant-unproven">Possibly relevant, unproven</h2>
+<p><code>fltmc instances</code> shows <code>bindflt</code> attached to C: at altitude 409800, the highest of any filter on the volume. <code>wcifs</code> is loaded but has no instances.</p>
+<p>Separately, and possibly the same underlying cause: a Task Scheduler process on this machine cannot see the <code>docker-secrets-engine*</code> directories at all. It enumerates 173 of the 175 entries in <code>%LOCALAPPDATA%</code>, and the two it misses are exactly those, including a plain empty directory created seconds earlier by <code>New-Item</code>. An interactive shell, elevated or not, sees all 175. I could not take this further because <code>fltmc</code> cannot enumerate bindflt mappings.</p>
+<h2 id="note-on-the-4900-installer">Note on the 4.90.0 installer</h2>
+<p>The 4.88.1 to 4.90.0 upgrade rewrote both the <code>HKCU\...\Run</code> entry and the Start Menu shortcut for Docker Desktop, discarding local modifications to them without warning. Worth flagging separately if that is not intended.</p></div><h3>How I read the trail</h3><p>This article connects 1 linked issue or PR thread, 0 captured PR commits, 0 authored comment or review records, and 0 captured reviewer notes. These sources answer different questions. The issue or PR description states the requested problem and proposed scope. The diff shows what changed. Commit dates show whether the patch evolved. Comments record questions, review responses, and verification notes. GitHub’s final state tells whether the work merged, closed without merging, or stayed open at the scan date.</p><p>That separation makes the reflection more useful than a success-only summary. If the record contains a test result, I can describe the exact environment and what it covered. If it contains a request to retest, I can say the fix remained under review. If it only contains a diagnosis, I can describe the debugging contribution without implying that an upstream behavior changed. The linked source remains the place to inspect the full conversation and current status.</p></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>I documented reproduction steps and ruled out disk space, reboot, antivirus, privileges, and a simple version change. The possible bindflt connection remains a hypothesis. The issue was still open at the scan date.</p><p>The lasting lesson is specific to this record: Deleting or renaming the socket failed with Windows error 1920, while renaming its parent directory worked because it did not open the child path. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/docker/for-win" target="_blank" rel="noopener noreferrer">Original repository · docker/for-win</a></li><li><a href="https://github.com/docker/for-win/issues/15064" target="_blank" rel="noopener noreferrer">Authored issue #15064 · Open</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./solana-pr-2670-pinning-container-line-endings-and-ignoring-env-copies.html"><small>NEWER STORY</small><strong>← Solana PR #2670: pinning container line endings and ignoring env copies</strong></a><a class="older" href="./a-fellowship-metrics-service-for-the-solana-developer-platform.html"><small>OLDER STORY</small><strong>A fellowship metrics service for the Solana Developer Platform →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: activity-issue-docker-for-win-15064 · Evidence reviewed November 8, 2026</span></footer></main></body></html>

@@ -1,0 +1,502 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A legal-AI prototype studies employment-law analysis through ingestion, retrieval, and context-aware answers."><title>Keeping a legal-document RAG pipeline moving through real CI failures · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>Keeping a legal-document RAG pipeline moving through real CI failures</h1><p class="dek">A legal-AI prototype studies employment-law analysis through ingestion, retrieval, and context-aware answers.</p></div><img src="../covers/keeping-a-legal-document-rag-pipeline-moving-through-real-ci-failures.svg" alt="Keeping a legal-document RAG pipeline moving through real CI failures · project visual" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started February 7, 2026</span><span>Updated August 22, 2026</span><span>~8 min read</span></div><div class="tags"><span class="tag">Python</span><span class="tag">RAG</span><span class="tag">Data pipelines</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The repository describes a document-processing and retrieval system. It does not establish legal accuracy or suitability for legal advice.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A legal-AI prototype studies employment-law analysis through ingestion, retrieval, and context-aware answers.. The repository history snapshot records 66 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The repository describes a document-processing and retrieval system. It does not establish legal accuracy or suitability for legal advice.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The interesting work is in the pipeline boundaries: a missing progress file, expired API keys, rate limits, or an embedding service still running can all stop useful results.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A legal-AI prototype studies employment-law analysis through ingestion, retrieval, and context-aware answers.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The README contains 2458 words. This visible excerpt keeps the core purpose and setup close to the story, while the full document is available below and at the source repository.</p><h1 id="legal-ai-system--enterprise-edition-1">⚖️ Legal AI System — Enterprise Edition</h1>
+<p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/python-3.11+-blue.svg" alt="Python 3.11+" loading="lazy"></a> <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/docker-ready-blue.svg" alt="Docker" loading="lazy"></a> <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/kubernetes-AKS-326ce5.svg" alt="Kubernetes" loading="lazy"></a> <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/FastAPI-005571?style=flat&amp;amp;logo=fastapi" alt="FastAPI" loading="lazy"></a> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" loading="lazy"></a></p>
+<blockquote><p><strong>A comprehensive, enterprise-grade legal AI platform for employment law analysis, misclassification detection, and context-aware reasoning.</strong></p></blockquote>
+<p>A comprehensive legal AI platform for employment law analysis, featuring:</p>
+<ul>
+<li><strong>RAG Pipeline</strong>: Automated legal document collection, scaled to <strong>500+ documents</strong> via Pinecone</li>
+<li><strong>ML Classifier</strong>: Random Forest model trained on <strong>1255 cases</strong> (100% accuracy)</li>
+<li><strong>REST API</strong>: FastAPI service with RAG query and classification endpoints</li>
+<li><strong>Cloud Deployment</strong>: Docker containerization with Azure Kubernetes Service deployment</li>
+</ul>
+<h3 id="v30--bytedance-rag-production-architecture-latest-1">🏭 v3.0 — ByteDance RAG Production Architecture (Latest)</h3>
+<p>Based on <a href="https://github.com/johnnietse/legal-ai/blob/main/rag_pipeline/Byte_Dance_RAG_Guideline.md" target="_blank" rel="noopener noreferrer">ByteDance&#39;s internal RAG guideline</a>, the pipeline now implements commercial-grade patterns:</p>
+<ul>
+<li><strong>Hybrid Retrieval</strong>: BM25 (Elasticsearch) + Dense Vector fusion with Reciprocal Rank Fusion and MMR diversity</li>
+<li><strong>Semantic Chunking</strong>: Section-aware, paragraph-preserving chunking with variable sizes (128 tokens for statutes, 384 for narrative)</li>
+<li><strong>Structured Prompt Templates</strong>: 4 legal-domain templates with intent-based auto-selection</li>
+<li><strong>Confidence Gate</strong>: Pre-generation refuse/hedge/pass quality control</li>
+<li><strong>Multi-Layer Caching</strong>: Embedding (1h TTL), retrieval (10m), response (5m) with LRU eviction</li>
+<li><strong>Pipeline Metrics</strong>: Per-query structured JSONL logging with latency percentiles and cost estimation</li>
+<li><strong>Feedback Loop</strong>: User feedback collection with root cause analysis and few-shot example export</li>
+<li><strong>Vector Store Abstraction</strong>: Unified interface supporting Pinecone (managed) and Milvus (self-hosted, GPU-accelerated)</li>
+<li><strong>Model Optimization</strong>: LoRA fine-tuning scaffolding, INT8 quantisation, knowledge distillation, GPU auto-scaling configs</li>
+</ul>
+<h3 id="v20--research-grade-modules-1">🔬 v2.0 — Research-Grade Modules</h3>
+<ul>
+<li><strong>Multi-Hop RAG</strong>: Iterative retrieve-read-reason cycles with gap analysis and dynamic stopping</li>
+<li><strong>Knowledge Graph + Hybrid Retrieval</strong>: Legal entity graph (NetworkX) with BFS subgraph traversal and graph-to-text linearization, fused with vector search</li>
+<li><strong>Post-Hoc Verifier</strong>: Adversarial NLI fact-checker with claim-level citation mapping and implicit assumption validation to eliminate hallucinations</li>
+<li><strong>MCTS Legal Reasoning Agent</strong>: Monte Carlo Tree Search over Sagaz test factors with UCB1 selection and LLM-as-judge simulation</li>
+<li><strong>Dynamic Evaluation Framework</strong>: Anti-contamination parameterized benchmarks with difficulty-controlled test generation</li>
+<li><strong>Debiased LLM-as-Judge</strong>: Rubric decomposition, position-swap debiasing, and length normalization for fair evaluation</li>
+</ul>
+<p>---</p>
+<h2 id="table-of-contents-1">📑 Table of Contents</h2>
+<ol>
+<li><a href="#key-features" target="_blank" rel="noopener noreferrer">Key Features</a></li>
+<li><a href="#system-architecture" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+<li><a href="#quick-start" target="_blank" rel="noopener noreferrer">Quick Start</a></li>
+<li><a href="#system-workflow" target="_blank" rel="noopener noreferrer">System Workflow</a></li>
+<li><a href="#api-endpoints" target="_blank" rel="noopener noreferrer">API Endpoints</a></li>
+<li><a href="#model-performance" target="_blank" rel="noopener noreferrer">Model Performance</a></li>
+<li><a href="#file-dictionary--project-structure" target="_blank" rel="noopener noreferrer">File Dictionary &amp; Project Structure</a></li>
+<li><a href="#verification--testing" target="_blank" rel="noopener noreferrer">Verification &amp; Testing</a></li>
+<li><a href="#maintenance--cleanup" target="_blank" rel="noopener noreferrer">Maintenance &amp; Cleanup</a></li>
+<li><a href="#references--license" target="_blank" rel="noopener noreferrer">References &amp; License</a></li>
+</ol>
+<p>---</p>
+<h2 id="key-features-1">🎯 Key Features</h2>
+<h3 id="legal-rag-pipeline-1">Legal RAG Pipeline</h3>
+<ul>
+<li>Automated collection of 500+ legal documents (Real + Synthetic)</li>
+<li><strong>Semantic chunking</strong> with section-awareness and paragraph preservation (v3.0)</li>
+<li>Google Gemini embeddings (gemini-embedding-001)</li>
+<li><strong>Dual vector store</strong>: Pinecone (managed) or Milvus (self-hosted) with HNSW tuning (v3.0)</li>
+<li><strong>Hybrid BM25 + vector retrieval</strong> with Elasticsearch and query-type-aware weights (v3.0)</li>
+<li>Context-aware response generation with Gemini 2.0 Flash</li>
+<li><strong>Confidence gate</strong>, <strong>multi-layer caching</strong>, and <strong>pipeline metrics</strong> (v3.0)</li>
+</ul>
+<h3 id="worker-classification-model-1">Worker Classification Model</h3>
+<ul>
+<li>Random Forest classifier trained on 1255 annotated employment cases</li>
+<li>100% accuracy on test set</li>
+<li>Feature importance analysis for legal interpretability</li>
+<li>Based on Sagaz test factors (control, tools, profit/loss, integration)</li>
+</ul>
+<h3 id="production-infrastructure-1">Production Infrastructure</h3>
+<ul>
+<li>Docker multi-stage builds for optimized images</li>
+<li>Kubernetes deployment with HPA auto-scaling</li>
+<li>GitHub Actions CI/CD pipeline</li>
+<li>99.5% uptime target with rolling updates</li>
+</ul>
+<p>---</p>
+<h2 id="system-architecture-1">🏗️ System Architecture</h2>
+<p>The Legal AI platform is built on a modern, decoupled microservices architecture designed for high availability and scalable inference.</p>
+<h3 id="high-level-system-flow-1">High-Level System Flow</h3>
+<pre><code>graph TD
+    subgraph Data Layer
+        A[CanLII Scraper] --&gt;|PDFs| B[&quot;Document Processor&lt;br&gt;(SemanticChunker v3.0)&quot;]
+        C[Synthetic Generator] --&gt;|CSV| D[ML Trainer]
+    end
+
+    subgraph Logic Layer
+        B --&gt;|Chunks| E[Gemini Embeddings]
+        E --&gt;|Vectors| F[&quot;Pinecone / Milvus&quot;]
+        B --&gt;|Text| ES[&quot;Elasticsearch BM25&quot;]
+        D --&gt;|Model| G[Random Forest Classifier]
+        K[Knowledge Graph extractor] --&gt;|Triples| L[NetworkX Graph DB]
+        B --&gt;|Text| K
+    end
+
+    subgraph &quot;Application Layer (v3.0 Enhanced)&quot;
+        H[FastAPI Gateway] --&gt;|Query| QC[Query Classifier]
+        QC --&gt;|keyword| ES
+        QC --&gt;|semantic| F
+        QC --&gt;|hybrid| BOTH[&quot;BM25 + Vector&quot;]
+        ES --&gt; RRF[&quot;RRF Fusion + MMR&quot;]
+        F --&gt; RRF
+        BOTH --&gt; RRF
+        RRF --&gt; PT[Prompt Template Auto-Select]
+        PT --&gt; J[Gemini 2.0 Flash]
+        J --&gt; CG[Confidence Gate]
+        CG --&gt; VER[NLI Verifier]
+        H --&gt;|Classify| G
+        H --&gt;|Reasoning| M[MCTS Agent]
+        M --&gt; QC
+    end</code></pre>
+<h3 id="multi-hop-rag--mcts-agent-workflow-1">Multi-Hop RAG &amp; MCTS Agent Workflow</h3>
+<p>To support complex legal analysis, v2.0 introduces advanced orchestration techniques:</p>
+<pre><code>sequenceDiagram
+    participant User
+    participant Gateway as FastAPI Gateway
+    participant MCTS as MCTS Reasoning Agent
+    participant RAG as Multi-Hop RAG
+    participant KG as Knowledge Graph
+    participant DB as Pinecone DB
+    participant LLM as Gemini 2.0
+
+    User-&gt;&gt;Gateway: POST /classify/reasoning
+    Gateway-&gt;&gt;MCTS: Initialize Search Tree
+    loop Monte Carlo Tree Search
+        MCTS-&gt;&gt;MCTS: Select Node (UCB1)
+        MCTS-&gt;&gt;MCTS: Expand Hypothesis
+        MCTS-&gt;&gt;RAG: Generate Evidence Query</code></pre><span id="key-features-2"></span><span id="system-architecture-2"></span><span id="quick-start-1"></span><span id="system-workflow-1"></span><span id="api-endpoints-1"></span><span id="model-performance-1"></span><span id="file-dictionary--project-structure-1"></span><span id="verification--testing-1"></span><span id="maintenance--cleanup-1"></span><span id="references--license-1"></span><details class="history-details"><summary>Expand the full repository README (2458 words)</summary><h1 id="legal-ai-system--enterprise-edition">⚖️ Legal AI System — Enterprise Edition</h1>
+<p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/python-3.11+-blue.svg" alt="Python 3.11+" loading="lazy"></a> <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/docker-ready-blue.svg" alt="Docker" loading="lazy"></a> <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/kubernetes-AKS-326ce5.svg" alt="Kubernetes" loading="lazy"></a> <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/FastAPI-005571?style=flat&amp;amp;logo=fastapi" alt="FastAPI" loading="lazy"></a> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" loading="lazy"></a></p>
+<blockquote><p><strong>A comprehensive, enterprise-grade legal AI platform for employment law analysis, misclassification detection, and context-aware reasoning.</strong></p></blockquote>
+<p>A comprehensive legal AI platform for employment law analysis, featuring:</p>
+<ul>
+<li><strong>RAG Pipeline</strong>: Automated legal document collection, scaled to <strong>500+ documents</strong> via Pinecone</li>
+<li><strong>ML Classifier</strong>: Random Forest model trained on <strong>1255 cases</strong> (100% accuracy)</li>
+<li><strong>REST API</strong>: FastAPI service with RAG query and classification endpoints</li>
+<li><strong>Cloud Deployment</strong>: Docker containerization with Azure Kubernetes Service deployment</li>
+</ul>
+<h3 id="v30--bytedance-rag-production-architecture-latest">🏭 v3.0 — ByteDance RAG Production Architecture (Latest)</h3>
+<p>Based on <a href="https://github.com/johnnietse/legal-ai/blob/main/rag_pipeline/Byte_Dance_RAG_Guideline.md" target="_blank" rel="noopener noreferrer">ByteDance&#39;s internal RAG guideline</a>, the pipeline now implements commercial-grade patterns:</p>
+<ul>
+<li><strong>Hybrid Retrieval</strong>: BM25 (Elasticsearch) + Dense Vector fusion with Reciprocal Rank Fusion and MMR diversity</li>
+<li><strong>Semantic Chunking</strong>: Section-aware, paragraph-preserving chunking with variable sizes (128 tokens for statutes, 384 for narrative)</li>
+<li><strong>Structured Prompt Templates</strong>: 4 legal-domain templates with intent-based auto-selection</li>
+<li><strong>Confidence Gate</strong>: Pre-generation refuse/hedge/pass quality control</li>
+<li><strong>Multi-Layer Caching</strong>: Embedding (1h TTL), retrieval (10m), response (5m) with LRU eviction</li>
+<li><strong>Pipeline Metrics</strong>: Per-query structured JSONL logging with latency percentiles and cost estimation</li>
+<li><strong>Feedback Loop</strong>: User feedback collection with root cause analysis and few-shot example export</li>
+<li><strong>Vector Store Abstraction</strong>: Unified interface supporting Pinecone (managed) and Milvus (self-hosted, GPU-accelerated)</li>
+<li><strong>Model Optimization</strong>: LoRA fine-tuning scaffolding, INT8 quantisation, knowledge distillation, GPU auto-scaling configs</li>
+</ul>
+<h3 id="v20--research-grade-modules">🔬 v2.0 — Research-Grade Modules</h3>
+<ul>
+<li><strong>Multi-Hop RAG</strong>: Iterative retrieve-read-reason cycles with gap analysis and dynamic stopping</li>
+<li><strong>Knowledge Graph + Hybrid Retrieval</strong>: Legal entity graph (NetworkX) with BFS subgraph traversal and graph-to-text linearization, fused with vector search</li>
+<li><strong>Post-Hoc Verifier</strong>: Adversarial NLI fact-checker with claim-level citation mapping and implicit assumption validation to eliminate hallucinations</li>
+<li><strong>MCTS Legal Reasoning Agent</strong>: Monte Carlo Tree Search over Sagaz test factors with UCB1 selection and LLM-as-judge simulation</li>
+<li><strong>Dynamic Evaluation Framework</strong>: Anti-contamination parameterized benchmarks with difficulty-controlled test generation</li>
+<li><strong>Debiased LLM-as-Judge</strong>: Rubric decomposition, position-swap debiasing, and length normalization for fair evaluation</li>
+</ul>
+<p>---</p>
+<h2 id="table-of-contents">📑 Table of Contents</h2>
+<ol>
+<li><a href="#key-features" target="_blank" rel="noopener noreferrer">Key Features</a></li>
+<li><a href="#system-architecture" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+<li><a href="#quick-start" target="_blank" rel="noopener noreferrer">Quick Start</a></li>
+<li><a href="#system-workflow" target="_blank" rel="noopener noreferrer">System Workflow</a></li>
+<li><a href="#api-endpoints" target="_blank" rel="noopener noreferrer">API Endpoints</a></li>
+<li><a href="#model-performance" target="_blank" rel="noopener noreferrer">Model Performance</a></li>
+<li><a href="#file-dictionary--project-structure" target="_blank" rel="noopener noreferrer">File Dictionary &amp; Project Structure</a></li>
+<li><a href="#verification--testing" target="_blank" rel="noopener noreferrer">Verification &amp; Testing</a></li>
+<li><a href="#maintenance--cleanup" target="_blank" rel="noopener noreferrer">Maintenance &amp; Cleanup</a></li>
+<li><a href="#references--license" target="_blank" rel="noopener noreferrer">References &amp; License</a></li>
+</ol>
+<p>---</p>
+<h2 id="key-features">🎯 Key Features</h2>
+<h3 id="legal-rag-pipeline">Legal RAG Pipeline</h3>
+<ul>
+<li>Automated collection of 500+ legal documents (Real + Synthetic)</li>
+<li><strong>Semantic chunking</strong> with section-awareness and paragraph preservation (v3.0)</li>
+<li>Google Gemini embeddings (gemini-embedding-001)</li>
+<li><strong>Dual vector store</strong>: Pinecone (managed) or Milvus (self-hosted) with HNSW tuning (v3.0)</li>
+<li><strong>Hybrid BM25 + vector retrieval</strong> with Elasticsearch and query-type-aware weights (v3.0)</li>
+<li>Context-aware response generation with Gemini 2.0 Flash</li>
+<li><strong>Confidence gate</strong>, <strong>multi-layer caching</strong>, and <strong>pipeline metrics</strong> (v3.0)</li>
+</ul>
+<h3 id="worker-classification-model">Worker Classification Model</h3>
+<ul>
+<li>Random Forest classifier trained on 1255 annotated employment cases</li>
+<li>100% accuracy on test set</li>
+<li>Feature importance analysis for legal interpretability</li>
+<li>Based on Sagaz test factors (control, tools, profit/loss, integration)</li>
+</ul>
+<h3 id="production-infrastructure">Production Infrastructure</h3>
+<ul>
+<li>Docker multi-stage builds for optimized images</li>
+<li>Kubernetes deployment with HPA auto-scaling</li>
+<li>GitHub Actions CI/CD pipeline</li>
+<li>99.5% uptime target with rolling updates</li>
+</ul>
+<p>---</p>
+<h2 id="system-architecture">🏗️ System Architecture</h2>
+<p>The Legal AI platform is built on a modern, decoupled microservices architecture designed for high availability and scalable inference.</p>
+<h3 id="high-level-system-flow">High-Level System Flow</h3>
+<pre><code>graph TD
+    subgraph Data Layer
+        A[CanLII Scraper] --&gt;|PDFs| B[&quot;Document Processor&lt;br&gt;(SemanticChunker v3.0)&quot;]
+        C[Synthetic Generator] --&gt;|CSV| D[ML Trainer]
+    end
+
+    subgraph Logic Layer
+        B --&gt;|Chunks| E[Gemini Embeddings]
+        E --&gt;|Vectors| F[&quot;Pinecone / Milvus&quot;]
+        B --&gt;|Text| ES[&quot;Elasticsearch BM25&quot;]
+        D --&gt;|Model| G[Random Forest Classifier]
+        K[Knowledge Graph extractor] --&gt;|Triples| L[NetworkX Graph DB]
+        B --&gt;|Text| K
+    end
+
+    subgraph &quot;Application Layer (v3.0 Enhanced)&quot;
+        H[FastAPI Gateway] --&gt;|Query| QC[Query Classifier]
+        QC --&gt;|keyword| ES
+        QC --&gt;|semantic| F
+        QC --&gt;|hybrid| BOTH[&quot;BM25 + Vector&quot;]
+        ES --&gt; RRF[&quot;RRF Fusion + MMR&quot;]
+        F --&gt; RRF
+        BOTH --&gt; RRF
+        RRF --&gt; PT[Prompt Template Auto-Select]
+        PT --&gt; J[Gemini 2.0 Flash]
+        J --&gt; CG[Confidence Gate]
+        CG --&gt; VER[NLI Verifier]
+        H --&gt;|Classify| G
+        H --&gt;|Reasoning| M[MCTS Agent]
+        M --&gt; QC
+    end</code></pre>
+<h3 id="multi-hop-rag--mcts-agent-workflow">Multi-Hop RAG &amp; MCTS Agent Workflow</h3>
+<p>To support complex legal analysis, v2.0 introduces advanced orchestration techniques:</p>
+<pre><code>sequenceDiagram
+    participant User
+    participant Gateway as FastAPI Gateway
+    participant MCTS as MCTS Reasoning Agent
+    participant RAG as Multi-Hop RAG
+    participant KG as Knowledge Graph
+    participant DB as Pinecone DB
+    participant LLM as Gemini 2.0
+
+    User-&gt;&gt;Gateway: POST /classify/reasoning
+    Gateway-&gt;&gt;MCTS: Initialize Search Tree
+    loop Monte Carlo Tree Search
+        MCTS-&gt;&gt;MCTS: Select Node (UCB1)
+        MCTS-&gt;&gt;MCTS: Expand Hypothesis
+        MCTS-&gt;&gt;RAG: Generate Evidence Query
+        RAG-&gt;&gt;DB: Vector Search
+        RAG-&gt;&gt;KG: Subgraph Traversal
+        RAG-&gt;&gt;LLM: Gap Analysis
+        LLM--&gt;&gt;RAG: Missing context
+        RAG--&gt;&gt;MCTS: Comprehensive Context
+        MCTS-&gt;&gt;LLM: Simulate Reward (Judge)
+        LLM--&gt;&gt;MCTS: Score
+        MCTS-&gt;&gt;MCTS: Backpropagate Score
+    end
+    MCTS--&gt;&gt;Gateway: Best Reasoning Trace
+    Gateway--&gt;&gt;User: JSON Response</code></pre>
+<p>---</p>
+<h2 id="quick-start">🚀 Quick Start</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Python 3.11+</li>
+<li>Docker &amp; Docker Compose</li>
+<li>API Keys: Gemini (Google AI Studio), Pinecone</li>
+<li><strong>v3.0 optional</strong>: Elasticsearch 8.x, Milvus 2.4+ (for production BM25 and self-hosted vector store)</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<pre><code># Clone repository
+git clone https://github.com/johnnietse/legal-ai.git
+cd legal-ai-system
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys</code></pre>
+<h3 id="v30-environment-variables">v3.0 Environment Variables</h3>
+<pre><code># Elasticsearch (production BM25)
+ELASTICSEARCH_URL=http://localhost:9200
+ELASTICSEARCH_API_KEY=your_key
+
+# Milvus (optional, self-hosted vector store)
+MILVUS_HOST=localhost
+MILVUS_PORT=19530
+VECTOR_STORE_BACKEND=pinecone  # or &quot;milvus&quot;
+
+# BM25 backend
+BM25_BACKEND=elasticsearch     # or &quot;local&quot; for development
+
+# HNSW tuning preset
+HNSW_PRESET=production         # development | production | high_recall | billion_scale</code></pre>
+<h3 id="running-locally">Running Locally</h3>
+<pre><code># Start API server
+python -m api.main
+
+# Or use Docker Compose
+docker-compose up</code></pre>
+<p>Access API docs at: http://localhost:8000/docs</p>
+<p>---</p>
+<h2 id="system-workflow">🔄 System Workflow</h2>
+<p>The system integrates three main pipelines:</p>
+<ol>
+<li><strong>Data Ingestion &amp; Scaling</strong>:</li>
+</ol>
+<ul>
+<li>Synthetic generation of 1200+ cases -&gt; <code>data/employment_cases_large.csv</code>.</li>
+<li>Manual/Synthetic generation of 500+ legal documents -&gt; Pinecone Index.</li>
+</ul>
+<ol>
+<li><strong>Machine Learning Training</strong>:</li>
+</ol>
+<ul>
+<li><code>train_model.py</code> loads CSV -&gt; trains Random Forest -&gt; saves <code>models/worker_classifier.joblib</code>.</li>
+</ul>
+<ol>
+<li><strong>RAG Knowledge Retrieval</strong>:</li>
+</ol>
+<ul>
+<li><code>api/main.py</code> -&gt; <code>LegalRAGPipeline</code> -&gt; Query Pinecone for semantic matches -&gt; Gemini for answer generation.</li>
+</ul>
+<p>---</p>
+<h2 id="api-endpoints">🔌 API Endpoints</h2>
+<p>The system provides a comprehensive REST API powered by FastAPI, featuring interactive Swagger documentation (<code>/docs</code>).</p>
+<div class="table-scroll"><table><thead><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>/health</code></td><td>GET</td><td>Health check</td></tr><tr><td><code>/rag/query</code></td><td>POST</td><td>Single-hop legal knowledge query (v3.0: hybrid retrieval + prompt templates)</td></tr><tr><td><code>/rag/query/multi-hop</code></td><td>POST</td><td>⭐ Multi-hop iterative retrieval for complex questions</td></tr><tr><td><code>/rag/query/smart</code></td><td>POST</td><td>⭐ Auto-routes between single/multi-hop based on complexity</td></tr><tr><td><code>/rag/verify</code></td><td>POST</td><td>⭐ Standalone fact-checking and assumption validation</td></tr><tr><td><code>/rag/stats</code></td><td>GET</td><td>🏭 Pipeline statistics: latency, cost, cache hit rates, quality scores</td></tr><tr><td><code>/api/feedback</code></td><td>POST</td><td>🏭 Submit user feedback (useful/not_useful/wrong) with error categorisation</td></tr><tr><td><code>/api/feedback/summary</code></td><td>GET</td><td>🏭 Feedback analysis: ratings, flagged queries, root cause breakdown</td></tr><tr><td><code>/classify</code></td><td>POST</td><td>Worker classification (Random Forest)</td></tr><tr><td><code>/classify/reasoning</code></td><td>POST</td><td>⭐ MCTS-based classification with full reasoning trace</td></tr><tr><td><code>/evaluate/generate-suite</code></td><td>POST</td><td>⭐ Generate anti-contamination evaluation suite</td></tr><tr><td><code>/evaluate/judge</code></td><td>POST</td><td>⭐ Score responses with debiased LLM judge</td></tr></tbody></table></div>
+<p>---</p>
+<span id="model-performance"></span><h2 id="model-performance-scaled">📊 Model Performance (Scaled)</h2>
+<div class="table-scroll"><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td><strong>Accuracy</strong></td><td><strong>100%</strong></td></tr><tr><td>Precision</td><td>100%</td></tr><tr><td>Recall</td><td>100%</td></tr><tr><td>F1 Score</td><td>100%</td></tr><tr><td>Cross-Validation</td><td>99.8%</td></tr><tr><td>Training Data</td><td>1255 Cases</td></tr></tbody></table></div>
+<h3 id="top-classification-factors">Top Classification Factors</h3>
+<ol>
+<li><strong>Did worker require uniform?</strong> (0.255)</li>
+<li><strong>Delegation of tasks</strong> (0.165)</li>
+<li><strong>Ownership of tools</strong> (0.155)</li>
+<li><strong>Exclusivity</strong> (0.145)</li>
+</ol>
+<p>---</p>
+<h2 id="file-dictionary--project-structure">📂 File Dictionary &amp; Project Structure</h2>
+<h3 id="core-components"><strong>Core Components</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><strong><code>config.py</code></strong></td><td><strong>Central Configuration</strong>: Manages API keys (Gemini, Pinecone), file paths, and system constants. Single source of truth.</td></tr><tr><td><strong><code>requirements.txt</code></strong></td><td><strong>Dependencies</strong>: Lists all Python libraries required (FastAPI, Pinecone, Pandas, scikit-learn).</td></tr></tbody></table></div>
+<h3 id="rag-pipeline-ragpipeline"><strong>RAG Pipeline (<code>rag_pipeline/</code>)</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>pipeline.py</code></td><td><strong>Orchestrator</strong>: Ties together scraping, processing, embedding, and querying. The main entry point for RAG operations.</td></tr><tr><td><code>canlii_scraper.py</code></td><td><strong>Data Ingestion</strong>: Handles web scraping from CanLII, including rate limiting and CAPTCHA detection.</td></tr><tr><td><code>document_processor.py</code></td><td><strong>Preprocessing</strong>: Extracts text from PDFs and chunks it intelligently (preserving legal context).</td></tr><tr><td><code>embeddings.py</code></td><td><strong>Vectorization</strong>: Interface to Google&#39;s Gemini Embedding API (gemini-embedding-001).</td></tr><tr><td><code>pinecone_client.py</code></td><td><strong>Storage</strong>: Manages connection to Pinecone Vector DB, including upserting and semantic search.</td></tr><tr><td><code>rag_query.py</code></td><td><strong>Retrieval</strong>: Formulates prompts and calls Gemini for answer generation based on retrieved context.</td></tr></tbody></table></div>
+<h3 id="advanced-rag-modules-ragpipeline--v20"><strong>Advanced RAG Modules (<code>rag_pipeline/</code> — v2.0)</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>multi_hop_retriever.py</code></td><td><strong>Multi-Hop RAG</strong>: State-machine iterative retrieval with gap analysis, query reformulation, and dynamic stopping criteria. Research contribution: the <code>_should_stop</code> function implements retrieval trajectory control.</td></tr><tr><td><code>knowledge_graph.py</code></td><td><strong>Legal Knowledge Graph</strong>: LLM-based entity/relation extraction, NetworkX directed graph, BFS subgraph traversal, and graph-to-text linearization for LLM consumption.</td></tr><tr><td><code>graph_retriever.py</code></td><td><strong>Hybrid Retriever</strong>: Fuses Pinecone vector search with knowledge graph traversal. Merges semantic similarity results with structured relationship context.</td></tr><tr><td><code>verifier.py</code></td><td><strong>Fact-Checker</strong>: Uses adversarial NLI to extract implicit assumptions, map citations, and auto-correct hallucinations.</td></tr><tr><td><code>legal_reasoning_agent.py</code></td><td><strong>MCTS Agent</strong>: Monte Carlo Tree Search over Sagaz classification factors with UCB1 selection, LLM-as-judge simulation, and backpropagation. Implements inference-time compute scaling.</td></tr></tbody></table></div>
+<h3 id="bytedance-rag-enhancements-ragpipeline--v30"><strong>ByteDance RAG Enhancements (<code>rag_pipeline/</code> — v3.0)</strong> 🏭</h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>hybrid_retriever.py</code></td><td><strong>Hybrid Search</strong>: BM25 keyword + dense vector fusion with Reciprocal Rank Fusion (RRF), query-type classifier (keyword/semantic/hybrid), and Maximum Marginal Relevance (MMR) diversity reranking. §5.2</td></tr><tr><td><code>prompt_templates.py</code></td><td><strong>Prompt Library</strong>: 4 domain-specific templates (worker classification, notice period, risk analysis, general) with intent-based auto-selector. §6.2</td></tr><tr><td><code>confidence_gate.py</code></td><td><strong>Quality Gate</strong>: Pre-generation confidence checking — refuses low-confidence, hedges borderline, passes high-confidence answers. §6.3.1</td></tr><tr><td><code>query_cache.py</code></td><td><strong>Multi-Layer Cache</strong>: 3-tier TTL cache (embedding 1h, retrieval 10m, response 5m) with LRU eviction and disk persistence. §6.4.2</td></tr><tr><td><code>metrics.py</code></td><td><strong>Pipeline Metrics</strong>: Per-query structured JSONL logging with timing, cost estimation, latency percentiles (p50/p95), and weekly summaries. §8.1</td></tr><tr><td><code>feedback_analyzer.py</code></td><td><strong>Feedback Loop</strong>: JSONL-backed user feedback (useful/not_useful/wrong), root cause analysis by system layer, flagged query detection, few-shot example export. §6.3.3</td></tr><tr><td><code>vector_store.py</code></td><td><strong>Vector Store Abstraction</strong>: Unified interface for Pinecone (managed) and Milvus (self-hosted, GPU-accelerated). HNSW tuning presets from development to billion-scale. §4.2.1</td></tr><tr><td><code>search_engine.py</code></td><td><strong>Elasticsearch BM25</strong>: Production sparse retrieval with legal-domain custom analyser, legal synonym expansion, and metadata-filtered search. §5.2</td></tr><tr><td><code>model_optimization.py</code></td><td><strong>Model Optimization</strong>: LoRA fine-tuning (PEFT), INT8/4-bit quantisation (BitsAndBytes), teacher-student distillation, GPU auto-scaling profiles, cross-region deployment configs. §7–§8</td></tr></tbody></table></div>
+<h3 id="evaluation-framework-evaluation--v20"><strong>Evaluation Framework (<code>evaluation/</code> — v2.0)</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>dynamic_benchmark.py</code></td><td><strong>Anti-Contamination Benchmarks</strong>: Parameterized test case generation with randomized entities, difficulty-controlled factor distributions, and 6-dimensional evaluation rubrics.</td></tr><tr><td><code>llm_judge.py</code></td><td><strong>Debiased Judge</strong>: LLM-as-Judge with rubric decomposition (anti-self-enhancement), position swapping (anti-position-bias), and length normalization (anti-length-bias).</td></tr><tr><td><code>bias_detector.py</code></td><td><strong>Bias Auditor</strong>: Automated detection and quantification of position, length, and self-enhancement biases in judge models.</td></tr><tr><td><code>benchmark_runner.py</code></td><td><strong>Benchmark CLI</strong>: End-to-end evaluation orchestration with per-difficulty breakdowns and multi-dimensional scoring reports.</td></tr></tbody></table></div>
+<h3 id="ml-classifier-mlclassifier"><strong>ML Classifier (<code>ml_classifier/</code>)</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>train_classifier.py</code></td><td><strong>Training Logic</strong>: Loads CSV data, trains Random Forest model, and performs hyperparameter tuning.</td></tr><tr><td><code>model_inference.py</code></td><td><strong>Prediction</strong>: Helper for making predictions with the trained <code>worker_classifier.joblib</code> model.</td></tr></tbody></table></div>
+<h3 id="api--deployment"><strong>API &amp; Deployment</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>api/main.py</code></td><td><strong>Gateway</strong>: FastAPI application defining REST endpoints (<code>/rag/query</code>, <code>/classify</code>).</td></tr><tr><td><code>k8s/</code></td><td><strong>Orchestration</strong>: Kubernetes manifests (Deployment, Service) for cloud scaling.</td></tr><tr><td><code>Dockerfile</code></td><td><strong>Containerization</strong>: Multistage build instructions for creating the production image.</td></tr></tbody></table></div>
+<h3 id="data-management-data"><strong>Data Management (<code>data/</code>)</strong></h3>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Role &amp; Description</th></tr></thead><tbody><tr><td><code>generate_large_dataset.py</code></td><td><strong>Scale Generator</strong>: Creates thousands of synthetic employment cases for robust training.</td></tr><tr><td><code>employment_cases_large.csv</code></td><td><strong>Training Data</strong>: The gold-standard dataset (1255 cases) used for the ML model.</td></tr></tbody></table></div>
+<h3 id="directory-tree">Directory Tree</h3>
+<pre><code>Law_AI/
+├── rag_pipeline/                  # RAG pipeline components
+│   ├── canlii_scraper.py          # CanLII web scraper
+│   ├── document_processor.py      # PDF extraction, chunking + SemanticChunker (v3)
+│   ├── embeddings.py              # Gemini embeddings
+│   ├── pinecone_client.py         # Vector database client
+│   ├── rag_query.py               # Query interface (v3: full ByteDance pipeline)
+│   ├── pipeline.py                # Main orchestrator
+│   ├── multi_hop_retriever.py     # ⭐ Multi-hop iterative retrieval
+│   ├── knowledge_graph.py         # ⭐ Legal entity knowledge graph
+│   ├── graph_retriever.py         # ⭐ Hybrid vector+graph retriever
+│   ├── legal_reasoning_agent.py   # ⭐ MCTS classification agent
+│   ├── verifier.py                # ⭐ NLI fact-checker
+│   ├── hybrid_retriever.py        # 🏭 BM25+vector fusion, RRF, MMR
+│   ├── prompt_templates.py        # 🏭 Domain prompt templates
+│   ├── confidence_gate.py         # 🏭 Pre-generation quality gate
+│   ├── query_cache.py             # 🏭 Multi-layer TTL cache
+│   ├── metrics.py                 # 🏭 Pipeline metrics &amp; logging
+│   ├── feedback_analyzer.py       # 🏭 User feedback loop
+│   ├── vector_store.py            # 🏭 Pinecone/Milvus abstraction
+│   ├── search_engine.py           # 🏭 Elasticsearch BM25
+│   └── model_optimization.py      # 🏭 LoRA, quantisation, deployment
+├── evaluation/                    # ⭐ Evaluation framework
+│   ├── dynamic_benchmark.py       # Anti-contamination test generation
+│   ├── llm_judge.py               # Debiased LLM-as-Judge
+│   ├── bias_detector.py           # Bias detection &amp; auditing
+│   └── benchmark_runner.py        # CLI benchmark orchestrator
+├── ml_classifier/                 # ML classification
+│   ├── train_classifier.py        # Random Forest training
+│   └── model_inference.py         # Inference API
+├── api/                           # FastAPI service
+│   └── main.py                    # REST endpoints (v1 + v2 + v3)
+├── data/                          # Data storage
+│   ├── employment_cases_large.csv
+│   ├── cache/                     # 🏭 Query cache (auto-generated)
+│   └── generate_large_dataset.py
+├── scripts/                       # 🏭 Deployment &amp; execution scripts
+│   ├── reindex_local.py           # Local semantic re-indexing pipeline
+│   ├── bootstrap_elasticsearch.py # Elasticsearch index creation &amp; loading
+│   └── lora_finetune.py           # LoRA training &amp; distillation pipeline
+├── tests/                         # Test suites (85+ total tests)
+│   ├── test_advanced_modules.py   # Tests for v2 modules
+│   ├── test_v3_bytedance.py       # Tests for v3 ByteDance modules
+│   ├── test_system_integration.py # E2E system integration tests
+│   └── test_main.py               # API and core functionality tests
+├── logs/metrics/                  # 🏭 Structured metrics JSONL
+├── k8s/                           # Kubernetes manifests
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── config.py                      # Central config (60+ v3 constants)</code></pre>
+<p>---</p>
+<h2 id="verification--testing">✅ Verification &amp; Testing</h2>
+<p>To verify the entire system integration (Data, ML, and RAG connection), run the included test suite:</p>
+<pre><code># Run the complete test suite (v1, v2, and v3 modules, ~85 tests)
+python -m pytest tests/ -v --tb=short
+
+# Run specifically the v3 ByteDance RAG tests
+python -m pytest tests/test_v3_bytedance.py -v</code></pre>
+<p>Expected output for integration:</p>
+<blockquote><p>✅ Data Verified ✅ ML Pipeline Verified ✅ RAG Pipeline Verified SYSTEM INTEGRATION TEST PASSED</p></blockquote>
+<h3 id="individual-component-testing">Individual Component Testing</h3>
+<pre><code># Test RAG scraping/processing
+python rag_pipeline/pipeline.py --query &quot;What is the Sagaz test?&quot;
+
+# Test ML Prediction interaction
+python -m ml_classifier.train_classifier --demo</code></pre>
+<p>---</p>
+<span id="maintenance--cleanup"></span><h2 id="maintenance">🛠️ Maintenance</h2>
+<h3 id="scaling-up">Scaling Up</h3>
+<pre><code># Generate more training data
+python data/generate_large_dataset.py
+
+# Populate RAG (takes ~10m for 500 docs)
+python populate_pinecone_large.py</code></pre>
+<h3 id="verification">Verification</h3>
+<pre><code>python verify_pinecone.py
+python train_model.py</code></pre>
+<p>---</p>
+<h2 id="cleanup-recommendations">🧹 Cleanup Recommendations</h2>
+<p>The following files and directories are <strong>safe to remove</strong> as they are not required for the core system:</p>
+<div class="table-scroll"><table><thead><tr><th>Path</th><th>Reason</th></tr></thead><tbody><tr><td><code>openjustice-rag/</code></td><td>Empty reference project, unused</td></tr><tr><td><code>create_landmark_cases.py</code></td><td>One-time script for generating test cases</td></tr><tr><td><code>fetch_real_cases.py</code></td><td>Experimental CanLII URL fetcher</td></tr><tr><td><code>real_cases_to_scrape.csv</code></td><td>Sample output from above script</td></tr><tr><td><code>.pytest_cache/</code></td><td>Test cache, auto-generated</td></tr><tr><td><code>__pycache__/</code></td><td>Python bytecode cache</td></tr><tr><td><code>logs/</code></td><td>Runtime logs (if empty)</td></tr></tbody></table></div>
+<p><strong>To remove all at once:</strong></p>
+<pre><code>Remove-Item -Recurse -Force openjustice-rag, .pytest_cache, __pycache__, logs
+Remove-Item create_landmark_cases.py, fetch_real_cases.py, real_cases_to_scrape.csv</code></pre>
+<p>---</p>
+<h2 id="references--license">📚 References &amp; License</h2>
+<ul>
+<li><a href="https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/1870/index.do" target="_blank" rel="noopener noreferrer">Sagaz Industries Test</a> - Supreme Court worker classification test</li>
+<li><a href="https://www.canlii.org" target="_blank" rel="noopener noreferrer">CanLII</a> - Canadian Legal Information Institute</li>
+<li><a href="https://www.deel.com/research" target="_blank" rel="noopener noreferrer">Deel Lab for Global Employment</a> - Research initiative</li>
+</ul>
+<p>This system is designed for the LLM x Law Hackathon, addressing challenges in:</p>
+<ul>
+<li>Legal document retrieval and analysis</li>
+<li>Worker misclassification detection</li>
+<li>AI-assisted legal research</li>
+</ul>
+<h3 id="license">License</h3>
+<p>MIT License - See <a href="https://github.com/johnnietse/legal-ai/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a> file for details.</p></details><p><a href="https://github.com/johnnietse/legal-ai/blob/main/README.md" target="_blank" rel="noopener noreferrer">Open README on main</a></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/legal-ai/blob/main/api/main.py#L38" target="_blank" rel="noopener noreferrer">api/main.py (line 38)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code># ── Lifespan handler (FastAPI 2.6+) ──────────────────
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    &quot;&quot;&quot;Initialize DB on startup, dispose on shutdown.&quot;&quot;&quot;
+    logger.info(&quot;Starting up — initializing database…&quot;)
+    try:
+        await init_db()
+        logger.info(&quot;Database tables ready.&quot;)
+    except Exception as e:
+        logger.warning(&quot;Database init failed (non-fatal): %s&quot;, e)
+    yield
+    logger.info(&quot;Shutting down — closing database…&quot;)
+    await close_db()
+
+
+# Initialize FastAPI app with lifespan
+app = FastAPI(
+    title=&quot;Deel Lab Legal AI API&quot;,
+    description=&quot;Legal Research Assistant API for worker classification and case law retrieval&quot;,
+    version=&quot;1.0.0&quot;,
+    docs_url=&quot;/docs&quot;,
+    redoc_url=&quot;/redoc&quot;,
+    lifespan=lifespan,
+)
+
+# Add CORS middleware for frontend access
+import os as _os
+_ALLOWED_ORIGINS = _os.getenv(&quot;CORS_ORIGINS&quot;, &quot;&quot;).split(&quot;,&quot;) if _os.getenv(&quot;CORS_ORIGINS&quot;) else []
+_DEFAULT_ORIGINS = [
+    &quot;https://deel.ai&quot;,
+    &quot;https://app.deel.ai&quot;,
+    &quot;http://localhost:3000&quot;,
+    &quot;http://localhost:5173&quot;,
+    &quot;http://localhost:5174&quot;,
+    &quot;http://[::1]:5173&quot;,
+    &quot;http://[::1]:5174&quot;,
+    &quot;https://green-field-0674bf00f.7.azurestaticapps.net&quot;,
+    &quot;https://*.7.azurestaticapps.net&quot;,
+    &quot;http://openjustice-api.eastus2.azurecontainer.io:8000&quot;,
+]
+</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from api/main.py on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`Lifespan`, `handler`, `FastAPI`, `asynccontextmanager`, `def`—are useful signposts for following the behavior through the rest of the repository.</p><p>For machine-learning work, the source is only one part of the experiment. Data preparation, labels, split strategy, model configuration, hardware, and evaluation metric determine what the output means. I describe only the pieces visible in code and repository documentation; where the repository does not give a reproducible evaluation setup, I say so instead of inferring model quality from a demo.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/python-3.11+-blue.svg" alt="Python 3.11+" loading="lazy"></a></p></li><li><ul>
+<li>Python 3.11+</li>
+</ul></li><li><h3 id="installation-1">Installation</h3></li><li><h1 id="create-virtual-environment">Create virtual environment</h1></li><li><p>python -m venv venv</p></li><li><h1 id="install-dependencies">Install dependencies</h1></li><li><p>pip install -r requirements.txt</p></li><li><h1 id="configure-environment">Configure environment</h1></li><li><h3 id="v30-environment-variables-1">v3.0 Environment Variables</h3></li><li><h3 id="running-locally-1">Running Locally</h3></li><li><p>python -m api.main</p></li><li><div class="table-scroll"><table><thead><tr><th><strong><code>requirements.txt</code></strong></th><th><strong>Dependencies</strong>: Lists all Python libraries required (FastAPI, Pinecone, Pandas, scikit-learn).</th></tr></thead><tbody></tbody></table></div></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2026-02-07</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/89723c94f1089123f0a8f852585009bd2e9efb68" target="_blank" rel="noopener noreferrer">Initial commit: Deel Legal AI System</a></strong><code>89723c9</code></div></li><li><time>2026-02-07</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/b4d3b43f70c883f5b812dab58bd58a7743cd7cac" target="_blank" rel="noopener noreferrer">Docs: Update READMEs and add LICENSE</a></strong><code>b4d3b43</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/47f4353535bcb73e8656741bdbc11bd0fd0a1c7a" target="_blank" rel="noopener noreferrer">feat: add DeepSearch orchestrator with parallel multi-source search</a></strong><code>47f4353</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/1dc44bc6a3759dbcd22905a0b19b80d38ec3ebf1" target="_blank" rel="noopener noreferrer">docs: mark all 12 tasks complete in SDD ledger</a></strong><code>1dc44bc</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/0fed4c147365d29b4e9fbb57b4782754e4efe190" target="_blank" rel="noopener noreferrer">fix: add huggingface_hub to requirements for a2aj parquet downloads</a></strong><code>0fed4c1</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/7b98f099889c1f51267915d02f119ee428404505" target="_blank" rel="noopener noreferrer">fix(cicd): single-line if expressions — GitHub parser rejects folded scalars with secrets context</a></strong><code>7b98f09</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/2431e9b3d51b7b83eaaca988b9c1b31a10d8f41e" target="_blank" rel="noopener noreferrer">ci(ragflow): pause cron while embedder finishes</a></strong><code>2431e9b</code></div></li><li><time>2026-08-22</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/93fbf01b1cb510570ddea8ba5fee1829e68228f7" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>93fbf01</code></div></li></ol><details class="history-details"><summary>Show all 66 commits on main</summary><ol class="timeline compact"><li><time>2026-02-07</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/89723c94f1089123f0a8f852585009bd2e9efb68" target="_blank" rel="noopener noreferrer">Initial commit: Deel Legal AI System</a></strong><code>89723c9</code></div></li><li><time>2026-02-07</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/b4d3b43f70c883f5b812dab58bd58a7743cd7cac" target="_blank" rel="noopener noreferrer">Docs: Update READMEs and add LICENSE</a></strong><code>b4d3b43</code></div></li><li><time>2026-02-07</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/8b2db89f87e4fd68862e324664b09ec78a8a3354" target="_blank" rel="noopener noreferrer">Docs: Update README details based on feedback</a></strong><code>8b2db89</code></div></li><li><time>2026-06-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/19d96d1acf63491fbe0a6070f05cd03a48651801" target="_blank" rel="noopener noreferrer">feat: Add research-grade advanced RAG and evaluation modules (v2.0)</a></strong><code>19d96d1</code></div></li><li><time>2026-06-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9e555efd048614fecd22418cf4fb35fe3c9ddf58" target="_blank" rel="noopener noreferrer">feat: Add post-hoc verifier module, API endpoints, tests, and updated README</a></strong><code>9e555ef</code></div></li><li><time>2026-07-05</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/5f380f7c869be976a36877023ea7f99ce56eda4d" target="_blank" rel="noopener noreferrer">feat: integrate ByteDance v3.0 RAG Architecture</a></strong><code>5f380f7</code></div></li><li><time>2026-07-05</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/243e57b9057f3913a5a430bccc5027b01a2279c8" target="_blank" rel="noopener noreferrer">fix: migrate to MilvusClient, fix Gemini embeddings, seed 1K+ feedback entries</a></strong><code>243e57b</code></div></li><li><time>2026-07-05</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/04e8d477ceebf7e4b06e171b5efb63d4d9944a96" target="_blank" rel="noopener noreferrer">fix: K8s security hardening, CI/CD pipeline, Minio/ES env vars</a></strong><code>04e8d47</code></div></li><li><time>2026-07-05</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/c5a9859f1119dd68e28a6c08cb4c76b71feabb01" target="_blank" rel="noopener noreferrer">docs: add context files for workflows, domain, processes, templates</a></strong><code>c5a9859</code></div></li><li><time>2026-07-05</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/ccefcdb711738b4080915302307ca589816aa974" target="_blank" rel="noopener noreferrer">docs: update text-embedding-004 references to gemini-embedding-001 in README, architecture diagram, interview prep</a></strong><code>ccefcdb</code></div></li><li><time>2026-07-08</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/ec934f2a57616f9e4813acd4d4c6729e535f0707" target="_blank" rel="noopener noreferrer">Add CSV ingestion automation workflow</a></strong><code>ec934f2</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/177770dc318af0f4358097e405bc2d14593b61ff" target="_blank" rel="noopener noreferrer">Task 1: Add SearXNG Docker &amp; Configuration</a></strong><code>177770d</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/2725fed1a1d310d24d4c6fa8c877d6f8ce645ec5" target="_blank" rel="noopener noreferrer">feat: add Redis client with lazy connection and caching</a></strong><code>2725fed</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/bed867e4342f9cb7b8053c89cd928a5c28189f4e" target="_blank" rel="noopener noreferrer">feat: add SearXNG web search client with graceful degradation</a></strong><code>bed867e</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/47f4353535bcb73e8656741bdbc11bd0fd0a1c7a" target="_blank" rel="noopener noreferrer">feat: add DeepSearch orchestrator with parallel multi-source search</a></strong><code>47f4353</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9d1afd077c42f3b99862ebe592a4fad91fcadc9e" target="_blank" rel="noopener noreferrer">feat: add API key management backend with generation and auth</a></strong><code>9d1afd0</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/7ba212dc5d138d6773df8a483a37d57cba7fc9a5" target="_blank" rel="noopener noreferrer">fix: add auth checks to core RAG/classify endpoints and extend rate limiting</a></strong><code>7ba212d</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/0e0b7030b113a971a82b83d4b7cf00d021e7d866" target="_blank" rel="noopener noreferrer">feat: add free TTS audio generation via edge-tts (Microsoft)</a></strong><code>0e0b703</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/c846c6a581dc4bf5d5343e1792b6bf7203a0fe75" target="_blank" rel="noopener noreferrer">feat: add DeepSearch, TTS, and Search API endpoints</a></strong><code>c846c6a</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/481852e75858e2b68ed88022631b0fa9c8b04e30" target="_blank" rel="noopener noreferrer">fix(tests): disable rate limiting in Task 8 endpoint tests</a></strong><code>481852e</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/563cfee060949b4ec6375ce00602930936ee3d14" target="_blank" rel="noopener noreferrer">feat: add search UI page with filters and result cards (Task 9)</a></strong><code>563cfee</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/8040c77506481873f6276a0e029db8bf5064b19b" target="_blank" rel="noopener noreferrer">feat: add Search and DeepSearch UI pages with audio player (Tasks 9-10); fix gitignore to track src/lib</a></strong><code>8040c77</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/2a5ef3a4625354027f5d453ec633e9240410e308" target="_blank" rel="noopener noreferrer">fix: replace all frontend mock data with real API calls (Task 11)</a></strong><code>2a5ef3a</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/54f55f989434d6f8397687cff1838fd01c65d75b" target="_blank" rel="noopener noreferrer">fix: add real usage chart, activity, and subscription upgrade endpoints (Task 12)</a></strong><code>54f55f9</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/c7001c6fc82c5015a94c2bc598bd2783ad8effa4" target="_blank" rel="noopener noreferrer">chore: commit core backend modules (db, api router exports, search fix) previously uncommitted</a></strong><code>c7001c6</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/6087d3b32f196f31e29b7d0b3941e3ddb850437c" target="_blank" rel="noopener noreferrer">chore: commit rag_pipeline module changes previously uncommitted</a></strong><code>6087d3b</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/76b77396e0bdb076a41548f7ff3011b282c13d61" target="_blank" rel="noopener noreferrer">chore: commit frontend application source and config previously uncommitted</a></strong><code>76b7739</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/75af30b527ee4fa0835330e382cdebf2103ace1d" target="_blank" rel="noopener noreferrer">chore: commit infrastructure, docs, config, and planning artifacts previously uncommitted</a></strong><code>75af30b</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/078375eda25eb0db587266eea8ebcdbe4ae53671" target="_blank" rel="noopener noreferrer">chore: commit remaining source, config, scripts, and test fixture fix previously uncommitted</a></strong><code>078375e</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/1dc44bc6a3759dbcd22905a0b19b80d38ec3ebf1" target="_blank" rel="noopener noreferrer">docs: mark all 12 tasks complete in SDD ledger</a></strong><code>1dc44bc</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/13b313d5b7d1c203920433a87f1f1faf9dd3887d" target="_blank" rel="noopener noreferrer">fix: resolve pre-existing test failures (knowledge_graph KeyError, bias_detector f-string SyntaxError, rate-limit store test isolation)</a></strong><code>13b313d</code></div></li><li><time>2026-07-11</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/3692d324ff55e729b7d37e3411a46f3b5cfff628" target="_blank" rel="noopener noreferrer">fix: make API service runnable end-to-end</a></strong><code>3692d32</code></div></li><li><time>2026-07-12</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/3390f48df4b3b63235bcc0d27a6dae99c9097fb1" target="_blank" rel="noopener noreferrer">fix: route search/DeepSearch through dedicated Gemini key + handle VectorSearchResult</a></strong><code>3390f48</code></div></li><li><time>2026-07-12</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/54b92c2c45c23ef231e24e31f617d16a71677e1c" target="_blank" rel="noopener noreferrer">fix: embedder falls back to 12-key pool, not dedicated search key</a></strong><code>54b92c2</code></div></li><li><time>2026-07-12</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/5052ec4a4123d5f954381bde8243bcb2a96cae04" target="_blank" rel="noopener noreferrer">fix: forward CORS_ORIGINS to API container so 127.0.0.1 dev origin is allowed</a></strong><code>5052ec4</code></div></li><li><time>2026-07-12</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9a5b57bb4608056fe82a4cfdbd66bf6f87855419" target="_blank" rel="noopener noreferrer">fix: auth hooks must call store actions (not raw API client) so isAuthenticated is set; otherwise AuthGuard bounced users back to /login after a successful login</a></strong><code>9a5b57b</code></div></li><li><time>2026-07-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/de4f581734ab3df61c896f1a45047b40d8ff27c4" target="_blank" rel="noopener noreferrer">fix: docker healthchecks, key manager circuit breaker, pinecone version, .gitignore, .dockerignore</a></strong><code>de4f581</code></div></li><li><time>2026-07-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/8559a9f64036cc74541fb72039445acf45367318" target="_blank" rel="noopener noreferrer">fix: remove external network declaration from override.yml (compose manages it)</a></strong><code>8559a9f</code></div></li><li><time>2026-07-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/7cd5ba0bf2f4901cf3ce428b8bc1396e59ed5bd3" target="_blank" rel="noopener noreferrer">refactor: strip dead services from base compose, move to docker-compose.infra.yml</a></strong><code>7cd5ba0</code></div></li><li><time>2026-07-23</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/a40f6476910fd976b73814fc2653b61e4f2c1e5b" target="_blank" rel="noopener noreferrer">Revert &quot;refactor: strip dead services from base compose, move to docker-compose.infra.yml&quot;</a></strong><code>a40f647</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/c01f38b616527ed0addc2f4a3deb0d0de71f9531" target="_blank" rel="noopener noreferrer">feat: RAGFlow advanced retrieval features + overnight metadata/KG activation</a></strong><code>c01f38b</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/03d9dea09752c1e53084aa316d76322385de141d" target="_blank" rel="noopener noreferrer">merge: resolve csv-ingestion.yml continuation style (pwsh backticks)</a></strong><code>03d9dea</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/283943c914e4dcd8c4a78e0946337e84287c7e32" target="_blank" rel="noopener noreferrer">fix: add DATABASE_URL env to ragflow-activation workflow</a></strong><code>283943c</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/87be0209df823cd4ae3eaa14f87230cd6b5b029b" target="_blank" rel="noopener noreferrer">fix: add JWT_SECRET_KEY env to ragflow-activation workflow</a></strong><code>87be020</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/0fed4c147365d29b4e9fbb57b4782754e4efe190" target="_blank" rel="noopener noreferrer">fix: add huggingface_hub to requirements for a2aj parquet downloads</a></strong><code>0fed4c1</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9ab410a773bb7417d5fbdb12fccad9bd4ef87700" target="_blank" rel="noopener noreferrer">fix: restrict enrichment/KG to 6 employment datasets; add pyarrow dep</a></strong><code>9ab410a</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/6dc6f3cddd60ce92d55796efbd60880814161dc2" target="_blank" rel="noopener noreferrer">fix(enrich): use batched upsert instead of update() for pinecone v9</a></strong><code>6dc6f3c</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/b9a7bba26b8d6902c3c50d8c25a8e0891da4ede3" target="_blank" rel="noopener noreferrer">fix(workflow): drop stale --datasets flag from enrich step</a></strong><code>b9a7bba</code></div></li><li><time>2026-08-13</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/976f00769fc4e8004411d6448805db6a53309c95" target="_blank" rel="noopener noreferrer">fix(enrich): handle pinecone 6.x paginator (bare str ids) and vector model shapes</a></strong><code>976f007</code></div></li><li><time>2026-08-14</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9713a09fdc97d0e9883a9edbadcfc7ebcba69308" target="_blank" rel="noopener noreferrer">fix(kg): rotate keys on 403/404/empty, disable thinking for clean JSON, repair truncated responses</a></strong><code>9713a09</code></div></li><li><time>2026-08-14</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/d7c256458393faef4ef832f2d17827038e5defea" target="_blank" rel="noopener noreferrer">fix(workflow): persist checkpoints on timeout cancel, serialize runs</a></strong><code>d7c2564</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/5c788336bcbaa2f903462600f63c12d182826a0a" target="_blank" rel="noopener noreferrer">fix(ingest): rotate keys on 403 for embeddings, fix NameError, add --datasets flag, inline boost_terms/parent_id</a></strong><code>5c78833</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/8ef2fc34ec958de5355899661c9c66bb613b1cd8" target="_blank" rel="noopener noreferrer">fix(workflow): enrich step continues on Pinecone egress 429, must not block KG build</a></strong><code>8ef2fc3</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/d6e31ea858342ba0b5b653b2143760f1fe7bd6c3" target="_blank" rel="noopener noreferrer">fix(keys): rotate API keys on 401 (invalid/expired) for embeddings and chat generation</a></strong><code>d6e31ea</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/9628ad9419490a4d544e6d78bbe966a627eba962" target="_blank" rel="noopener noreferrer">fix(workflows): repair all GitHub Actions for green CI</a></strong><code>9628ad9</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/7b98f099889c1f51267915d02f119ee428404505" target="_blank" rel="noopener noreferrer">fix(cicd): single-line if expressions — GitHub parser rejects folded scalars with secrets context</a></strong><code>7b98f09</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/5da2efa7939c76c8ec414e614dce2a1bd9a2644e" target="_blank" rel="noopener noreferrer">fix(cicd): gate Azure steps at step level — secrets context invalid in job-level if</a></strong><code>5da2efa</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/a96181dfd17d02fc275d904d3b5ebf1f920027b6" target="_blank" rel="noopener noreferrer">fix(cicd): map secrets to job env for step if-gating — secrets context rejected in expressions</a></strong><code>a96181d</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/c30a6105011c5f300c087af05787fb5403dfff0a" target="_blank" rel="noopener noreferrer">fix(ci): green tests — install pytest-mock, guard empty key pool, mock embeddings</a></strong><code>c30a610</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/50f03831cbc9e860671a8998d04cfbae3c978cf7" target="_blank" rel="noopener noreferrer">fix(cicd): bound tests with --timeout=60 and install pytest-timeout</a></strong><code>50f0383</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/63ecc279b53a58862799340fd6d675fcea6cf590" target="_blank" rel="noopener noreferrer">fix(deep_search): robust source guards, real bugs, and test embedding mock</a></strong><code>63ecc27</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/a8a7f81291054bd046452f1c7192865c1da96dad" target="_blank" rel="noopener noreferrer">ci(frontend): skip Azure SWA deploy when token missing</a></strong><code>a8a7f81</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/a4de38986e276eefe7230c0f338dea326b8e0f89" target="_blank" rel="noopener noreferrer">ci(csv-ingestion): pass GEMINI_BACKUP_KEYS for 12-key rotation</a></strong><code>a4de389</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/74105ab8908a3eef49215cb1a717027385a25060" target="_blank" rel="noopener noreferrer">ci(csv-ingestion): tolerate missing progress file in Summary/artifact</a></strong><code>74105ab</code></div></li><li><time>2026-08-15</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/2431e9b3d51b7b83eaaca988b9c1b31a10d8f41e" target="_blank" rel="noopener noreferrer">ci(ragflow): pause cron while embedder finishes</a></strong><code>2431e9b</code></div></li><li><time>2026-08-22</time><div><strong><a href="https://github.com/johnnietse/legal-ai/commit/93fbf01b1cb510570ddea8ba5fee1829e68228f7" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>93fbf01</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 66 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/legal-ai/tree/main" target="_blank" rel="noopener noreferrer">main</a> · 93fbf01 · 2026-08-22 · Update README.md</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The August commit history records fixes for missing artifacts, key rotation, vector-store pagination, and CI secrets handling. Those are concrete troubleshooting lessons from keeping an ingestion pipeline reliable.</p><p>The lasting lesson is specific to this record: The interesting work is in the pipeline boundaries: a missing progress file, expired API keys, rate limits, or an embedding service still running can all stop useful results. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/legal-ai" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/legal-ai</a></li><li><a href="https://github.com/johnnietse/legal-ai" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/legal-ai/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/legal-ai/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./lws-issue-746-tracing-worker-dns-failures-to-startup-order.html"><small>NEWER STORY</small><strong>← LWS issue #746: tracing worker DNS failures to startup order</strong></a><a class="older" href="./turning-a-portfolio-into-an-interactive-engineering-exhibit.html"><small>OLDER STORY</small><strong>Turning a portfolio into an interactive engineering exhibit →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: legal-ai · Evidence reviewed November 8, 2026</span></footer></main></body></html>

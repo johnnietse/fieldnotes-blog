@@ -1,0 +1,631 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A PHP, HTML, CSS, and JavaScript application uses MySQL to manage conference information."><title>Modeling a conference workflow in a database app · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Coursework &amp; capstone</p><div class="title-cover"><div><h1>Modeling a conference workflow in a database app</h1><p class="dek">A PHP, HTML, CSS, and JavaScript application uses MySQL to manage conference information.</p></div><img src="https://github.com/user-attachments/assets/cf1a1832-8c8d-4175-97d5-4990d06b2979" alt="Conference database interface from the coursework README" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started April 22, 2025</span><span>Updated June 28, 2025</span><span>~9 min read</span></div><div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Web development</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The README identifies it as a university course project and describes a conference-management use case.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A PHP, HTML, CSS, and JavaScript application uses MySQL to manage conference information.. The repository history snapshot records 33 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The README identifies it as a university course project and describes a conference-management use case.</p><p>This project sits in Coursework &amp; capstone. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The appeal is that a database becomes meaningful when it supports a real workflow: people, events, and the records connecting them.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A PHP, HTML, CSS, and JavaScript application uses MySQL to manage conference information.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section"><h2>System sketch</h2><figure class="diagram"><figcaption>A course application ties a conference workflow to relational records.</figcaption><div class="flow"><div class="flow-node">Conference users</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">PHP web interface</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">MySQL records</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Schedule and registration workflow</div></div><small>Conceptual path only; see the linked repository for the complete implementation.</small></figure></section><figure class="project-image"><img src="https://github.com/user-attachments/assets/cf1a1832-8c8d-4175-97d5-4990d06b2979" alt="Conference database interface from the coursework README" loading="lazy"><figcaption>A project image from the coursework repository.</figcaption></figure><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The README contains 2269 words. This visible excerpt keeps the core purpose and setup close to the story, while the full document is available below and at the source repository.</p><h1 id="conference-management-system-1">🎓 Conference Management System</h1>
+<p>Welcome to the <strong>Conference Management System</strong> — a fully functional PHP-based web application tool developed as part of a university course project. Built using <strong>PHP</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, and <strong>MySQL</strong>, this application is intended for internal use by <strong>conference organizers</strong> to streamline the management of a university-level academic conference. This application enables administrators to manage attendees, sponsors, job postings, session schedules, and finances efficiently via a clean and structured interface (focusing on functionality and database-driven interactions over flashy design). The system interfaces with a backend MySQL-compatible database using PHP PDO, ensuring broad DBMS compatibility.</p>
+<p>---</p>
+<h2 id="project-overview-1">🌐 Project Overview</h2>
+<p>This application is a complete end-to-end system for managing university conference data, implemented as a practical assignment for a Computer Science/Engineering course. The primary focus is on <strong>functionality, accessibility, and database interaction</strong>, using <strong>PDO (PHP Data Objects)</strong> for robust, secure, and DBMS-agnostic operations.</p>
+<p>Unlike flashy public-facing sites, this organizer-only tool emphasizes clarity and completeness of core conference operations. All data-driven content is rendered dynamically through PHP modules.</p>
+<h3 id="key-principles-1">Key Principles:</h3>
+<ul>
+<li><strong>Functionality First</strong>: Designed with the primary goal of fulfilling real-world conference management tasks for organizers.</li>
+</ul>
+<ul>
+<li><strong>Clean Architecture</strong>: Pages are broken down into clear modules (e.g., attendees, sessions, sponsors).</li>
+</ul>
+<ul>
+<li><strong>Portable &amp; Configurable</strong>: Developed to work on most local or hosted environments with minimal setup.</li>
+</ul>
+<ul>
+<li><strong>Database Agnostic</strong>: Uses PHP&#39;s PDO for all database operations, allowing use with various SQL-based systems.</li>
+</ul>
+<ul>
+<li><strong>Accessible UI</strong>: Focused on readability, logical flow, and ease of use without requiring frontend frameworks.</li>
+</ul>
+<p>The application aims to demonstrate a well-organized and modular approach to building dynamic content with PHP, while enforcing best practices for web application development and relational database design.</p>
+<p>---</p>
+<h2 id="file-structure-1">📁 File Structure</h2>
+<p>conference_management_system/ ├── images/ │   └── conferencelogo.png      # Conference logo ├── includes/ │   ├── footer.php              # Common footer │   ├── header.php              # Common header (styles, nav) │   ├── helper_functions.php    # Reusable formatting functions │   └── styles.css              # Styling ├── modules/                    # All feature modules (dynamic content) │   ├── add_new_attendee.php │   ├── all_available_jobs.php │   ├── company_jobs.php │   ├── conference_daily_schedule.php │   ├── conference_financials.php │   ├── hotel_rooming.php │   ├── list_of_attendees.php │   ├── list_of_sponsors.php │   ├── session_details_management.php │   ├── sponsorship_companies_management.php │   └── sub_committee_members.php ├── README.md ├── conference.php              # Home page / main menu ├── conferencedb.sql ├── connectdb.php               # Database connection (PDO) └── getdata.php                 # Ignore this file</p>
+<p>---</p>
+<h2 id="tech-stack-1">🧰 Tech Stack</h2>
+<ul>
+<li><strong>PHP 7+</strong> – Backend logic and dynamic content generation (with PDO for database access)</li>
+<li><strong>PDO (PHP Data Objects)</strong> – Secure, DBMS-independent database interaction</li>
+<li><strong>MySQL (or compatible DBMS)</strong> – Data storage and querying (via conferenceDB)</li>
+<li><strong>HTML5/CSS3</strong> – Structure and styling</li>
+<li><strong>Vanilla JavaScript</strong> – For form interactivity (e.g., conditional fields) --&gt; but No JavaScript frameworks — plain JS where necessary</li>
+<li><strong>Responsive and clean UI with a professional touch</strong></li>
+</ul>
+<p>---</p>
+<h2 id="functional-features-1">🚀 Functional Features</h2>
+<p>The application supports all the following functionalities:</p>
+<h3 id="attendee-management-1">👥 Attendee Management</h3>
+<ul>
+<li>Add a new attendee (student, professional, sponsor) -&gt;  Note: (automatically links students to rooms and sponsors to companies)</li>
+<li>Students are assigned to a hotel room</li>
+<li>Sponsors are linked to a company</li>
+<li>View all attendees organized by type:</li>
+<li>Students</li>
+<li>Professionals</li>
+<li>Sponsors</li>
+</ul>
+<h3 id="hotel-room-viewer-1">🏨 Hotel Room Viewer</h3>
+<ul>
+<li>Select a room from a dropdown menu to view all students assigned to that room</li>
+</ul>
+<h3 id="sub-committee-viewer-1">🧑‍💼 Sub-Committee Viewer</h3>
+<ul>
+<li>Choose a sub-committee from a dropdown menu and list all its members</li>
+</ul>
+<h3 id="conference-schedule-1">📆 Conference Schedule</h3>
+<ul>
+<li>Select a day to view all scheduled sessions with:</li>
+<li>Time</li>
+<li>Location</li>
+<li>Speaker details</li>
+</ul>
+<h3 id="job-postings-1">💼 Job Postings</h3>
+<ul>
+<li>View all available jobs sorted by sponsorship level and salary</li>
+<li>Filter job listings by sponsoring company</li>
+</ul>
+<h3 id="sponsor-management-1">🏢 Sponsor Management</h3>
+<ul>
+<li>View all sponsoring companies with their sponsorship level and number of attendees to the conference</li>
+<li>Add a new sponsor company</li>
+<li>Delete an existing company (and cascade delete attendees from that sponsor&#39;s company)</li>
+</ul>
+<h3 id="financial-report-1">💰 Financial Report</h3>
+<ul>
+<li>Display total revenue breakdown:</li>
+<li>From registration fees</li>
+<li>From sponsorship contributions</li>
+<li>Summarized in clearly formatted tables </li>
+</ul>
+<h3 id="session-editingupdates-1">🔁 Session Editing/Updates</h3>
+<ul>
+<li>Change and switch a session’s:</li>
+<li>Day</li>
+<li>Time</li>
+<li>Location</li>
+<li>Ensure no time/location conflicts</li>
+</ul>
+<p>---</p>
+<h2 id="how-to-run-1">🧪 How to Run</h2>
+<h3 id="1-clone-or-download-the-repository-1">1. Clone or Download the Repository</h3>
+<p>Place it in the appropriate root folder of your local server:</p>
+<ul>
+<li><strong>XAMPP:</strong> <code>htdocs/</code></li>
+<li><strong>WAMP:</strong> <code>www/</code></li>
+</ul>
+<h3 id="2-create--load-the-database-1">2. Create &amp; Load the Database</h3>
+<p>Run the provided script:</p>
+<pre><code>-- conferencedb.sql
+DROP DATABASE IF EXISTS conferenceDB;
+CREATE DATABASE IF NOT EXISTS conferenceDB;
+USE conferenceDB;</code></pre>
+<p>-- Followed by table creation and data inserts... You can run this in tools like phpMyAdmin, MySQL CLI, or DBeaver.</p>
+<h3 id="3-configure-your-environment-1">3. Configure Your Environment</h3>
+<p>Ensure the database credentials in connectdb.php match your local setup:</p>
+<pre><code>$connection = new PDO(&#39;mysql:host=localhost;port=3308;dbname=conferenceDB&#39;, &#39;root&#39;, &#39;&#39;);</code></pre>
+<h3 id="4-access-the-application-1">4. Access the Application</h3>
+<p>Navigate to:</p>
+<pre><code>http://localhost:PORT/conference_management_system/conference.php</code></pre>
+<p>(Replace PORT with your configured port, like 8080 or 3308.)</p>
+<p>---</p>
+<h3 id="summary-on-how-to-run-1">Summary on how to run</h3>
+<p>Ensure you have:</p>
+<ul>
+<li>PHP (v7+)</li>
+</ul>
+<ul>
+<li>MySQL (or compatible DBMS)</li>
+</ul>
+<ul>
+<li>A local server (e.g., XAMPP/WAMP/MAMP)</li>
+</ul>
+<p>Place the project in your htdocs (or equivalent), then visit:</p><details class="history-details"><summary>Expand the full repository README (2269 words)</summary><h1 id="conference-management-system">🎓 Conference Management System</h1>
+<p>Welcome to the <strong>Conference Management System</strong> — a fully functional PHP-based web application tool developed as part of a university course project. Built using <strong>PHP</strong>, <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, and <strong>MySQL</strong>, this application is intended for internal use by <strong>conference organizers</strong> to streamline the management of a university-level academic conference. This application enables administrators to manage attendees, sponsors, job postings, session schedules, and finances efficiently via a clean and structured interface (focusing on functionality and database-driven interactions over flashy design). The system interfaces with a backend MySQL-compatible database using PHP PDO, ensuring broad DBMS compatibility.</p>
+<p>---</p>
+<h2 id="project-overview">🌐 Project Overview</h2>
+<p>This application is a complete end-to-end system for managing university conference data, implemented as a practical assignment for a Computer Science/Engineering course. The primary focus is on <strong>functionality, accessibility, and database interaction</strong>, using <strong>PDO (PHP Data Objects)</strong> for robust, secure, and DBMS-agnostic operations.</p>
+<p>Unlike flashy public-facing sites, this organizer-only tool emphasizes clarity and completeness of core conference operations. All data-driven content is rendered dynamically through PHP modules.</p>
+<h3 id="key-principles">Key Principles:</h3>
+<ul>
+<li><strong>Functionality First</strong>: Designed with the primary goal of fulfilling real-world conference management tasks for organizers.</li>
+</ul>
+<ul>
+<li><strong>Clean Architecture</strong>: Pages are broken down into clear modules (e.g., attendees, sessions, sponsors).</li>
+</ul>
+<ul>
+<li><strong>Portable &amp; Configurable</strong>: Developed to work on most local or hosted environments with minimal setup.</li>
+</ul>
+<ul>
+<li><strong>Database Agnostic</strong>: Uses PHP&#39;s PDO for all database operations, allowing use with various SQL-based systems.</li>
+</ul>
+<ul>
+<li><strong>Accessible UI</strong>: Focused on readability, logical flow, and ease of use without requiring frontend frameworks.</li>
+</ul>
+<p>The application aims to demonstrate a well-organized and modular approach to building dynamic content with PHP, while enforcing best practices for web application development and relational database design.</p>
+<p>---</p>
+<h2 id="file-structure">📁 File Structure</h2>
+<p>conference_management_system/ ├── images/ │   └── conferencelogo.png      # Conference logo ├── includes/ │   ├── footer.php              # Common footer │   ├── header.php              # Common header (styles, nav) │   ├── helper_functions.php    # Reusable formatting functions │   └── styles.css              # Styling ├── modules/                    # All feature modules (dynamic content) │   ├── add_new_attendee.php │   ├── all_available_jobs.php │   ├── company_jobs.php │   ├── conference_daily_schedule.php │   ├── conference_financials.php │   ├── hotel_rooming.php │   ├── list_of_attendees.php │   ├── list_of_sponsors.php │   ├── session_details_management.php │   ├── sponsorship_companies_management.php │   └── sub_committee_members.php ├── README.md ├── conference.php              # Home page / main menu ├── conferencedb.sql ├── connectdb.php               # Database connection (PDO) └── getdata.php                 # Ignore this file</p>
+<p>---</p>
+<h2 id="tech-stack">🧰 Tech Stack</h2>
+<ul>
+<li><strong>PHP 7+</strong> – Backend logic and dynamic content generation (with PDO for database access)</li>
+<li><strong>PDO (PHP Data Objects)</strong> – Secure, DBMS-independent database interaction</li>
+<li><strong>MySQL (or compatible DBMS)</strong> – Data storage and querying (via conferenceDB)</li>
+<li><strong>HTML5/CSS3</strong> – Structure and styling</li>
+<li><strong>Vanilla JavaScript</strong> – For form interactivity (e.g., conditional fields) --&gt; but No JavaScript frameworks — plain JS where necessary</li>
+<li><strong>Responsive and clean UI with a professional touch</strong></li>
+</ul>
+<p>---</p>
+<h2 id="functional-features">🚀 Functional Features</h2>
+<p>The application supports all the following functionalities:</p>
+<h3 id="attendee-management">👥 Attendee Management</h3>
+<ul>
+<li>Add a new attendee (student, professional, sponsor) -&gt;  Note: (automatically links students to rooms and sponsors to companies)</li>
+<li>Students are assigned to a hotel room</li>
+<li>Sponsors are linked to a company</li>
+<li>View all attendees organized by type:</li>
+<li>Students</li>
+<li>Professionals</li>
+<li>Sponsors</li>
+</ul>
+<h3 id="hotel-room-viewer">🏨 Hotel Room Viewer</h3>
+<ul>
+<li>Select a room from a dropdown menu to view all students assigned to that room</li>
+</ul>
+<h3 id="sub-committee-viewer">🧑‍💼 Sub-Committee Viewer</h3>
+<ul>
+<li>Choose a sub-committee from a dropdown menu and list all its members</li>
+</ul>
+<h3 id="conference-schedule">📆 Conference Schedule</h3>
+<ul>
+<li>Select a day to view all scheduled sessions with:</li>
+<li>Time</li>
+<li>Location</li>
+<li>Speaker details</li>
+</ul>
+<h3 id="job-postings">💼 Job Postings</h3>
+<ul>
+<li>View all available jobs sorted by sponsorship level and salary</li>
+<li>Filter job listings by sponsoring company</li>
+</ul>
+<h3 id="sponsor-management">🏢 Sponsor Management</h3>
+<ul>
+<li>View all sponsoring companies with their sponsorship level and number of attendees to the conference</li>
+<li>Add a new sponsor company</li>
+<li>Delete an existing company (and cascade delete attendees from that sponsor&#39;s company)</li>
+</ul>
+<h3 id="financial-report">💰 Financial Report</h3>
+<ul>
+<li>Display total revenue breakdown:</li>
+<li>From registration fees</li>
+<li>From sponsorship contributions</li>
+<li>Summarized in clearly formatted tables </li>
+</ul>
+<h3 id="session-editingupdates">🔁 Session Editing/Updates</h3>
+<ul>
+<li>Change and switch a session’s:</li>
+<li>Day</li>
+<li>Time</li>
+<li>Location</li>
+<li>Ensure no time/location conflicts</li>
+</ul>
+<p>---</p>
+<h2 id="how-to-run">🧪 How to Run</h2>
+<h3 id="1-clone-or-download-the-repository">1. Clone or Download the Repository</h3>
+<p>Place it in the appropriate root folder of your local server:</p>
+<ul>
+<li><strong>XAMPP:</strong> <code>htdocs/</code></li>
+<li><strong>WAMP:</strong> <code>www/</code></li>
+</ul>
+<h3 id="2-create--load-the-database">2. Create &amp; Load the Database</h3>
+<p>Run the provided script:</p>
+<pre><code>-- conferencedb.sql
+DROP DATABASE IF EXISTS conferenceDB;
+CREATE DATABASE IF NOT EXISTS conferenceDB;
+USE conferenceDB;</code></pre>
+<p>-- Followed by table creation and data inserts... You can run this in tools like phpMyAdmin, MySQL CLI, or DBeaver.</p>
+<h3 id="3-configure-your-environment">3. Configure Your Environment</h3>
+<p>Ensure the database credentials in connectdb.php match your local setup:</p>
+<pre><code>$connection = new PDO(&#39;mysql:host=localhost;port=3308;dbname=conferenceDB&#39;, &#39;root&#39;, &#39;&#39;);</code></pre>
+<h3 id="4-access-the-application">4. Access the Application</h3>
+<p>Navigate to:</p>
+<pre><code>http://localhost:PORT/conference_management_system/conference.php</code></pre>
+<p>(Replace PORT with your configured port, like 8080 or 3308.)</p>
+<p>---</p>
+<h3 id="summary-on-how-to-run">Summary on how to run</h3>
+<p>Ensure you have:</p>
+<ul>
+<li>PHP (v7+)</li>
+</ul>
+<ul>
+<li>MySQL (or compatible DBMS)</li>
+</ul>
+<ul>
+<li>A local server (e.g., XAMPP/WAMP/MAMP)</li>
+</ul>
+<p>Place the project in your htdocs (or equivalent), then visit:</p>
+<pre><code>http://localhost:PORT/conference_management_system/conference.php</code></pre>
+<p>Update connectdb.php as needed for your DB credentials or port.</p>
+<p>---</p>
+<h2 id="screenshots">📸 Screenshots</h2>
+<p><img src="https://github.com/user-attachments/assets/cf1a1832-8c8d-4175-97d5-4990d06b2979" alt="Conference" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/f4d1f917-8648-4973-a6ee-a201af5fba6b" alt="Screenshot (684)" loading="lazy"> <img src="https://github.com/user-attachments/assets/2d575bce-235e-4a3c-96f1-ba032cceac9d" alt="Screenshot (685)" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/b3bd9904-ebfd-4196-a46b-8e266c27c2fa" alt="Screenshot (686)" loading="lazy"> <img src="https://github.com/user-attachments/assets/de5dde28-6db9-47ec-a89d-02203a39139f" alt="Screenshot (687)" loading="lazy"> <img src="https://github.com/user-attachments/assets/929dfc2f-06f1-4d96-b056-ce61921e2931" alt="Screenshot (688)" loading="lazy"> <img src="https://github.com/user-attachments/assets/9a3acca4-03ce-4d3f-bac4-508185cc9032" alt="Screenshot (689)" loading="lazy"> <img src="https://github.com/user-attachments/assets/92722e78-98f5-4148-8e2e-96ed3acc3559" alt="Screenshot (690)" loading="lazy"> <img src="https://github.com/user-attachments/assets/17c837bc-444a-4723-b821-a0b11767f324" alt="Screenshot (691)" loading="lazy"> <img src="https://github.com/user-attachments/assets/9c04e390-0c47-4004-9c99-90645a685a5b" alt="Screenshot (692)" loading="lazy"> <img src="https://github.com/user-attachments/assets/7d392462-2ac9-4321-b817-99f7afd6e3c4" alt="Screenshot (693)" loading="lazy"> <img src="https://github.com/user-attachments/assets/a9468202-e1fa-45ec-9452-12edbf2a08f2" alt="Screenshot (694)" loading="lazy"> <img src="https://github.com/user-attachments/assets/8cbb510b-452c-462c-a8b0-68256c81f359" alt="Screenshot (695)" loading="lazy"> <img src="https://github.com/user-attachments/assets/b93577c9-6cc7-4915-b323-d357127c92cf" alt="Screenshot (696)" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/9f994151-1d9c-4a78-9d69-a10d258bae2b" alt="Screenshot (697)" loading="lazy"> <img src="https://github.com/user-attachments/assets/ec95f86d-0869-45b7-a4a9-08039d13a1a1" alt="Screenshot (698)" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/d2f55605-98dc-4bdf-aabd-a98d484256aa" alt="Screenshot (699)" loading="lazy"> <img src="https://github.com/user-attachments/assets/12518ef4-d5d7-4ad5-a402-d1a3632ce63e" alt="Screenshot (700)" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/cb9ffbc5-139e-4d85-9870-cf914be2b108" alt="Screenshot (701)" loading="lazy"> <img src="https://github.com/user-attachments/assets/834d01a5-6cf8-457b-b0b9-1c4ef6aba95f" alt="Screenshot (702)" loading="lazy"></p>
+<h2 id="demo-video">🎥 Demo Video</h2>
+<p>A short walkthrough of the Conference Management System is available below. This demo highlights all core features, including attendee management, sponsorship controls, job postings, and session scheduling.</p>
+<p>▶️ Watch the full demo here: https://youtu.be/PeUEeHX_8Xo?si=YaiZIT_tbwugFAs6</p>
+<p>---</p>
+<p>🔊 The video includes audio narration and is under 5 minutes as per the project&#39;s requirements</p>
+<p>---</p>
+<h1 id="project-development-phases-comprehensive-breakdown">Project Development Phases (Comprehensive Breakdown)</h1>
+<p>This project was structured into four distinct phases, each building upon the previous to deliver a robust, full-stack web application. Below is an exhaustive, narrative-style breakdown of each phase, covering workflows, technical considerations, challenges, and outcomes.</p>
+<p>---</p>
+<h2 id="phase-1-local-development-environment-setup"><strong>Phase 1: Local Development Environment Setup</strong></h2>
+<h3 id="objective"><strong>Objective</strong></h3>
+<p>Establish a foundational environment for database management and web development using industry-standard tools.</p>
+<h3 id="key-components"><strong>Key Components</strong></h3>
+<ol>
+<li><strong>Software Stack Installation</strong>:  </li>
+</ol>
+<ul>
+<li><strong>XAMPP</strong>: Installed Apache (web server), MySQL (database), and PHP (backend scripting language) as a unified package.  </li>
+<li><strong>phpMyAdmin</strong>: Configured for GUI-based MySQL database management.  </li>
+<li><strong>OS-Specific Adjustments</strong>:  </li>
+<li><strong>Windows</strong>: Standard XAMPP installer with default settings.  </li>
+<li><strong>macOS (M1/M2)</strong>: Avoided VM-based XAMPP versions; used native ARM-compatible installers to prevent crashes.  </li>
+<li><strong>Linux</strong>: Adjusted file permissions for <code>/opt/lampp</code> to enable Apache and MySQL services.  </li>
+</ul>
+<ol>
+<li><strong>Database Initialization</strong>:  </li>
+</ol>
+<ul>
+<li>Created <code>cisc332</code> database via phpMyAdmin’s SQL console:  </li>
+</ul>
+<pre><code>   CREATE DATABASE cisc332;  </code></pre>
+<ul>
+<li>Configured a dedicated MySQL user with restricted privileges for enhanced security:  </li>
+</ul>
+<pre><code>   CREATE USER &#39;app_user&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;SecurePass123!&#39;;  
+   GRANT SELECT, INSERT, UPDATE ON cisc332.* TO &#39;app_user&#39;@&#39;localhost&#39;;  </code></pre>
+<ol>
+<li><strong>Web Server Validation</strong>:  </li>
+</ol>
+<ul>
+<li>Tested Apache by hosting a static <code>index.html</code> page in <code>htdocs</code>:  </li>
+</ul>
+<pre><code>   &lt;!DOCTYPE html&gt;  
+   &lt;html&gt;  
+       &lt;head&gt;&lt;title&gt;Test&lt;/title&gt;&lt;/head&gt;  
+       &lt;body&gt;&lt;h1&gt;Apache is running!&lt;/h1&gt;&lt;/body&gt;  
+   &lt;/html&gt;  </code></pre>
+<ul>
+<li>Verified accessibility via <code>http://localhost</code> and resolved port conflicts by modifying <code>httpd.conf</code> (e.g., switching from port <code>80</code> to <code>8080</code>).  </li>
+</ul>
+<h3 id="challenges--solutions"><strong>Challenges &amp; Solutions</strong></h3>
+<ul>
+<li><strong>M1 Mac Compatibility</strong>:  </li>
+<li><strong>Issue</strong>: ProFTPD service caused system crashes.  </li>
+<li><strong>Resolution</strong>: Disabled ProFTPD and used only Apache/MySQL.  </li>
+<li><strong>Permission Denied Errors</strong>:  </li>
+<li><strong>Issue</strong>: Apache lacked write access to <code>htdocs</code>.  </li>
+<li><strong>Resolution</strong>: Adjusted folder permissions via <code>chmod -R 755 /opt/lampp/htdocs</code>.  </li>
+</ul>
+<h3 id="outcome"><strong>Outcome</strong></h3>
+<ul>
+<li>Fully operational local server environment with MySQL database connectivity.  </li>
+<li>Screenshots of <code>phpMyAdmin</code> and <code>Hello World</code> page submitted as proof of setup.  </li>
+</ul>
+<p>---</p>
+<h2 id="phase-2-entity-relationship-er-diagram-design"><strong>Phase 2: Entity-Relationship (ER) Diagram Design</strong></h2>
+<h3 id="objective-1"><strong>Objective</strong></h3>
+<p>Model the <strong>Conference Database</strong> to encapsulate entities, relationships, and constraints based on real-world requirements.</p>
+<h3 id="outcome-1"><strong>Outcome</strong></h3>
+<ul>
+<li>ER diagram in <code>.jpg</code> format, validated against project requirements.  </li>
+<li>Assumptions documented (e.g., &quot;Sponsors are not automatically attendees&quot;).  </li>
+</ul>
+<h3 id="er-diagram">ER Diagram</h3>
+<p><a href="https://github.com/user-attachments/files/19880506/ER.Diagram.Project.Part.1.-.Corrected.modified.version.pdf" target="_blank" rel="noopener noreferrer">ER Diagram (Project Part 1) - Corrected, modified version.pdf</a></p>
+<p>---</p>
+<h2 id="phase-3-relational-model--sql-script-implementation"><strong>Phase 3: Relational Model &amp; SQL Script Implementation</strong></h2>
+<h3 id="objective-2"><strong>Objective</strong></h3>
+<p>Translate the ER diagram into a normalized SQL schema and populate it with test data.</p>
+<h3 id="outcome-2"><strong>Outcome</strong></h3>
+<ul>
+<li>SQL script (<code>conferenceDB.sql</code>) capable of recreating the database from scratch.  </li>
+<li>Test data ensuring all relationships and constraints functioned as intended.</li>
+</ul>
+<h3 id="sql-script">SQL Script</h3>
+<pre><code>drop database if exists conferenceDB;
+create database if not exists conferenceDB;
+use conferenceDB;
+
+create table attendee(
+    id integer not null primary key,
+    fName varchar(40),
+    lName varchar(40),
+    fee Enum(&quot;0&quot;, &quot;50&quot;, &quot;100&quot;));
+
+create table room (
+    num integer not null primary key,
+    numbed integer);
+
+create table student(
+    id integer not null primary key,
+    roomNum integer not null,
+    foreign key (id) references attendee (id) on delete cascade,
+    foreign key (roomNum) references room(num));
+
+create table professional(
+    id integer not null primary key,
+    foreign key (id) references attendee (id) on delete cascade);
+
+
+create table speaker(
+    id integer not null primary key,
+    foreign key (id) references attendee (id) on delete cascade);
+
+create table session(
+    location integer not null,
+    sessionDate date not null,
+    startTime time not null,
+    endTime time not null,
+    speakerID integer not null,
+    primary key(location, sessionDate, startTime),
+    foreign key (speakerID) references speaker (id) on delete cascade);
+
+create table company(
+    name varchar(120) not null primary key,
+    emailsSent integer,
+    level Enum(&quot;Gold&quot;, &quot;Bronze&quot;, &quot;Platinum&quot;, &quot;Silver&quot;));
+
+create table sponsor(
+    id integer not null primary key,
+    companyName varchar(120) not null,
+    foreign key (id) references attendee (id) on delete cascade,
+    foreign key (companyName) references company (name) on delete cascade);
+
+create table jobAd(
+    companyName varchar(120) not null,
+    jobTitle varchar(250) not null,
+    salary integer,
+    location varchar(250),
+    primary key (companyName, jobTitle),
+    foreign key (companyName) references company (name) on delete cascade);
+
+
+create table member(
+    id integer not null primary key,
+    fName varchar(120) not null,
+    lName varchar(120) not null);
+
+
+create table subcommittee(
+    name varchar(120) not null primary key,
+    chairID integer not null,
+    foreign key (chairID) references member (id));
+
+create table memberOf(
+    id integer not null,
+    subcommittee varchar(120) not null,
+    foreign key (id) references member (id),
+    foreign key (subcommittee) references subcommittee (name));
+
+    
+
+
+insert into attendee values
+(1, &#39;Alice&#39;, &#39;King&#39;, &#39;100&#39;),
+(2, &#39;Bob&#39;, &#39;Smith&#39;, &#39;50&#39;),
+(3, &#39;Charlie&#39;, &#39;Williams&#39;, &#39;0&#39;),
+(4, &#39;David&#39;, &#39;Lee&#39;, &#39;100&#39;),
+(5, &#39;Eve&#39;, &#39;Brown&#39;, &#39;50&#39;),
+(6, &#39;Frank&#39;, &#39;Davis&#39;, &#39;0&#39;),
+(7, &#39;Grace&#39;, &#39;Miller&#39;, &#39;100&#39;),
+(8, &#39;Hannah&#39;, &#39;Taylor&#39;, &#39;50&#39;),
+(9, &#39;Olivia&#39;, &#39;Young&#39;, &#39;0&#39;),
+(10, &#39;Lisa&#39;, &#39;Green&#39;, &#39;50&#39;),
+(11, &#39;Kara&#39;, &#39;Thomas&#39;, &#39;100&#39;),
+(12, &#39;Kelly&#39;, &#39;Kang&#39;, &#39;0&#39;),
+(13, &#39;Douglas&#39;, &#39;Lopez&#39;, &#39;50&#39;),
+(14, &#39;Noah&#39;, &#39;Green&#39;, &#39;0&#39;),
+(15, &#39;Olivia&#39;, &#39;Hill&#39;, &#39;100&#39;),
+(16, &#39;Paul&#39;, &#39;Adams&#39;, &#39;50&#39;),
+(17, &#39;Quinn&#39;, &#39;Baker&#39;, &#39;0&#39;),
+(18, &#39;Rachel&#39;, &#39;Carter&#39;, &#39;100&#39;),
+(19, &#39;Samuel&#39;, &#39;Dave&#39;, &#39;50&#39;),
+(20, &#39;Tom&#39;, &#39;Hall&#39;, &#39;0&#39;),
+(21, &#39;Umi&#39;, &#39;Blake&#39;, &#39;50&#39;),
+(22, &#39;Vanessa&#39;, &#39;Scott&#39;, &#39;100&#39;),
+(23, &#39;Wendy&#39;, &#39;Masse&#39;, &#39;0&#39;),
+(24, &#39;Xavier&#39;, &#39;Iris&#39;, &#39;100&#39;);  
+
+
+insert into room values
+(101, 2),
+(102, 3),
+(103, 2),
+(104, 1),
+(105, 2),
+(106, 3),
+(107, 1),
+(108, 2),
+(109, 3);  
+
+
+
+
+insert into student values
+(1, 101),
+(2, 101),
+(3, 102),
+(7, 102),
+(8, 103),
+(9, 103),
+(13, 104),
+(14, 105),
+(16, 105),
+(17, 106),
+(19, 107),
+(20, 106),
+(21, 108),
+(23, 109);  
+
+
+
+insert into professional values
+(4),
+(5),
+(10),
+(12),
+(15),
+(18),
+(22),
+(24);
+
+
+insert into speaker values
+(8),
+(13),
+(16),
+(19),
+(23);
+
+
+
+
+insert into session values
+(201, &#39;2025-05-01&#39;, &#39;10:30:00&#39;, &#39;12:30:00&#39;, 8),
+(202, &#39;2025-05-01&#39;, &#39;12:00:00&#39;, &#39;15:30:00&#39;, 8),
+(203, &#39;2025-05-02&#39;, &#39;09:30:00&#39;, &#39;11:30:00&#39;, 8),
+(204, &#39;2025-05-02&#39;, &#39;13:00:00&#39;, &#39;14:30:00&#39;, 13),
+(205, &#39;2025-05-01&#39;, &#39;14:30:00&#39;, &#39;17:30:00&#39;, 16),
+(206, &#39;2025-05-01&#39;, &#39;17:00:00&#39;, &#39;18:30:00&#39;, 19),
+(207, &#39;2025-05-02&#39;, &#39;14:30:00&#39;, &#39;16:30:00&#39;, 23),
+(208, &#39;2025-05-02&#39;, &#39;16:30:00&#39;, &#39;18:00:00&#39;, 16);
+
+
+insert into company values
+(&#39;Thompson LLC&#39;, 10, &#39;Gold&#39;),
+(&#39;Hammes, Littel and Schultz&#39;, 5, &#39;Silver&#39;),
+(&#39;Brekke LLC&#39;, 8, &#39;Platinum&#39;),
+(&#39;Donnelly Group&#39;, 3, &#39;Bronze&#39;),
+(&#39;Gibson LLC&#39;, 15, &#39;Gold&#39;),
+(&#39;Crist&#39;, 7, &#39;Gold&#39;),
+(&#39;Cloud AI&#39;, 4, &#39;Silver&#39;),
+(&#39;Wunsch&#39;, 12, &#39;Platinum&#39;),
+(&#39;EffertzCode&#39;, 0, &#39;Bronze&#39;),
+(&#39;AI Welch&#39;, 9, &#39;Gold&#39;);
+
+
+
+insert into sponsor values
+(4, &#39;Thompson LLC&#39;),
+(5, &#39;Hammes, Littel and Schultz&#39;),
+(10, &#39;Donnelly Group&#39;),
+(11, &#39;Gibson LLC&#39;),
+(13, &#39;Crist&#39;),
+(14, &#39;Cloud AI&#39;),
+(16, &#39;EffertzCode&#39;),
+(19, &#39;AI Welch&#39;);
+
+
+insert into jobAd values
+(&#39;Thompson LLC&#39;, &#39;Frontend Developer&#39;, 95000, &#39;Surrey&#39;),
+(&#39;Thompson LLC&#39;, &#39;ML Data Analyst&#39;, 80000, &#39;Halifax&#39;),
+(&#39;Brekke LLC&#39;, &#39;Product Designer&#39;, 75000, &#39;Seattle&#39;),
+(&#39;Hammes, Littel and Schultz&#39;, &#39;DevOps Engineer&#39;, 100000, &#39;New York City&#39;),
+(&#39;Donnelly Group&#39;, &#39;UI/UX Developer&#39;, 50000, &#39;Calgary&#39;),
+(&#39;Gibson LLC&#39;, &#39;AI Researcher&#39;, 625000, &#39;South Boston&#39;),
+(&#39;Crist&#39;, &#39;Backend Developer&#39;, 85000, &#39;Vancouver&#39;),
+(&#39;Cloud AI&#39;, &#39;Cloud Architect&#39;, 140000, &#39;Galena&#39;),
+(&#39;Wunsch&#39;, &#39;ML Engineer&#39;, 135000, &#39;San Francisco&#39;),
+(&#39;EffertzCode&#39;, &#39;Network Engineer&#39;, 65000, &#39;Toronto&#39;),
+(&#39;AI Welch&#39;, &#39;Software Developer&#39;, 90000, &#39;Dallas&#39;);
+
+
+
+insert into member values
+(1, &#39;Grace&#39;, &#39;Hoppi&#39;),
+(2, &#39;Alan&#39;, &#39;Turing&#39;),
+(3, &#39;Aidea&#39;, &#39;Lovlace&#39;),
+(4, &#39;Tim&#39;, &#39;Bay-Lee&#39;),
+(5, &#39;Marget&#39;, &#39;Hamilton&#39;),
+(6, &#39;Denny&#39;, &#39;Richie&#39;),
+(7, &#39;Barba&#39;, &#39;Niskovy&#39;),
+(8, &#39;Kenny&#39;, &#39;Thompson&#39;),
+(9, &#39;Brien&#39;, &#39;Kitchenville&#39;),
+(10, &#39;Linux&#39;, &#39;Toaldrus&#39;),
+(11, &#39;John&#39;, &#39;Backingham&#39;),
+(12, &#39;Franci&#39;, &#39;Allan&#39;);
+
+
+insert into subcommittee values
+(&#39;Event Planning and Logistics&#39;, 1),
+(&#39;Finance&#39;, 2),
+(&#39;Sponsorship&#39;, 3),
+(&#39;Program&#39;, 4),
+(&#39;IT Support and Web Development&#39;, 5),
+(&#39;Marketing&#39;, 6),
+(&#39;Registration&#39;, 7),
+(&#39;Art Design&#39;, 8),
+(&#39;Operations&#39;, 9);
+
+
+insert into memberOf values
+(1, &#39;Event Planning and Logistics&#39;),
+(2, &#39;Finance&#39;),
+(3, &#39;Sponsorship&#39;),
+(4, &#39;IT Support and Web Development&#39;),
+(3, &#39;Program&#39;),
+(3, &#39;Marketing&#39;),
+(4, &#39;Finance&#39;),
+(5, &#39;Registration&#39;),
+(5, &#39;Event Planning and Logistics&#39;),
+(6, &#39;Finance&#39;),
+(7, &#39;Marketing&#39;),
+(2, &#39;Sponsorship&#39;),
+(6, &#39;Art Design&#39;),
+(7, &#39;IT Support and Web Development&#39;),
+(8, &#39;IT Support and Web Development&#39;),
+(9, &#39;Operations&#39;),
+(9, &#39;Registration&#39;),
+(10, &#39;Marketing&#39;),
+(11, &#39;Art Design&#39;),
+(11, &#39;IT Support and Web Development&#39;),
+(12, &#39;Operations&#39;);
+</code></pre>
+<p>---</p>
+<h2 id="phase-4-web-application-development"><strong>Phase 4: Web Application Development</strong></h2>
+<h3 id="objective-3"><strong>Objective</strong></h3>
+<p>Build a dynamic, database-driven web interface for conference organizers.</p>
+<h3 id="outcome-3"><strong>Outcome</strong></h3>
+<ul>
+<li><strong>Web Application</strong>:  </li>
+<li>Multi-page interface with CRUD operations for all entities.  </li>
+<li><strong>Demo Video</strong>:  </li>
+<li>5-minute walkthrough showing feature demonstrations and database interactions.  </li>
+</ul>
+<p>---</p>
+<p>This structured approach ensured rigorous testing at each phase, alignment with academic objectives, and delivery of a functional, scalable application.</p></details><p><a href="https://github.com/johnnietse/conference-database-management-system/blob/main/README.md" target="_blank" rel="noopener noreferrer">Open README on main</a></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/conference-database-management-system/blob/main/connectdb.php#L1" target="_blank" rel="noopener noreferrer">connectdb.php (line 1)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>&lt;?php
+try {
+    $connection = new PDO(&#39;mysql:host=localhost;port=3308;dbname=conferenceDB&#39;, &quot;root&quot;, &quot;&quot;);
+} catch (PDOException $e) {
+    print &quot;Connection failed: &quot; . $e-&gt;getMessage(). &quot;&lt;br/&gt;&quot;;
+    die();
+}
+?&gt;</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from connectdb.php on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`php`, `try`, `connection`, `new`, `PDO`—are useful signposts for following the behavior through the rest of the repository.</p><p>To read a code sample responsibly, I ask three questions: what values enter this block, what state does it change, and where is its result consumed? The source file and linked history give those surrounding call sites. If a README or test file describes the expected behavior, that provides a checkable target; otherwise the snippet is evidence about structure, not a result or benchmark.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><ul>
+<li><strong>Portable &amp; Configurable</strong>: Developed to work on most local or hosted environments with minimal setup.</li>
+</ul></li><li><p>Run the provided script:</p></li><li><h3 id="3-configure-your-environment-2">3. Configure Your Environment</h3></li><li><p>Ensure the database credentials in connectdb.php match your local setup:</p></li><li><p>🔊 The video includes audio narration and is under 5 minutes as per the project&#39;s requirements</p></li><li><h2 id="phase-1-local-development-environment-setup-1"><strong>Phase 1: Local Development Environment Setup</strong></h2></li><li><p>Establish a foundational environment for database management and web development using industry-standard tools.</p></li><li><ol>
+<li><strong>Software Stack Installation</strong>:  </li>
+</ol></li><li></li><li><ul>
+<li>Fully operational local server environment with MySQL database connectivity.  </li>
+</ul></li><li><ul>
+<li>Screenshots of <code>phpMyAdmin</code> and <code>Hello World</code> page submitted as proof of setup.  </li>
+</ul></li><li><p>Model the <strong>Conference Database</strong> to encapsulate entities, relationships, and constraints based on real-world requirements.</p></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-04-21</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/a1f583438b65807b8eef4152076548c305d4666a" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>a1f5834</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/968a76be03f3656d890e94ea8518fd63e55189c1" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>968a76b</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/fe8e4b744082fe851e15cedf5b28f9fb6ff96b01" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fe8e4b7</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/50f97271157a488b645f3fa001a20a3151ef4d9a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>50f9727</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/e5ca6b42e10738ba8d77cb62f34ad3ab17df5d69" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e5ca6b4</code></div></li><li><time>2025-04-23</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/068e701d9ef9f23aaee3adafb557e757c479722c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>068e701</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/1990edf564f3a3dab9a5a3720d276919dc6f6ded" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1990edf</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/b1bc991213a20fe645c6b9beb3a27abbf62a2245" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b1bc991</code></div></li></ol><details class="history-details"><summary>Show all 33 commits on main</summary><ol class="timeline compact"><li><time>2025-04-21</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/a1f583438b65807b8eef4152076548c305d4666a" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>a1f5834</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/968a76be03f3656d890e94ea8518fd63e55189c1" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>968a76b</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/154558ea59f5e48a8d9d285fefbc650eb494c647" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>154558e</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/b6387074e0e889eb57216aa13bf20e9e15ceabed" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b638707</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/4ede5e56d225dfb0fa586e68fd86f1142f915e2c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>4ede5e5</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/5d9723314f65983fa50d7f5263bd4c913cb7a58c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>5d97233</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/68371635e46fc2f80b6d7df942d42f274ad35da9" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6837163</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/fe8e4b744082fe851e15cedf5b28f9fb6ff96b01" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fe8e4b7</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/fede71a982f91df011035828541ec3fc5eb0dee4" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fede71a</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/b42def3accaf0e335ad348f72b67cc260b9d7179" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b42def3</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/99808682baa0ae6d3e316ce3574c3d3de20d4f51" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>9980868</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/dec38f90634bce3586a42d43ec0ed28cad31fc6f" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>dec38f9</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/38e7496d2e63b4d75bc084ae1a79d9d19d1a68f3" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>38e7496</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/13dc27e72352586e0e0ec5f93a1b901243761acd" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>13dc27e</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/50f97271157a488b645f3fa001a20a3151ef4d9a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>50f9727</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/47655cce3cdebd92f2246dd1c92eba8a763d47e5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>47655cc</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/146ea68ab87273ea2159613ad370ce1b0bcf3f39" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>146ea68</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/18028411986cd5eb0745bc7de0f199ba97d02328" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1802841</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/4fdf5d65052fccd16ace189a8dde45b253ddf6e0" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>4fdf5d6</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/835e2986fe17899c7613d349c6a542bdc0b897b8" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>835e298</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/bdf33bb762e356209182f906f45892b05a1d198e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>bdf33bb</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/03e94d6caf63ec8434556aa3430e5a729092bfd7" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>03e94d6</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/e5ca6b42e10738ba8d77cb62f34ad3ab17df5d69" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e5ca6b4</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/0ad05ae03ffecbf59802ee90e4b6353da77167a3" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>0ad05ae</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/173f8ed9ea4f28ed1f60b6fc9da94262e5f8386d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>173f8ed</code></div></li><li><time>2025-04-23</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/3b778ff2981ad5679907fa3fd83d71e6513b6347" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3b778ff</code></div></li><li><time>2025-04-23</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/f9a1d60a8ca096b9ae1ee5de19937e454ee76586" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>f9a1d60</code></div></li><li><time>2025-04-23</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/068e701d9ef9f23aaee3adafb557e757c479722c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>068e701</code></div></li><li><time>2025-04-23</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/cf80edfa910b777e5cbfd33bdd9b84eac4bbf42d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>cf80edf</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/6716fee1e916e480f8e9988aaba1867846ba7234" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6716fee</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/f58ff87b79b76a7de5c04bd554518e8b4fa63bef" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>f58ff87</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/1990edf564f3a3dab9a5a3720d276919dc6f6ded" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1990edf</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/conference-database-management-system/commit/b1bc991213a20fe645c6b9beb3a27abbf62a2245" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b1bc991</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 33 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/conference-database-management-system/tree/main" target="_blank" rel="noopener noreferrer">main</a> · b1bc991 · 2025-06-28 · Update README.md</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>This assignment is a compact exercise in connecting a user-facing workflow to relational data rather than treating the database as an isolated schema.</p><p>The lasting lesson is specific to this record: The appeal is that a database becomes meaningful when it supports a real workflow: people, events, and the records connecting them. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/conference-database-management-system" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/conference-database-management-system</a></li><li><a href="https://github.com/johnnietse/conference-database-management-system" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/conference-database-management-system/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/conference-database-management-system/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./rebuilding-a-maze-game-to-practice-c-and-c-fundamentals.html"><small>NEWER STORY</small><strong>← Rebuilding a maze game to practice C and C++ fundamentals</strong></a><a class="older" href="./a-travel-expense-tracker-for-the-queen-s-hpc-club.html"><small>OLDER STORY</small><strong>A travel expense tracker for the Queen&#39;s HPC club →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: conference-database · Evidence reviewed November 8, 2026</span></footer></main></body></html>

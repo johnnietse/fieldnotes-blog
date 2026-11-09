@@ -1,0 +1,999 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A 3D portfolio uses Next.js, React Three Fiber, and WebGL to present systems, autonomous work, and HPC projects."><title>Turning a portfolio into an interactive engineering exhibit · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>Turning a portfolio into an interactive engineering exhibit</h1><p class="dek">A 3D portfolio uses Next.js, React Three Fiber, and WebGL to present systems, autonomous work, and HPC projects.</p></div><img src="../covers/turning-a-portfolio-into-an-interactive-engineering-exhibit.svg" alt="Turning a portfolio into an interactive engineering exhibit · project visual" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started January 4, 2025</span><span>Updated July 30, 2026</span><span>~8 min read</span></div><div class="tags"><span class="tag">Next.js</span><span class="tag">Three.js</span><span class="tag">Portfolio</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The repository is a personal portfolio project. The July 2026 history records mobile stability work, an ErrorBoundary, circuit-breaker behavior, and a globe fallback.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A 3D portfolio uses Next.js, React Three Fiber, and WebGL to present systems, autonomous work, and HPC projects.. The repository history snapshot records 198 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The repository is a personal portfolio project. The July 2026 history records mobile stability work, an ErrorBoundary, circuit-breaker behavior, and a globe fallback.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>I wanted the portfolio to make complex systems feel explorable instead of flattening everything into a list of technologies.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A 3D portfolio uses Next.js, React Three Fiber, and WebGL to present systems, autonomous work, and HPC projects.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The README contains 5602 words. This visible excerpt keeps the core purpose and setup close to the story, while the full document is available below and at the source repository.</p><h1 id="johnnie-tse--engineering-portfolio-1">Johnnie Tse — Engineering Portfolio</h1>
+<p><a href="https://nextjs.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Next.js_16.2-000000?style=flat&amp;amp;logo=next.js&amp;amp;logoColor=white" alt="Next.js" loading="lazy"></a> <a href="https://react.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React_19-087EA4?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="React" loading="lazy"></a> <a href="https://threejs.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Three.js_r183-000000?style=flat&amp;amp;logo=three.js&amp;amp;logoColor=white" alt="Three.js" loading="lazy"></a> <a href="https://docs.pmnd.rs/react-three-fiber" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/R3F_9-FF4154?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="R3F" loading="lazy"></a> <a href="https://motion.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Motion_12-0055FF?style=flat&amp;amp;logo=framer&amp;amp;logoColor=white" alt="Framer Motion" loading="lazy"></a> <a href="https://get.webgl.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/WebGL_2-990000?style=flat&amp;amp;logo=webgl&amp;amp;logoColor=white" alt="WebGL" loading="lazy"></a> <a href="https://globe.gl" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/globe.gl_2.46-4DA3FF?style=flat&amp;amp;logo=three.js&amp;amp;logoColor=white" alt="globe.gl" loading="lazy"></a> <a href="https://github.com/pmndrs/react-xr" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/R3F_XR_6.6-FF4154?style=flat&amp;amp;logo=webxr&amp;amp;logoColor=white" alt="R3F XR" loading="lazy"></a> <a href="https://react.dev/learn/react-compiler" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React_Compiler-1.0-61DAFB?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="React Compiler" loading="lazy"></a> <a href="https://turbo.build" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Turbopack-000000?style=flat&amp;amp;logo=vercel&amp;amp;logoColor=white" alt="Turbopack" loading="lazy"></a> <a href="https://github.com/johnnietse/personal-portfolio-website/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="MIT License" loading="lazy"></a> <a href="https://johnnietse.vercel.app" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&amp;amp;logo=vercel&amp;amp;logoColor=white" alt="Vercel" loading="lazy"></a></p>
+<blockquote><p><strong>Scaling High-Performance Distributed Compute.</strong>   A production-grade, systems-monitored engineering portfolio that presents itself as a living technical exhibit — fusing interactive 3D WebGL, real-time physics simulation, autonomous vehicle visualization, molecular dynamics computation, global geo-mapping, and a full-suite performance telemetry system into a single Next.js 16 application.</p></blockquote>
+<p>---</p>
+<h2 id="table-of-contents-1">Table of Contents</h2>
+<ul>
+<li><a href="#technical-philosophy" target="_blank" rel="noopener noreferrer">Technical Philosophy</a></li>
+<li><a href="#the-world-monitor-system" target="_blank" rel="noopener noreferrer">The World Monitor System</a></li>
+<li><a href="#architecture" target="_blank" rel="noopener noreferrer">Architecture</a></li>
+<li><a href="#tech-stack" target="_blank" rel="noopener noreferrer">Tech Stack</a></li>
+<li><a href="#directory-structure" target="_blank" rel="noopener noreferrer">Directory Structure</a></li>
+<li><a href="#route-map" target="_blank" rel="noopener noreferrer">Route Map</a></li>
+<li><a href="#component-dependency-graph" target="_blank" rel="noopener noreferrer">Component Dependency Graph</a></li>
+<li><a href="#interactive-3d-experiences" target="_blank" rel="noopener noreferrer">Interactive 3D Experiences</a></li>
+<li><a href="#1-hero-wireframe-model" target="_blank" rel="noopener noreferrer">1. Hero Wireframe Model</a></li>
+<li><a href="#2-level-4-autonomous-vehicle" target="_blank" rel="noopener noreferrer">2. Level 4 Autonomous Vehicle</a></li>
+<li><a href="#3-procedural-embedded-microcontroller" target="_blank" rel="noopener noreferrer">3. Procedural Embedded Microcontroller</a></li>
+<li><a href="#4-molecular-dynamics-simulation" target="_blank" rel="noopener noreferrer">4. Molecular Dynamics Simulation</a></li>
+<li><a href="#5-interactive-3d-globe" target="_blank" rel="noopener noreferrer">5. Interactive 3D Globe</a></li>
+<li><a href="#6-solar-system-background" target="_blank" rel="noopener noreferrer">6. Solar System Background</a></li>
+<li><a href="#performance-architecture" target="_blank" rel="noopener noreferrer">Performance Architecture</a></li>
+<li><a href="#adaptive-quality-system" target="_blank" rel="noopener noreferrer">Adaptive Quality System</a></li>
+<li><a href="#webgl-tier-detection" target="_blank" rel="noopener noreferrer">WebGL Tier Detection</a></li>
+<li><a href="#dynamic-import--lazy-loading" target="_blank" rel="noopener noreferrer">Dynamic Import &amp; Lazy Loading</a></li>
+<li><a href="#render-budget-management" target="_blank" rel="noopener noreferrer">Render Budget Management</a></li>
+<li><a href="#react-19--react-compiler-optimizations" target="_blank" rel="noopener noreferrer">React 19 + React Compiler Optimizations</a></li>
+<li><a href="#memory-management--gpu-disposal" target="_blank" rel="noopener noreferrer">Memory Management &amp; GPU Disposal</a></li>
+<li><a href="#uiux--design-system" target="_blank" rel="noopener noreferrer">UI/UX &amp; Design System</a></li>
+<li><a href="#design-token-architecture" target="_blank" rel="noopener noreferrer">Design Token Architecture</a></li>
+<li><a href="#dark--light-mode" target="_blank" rel="noopener noreferrer">Dark / Light Mode</a></li>
+<li><a href="#motion-system" target="_blank" rel="noopener noreferrer">Motion System</a></li>
+<li><a href="#responsive-breakpoints" target="_blank" rel="noopener noreferrer">Responsive Breakpoints</a></li>
+<li><a href="#typography-system" target="_blank" rel="noopener noreferrer">Typography System</a></li>
+<li><a href="#component-design-patterns" target="_blank" rel="noopener noreferrer">Component Design Patterns</a></li>
+<li><a href="#key-interactive-components" target="_blank" rel="noopener noreferrer">Key Interactive Components</a></li>
+<li><a href="#github-integration-layer" target="_blank" rel="noopener noreferrer">GitHub Integration Layer</a></li>
+<li><a href="#security-architecture" target="_blank" rel="noopener noreferrer">Security Architecture</a></li>
+<li><a href="#content-security-policy-deep-dive" target="_blank" rel="noopener noreferrer">Content Security Policy (Deep Dive)</a></li>
+<li><a href="#http-security-header-strategy" target="_blank" rel="noopener noreferrer">HTTP Security Header Strategy</a></li>
+<li><a href="#getting-started" target="_blank" rel="noopener noreferrer">Getting Started</a></li>
+<li><a href="#prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites</a></li>
+<li><a href="#installation" target="_blank" rel="noopener noreferrer">Installation</a></li>
+<li><a href="#development" target="_blank" rel="noopener noreferrer">Development</a></li>
+<li><a href="#build--production" target="_blank" rel="noopener noreferrer">Build &amp; Production</a></li>
+<li><a href="#configuration" target="_blank" rel="noopener noreferrer">Configuration</a></li>
+<li><a href="#environment-variables" target="_blank" rel="noopener noreferrer">Environment Variables</a></li>
+<li><a href="#content-data-layer" target="_blank" rel="noopener noreferrer">Content Data Layer</a></li>
+<li><a href="#deployment" target="_blank" rel="noopener noreferrer">Deployment</a></li>
+<li><a href="#contributing" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+<li><a href="#license" target="_blank" rel="noopener noreferrer">License</a></li>
+</ul>
+<p>---</p>
+<h2 id="technical-philosophy-1">Technical Philosophy</h2>
+<p>This portfolio is engineered around three core principles:</p>
+<h3 id="1-the-portfolio-as-a-monitored-system-1">1. The Portfolio as a Monitored System</h3>
+<p>Rather than presenting a static résumé, the site wraps its content in a <strong>live system-monitoring layer</strong> — HUD overlays, performance telemetry, interactive terminals, and real-time data feeds. The visitor isn&#39;t just reading about an engineer&#39;s work; they are placed inside a system that the engineer built. This is a deliberate architectural statement: <strong>the medium is the message.</strong> The portfolio itself is the most sophisticated artifact on display.</p>
+<h3 id="2-zero-compromise-procedural-rendering-1">2. Zero-Compromise Procedural Rendering</h3>
+<p>Every 3D asset is built from <strong>pure mathematics</strong> — no downloaded models, no asset store purchases, no external blend files. The autonomous car&#39;s LiDAR array, the embedded PCB&#39;s trace routing, the molecular dynamics particle grid, the globe&#39;s atmospheric bloom — all are generated programmatically. This guarantees:</p>
+<ul>
+<li><strong>No third-party licensing dependencies</strong> for visual assets</li>
+<li><strong>Deterministic builds</strong> (same code = same output, always)</li>
+<li><strong>Progressive enhancement</strong> (geometry detail scales with device capability)</li>
+<li><strong>Complete artistic control</strong> through code parameters</li>
+</ul>
+<h3 id="3-production-grade-engineering-practices-1">3. Production-Grade Engineering Practices</h3>
+<p>The codebase follows enterprise patterns throughout:</p>
+<ul>
+<li><strong>Single source of truth</strong> for all content (<code>lib/config/</code>) and all visual values (<code>lib/design/tokens.js</code>)</li>
+<li><strong>No mixed concerns</strong> — data, design tokens, and rendering are fully separated</li>
+<li><strong>Resilience patterns</strong> — exponential backoff (<code>lib/utils/backoff.ts</code>), circuit breakers (<code>lib/utils/circuit-breaker.ts</code>), error boundaries (<code>components/ErrorBoundary.jsx</code>), graceful degradation via <code>VisibilityWrapper</code> + <code>RenderOnScroll</code></li>
+<li><strong>Accessibility-first animation</strong> — every <code>motion.*</code> element respects <code>prefers-reduced-motion</code></li>
+<li><strong>Security-hardened</strong> — strict CSP, HSTS preload, no inline event handlers, hardened form-action policy</li>
+</ul>
+<p>---</p>
+<h2 id="the-world-monitor-system-1">The World Monitor System</h2>
+<p>The most architecturally distinctive feature of this portfolio is the <strong>World Monitor</strong> — a pervasive system-monitoring layer that transforms a conventional website into a live technical dashboard. This is not decoration; it is a coherent design subsystem with multiple integrated components:</p>
+<h3 id="monitor-components-1">Monitor Components</h3>
+<div class="table-scroll"><table><thead><tr><th>Component</th><th>Function</th><th>Real-Time Data</th></tr></thead><tbody><tr><td><strong>IronManHUD</strong></td><td>Fixed-position heads-up display overlay</td><td>Current time (HH:MM:SS), connection status indicator, system metrics, mounted at <code>z-index: 9999</code></td></tr><tr><td><strong>PerformanceHUD</strong></td><td>Debug overlay for quality assurance</td><td>FPS counter (rolling average), active quality tier (Ultra/High/Low/Economy), per-frame render budget utilization, 3D scene active status</td></tr></tbody></table></div><span id="technical-philosophy-2"></span><span id="the-world-monitor-system-2"></span><span id="architecture-1"></span><span id="tech-stack-1"></span><span id="directory-structure-1"></span><span id="route-map-1"></span><span id="component-dependency-graph-1"></span><span id="interactive-3d-experiences-1"></span><span id="1-hero-wireframe-model-1"></span><span id="2-level-4-autonomous-vehicle-1"></span><span id="3-procedural-embedded-microcontroller-1"></span><span id="4-molecular-dynamics-simulation-1"></span><span id="5-interactive-3d-globe-1"></span><span id="6-solar-system-background-1"></span><span id="performance-architecture-1"></span><span id="adaptive-quality-system-1"></span><span id="webgl-tier-detection-1"></span><span id="dynamic-import--lazy-loading-1"></span><span id="render-budget-management-1"></span><span id="react-19--react-compiler-optimizations-1"></span><span id="memory-management--gpu-disposal-1"></span><span id="uiux--design-system-1"></span><span id="design-token-architecture-1"></span><span id="dark--light-mode-1"></span><span id="motion-system-1"></span><span id="responsive-breakpoints-1"></span><span id="typography-system-1"></span><span id="component-design-patterns-1"></span><span id="key-interactive-components-1"></span><span id="github-integration-layer-1"></span><span id="security-architecture-1"></span><span id="content-security-policy-deep-dive-1"></span><span id="http-security-header-strategy-1"></span><span id="getting-started-1"></span><span id="prerequisites-1"></span><span id="installation-1"></span><span id="development-1"></span><span id="build--production-1"></span><span id="configuration-1"></span><span id="environment-variables-1"></span><span id="content-data-layer-1"></span><span id="deployment-1"></span><span id="contributing-1"></span><span id="license-1"></span><details class="history-details"><summary>Expand the full repository README (5602 words)</summary><h1 id="johnnie-tse--engineering-portfolio">Johnnie Tse — Engineering Portfolio</h1>
+<p><a href="https://nextjs.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Next.js_16.2-000000?style=flat&amp;amp;logo=next.js&amp;amp;logoColor=white" alt="Next.js" loading="lazy"></a> <a href="https://react.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React_19-087EA4?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="React" loading="lazy"></a> <a href="https://threejs.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Three.js_r183-000000?style=flat&amp;amp;logo=three.js&amp;amp;logoColor=white" alt="Three.js" loading="lazy"></a> <a href="https://docs.pmnd.rs/react-three-fiber" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/R3F_9-FF4154?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="R3F" loading="lazy"></a> <a href="https://motion.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Motion_12-0055FF?style=flat&amp;amp;logo=framer&amp;amp;logoColor=white" alt="Framer Motion" loading="lazy"></a> <a href="https://get.webgl.org" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/WebGL_2-990000?style=flat&amp;amp;logo=webgl&amp;amp;logoColor=white" alt="WebGL" loading="lazy"></a> <a href="https://globe.gl" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/globe.gl_2.46-4DA3FF?style=flat&amp;amp;logo=three.js&amp;amp;logoColor=white" alt="globe.gl" loading="lazy"></a> <a href="https://github.com/pmndrs/react-xr" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/R3F_XR_6.6-FF4154?style=flat&amp;amp;logo=webxr&amp;amp;logoColor=white" alt="R3F XR" loading="lazy"></a> <a href="https://react.dev/learn/react-compiler" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React_Compiler-1.0-61DAFB?style=flat&amp;amp;logo=react&amp;amp;logoColor=white" alt="React Compiler" loading="lazy"></a> <a href="https://turbo.build" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Turbopack-000000?style=flat&amp;amp;logo=vercel&amp;amp;logoColor=white" alt="Turbopack" loading="lazy"></a> <a href="https://github.com/johnnietse/personal-portfolio-website/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="MIT License" loading="lazy"></a> <a href="https://johnnietse.vercel.app" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&amp;amp;logo=vercel&amp;amp;logoColor=white" alt="Vercel" loading="lazy"></a></p>
+<blockquote><p><strong>Scaling High-Performance Distributed Compute.</strong>   A production-grade, systems-monitored engineering portfolio that presents itself as a living technical exhibit — fusing interactive 3D WebGL, real-time physics simulation, autonomous vehicle visualization, molecular dynamics computation, global geo-mapping, and a full-suite performance telemetry system into a single Next.js 16 application.</p></blockquote>
+<p>---</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#technical-philosophy" target="_blank" rel="noopener noreferrer">Technical Philosophy</a></li>
+<li><a href="#the-world-monitor-system" target="_blank" rel="noopener noreferrer">The World Monitor System</a></li>
+<li><a href="#architecture" target="_blank" rel="noopener noreferrer">Architecture</a></li>
+<li><a href="#tech-stack" target="_blank" rel="noopener noreferrer">Tech Stack</a></li>
+<li><a href="#directory-structure" target="_blank" rel="noopener noreferrer">Directory Structure</a></li>
+<li><a href="#route-map" target="_blank" rel="noopener noreferrer">Route Map</a></li>
+<li><a href="#component-dependency-graph" target="_blank" rel="noopener noreferrer">Component Dependency Graph</a></li>
+<li><a href="#interactive-3d-experiences" target="_blank" rel="noopener noreferrer">Interactive 3D Experiences</a></li>
+<li><a href="#1-hero-wireframe-model" target="_blank" rel="noopener noreferrer">1. Hero Wireframe Model</a></li>
+<li><a href="#2-level-4-autonomous-vehicle" target="_blank" rel="noopener noreferrer">2. Level 4 Autonomous Vehicle</a></li>
+<li><a href="#3-procedural-embedded-microcontroller" target="_blank" rel="noopener noreferrer">3. Procedural Embedded Microcontroller</a></li>
+<li><a href="#4-molecular-dynamics-simulation" target="_blank" rel="noopener noreferrer">4. Molecular Dynamics Simulation</a></li>
+<li><a href="#5-interactive-3d-globe" target="_blank" rel="noopener noreferrer">5. Interactive 3D Globe</a></li>
+<li><a href="#6-solar-system-background" target="_blank" rel="noopener noreferrer">6. Solar System Background</a></li>
+<li><a href="#performance-architecture" target="_blank" rel="noopener noreferrer">Performance Architecture</a></li>
+<li><a href="#adaptive-quality-system" target="_blank" rel="noopener noreferrer">Adaptive Quality System</a></li>
+<li><a href="#webgl-tier-detection" target="_blank" rel="noopener noreferrer">WebGL Tier Detection</a></li>
+<li><a href="#dynamic-import--lazy-loading" target="_blank" rel="noopener noreferrer">Dynamic Import &amp; Lazy Loading</a></li>
+<li><a href="#render-budget-management" target="_blank" rel="noopener noreferrer">Render Budget Management</a></li>
+<li><a href="#react-19--react-compiler-optimizations" target="_blank" rel="noopener noreferrer">React 19 + React Compiler Optimizations</a></li>
+<li><a href="#memory-management--gpu-disposal" target="_blank" rel="noopener noreferrer">Memory Management &amp; GPU Disposal</a></li>
+<li><a href="#uiux--design-system" target="_blank" rel="noopener noreferrer">UI/UX &amp; Design System</a></li>
+<li><a href="#design-token-architecture" target="_blank" rel="noopener noreferrer">Design Token Architecture</a></li>
+<li><a href="#dark--light-mode" target="_blank" rel="noopener noreferrer">Dark / Light Mode</a></li>
+<li><a href="#motion-system" target="_blank" rel="noopener noreferrer">Motion System</a></li>
+<li><a href="#responsive-breakpoints" target="_blank" rel="noopener noreferrer">Responsive Breakpoints</a></li>
+<li><a href="#typography-system" target="_blank" rel="noopener noreferrer">Typography System</a></li>
+<li><a href="#component-design-patterns" target="_blank" rel="noopener noreferrer">Component Design Patterns</a></li>
+<li><a href="#key-interactive-components" target="_blank" rel="noopener noreferrer">Key Interactive Components</a></li>
+<li><a href="#github-integration-layer" target="_blank" rel="noopener noreferrer">GitHub Integration Layer</a></li>
+<li><a href="#security-architecture" target="_blank" rel="noopener noreferrer">Security Architecture</a></li>
+<li><a href="#content-security-policy-deep-dive" target="_blank" rel="noopener noreferrer">Content Security Policy (Deep Dive)</a></li>
+<li><a href="#http-security-header-strategy" target="_blank" rel="noopener noreferrer">HTTP Security Header Strategy</a></li>
+<li><a href="#getting-started" target="_blank" rel="noopener noreferrer">Getting Started</a></li>
+<li><a href="#prerequisites" target="_blank" rel="noopener noreferrer">Prerequisites</a></li>
+<li><a href="#installation" target="_blank" rel="noopener noreferrer">Installation</a></li>
+<li><a href="#development" target="_blank" rel="noopener noreferrer">Development</a></li>
+<li><a href="#build--production" target="_blank" rel="noopener noreferrer">Build &amp; Production</a></li>
+<li><a href="#configuration" target="_blank" rel="noopener noreferrer">Configuration</a></li>
+<li><a href="#environment-variables" target="_blank" rel="noopener noreferrer">Environment Variables</a></li>
+<li><a href="#content-data-layer" target="_blank" rel="noopener noreferrer">Content Data Layer</a></li>
+<li><a href="#deployment" target="_blank" rel="noopener noreferrer">Deployment</a></li>
+<li><a href="#contributing" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+<li><a href="#license" target="_blank" rel="noopener noreferrer">License</a></li>
+</ul>
+<p>---</p>
+<h2 id="technical-philosophy">Technical Philosophy</h2>
+<p>This portfolio is engineered around three core principles:</p>
+<h3 id="1-the-portfolio-as-a-monitored-system">1. The Portfolio as a Monitored System</h3>
+<p>Rather than presenting a static résumé, the site wraps its content in a <strong>live system-monitoring layer</strong> — HUD overlays, performance telemetry, interactive terminals, and real-time data feeds. The visitor isn&#39;t just reading about an engineer&#39;s work; they are placed inside a system that the engineer built. This is a deliberate architectural statement: <strong>the medium is the message.</strong> The portfolio itself is the most sophisticated artifact on display.</p>
+<h3 id="2-zero-compromise-procedural-rendering">2. Zero-Compromise Procedural Rendering</h3>
+<p>Every 3D asset is built from <strong>pure mathematics</strong> — no downloaded models, no asset store purchases, no external blend files. The autonomous car&#39;s LiDAR array, the embedded PCB&#39;s trace routing, the molecular dynamics particle grid, the globe&#39;s atmospheric bloom — all are generated programmatically. This guarantees:</p>
+<ul>
+<li><strong>No third-party licensing dependencies</strong> for visual assets</li>
+<li><strong>Deterministic builds</strong> (same code = same output, always)</li>
+<li><strong>Progressive enhancement</strong> (geometry detail scales with device capability)</li>
+<li><strong>Complete artistic control</strong> through code parameters</li>
+</ul>
+<h3 id="3-production-grade-engineering-practices">3. Production-Grade Engineering Practices</h3>
+<p>The codebase follows enterprise patterns throughout:</p>
+<ul>
+<li><strong>Single source of truth</strong> for all content (<code>lib/config/</code>) and all visual values (<code>lib/design/tokens.js</code>)</li>
+<li><strong>No mixed concerns</strong> — data, design tokens, and rendering are fully separated</li>
+<li><strong>Resilience patterns</strong> — exponential backoff (<code>lib/utils/backoff.ts</code>), circuit breakers (<code>lib/utils/circuit-breaker.ts</code>), error boundaries (<code>components/ErrorBoundary.jsx</code>), graceful degradation via <code>VisibilityWrapper</code> + <code>RenderOnScroll</code></li>
+<li><strong>Accessibility-first animation</strong> — every <code>motion.*</code> element respects <code>prefers-reduced-motion</code></li>
+<li><strong>Security-hardened</strong> — strict CSP, HSTS preload, no inline event handlers, hardened form-action policy</li>
+</ul>
+<p>---</p>
+<h2 id="the-world-monitor-system">The World Monitor System</h2>
+<p>The most architecturally distinctive feature of this portfolio is the <strong>World Monitor</strong> — a pervasive system-monitoring layer that transforms a conventional website into a live technical dashboard. This is not decoration; it is a coherent design subsystem with multiple integrated components:</p>
+<h3 id="monitor-components">Monitor Components</h3>
+<div class="table-scroll"><table><thead><tr><th>Component</th><th>Function</th><th>Real-Time Data</th></tr></thead><tbody><tr><td><strong>IronManHUD</strong></td><td>Fixed-position heads-up display overlay</td><td>Current time (HH:MM:SS), connection status indicator, system metrics, mounted at <code>z-index: 9999</code></td></tr><tr><td><strong>PerformanceHUD</strong></td><td>Debug overlay for quality assurance</td><td>FPS counter (rolling average), active quality tier (Ultra/High/Low/Economy), per-frame render budget utilization, 3D scene active status</td></tr><tr><td><strong>MobileSystemsTray</strong></td><td>Compact system tray for mobile viewport</td><td>Signal bars, time, connection dots — mimics mobile OS status bar</td></tr><tr><td><strong>BlackHoleCursor</strong></td><td>Physics-based cursor replacement</td><td>Trailing particles with gravitational attraction toward cursor position, canvas-based, disabled on touch devices</td></tr><tr><td><strong>ParticleBackground</strong></td><td>Full-viewport ambient particle system</td><td>200+ particles with mouse parallax, z-depth layering, opacity oscillation via <code>requestAnimationFrame</code></td></tr><tr><td><strong>ScrollPhysics</strong></td><td>Custom scroll controller</td><td>Scroll-driven animation triggers, velocity tracking, smooth deceleration curves</td></tr><tr><td><strong>TerminalProfile</strong></td><td>Fully interactive shell emulator</td><td>Responds to <code>whoami</code>, <code>ls</code>, <code>clear</code>, and hidden command <code>sudo hire johnnie</code> — live in-browser state machine</td></tr></tbody></table></div>
+<h3 id="how-the-monitor-layer-works">How the Monitor Layer Works</h3>
+<pre><code>flowchart TD
+    A[Root Layout] --&gt; B[PerformanceProvider]
+    B --&gt; C[Context: qualityTier, isLowSpec, isMobile]
+    
+    B --&gt; D[IronManHUD]
+    B --&gt; E[PerformanceHUD]
+    B --&gt; F[MobileSystemsTray]
+    B --&gt; G[BlackHoleCursor]
+    B --&gt; H[ParticleBackground]
+    B --&gt; I[ScrollPhysics]
+    
+    C --&gt; J[All 3D Components]
+    J --&gt; K[Adapt geometry detail]
+    J --&gt; L[Adapt shadow quality]
+    J --&gt; M[Adapt particle count]
+    J --&gt; N[Adapt post-processing]
+    
+    D --&gt; O[Monitors: time, status]
+    E --&gt; P[Monitors: FPS, tier, budget]
+    F --&gt; Q[Monitors: system state]</code></pre>
+<p>The <code>PerformanceProvider</code> context is the central nervous system. It runs a device capability detection pipeline on mount, broadcasts the results to all 41 components, and every 3D scene self-configures to match. No hardcoded quality assumptions. No <code>if (mobile)</code> scattered across files. One context, one source of truth.</p>
+<h3 id="why-this-matters">Why This Matters</h3>
+<p>The World Monitor system achieves something most portfolios don&#39;t attempt: <strong>it proves the engineer&#39;s skill through the interface itself.</strong> A visitor reading about &quot;HPC optimization&quot; can look at the PerformanceHUD and see real-time frame budgets. Someone curious about &quot;systems engineering&quot; interacts with a live terminal. The monitor layer is not a gimmick — it is the <strong>evidence layer</strong> for every claim the portfolio makes.</p>
+<p>---</p>
+<h2 id="architecture">Architecture</h2>
+<h3 id="tech-stack">Tech Stack</h3>
+<div class="table-scroll"><table><thead><tr><th>Layer</th><th>Technology</th><th>Version</th><th>Purpose</th><th>Selection Rationale</th></tr></thead><tbody><tr><td><strong>Framework</strong></td><td>Next.js (App Router)</td><td>16.2.1</td><td>SSR/SSG, routing, API routes, React Server Components</td><td>Latest stable App Router; Turbopack default; React Compiler built-in support</td></tr><tr><td><strong>UI Library</strong></td><td>React</td><td>19.2.4</td><td>Component model, hooks, concurrent features</td><td>Latest major; <code>use()</code> hook, improved Suspense, React Compiler target</td></tr><tr><td><strong>3D Engine</strong></td><td>Three.js</td><td>0.183.2</td><td>Low-level WebGL abstractions, geometry, materials, post-processing</td><td>Most mature WebGL library; r183 introduces WebGPU compatibility layer</td></tr><tr><td><strong>React 3D Bridge</strong></td><td>@react-three/fiber (R3F)</td><td>9.5.0</td><td>Declarative Three.js scene graphs as React components</td><td>React lifecycle management for 3D objects; automatic disposal on unmount</td></tr><tr><td><strong>R3F Utilities</strong></td><td>@react-three/drei</td><td>10.7.7</td><td>OrbitControls, environment, shadows, text, performance utils</td><td>Industry-standard R3F component library; maintained by Poimandres</td></tr><tr><td><strong>XR / AR</strong></td><td>@react-three/xr</td><td>6.6.29</td><td>WebXR integration for R3F scenes</td><td>VR/AR session management; controller input; spatial tracking</td></tr><tr><td><strong>Three.js Extensions</strong></td><td>three-stdlib</td><td>2.36.1</td><td>Additional Three.js helpers and loaders</td><td>DRACOLoader, GLTFExporter, BufferGeometryUtils, and 500+ utilities</td></tr><tr><td><strong>Physics</strong></td><td>@react-three/cannon</td><td>6.6.0</td><td>Rigid body dynamics for vehicle suspension</td><td>WebGPU-compatible physics engine; declarative API</td></tr><tr><td><strong>Animation</strong></td><td>motion (Framer Motion)</td><td>12.42.2</td><td>Declarative scroll/enter animations, gesture handling, layout animations</td><td>Most mature React animation library; <code>motion/react</code> export; <code>useReducedMotion()</code> hook</td></tr><tr><td><strong>Globe</strong></td><td>globe.gl</td><td>2.46.1</td><td>Three.js-based 3D globe with atmosphere, arcs, hexbin</td><td>Lightweight (&lt; 50KB); built on Three.js; supports custom point-of-view animations</td></tr><tr><td><strong>Geodata</strong></td><td>topojson-client</td><td>3.1.0</td><td>Country boundary topology for globe rendering</td><td>Standard format for world map data; sub-200KB compressed</td></tr><tr><td><strong>GitHub Data</strong></td><td>GitHub GraphQL API v4</td><td>—</td><td>Real-time profile, repos, contributions, activity, organizations</td><td>Uses <code>fetch()</code> POST to <code>/graphql</code> endpoint; no SDK dependency; supports NDA-protected repo filtering</td></tr><tr><td><strong>Icons</strong></td><td>lucide-react</td><td>0.577.0</td><td>Tree-shakeable SVG icon system</td><td>Null-runtime; pure ESM; 1000+ icons; no icon font dependencies</td></tr><tr><td><strong>Icons (fallback)</strong></td><td>react-icons</td><td>5.6.0</td><td>Additional icon sets (GitHub, LinkedIn brands)</td><td>Covers brand icons Lucide doesn&#39;t include</td></tr><tr><td><strong>React Compiler</strong></td><td>babel-plugin-react-compiler</td><td>1.0.0</td><td>Automatic memoization of React components</td><td>First-party React compiler; eliminates manual <code>useMemo</code>/<code>useCallback</code>/<code>React.memo</code></td></tr><tr><td><strong>Code Quality</strong></td><td>eslint + eslint-config-next</td><td>9.x / 16.2.1</td><td>Static analysis, lint rules, React/Next.js best practices</td><td>Flat config format; latest Next.js plugin</td></tr><tr><td><strong>Build</strong></td><td>Turbopack (Next.js native)</td><td>Rust-based</td><td>Sub-second HMR, incremental compilation</td><td>Next.js 16 default; 10x faster than webpack on cold starts</td></tr><tr><td><strong>Fonts</strong></td><td>next/font/google</td><td>Built-in</td><td>Self-hosted Geist variable font</td><td>Zero external font requests after initial load; <code>font-display: swap</code></td></tr><tr><td><strong>Forms</strong></td><td>Web3Forms API</td><td>External</td><td>Serverless form submission</td><td>No backend required; spam filtering; CORS-allowlisted in CSP</td></tr><tr><td><strong>Deploy</strong></td><td>Vercel Edge Network</td><td>Global</td><td>CDN, serverless functions, instant rollbacks</td><td>First-class Next.js support; automatic ISR; Edge Functions</td></tr></tbody></table></div>
+<h3 id="directory-structure">Directory Structure</h3>
+<span id="github-visualization-components-13"></span><pre><code>personal-portfolio-website/
+├── .env.local                              # Environment variables (GITHUB_TOKEN, WEB3FORMS_ACCESS_KEY)
+├── AGENTS.md                               # Next.js 16 breaking changes warning for AI agents
+├── app/                                    # Next.js App Router (routes as directories)
+│   ├── about/
+│   │   └── page.js                         # About / résumé page (612 lines)
+│   ├── api/
+│   │   └── github/
+│   │       └── stats/
+│   │           └── route.js               # GitHub GraphQL API proxy (NDA-protected, K8s intelligence)
+│   ├── project/
+│   │   └── page.js                         # Projects showcase page (145 lines)
+│   ├── globals.css                         # Global CSS + CSS custom properties (681 lines)
+│   ├── layout.js                           # Root layout: nav, footer, backgrounds, HUDs
+│   ├── loading.js                          # Suspense loading spinner (29 lines)
+│   ├── not-found.js                        # Custom 404 page (50 lines)
+│   └── page.js                             # Home page: all 7 sections (414 lines)
+│
+├── components/                             # 41 UI + 3D components
+│   │
+│   │   # --- 3D Scene Components (6) ---
+│   ├── AutonomousCar.jsx                   # L4 vehicle with LiDAR, trajectory arcs
+│   ├── EmbeddedController.jsx              # 3D procedural ESP32 / RPi PCB
+│   ├── GlobeFootprint.jsx                  # Interactive 3D globe with geo-pins
+│   ├── HeroModel.jsx                       # 3D wireframe portrait bust
+│   ├── MiniMDSimulation.jsx                # Lennard-Jones molecular dynamics
+│   └── SolarSystemBackground.jsx           # Persistent 3D scene background
+│   │
+│   │   # --- World Monitor Components (7) ---
+│   ├── BlackHoleCursor.jsx                 # Physics-based cursor particle system
+│   ├── IronManHUD.jsx                      # Heads-up display overlay
+│   ├── MobileSystemsTray.jsx               # Mobile system status tray
+│   ├── ParticleBackground.jsx              # Canvas-based ambient particles
+│   ├── PerformanceHUD.jsx                  # Debug performance overlay
+│   ├── PerformanceManager.jsx              # Adaptive quality context provider
+│   └── ScrollPhysics.jsx                   # Smooth scroll physics controller
+│   │
+│   │   # --- GitHub Visualization Components (13) ---
+│   ├── GitHubStats.jsx                     # Stats orchestrator
+│   ├── GithubAchievements.jsx              # Achievement badges and milestones
+│   ├── GithubProfileHeader.jsx             # Avatar, bio, counts
+│   ├── GithubTopRepos.jsx                  # Starred repo cards
+│   ├── GithubContributionGrid.jsx          # Contribution heatmap
+│   ├── GithubLanguageChart.jsx             # Language distribution
+│   ├── GithubActivityOverview.jsx          # Activity timeline
+│   ├── GithubVelocityChart.jsx             # Commit velocity
+│   ├── GithubInterestStreams.jsx           # Interest area streams
+│   ├── GithubK8sSpotlight.jsx              # K8s-specific spotlight
+│   ├── GithubOrgNodes.jsx                  # Org membership graph
+│   ├── GithubCityscape.jsx                 # Repo skyline visualization
+│   └── GithubLiveLog.jsx                   # Live activity feed
+│   │
+│   │   # --- Interactive / Utility Components (15) ---
+│   ├── DataWaveform.jsx                    # Animated signal visualization
+│   ├── ErrorBoundary.jsx                   # React error boundary with reset
+│   ├── Footer.jsx                          # Site footer
+│   ├── Header.jsx                          # Site header (legacy — replaced by Navigation.jsx)
+│   ├── HolographicCard.jsx                 # 3D tilt + glare card wrapper
+│   ├── LiveGithubProjects.jsx              # Live GitHub project cards (with circuit breaker)
+│   ├── MobileNav.jsx                       # Mobile hamburger menu (legacy — replaced by Navigation.jsx)
+│   ├── Navigation.jsx                      # Desktop navigation bar (responsive)
+│   ├── RenderOnScroll.jsx                  # IntersectionObserver lazy loader
+│   ├── SkillConstellation.jsx              # Interactive 2D skill graph
+│   ├── SkillTicker.jsx                     # Horizontal scrolling marquee
+│   ├── TerminalProfile.jsx                 # Interactive shell emulator
+│   ├── TimelineLaser.jsx                   # Timeline entry animation
+│   ├── Typewriter.jsx                      # Text rotation animation (legacy — replaced by motion-based reveal)
+│   └── VisibilityWrapper.jsx               # Viewport entry lazy hydration
+│
+├── lib/                                    # Application logic (zero JSX)
+│   ├── config/                             # Content layer — single source of truth
+│   │   ├── constants.ts                    # Global constants
+│   │   ├── experience.js                   # Work experience data (247 lines)
+│   │   ├── experience.ts                   # Experience TypeScript interfaces
+│   │   ├── locations.ts                    # Globe geo-coordinate data (58 lines)
+│   │   ├── projects.ts                     # Project metadata (391 lines, 20+ projects)
+│   │   └── skills.ts                       # Skill taxonomy, 6 categories, 28 skills
+│   │
+│   ├── design/                             # Design token system
+│   │   └── tokens.js                       # 330-line SSOT: colors, spacing, shadows, etc.
+│   │
+│   ├── hooks/                              # Custom React hooks
+│   │   ├── useBoundedHistory.js            # Bounded circular buffer for state
+│   │   ├── useIntersectionObserver.js       # Reusable IO wrapper
+│   │   ├── useRAF.js                       # requestAnimationFrame abstraction
+│   │   └── useRenderBudget.js              # Per-frame ms budget tracker
+│   │
+│   ├── utils/                              # Pure utility functions
+│   │   ├── backoff.ts                      # Exponential backoff (retry logic)
+│   │   ├── circuit-breaker.ts              # Circuit breaker pattern
+│   │   ├── webgl-detect.ts                 # GPU tier classification
+│   │   └── welford.ts                      # Online variance algorithm
+│   │
+│   └── fonts.js                            # next/font configuration
+│
+├── public/                                 # Static assets (219 files)
+│   ├── data/                               # GeoJSON world topology
+│   ├── textures/                           # 3D environment maps
+│   ├── *.glb                               # 3D models (car.glb only)
+│   ├── *.svg, *.png, *.webp               # Skill icons, logos, photos
+│   ├── *.pdf                               # Résumé PDFs (3 versions)
+│   ├── og-image.png                        # 1200×630 Open Graph image
+│   └── site.webmanifest                    # PWA manifest
+│
+├── next.config.mjs                         # Next.js config + security headers (68 lines)
+├── eslint.config.mjs                       # ESLint flat config
+├── jsconfig.json                           # @/* path alias
+└── package.json                            # Dependencies + scripts</code></pre>
+<h3 id="route-map">Route Map</h3>
+<div class="table-scroll"><table><thead><tr><th>Path</th><th>Page</th><th>Sections</th><th>Total Lines</th></tr></thead><tbody><tr><td><code>/</code></td><td>Home (<code>page.js</code>)</td><td>Hero → System Diagnostics → Showroom (3 scenes) → Globe → Contact</td><td>414</td></tr><tr><td><code>/about</code></td><td>About (<code>about/page.js</code>)</td><td>Bio → Experience Timeline → Education → Certifications → Skills → GitHub Stats</td><td>612</td></tr><tr><td><code>/project</code></td><td>Project (<code>project/page.js</code>)</td><td>Featured projects grid → Live GitHub repositories</td><td>145</td></tr><tr><td><code>/*</code></td><td>404 (<code>not-found.js</code>)</td><td>Custom error page with in-universe messaging</td><td>50</td></tr></tbody></table></div>
+<h3 id="component-dependency-graph">Component Dependency Graph</h3>
+<pre><code>flowchart LR
+    subgraph &quot;Root Layout&quot;
+        A[layout.js] --&gt; B[Navigation]
+        A --&gt; C[ParticleBackground]
+        A --&gt; D[ScrollPhysics]
+        A --&gt; E[BlackHoleCursor]
+        A --&gt; F[PerformanceHUD]
+        A --&gt; G[IronManHUD]
+        A --&gt; H[MobileSystemsTray]
+        A --&gt; I[Footer]
+        A --&gt; J[PerformanceProvider]
+    end
+
+    subgraph &quot;Home Page&quot;
+        K[page.js] --&gt; L[HeroModel]
+        K --&gt; N[TerminalProfile]
+        K --&gt; O[SkillTicker]
+        K --&gt; P[AutonomousCar]
+        K --&gt; Q[EmbeddedController]
+        K --&gt; R[MiniMDSimulation]
+        K --&gt; S[GlobeFootprint]
+        K --&gt; T[RenderOnScroll]
+        K --&gt; U[VisibilityWrapper]
+    end
+
+    subgraph &quot;About Page&quot;
+        V[about/page.js] --&gt; V1[ErrorBoundary]
+        V1 --&gt; W[SolarSystemBackground]
+        V1 --&gt; X[HolographicCard]
+        V1 --&gt; Y[SkillConstellation]
+        V1 --&gt; Z[GitHubStats]
+    end
+
+    subgraph &quot;Shared Dependencies&quot;
+        J --&gt;|Context: qualityTier| L
+        J --&gt;|Context: qualityTier| P
+        J --&gt;|Context: qualityTier| Q
+        J --&gt;|Context: qualityTier| R
+        J --&gt;|Context: qualityTier| S
+        J --&gt;|Context: qualityTier| W
+        X --&gt; J
+    end</code></pre>
+<p>---</p>
+<h2 id="interactive-3d-experiences">Interactive 3D Experiences</h2>
+<p>The portfolio contains <strong>6 distinct WebGL scenes</strong> with zero external 3D model dependencies (except the car body mesh). Every particle, polygon, and shader is procedurally generated.</p>
+<h3 id="1-hero-wireframe-model">1. Hero Wireframe Model</h3>
+<p><strong>File:</strong> <code>components/HeroModel.jsx</code> <strong>Technologies:</strong> Three.js, R3F, <code>useFrame</code>, custom shader material</p>
+<p>A wireframe human bust with a color-shifting core:</p>
+<ul>
+<li><strong>Geometry:</strong> Torus knot + parametric bust approximation using lathed geometry</li>
+<li><strong>Materials:</strong> Custom <code>shaderMaterial</code> with time-uniform for RGB oscillation (<code>Math.sin(time * 0.3 + offset)</code> per channel)</li>
+<li><strong>Core glow:</strong> Inner emissive sphere with animated opacity — pulses between 0.3 and 0.8 opacity using <code>useFrame</code></li>
+<li><strong>Interaction:</strong> Mouse-driven parallax (rotation follows cursor with 0.1s lerp smoothing)</li>
+<li><strong>Accessibility:</strong> Disabled entirely when <code>prefersReducedMotion</code> is active; static image fallback</li>
+<li><strong>Performance:</strong> Wrapped in <code>VisibilityWrapper</code> + <code>next/dynamic({ ssr: false })</code> — zero bundle cost until viewport entry</li>
+<li><strong>Quality adaptation:</strong> Geometry segments halved on Low tier; mesh hidden on Economy tier</li>
+</ul>
+<h3 id="2-level-4-autonomous-vehicle">2. Level 4 Autonomous Vehicle</h3>
+<p><strong>File:</strong> <code>components/AutonomousCar.jsx</code> <strong>Technologies:</strong> Three.js, R3F, <code>@react-three/cannon</code>, custom geometries, <code>useFrame</code></p>
+<p>A fully interactive L4 autonomous vehicle with active sensor visualization:</p>
+<div class="table-scroll"><table><thead><tr><th>Subsystem</th><th>Implementation</th><th>Technical Detail</th></tr></thead><tbody><tr><td><strong>Chassis</strong></td><td>Loaded GLB mesh (<code>car.glb</code>) with metallic materials</td><td>Single external model; all other elements are procedural</td></tr><tr><td><strong>LiDAR Array</strong></td><td>4 spinning scan heads at 10 Hz</td><td>Each head: 32 rays via <code>BufferGeometry</code> with <code>setDrawRange(0, 32)</code>; rotation updates in <code>useFrame</code> using <code>time * 10</code> — LiDAR &quot;blinks&quot; at realistic scan frequency</td></tr><tr><td><strong>Sensor Suite</strong></td><td>IMU (green), RTK GPS (red)</td><td>Positioned on roof rails; color-coded by function; animated status indicators pulsing at 1 Hz</td></tr><tr><td><strong>Trajectory Prediction</strong></td><td>Green + blue arc curves</td><td><code>CatmullRomCurve3</code> with 50 control points; green = primary path, blue = secondary/emergency; <code>TubeGeometry</code> for thickness</td></tr><tr><td><strong>Suspension</strong></td><td>Physics-driven via <code>@react-three/cannon</code></td><td><code>Trimesh</code> collision hull; spring coefficients tuned to 0.7 damping; chassis articulation visible during rotation</td></tr><tr><td><strong>Ground Shadow</strong></td><td>Wireframe ellipse with contact point</td><td><code>RingGeometry</code> with opacity 0.3; follows chassis position via <code>useFrame</code></td></tr><tr><td><strong>Controls</strong></td><td><code>OrbitControls</code> from drei</td><td>Drag to rotate; auto-rotate when idle (speed: 0.005 rad/frame); disabled on Low tier</td></tr><tr><td><strong>Performance</strong></td><td>Auto-disabled on Low/Economy tier</td><td>Replaced with static fallback description</td></tr></tbody></table></div>
+<p>The LiDAR visualization is particularly notable: the scan lines are rendered as individual line segments that extend and retract each frame, simulating a real spinning LiDAR&#39;s 360-degree sweep. This is calculated per-frame — no pre-baked animation.</p>
+<h3 id="3-procedural-embedded-microcontroller">3. Procedural Embedded Microcontroller</h3>
+<p><strong>File:</strong> <code>components/EmbeddedController.jsx</code> <strong>Technologies:</strong> Three.js, R3F, procedural geometry, custom 5-point lighting</p>
+<p>A photorealistic ESP32 / Raspberry Pi 5 board recreated entirely through procedural WebGL geometry — no external images or models:</p>
+<div class="table-scroll"><table><thead><tr><th>Component</th><th>Geometry</th><th>Detail</th></tr></thead><tbody><tr><td><strong>PCB Substrate</strong></td><td><code>BoxGeometry(4.2, 0.12, 3.0)</code></td><td>Dark green (<code>#064e3b</code>); beveled edges via nested boxes</td></tr><tr><td><strong>CPU Substrate</strong></td><td><code>BoxGeometry(0.8, 0.04, 0.8)</code></td><td>Black epoxy; centered on board</td></tr><tr><td><strong>CPU Heatspreader</strong></td><td><code>BoxGeometry(0.7, 0.015, 0.7)</code></td><td>Silver metallic (<code>#94a3b8</code>); emissive at 0.05 for specular catch</td></tr><tr><td><strong>GPIO Header</strong></td><td>2×20 pin grid</td><td>Each pin: <code>CylinderGeometry(0.015, 0.015, 0.1, 8)</code>; gold material (<code>#fbbf24</code>); positioned via nested loops with 0.1 spacing</td></tr><tr><td><strong>USB Port</strong></td><td><code>BoxGeometry(0.3, 0.05, 0.15)</code> + inner <code>BoxGeometry</code></td><td>Blue internal tab + silver outer shield; positioned at board edge</td></tr><tr><td><strong>Ethernet Jack</strong></td><td>Large <code>BoxGeometry</code> with inner hole</td><td>Shielded with internal <code>BoxGeometry</code> cavity for port opening</td></tr><tr><td><strong>Wi-Fi Shield</strong></td><td><code>CylinderGeometry(0.15, 0.15, 0.02)</code> + trace line</td><td>Copper-colored shield can with antenna trace</td></tr><tr><td><strong>RAM Chip</strong></td><td><code>BoxGeometry(0.5, 0.03, 0.3)</code></td><td>Black surface-mount; positioned adjacent to CPU</td></tr><tr><td><strong>Capacitors</strong></td><td>6× surface-mount + 2× electrolytic</td><td>SMD: <code>CylinderGeometry(0.03, 0.03, 0.02, 12)</code>; electrolytic: larger cylinders with silver/black bands</td></tr><tr><td><strong>Power Port</strong></td><td>Micro-USB connector</td><td>Silver <code>BoxGeometry</code> at board edge; positioned opposite USB</td></tr><tr><td><strong>HDMI Port</strong></td><td>Shielded connector</td><td><code>BoxGeometry</code> with metallic material; board-edge mounted</td></tr><tr><td><strong>Vias &amp; Traces</strong></td><td>Procedural routing</td><td>Small <code>CircleGeometry(0.005)</code> for vias; <code>TubeGeometry</code> along CatmullRomCurve3 for traces</td></tr></tbody></table></div>
+<p><strong>Lighting rig</strong> (5-point):</p>
+<ul>
+<li><strong>Key light:</strong> <code>DirectionalLight</code> at (5, 10, 7), intensity 1.2, white</li>
+<li><strong>Fill light:</strong> <code>DirectionalLight</code> at (-5, 0, 5), intensity 0.4, blue-tinted (#60a5fa)</li>
+<li><strong>Bottom light:</strong> <code>DirectionalLight</code> at (0, -5, 0), intensity 0.3, green-tinted (#10b981)</li>
+<li><strong>Top light:</strong> <code>DirectionalLight</code> at (0, 5, 0), intensity 0.2, amber-tinted (#facc15)</li>
+<li><strong>Ambient light:</strong> <code>AmbientLight</code>, intensity 0.4, white</li>
+</ul>
+<p>The board auto-rotates at 0.3 rad/s for full inspection. On Low tier, rotation is disabled and geometry segments are halved. On Economy tier, the entire scene is replaced with a static image.</p>
+<h3 id="4-molecular-dynamics-simulation">4. Molecular Dynamics Simulation</h3>
+<p><strong>File:</strong> <code>components/MiniMDSimulation.jsx</code> <strong>Technologies:</strong> Three.js, R3F, <code>useFrame</code>, custom compute loop</p>
+<p>A real-time Lennard-Jones particle system — the portfolio&#39;s most computationally intensive component:</p>
+<p><strong>Physics Engine (all in <code>useFrame</code>):</strong></p>
+<ul>
+<li><strong>300 active particles</strong> in a periodic 3D boundary box</li>
+<li><strong>Lennard-Jones potential:</strong> $V_{LJ}(r) = 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6}\right]$</li>
+<li><strong>Force computation:</strong> $O(N^2)$ — 300² = 90,000 pairwise distance calculations per frame (reduced to ~45,000 with Newton&#39;s third law symmetry)</li>
+<li><strong>Numerical integration:</strong> Velocity Verlet — position update: $x(t+\Delta t) = x(t) + v(t)\Delta t + \frac{1}{2}a(t)\Delta t^2$, velocity update: $v(t+\Delta t) = v(t) + \frac{1}{2}[a(t) + a(t+\Delta t)]\Delta t$</li>
+<li><strong>Timestep:</strong> Δt = 0.005 (dimensionless LJ units); 5 substeps per frame for stability</li>
+</ul>
+<p><strong>Visualization:</strong></p>
+<ul>
+<li><strong>Color mapping:</strong> Kinetic energy → temperature gradient — blue (cold, KE &lt; 0.5) through cyan/green/yellow to red (hot, KE &gt; 2.0). Computed per-frame: <code>KE = 0.5 * |v|² / N</code></li>
+<li><strong>Boundary box:</strong> <code>BoxGeometry</code> wireframe, cyan (<code>#38bdf8</code>), opacity 0.3</li>
+<li><strong>Particle rendering:</strong> <code>Points</code> with <code>PointsMaterial</code>; size: 0.08 world units; 32 segments per point sprite</li>
+<li><strong>Lighting:</strong> Ambient + key/fill/bottom/center glow — 5-point rig matching the embedded controller</li>
+</ul>
+<p><strong>Performance budget:</strong></p>
+<ul>
+<li>Target: 8ms/frame (120fps budget)</li>
+<li>Particle count scales: Ultra=300, High=200, Low=100, Economy=0 (disabled)</li>
+<li>Substeps: Ultra=5, High=3, Low=1, Economy=0</li>
+</ul>
+<p><strong>Real-world relevance:</strong> This is a direct WebGL port of the ELEC498 capstone project. The real miniMD application runs on HPC clusters with MPI parallelization. This WebGL version demonstrates the same numerical methods in a browser — complete with DVFS-style quality throttling that mirrors the original project&#39;s energy optimization algorithm.</p>
+<pre><code>┌──────────────────────────────────────────────┐
+│         ⚡ MINIMD DVFS TELEMETRY              │
+├──────────────────────────────────────────────┤
+│  🌡 CPU Temp:               98°C              │
+│  🔄 MPI Phase:              COMPUTE          │
+│  ⚡ RAPL Power:            186.2 W            │
+│  🎛 CPU Freq:             2.40 GHz            │
+│  📊 Compute Yield:           20%              │
+│  🔋 Total Energy:       22171.2 kJ            │
+│                                              │
+│  ⚠ No DVFS — all cores at max freq           │
+│    in ALL phases                              │
+└──────────────────────────────────────────────┘</code></pre>
+<p><em>Telemetry captured from Intel RAPL during ELEC498 cluster benchmarking. The portfolio&#39;s DVFS-style quality throttling (Ultra → Economy tier) directly mirrors the frequency-scaling logic being measured here.</em></p>
+<h3 id="5-interactive-3d-globe">5. Interactive 3D Globe</h3>
+<p><strong>File:</strong> <code>components/GlobeFootprint.jsx</code> <strong>Technologies:</strong> globe.gl, Three.js, topojson-client, custom shaders</p>
+<p>An interactive 3D globe mapping Johnnie&#39;s academic and professional journey:</p>
+<div class="table-scroll"><table><thead><tr><th>Feature</th><th>Implementation</th></tr></thead><tbody><tr><td><strong>Earth texture</strong></td><td>4K-resolution satellite imagery; loaded via <code>globe.gl</code>&#39;s <code>globeImageUrl</code></td></tr><tr><td><strong>Atmosphere</strong></td><td>Custom outer glow sphere with <code>ShaderMaterial</code> — Fresnel-based rim lighting that pulses with intensity 0.3–0.5</td></tr><tr><td><strong>Country boundaries</strong></td><td>TopoJSON topology (<code>topojson-client</code> → <code>mesh()</code>); stroke color <code>rgba(139, 148, 158, 0.2)</code></td></tr><tr><td><strong>Graticules</strong></td><td>Latitude/longitude grid lines at 15° intervals; opacity 0.2</td></tr><tr><td><strong>City pins</strong></td><td>3 locations: Kingston (44.23, -76.49), Hong Kong (22.32, 114.17), Remote (0, 0)</td></tr><tr><td><strong>Pin rendering</strong></td><td>Custom <code>Points</code> material with pulsing ring animation — glow radius oscillates via <code>Math.sin(time * 2)</code></td></tr><tr><td><strong>City arcs</strong></td><td>Great-circle arc curves from each pin to equator; color-coded by type (education=blue, work=green, project=cyan)</td></tr><tr><td><strong>Interaction</strong></td><td>Click pin → camera <code>pointOfView()</code> animation to lat/lng at altitude 0.8, 800ms transition; close button resets to default view (lat=32, lng=-30, alt=2.6)</td></tr><tr><td><strong>Auto-rotation</strong></td><td><code>autoRotate: true</code>, speed: 0.005 rad/frame; pauses during interaction; resumes on close</td></tr><tr><td><strong>Info panel</strong></td><td>DOM overlay (not 3D) with city name, type badge, experience list; animated entrance via CSS transition</td></tr></tbody></table></div>
+<p><strong>Data architecture:</strong> Globe pins are driven by <code>lib/config/locations.ts</code> — adding a new city requires zero component code changes.</p>
+<p><strong>Reliability &amp; fallback:</strong> The globe uses a two-tier rendering strategy for mobile resilience:</p>
+<ul>
+<li><strong>Full WebGL globe</strong> — Rendered via <code>globe.gl</code> with atmosphere, arcs, pins, and rotation; wrapped in <code>RenderOnScroll</code> + <code>VisibilityWrapper</code> for deferred mounting</li>
+<li><strong>Static CSS fallback</strong> (<code>StaticGlobeFallback</code>) — A pure CSS earth image with inline label and subtitle, used as the default loading state and as a permanent replacement on low-power devices. The fallback is shown immediately (no Three.js load required), ensuring the Footprint section is always visible even when WebGL fails or is unavailable.</li>
+</ul>
+<h3 id="6-solar-system-background">6. Solar System Background</h3>
+<p><strong>File:</strong> <code>components/SolarSystemBackground.jsx</code> <strong>Technologies:</strong> Three.js, R3F</p>
+<p>A persistent 3D background that renders across the About and Projects pages:</p>
+<ul>
+<li><strong>Design constraint:</strong> Must be visually present but never compete with foreground content</li>
+<li><strong>Achieved via:</strong> Subdued color palette (50% opacity), low-poly geometry, slow animation speeds, <code>renderOrder: -1</code></li>
+<li><strong>Route persistence:</strong> Mounted at layout level (not page level) — continues rendering across route transitions with no re-initialization</li>
+<li><strong>Performance:</strong> Single <code>Group</code> with 10 instanced meshes; no post-processing; disabled on Low/Economy tier</li>
+</ul>
+<p>---</p>
+<h2 id="performance-architecture">Performance Architecture</h2>
+<p>The performance system is the portfolio&#39;s most sophisticated engineering subsystem. It operates at multiple layers simultaneously.</p>
+<h3 id="adaptive-quality-system">Adaptive Quality System</h3>
+<p><strong>File:</strong> <code>components/PerformanceManager.jsx</code> (184 lines)</p>
+<p>A React Context provider that classifies the device into one of four tiers and broadcasts quality parameters to all 41 components.</p>
+<h4 id="detection-pipeline">Detection Pipeline</h4>
+<pre><code>1. Platform check (SSR guard)
+   └── Server? → Return &#39;none&#39; (no context value)
+   
+2. WebGL renderer detection
+   ├── Create &lt;canvas&gt;
+   ├── Get WebGL2 context (fallback: WebGL1)
+   ├── Query UNMASKED_RENDERER_WEBGL
+   ├── Software renderer? (SwiftShader, LLVMpipe, Mesa)
+   │   └── Yes → Economy tier
+   │   └── No → Continue
+   
+3. Device memory (navigator.deviceMemory)
+   ├── &lt; 4GB → Low tier
+   ├── 4-8GB → High tier
+   └── &gt; 8GB → Continue
+   
+4. Screen resolution
+   ├── &lt; 1920px → High tier
+   └── ≥ 1920px → Ultra tier
+   
+5. prefers-reduced-motion check
+   └── True → Override: disable auto-rotate, static 3D</code></pre>
+<h4 id="quality-presets">Quality Presets</h4>
+<div class="table-scroll"><table><thead><tr><th>Property</th><th>Ultra</th><th>High</th><th>Low</th><th>Economy</th></tr></thead><tbody><tr><td><strong>pixelRatio</strong></td><td>2.0</td><td>1.5</td><td>1.0</td><td>1.0</td></tr><tr><td><strong>targetFPS</strong></td><td>60</td><td>60</td><td>30</td><td>30</td></tr><tr><td><strong>particleMultiplier</strong></td><td>1.0 (300)</td><td>0.75 (200)</td><td>0.25 (100)</td><td>0.1 (30)</td></tr><tr><td><strong>geometryDetail</strong></td><td>1.0 (max)</td><td>0.75</td><td>0.5</td><td>0.3</td></tr><tr><td><strong>enableShadows</strong></td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr><tr><td><strong>enablePostProcessing</strong></td><td>✅ (bloom)</td><td>❌</td><td>❌</td><td>❌</td></tr><tr><td><strong>enableAutoRotate</strong></td><td>✅</td><td>✅</td><td>✅ (slowed)</td><td>❌</td></tr><tr><td><strong>renderEveryNthFrame</strong></td><td>1 (every)</td><td>1</td><td>2 (skip 1)</td><td>4 (skip 3)</td></tr><tr><td><strong>maxLights</strong></td><td>4</td><td>3</td><td>2</td><td>1</td></tr><tr><td><strong>materialQuality</strong></td><td>physical</td><td>standard</td><td>basic</td><td>basic</td></tr><tr><td><strong>floatIntensity</strong></td><td>1.0</td><td>0.8</td><td>0.3</td><td>0.0</td></tr></tbody></table></div>
+<h4 id="consumption-pattern">Consumption Pattern</h4>
+<pre><code>// In any component:
+function My3DScene() {
+  const { pixelRatio, targetFPS, particleMultiplier, isLowSpec } = usePerformance();
+  
+  const particles = useMemo(
+    () =&gt; generateParticles(Math.round(300 * particleMultiplier)),
+    [particleMultiplier]
+  );
+  
+  return (
+    &lt;Canvas gl={{ pixelRatio: Math.min(pixelRatio, devicePixelRatio) }}&gt;
+      {isLowSpec ? &lt;SimpleScene /&gt; : &lt;FullScene /&gt;}
+    &lt;/Canvas&gt;
+  );
+}</code></pre>
+<h3 id="webgl-tier-detection">WebGL Tier Detection</h3>
+<p><strong>File:</strong> <code>lib/utils/webgl-detect.ts</code> (53 lines)</p>
+<p>A pure function that classifies the WebGL renderer without any React dependencies:</p>
+<pre><code>export type WebGLTier = &#39;hardware&#39; | &#39;software&#39; | &#39;none&#39;;
+
+const SOFTWARE_RENDERERS = [&#39;swiftshader&#39;, &#39;llvmpipe&#39;, &#39;softpipe&#39;, &#39;software rasterizer&#39;, &#39;mesa&#39;];
+
+export function detectWebGLTier(): WebGLTier {
+  if (typeof window === &#39;undefined&#39;) return &#39;none&#39;;
+  
+  const canvas = document.createElement(&#39;canvas&#39;);
+  const gl = canvas.getContext(&#39;webgl2&#39;) || canvas.getContext(&#39;webgl&#39;);
+  if (!gl) return &#39;none&#39;;
+  
+  const ext = gl.getExtension(&#39;WEBGL_debug_renderer_info&#39;);
+  if (!ext) return &#39;hardware&#39;;  // Can&#39;t detect — assume hardware
+  
+  const renderer = String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) ?? &#39;&#39;).toLowerCase();
+  return SOFTWARE_RENDERERS.some(s =&gt; renderer.includes(s)) ? &#39;software&#39; : &#39;hardware&#39;;
+}</code></pre>
+<p>Key design decisions:</p>
+<ul>
+<li><strong>WebGL2 preferred</strong> (WebGL1 fallback) — WebGL2 is available on 97%+ of modern browsers</li>
+<li><strong>Software renderer blacklist</strong> catches virtual machines, remote desktops, and headless browsers</li>
+<li><strong>SSR-safe</strong> — returns <code>&amp;#39;none&amp;#39;</code> during server rendering; no <code>window</code> access during build</li>
+<li><strong>No external dependencies</strong> — zero-byte utility function</li>
+</ul>
+<h3 id="dynamic-import--lazy-loading">Dynamic Import &amp; Lazy Loading</h3>
+<p>All 6 WebGL scenes use a three-layer lazy loading strategy, with additional resilience patterns for mobile stability:</p>
+<p><strong>Layer 1: <code>next/dynamic</code></strong> — Code splitting at the bundler level</p>
+<pre><code>const GlobeFootprint = dynamic(() =&gt; import(&#39;@/components/GlobeFootprint&#39;), {
+  ssr: false,
+  loading: () =&gt; &lt;div style={placeholderStyle}&gt;Scroll to render Globe...&lt;/div&gt;,
+});</code></pre>
+<p>This creates a separate JS chunk for each 3D component. The three.js library itself is shared (not duplicated) across chunks via Turbopack&#39;s automatic module deduplication.</p>
+<p><strong>Layer 2: <code>VisibilityWrapper</code></strong> — DOM-level hydration deferral</p>
+<pre><code>&lt;VisibilityWrapper&gt;
+  &lt;GlobeFootprint /&gt;  {/* Component doesn&#39;t mount until visible */}
+&lt;/VisibilityWrapper&gt;</code></pre>
+<p>Uses <code>IntersectionObserver</code> with <code>once: true</code> — the component renders exactly once and stays mounted. No unmount/remount on scroll.</p>
+<p><strong>Layer 3: <code>RenderOnScroll</code></strong> — Preemptive loading with root margin</p>
+<pre><code>&lt;RenderOnScroll rootMargin=&quot;300px&quot;&gt;
+  &lt;GlobeFootprint /&gt;  {/* Starts loading 300px before viewport entry */}
+&lt;/RenderOnScroll&gt;</code></pre>
+<p>This ensures the Three.js canvas is ready and the scene is initialized by the time the user scrolls to it. The 300px margin provides approximately 1 second of pre-load time at average scroll speed.</p>
+<p><strong>Layer 4: <code>ErrorBoundary</code></strong> — Crash recovery for 3D components</p>
+<pre><code>&lt;ErrorBoundary&gt;
+  &lt;section id=&quot;about-hero&quot;&gt;
+    &lt;HolographicCard&gt;
+      &lt;HeroModel /&gt;   {/* If Three.js crashes, ErrorBoundary catches it */}
+    &lt;/HolographicCard&gt;
+  &lt;/section&gt;
+&lt;/ErrorBoundary&gt;</code></pre>
+<p>A class-based React error boundary wraps the About page&#39;s top-level render. If any 3D component throws during mount (e.g., WebGL context loss, out-of-memory), the boundary catches the error, logs it, and displays a fallback UI with a &quot;Try Again&quot; button that resets the error state. This prevents the entire page from going blank due to a single scene failure.</p>
+<h3 id="render-budget-management">Render Budget Management</h3>
+<p><strong>File:</strong> <code>lib/hooks/useRenderBudget.js</code> (32 lines)</p>
+<p>A per-frame time budget tracker that prevents any single 3D scene from monopolizing the main thread:</p>
+<pre><code>const { startFrame, consume, isOverBudget } = useRenderBudget(8);  // 8ms budget
+
+// In animation loop:
+startFrame();
+for (const particle of particles) {
+  if (isOverBudget()) break;  // Early exit when budget exceeded
+  computeForces(particle);    // Heavy O(N²) operation
+  consume(0.5);               // Charge 0.5ms per particle
+}</code></pre>
+<p>The budget tracker uses <code>useRef</code> for mutable state (no re-renders) and <code>useCallback</code> for stable function references.</p>
+<h3 id="react-19--react-compiler-optimizations">React 19 + React Compiler Optimizations</h3>
+<p>The project uses Next.js 16&#39;s built-in React Compiler support:</p>
+<pre><code>// next.config.mjs
+const nextConfig = {
+  reactCompiler: true,  // Enables automatic memoization
+  turbopack: { root: process.cwd() },
+};</code></pre>
+<p>The React Compiler (previously &quot;React Forget&quot;) automatically:</p>
+<ul>
+<li>Memoizes component render outputs (replacing manual <code>React.memo</code>)</li>
+<li>Memoizes expensive computations (replacing manual <code>useMemo</code>)</li>
+<li>Memoizes callback functions (replacing manual <code>useCallback</code>)</li>
+<li>Detects hook rule violations at compile time</li>
+</ul>
+<p>This is configured via the <code>babel-plugin-react-compiler</code> package (v1.0.0) and is a differentiator for this project — very few production React sites have adopted the React Compiler as of 2026.</p>
+<h3 id="memory-management--gpu-disposal">Memory Management &amp; GPU Disposal</h3>
+<p>Every Three.js component follows a strict memory lifecycle:</p>
+<pre><code>useEffect(() =&gt; {
+  // Setup
+  const geometry = new THREE.BoxGeometry(...);
+  const material = new THREE.MeshPhysicalMaterial(...);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+  
+  return () =&gt; {
+    // Teardown — CRITICAL for GPU memory
+    scene.remove(mesh);
+    geometry.dispose();    // Free GPU vertex buffer
+    material.dispose();    // Free GPU shader program
+    mesh.material = null;  // Break JS reference
+    mesh.geometry = null;  // Break JS reference
+  };
+}, []);</code></pre>
+<p>Without disposal, Three.js objects accumulate in GPU memory across route transitions, causing performance degradation and eventual tab crashes. This is the #1 most overlooked optimization in Three.js React applications.</p>
+<p>---</p>
+<h2 id="uiux--design-system">UI/UX &amp; Design System</h2>
+<h3 id="design-token-architecture">Design Token Architecture</h3>
+<p><strong>File:</strong> <code>lib/design/tokens.js</code> (330 lines)</p>
+<p>A comprehensive design token system that serves as the <strong>single source of truth</strong> for every visual decision in the application:</p>
+<pre><code>lib/design/tokens.js
+├── colors
+│   ├── brand          # 5 semantic brand colors
+│   ├── dark           # 12 CSS variable values
+│   ├── light          # 12 CSS variable values
+│   ├── scene          # 5 3D scene palettes (80+ values)
+│   │   ├── globe      # Atmosphere, city glow, bloom params
+│   │   ├── hero       # Wireframe, core glow, accent
+│   │   ├── car        # Chassis, sensors, LiDAR, trajectory
+│   │   ├── embedded   # PCB, CPU, GPIO, lighting rig
+│   │   └── miniMD     # Particle cold/hot, boundary, lighting
+│   └── gradients      # 8 gradient definitions
+├── spacing            # 8 values (xs → sectionMobile)
+├── borderRadius       # 6 values (sm → full)
+├── shadows            # 8 shadow definitions (sm → inner)
+├── transitions        # 4 curves (fast → spring)
+├── typography
+│   ├── fontFamily      # 3 families (primary, mono, display)
+│   ├── fontSize       # 10 sizes (xs → 4xl)
+│   ├── fontWeight     # 6 weights (light → extrabold)
+│   ├── lineHeight     # 3 values (tight → relaxed)
+│   └── letterSpacing  # 5 values (tight → widest)
+├── breakpoints        # 6 values (sm → 2xl)
+├── zIndex             # 11 layers (base → hud)
+├── canvas             # 2 background presets
+└── cssVariables       # Dark + light CSS variable mappings</code></pre>
+<p>The token system enables:</p>
+<ul>
+<li><strong>Theme consistency</strong> — one change propagates to all components</li>
+<li><strong>Dark/light mode</strong> — two CSS variable sets derived from the same base colors</li>
+<li><strong>3D scene theming</strong> — each WebGL scene has its own color palette in the same file</li>
+<li><strong>Zero CSS-in-JS</strong> — runtime style generation uses CSS custom properties, not inline JS objects</li>
+</ul>
+<h3 id="dark--light-mode">Dark / Light Mode</h3>
+<p>Full dual-theme support with no FOUC (Flash of Unstyled Content):</p>
+<pre><code>:root {
+  /* Dark mode (default) — Premium tinted dark, not pure black */
+  --bg-color: #0a0d12;
+  --text-primary: #e8ebef;
+  --accent-color: #4da3ff;
+  /* ... 47 variables ... */
+}
+
+:root[data-theme=&quot;light&quot;] {
+  /* Light mode — Warm off-white, not sterile */
+  --bg-color: #faf9f7;
+  --text-primary: #0f172a;
+  --accent-color: #0284c7;
+  /* ... 47 variables ... */
+}</code></pre>
+<ul>
+<li><strong>47 CSS custom properties</strong> per theme, all derived from <code>tokens.js</code></li>
+<li><strong>Toggle mechanism:</strong> <code>data-theme</code> attribute on <code>&amp;lt;html&amp;gt;</code>, toggled via theme switch button</li>
+<li><strong>Transition:</strong> <code>background-color 0.4s ease, color 0.4s ease</code> on <code>&amp;lt;body&amp;gt;</code></li>
+<li><strong><code>prefers-color-scheme</code>:</strong> Not auto-detected — user choice is explicit (avoids flash and respects override intent)</li>
+<li><strong>Persistence:</strong> Theme choice persisted to <code>localStorage</code> on toggle; restored on next visit from Navigation.jsx&#39;s <code>&amp;lt;script&amp;gt;</code> hydration block</li>
+</ul>
+<h3 id="motion-system">Motion System</h3>
+<p>Every animated element follows a strict protocol:</p>
+<p><strong>1. Accessibility First:</strong></p>
+<pre><code>const prefersReducedMotion = useReducedMotion();
+// → Returns true when user has `prefers-reduced-motion: reduce`
+// → Disables ALL animations when true (not just some)</code></pre>
+<p><strong>2. Consistent Easing:</strong></p>
+<pre><code>ease: [0.16, 1, 0.3, 1]  // Custom cubic-bezier across ALL 150+ animations</code></pre>
+<p>This curve creates a &quot;premium&quot; feel — fast start, long tail — compared to the default <code>ease-out</code> or <code>ease-in-out</code>.</p>
+<p><strong>3. Staggered Delays:</strong></p>
+<pre><code>// All delays are multiples of 0.1s: 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6
+// This creates a cascading reveal effect across sections</code></pre>
+<p><strong>4. One-Time Activation:</strong></p>
+<pre><code>viewport: { once: true, amount: 0.2 }
+// Elements animate exactly once, on first viewport entry
+// No re-animation on scroll — reduces CPU/GPU load</code></pre>
+<h3 id="responsive-breakpoints">Responsive Breakpoints</h3>
+<div class="table-scroll"><table><thead><tr><th>Breakpoint</th><th>Value</th><th>Behavior Changes</th></tr></thead><tbody><tr><td><code>&amp;gt; 1200px</code> (2xl)</td><td>Max layout</td><td>Full hero-grid (1.2fr/0.8fr), 5rem gap, multi-column project grid</td></tr><tr><td><code>1024–1200px</code> (xl)</td><td>Small desktop</td><td>Reduced hero-grid gap (2rem), tighter card padding (1.5rem)</td></tr><tr><td><code>992–1024px</code> (lg)</td><td>Tablet landscape</td><td>Single-column hero grid, centered text, max-width 400px for 3D</td></tr><tr><td><code>768–992px</code> (md)</td><td>Tablet portrait</td><td>Single-column, centered CTA, hidden desktop nav</td></tr><tr><td><code>480–768px</code> (sm)</td><td>Mobile</td><td>1rem padding, hidden nav-links (hamburger), 42px icon buttons</td></tr><tr><td><code>&amp;lt; 480px</code></td><td>Small phone</td><td>0.75rem padding, 1.25rem card padding, 1.5rem mobile nav items</td></tr></tbody></table></div>
+<p><strong>Landscape optimization</strong> (<code>@media (max-height: 500px) and (orientation: landscape)</code>):</p>
+<ul>
+<li>Sections reduce <code>min-height</code> from <code>100dvh</code> to <code>auto</code></li>
+<li>Mobile menu switches to horizontal flex layout</li>
+<li>Navigation items reduce font size to 1.25rem</li>
+</ul>
+<p><strong><code>dvh</code> fallback</strong> (<code>@supports not (height: 100dvh)</code>):</p>
+<ul>
+<li>Falls back to <code>100vh</code> for browsers that don&#39;t support dynamic viewport units</li>
+<li>Covers Safari 15.2–15.4 and some mobile WebViews</li>
+</ul>
+<h3 id="typography-system">Typography System</h3>
+<p><strong>Primary Font: Geist</strong> (Vercel&#39;s open-source typeface)</p>
+<pre><code>// lib/fonts.js
+export const geist = Geist({
+  subsets: [&#39;latin&#39;],
+  display: &#39;swap&#39;,       // Fallback text renders immediately
+  variable: &#39;--font-geist&#39;,
+  weight: [&#39;300&#39;, &#39;400&#39;, &#39;500&#39;, &#39;600&#39;, &#39;700&#39;],
+  preload: true,          // Critical path font
+});</code></pre>
+<ul>
+<li><strong>Self-hosted</strong> via <code>next/font/google</code> — zero external font requests after initial page load</li>
+<li><strong>Variable font</strong> — single file covers all weights; reduced bandwidth vs. individual weight files</li>
+<li><strong><code>font-display: swap</code></strong> — text remains visible during font load (no Flash of Invisible Text)</li>
+<li><strong><code>preload: true</code></strong> — font file is fetched with highest priority during initial HTML parsing</li>
+</ul>
+<p><strong>Mono Font: Geist Mono</strong></p>
+<pre><code>export const geistMono = Geist_Mono({
+  subsets: [&#39;latin&#39;],
+  display: &#39;swap&#39;,
+  variable: &#39;--font-geist-mono&#39;,
+  weight: [&#39;400&#39;, &#39;500&#39;, &#39;600&#39;, &#39;700&#39;],
+  preload: true,
+});</code></pre>
+<p><strong>Typography Scale:</strong></p>
+<ul>
+<li><strong>Titles:</strong> <code>clamp(2.5rem, 6vw + 1rem, 6rem)</code> — scales fluidly from 40px (mobile) to 96px (desktop)</li>
+<li><strong>Subtitles:</strong> <code>clamp(1rem, 2vw + 0.5rem, 1.25rem)</code> — subtle scaling</li>
+<li><strong>Body:</strong> 1.1rem line-height 1.7 — optimized for reading</li>
+<li><strong>Code/monospace:</strong> 0.85rem — skill tags, terminal output</li>
+<li><strong>Letter-spacing:</strong> Titles: -0.03em (tight); subtitles: normal; nav: 0.02em</li>
+</ul>
+<h3 id="component-design-patterns">Component Design Patterns</h3>
+<p><strong>Glass Card</strong> (<code>glass-card</code> class in <code>globals.css</code>):</p>
+<pre><code>.glass-card {
+  background: var(--surface-color);               /* Semi-transparent */
+  border: 1px solid var(--border-color);           /* Subtle border */
+  border-radius: 20px;                              /* Generous rounding */
+  padding: 3rem;                                    /* Generous padding */
+  backdrop-filter: blur(20px);                      /* Frosted glass */
+  transition: transform 0.4s cubic-bezier(...),     /* Physics-based hover */
+              border-color 0.4s ease, ...;
+}
+.glass-card:hover {
+  transform: translateY(-6px);                      /* Lift effect */
+  box-shadow: 0 20px 40px -20px var(--shadow-color),
+              0 0 0 1px var(--border-strong),       /* Spotlight border */
+              inset 0 1px 0 rgba(255,255,255,0.03);  /* Inner highlight */
+}</code></pre>
+<p><strong>HolographicCard</strong> (<code>components/HolographicCard.jsx</code>):</p>
+<ul>
+<li>Mouse-tracked 3D tilt: <code>rotateX</code> and <code>rotateY</code> computed from cursor position within card bounds</li>
+<li>Tilt range: ±4° (subtle — prevents disorientation)</li>
+<li>Dynamic glare overlay: radial gradient positioned at cursor coordinates</li>
+<li>Hardware-accelerated: <code>transform: perspective(1000px) rotateX(...) rotateY(...) scale3d(...)</code></li>
+<li>Disabled on low-spec and mobile devices (touch devices lack hover)</li>
+</ul>
+<p><strong>Skill Tags:</strong></p>
+<ul>
+<li>Pill-shaped (<code>border-radius: 100px</code>) with icon + label</li>
+<li>Hover effect: gradient overlay at 10% opacity, accent border, slight lift</li>
+<li>Icon (20×20) and label both use <code>z-index: 1</code> to sit above hover overlay</li>
+</ul>
+<p><strong>Buttons:</strong></p>
+<ul>
+<li>Primary: gradient background, glow shadow, hover lift (−2px), active scale (0.98)</li>
+<li>Icon: glass surface, border, 48×48 size, hover accent border + glow</li>
+</ul>
+<p>---</p>
+<h3 id="key-interactive-components">Key Interactive Components</h3>
+<p>In addition to the glass card and button patterns, several components deserve specific mention:</p>
+<p><strong>ErrorBoundary</strong> (<code>components/ErrorBoundary.jsx</code>):</p>
+<ul>
+<li>Class-based React error boundary (the only class component in the codebase — <code>getDerivedStateFromError</code> + <code>componentDidCatch</code>)</li>
+<li>Catches render failures in 3D scenes and HUD elements; displays a branded fallback with &quot;Reload Page&quot; button</li>
+<li>Used as the outer wrapper for the About page&#39;s <code>&amp;lt;ErrorBoundary&amp;gt;</code>-wrapped content, ensuring a single scene crash never takes down the entire page</li>
+<li>Logs errors to <code>console.error</code> with component stack trace for debugging</li>
+<li>Provides a hard reset: <code>window.location.reload()</code> clears any corrupted WebGL state</li>
+</ul>
+<p><strong>SkillConstellation</strong> (<code>components/SkillConstellation.jsx</code>):</p>
+<ul>
+<li>Interactive 2D skill visualization using a force-directed graph layout</li>
+<li>6 category clusters (Languages, Web, Cloud/DevOps, Data/AI, Embedded, Tools) with 28 skill nodes</li>
+<li>Physics simulation: nodes repel each other via Coulomb&#39;s law, connected nodes attract via Hooke&#39;s law spring forces</li>
+<li>Built on raw Canvas 2D (no Three.js) — lightweight, no WebGL dependency</li>
+<li>Hover interaction: highlights connected skill clusters; click expands category</li>
+<li>Adaptive: node count scales with PerformanceProvider tier; reduced detail on mobile</li>
+</ul>
+<p><strong>TerminalProfile</strong> (<code>components/TerminalProfile.jsx</code>):</p>
+<ul>
+<li>Fully interactive shell emulator rendered as a DOM-based terminal (<code>&amp;lt;pre&amp;gt;</code> + <code>&amp;lt;input&amp;gt;</code>), not a canvas</li>
+<li>Built-in command set: <code>whoami</code> (identity), <code>ls</code> (file listing), <code>cat</code> (file contents), <code>help</code> (command reference), <code>clear</code> (reset), <code>date</code> (current time), <code>echo</code> (echo arguments)</li>
+<li>Hidden easter egg: <code>sudo hire johnnie</code> triggers a special hiring sequence with animated output</li>
+<li>Readline-style input: left/right arrow navigation, up/down history cycling (10-entry buffer), home/end, Ctrl+U clear</li>
+<li>Terminal history persisted in component state; new session starts fresh on each mount</li>
+<li>Themed to match the site&#39;s dark mode: green-on-black (<code>#00ff41</code>) with amber prompt (<code>$ </code>) and CRT scan-line overlay effect via CSS pseudo-elements</li>
+</ul>
+<p><strong>HolographicCard</strong> (<code>components/HolographicCard.jsx</code>):</p>
+<ul>
+<li>3D tilt card wrapper applied to skill categories, experience entries, and project cards</li>
+<li>Mouse position to CSS 3D transform mapping: ±4° rotation on X/Y axes with <code>perspective(1000px)</code></li>
+<li>Dynamic glare overlay: radial gradient follows cursor position as a surface reflection effect</li>
+<li>Hardware-accelerated: <code>scale3d(1.01)</code> on hover for subtle lift; CSS <code>will-change: transform</code> hint</li>
+<li>Automatically disabled on low-spec and touch devices via <code>usePerformance()</code> context — no hover state on mobile</li>
+</ul>
+<p>---</p>
+<h2 id="github-integration-layer">GitHub Integration Layer</h2>
+<p><strong>API Route:</strong> <code>/api/github/stats</code> → <code>app/api/github/stats/route.js</code></p>
+<p>Acts as a proxy between the client-side GitHub statistics components and the GitHub GraphQL API v4. This is intentionally a client-side fetch (not server-side) to keep data fresh on each page load.</p>
+<p><strong>Data fetched from GitHub GraphQL API v4:</strong></p>
+<ul>
+<li>User profile (login, avatar, bio, followers, following, public repos)</li>
+<li>Top repositories with stargazerCount, forkCount, primaryLanguage (sorted by stars, limited to 10) — <strong>augmented via GraphQL to include repoList array</strong></li>
+<li>Language breakdown (aggregated across all public repos)</li>
+<li>Contribution calendar (52-week heatmap data)</li>
+<li>Activity events (recent pushes, PRs, issues)</li>
+<li>Organization memberships (Kubernetes, vLLM, etc.)</li>
+</ul>
+<p><strong>Resilience layer:</strong> Both <code>GitHubStats</code> and <code>LiveGithubProjects</code> use a circuit breaker pattern (<code>lib/utils/circuit-breaker.ts</code>) with 3-failure threshold and 5-minute cooldown. On mount, each component resets the breaker to ensure fresh data fetches after navigation. The API route also returns a <code>repoList</code> array for use as fallback data.</p>
+<p><strong>Visualization Components:</strong> The raw API data is transformed and rendered through 13 dedicated visualization components, each handling a different aspect of the GitHub profile. See <a href="#github-visualization-components-13" target="_blank" rel="noopener noreferrer">Components &gt; GitHub Visualization Components</a> above for the full list.</p>
+<p>---</p>
+<h2 id="security-architecture">Security Architecture</h2>
+<h3 id="content-security-policy-deep-dive">Content Security Policy (Deep Dive)</h3>
+<p>The CSP is the most restrictive policy that still allows Three.js and Framer Motion to function:</p>
+<pre><code>default-src &#39;self&#39;;
+
+# Scripts
+script-src &#39;self&#39;
+  &#39;unsafe-eval&#39;        # Required by Three.js for shader compilation (new THREE.ShaderMaterial())
+  &#39;unsafe-inline&#39;      # Required by Framer Motion for runtime style injection
+  https://cdnjs.cloudflare.com;  # Three.js CDN fallback
+
+# Styles
+style-src &#39;self&#39;
+  &#39;unsafe-inline&#39;      # Required by Framer Motion and inline styles
+  https://api.fontshare.com
+  https://cdnjs.cloudflare.com;
+
+# Images
+img-src &#39;self&#39;
+  blob:                # Required for Three.js canvas.toBlob() render targets
+  data:                # Inline SVG icons, noise texture overlay
+  https://avatars.githubusercontent.com   # GitHub profile photos
+  https://raw.githubusercontent.com;      # GitHub repo images
+
+# Fonts
+font-src &#39;self&#39;
+  https://api.fontshare.com
+  https://cdn.fontshare.com;
+
+# Connections
+connect-src &#39;self&#39;
+  https://api.github.com     # GitHub GraphQL API
+  wss: ws:                   # WebSocket (reserved for future use)
+  https://api.web3forms.com; # Contact form submission
+
+# Forms
+form-action &#39;self&#39;
+  https://api.web3forms.com;  # Only form submission endpoint
+
+# Restrictions
+object-src &#39;none&#39;;            # No plugins (Flash, Java, etc.)
+base-uri &#39;self&#39;;              # No base tag hijacking
+frame-ancestors &#39;none&#39;;       # No iframing (clickjacking protection)
+upgrade-insecure-requests;    # Auto-upgrade HTTP to HTTPS</code></pre>
+<p><strong>Why <code>&amp;#39;unsafe-eval&amp;#39;</code> is Necessary:</strong> Three.js compiles GLSL shader programs at runtime using <code>new Function()</code> or <code>eval()</code>-equivalent patterns. Without <code>&amp;#39;unsafe-eval&amp;#39;</code>, all Three.js rendering fails silently (canvas stays blank). This is a known limitation of Three.js that the library maintainers have chosen not to eliminate (it would require shipping pre-compiled shaders, dramatically increasing bundle size).</p>
+<p><strong>Why <code>&amp;#39;unsafe-inline&amp;#39;</code> is Necessary:</strong> Framer Motion applies animation styles by injecting <code>&amp;lt;style&amp;gt;</code> elements into the document <code>&amp;lt;head&amp;gt;</code> at runtime. Without <code>&amp;#39;unsafe-inline&amp;#39;</code>, all CSS animations silently fail.</p>
+<h3 id="http-security-header-strategy">HTTP Security Header Strategy</h3>
+<p>Configured in <code>next.config.mjs</code> via Next.js&#39;s <code>headers()</code> function — applied to all routes (<code>source: &amp;#39;/(.*)&amp;#39;</code>):</p>
+<div class="table-scroll"><table><thead><tr><th>Header</th><th>Value</th><th>Rationale</th></tr></thead><tbody><tr><td><code>Content-Security-Policy</code></td><td><a href="#content-security-policy-deep-dive" target="_blank" rel="noopener noreferrer">See above</a></td><td>XSS prevention, resource origin restrictions</td></tr><tr><td><code>X-DNS-Prefetch-Control</code></td><td><code>on</code></td><td>Performance hint: pre-resolve external domains</td></tr><tr><td><code>Strict-Transport-Security</code></td><td><code>max-age=63072000; includeSubDomains; preload</code></td><td>2-year HSTS; includes all subdomains; preload list eligible</td></tr><tr><td><code>X-XSS-Protection</code></td><td><code>1; mode=block</code></td><td>Legacy IE/Edge XSS filter</td></tr><tr><td><code>X-Frame-Options</code></td><td><code>DENY</code></td><td>Clickjacking: page cannot be loaded in <code>&amp;lt;frame&amp;gt;</code>, <code>&amp;lt;iframe&amp;gt;</code>, or <code>&amp;lt;object&amp;gt;</code></td></tr><tr><td><code>X-Content-Type-Options</code></td><td><code>nosniff</code></td><td>Browser must not MIME-type sniff (prevents script injection via manipulated content-type)</td></tr><tr><td><code>Referrer-Policy</code></td><td><code>strict-origin-when-cross-origin</code></td><td>Full URL on same-origin, origin-only cross-origin, nothing on HTTPS→HTTP downgrade</td></tr><tr><td><code>Permissions-Policy</code></td><td><code>camera=(), microphone=(), geolocation=(), browsing-topics=()</code></td><td>Opt-in API restriction; disables unused features</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>Node.js</strong> ≥ 18.17 (LTS recommended; tested on 22.x)</li>
+<li><strong>npm</strong> ≥ 9 || <strong>pnpm</strong> ≥ 8 || <strong>yarn</strong> ≥ 3</li>
+<li><strong>GPU with WebGL2 support</strong> for full 3D experience (software fallback available)</li>
+<li><strong>Git</strong> (for version control)</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<pre><code># Clone
+git clone https://github.com/johnnietse/personal-portfolio-website.git
+cd personal-portfolio-website
+
+# Install dependencies
+npm install</code></pre>
+<h3 id="development">Development</h3>
+<pre><code>npm run dev
+# → Turbopack dev server on http://localhost:3001
+# → Sub-second HMR
+# → ESLint reporting in terminal</code></pre>
+<p><strong>What makes the dev experience different:</strong></p>
+<ul>
+<li><strong>Turbopack</strong> (Rust-based bundler) — 10x faster cold starts than webpack</li>
+<li><strong>React Compiler</strong> — automatic memoization, no manual <code>useMemo</code> required</li>
+<li><strong>ESLint flat config</strong> — modern config format with Next.js rules</li>
+<li><strong>Environment variables</strong> from <code>.env.local</code> loaded automatically</li>
+</ul>
+<h3 id="build--production">Build &amp; Production</h3>
+<pre><code># Production build
+npm run build
+# Output: .next/ (Turbopack compilation)
+# Route-based code splitting (home, about, project are separate bundles)
+# 3D components are lazy-loaded (separate chunks)
+
+# Production server
+npm run start
+# → localhost:3001
+
+# Lint
+npm run lint</code></pre>
+<p>---</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<p>Create <code>.env.local</code>:</p>
+<pre><code># GitHub Personal Access Token (public_repo scope)
+# Required for /api/github/stats endpoint
+GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+
+# Web3Forms API Key
+# Used for contact form submission
+# This IS safe to expose to the client (Web3Forms keys are public-facing)
+WEB3FORMS_ACCESS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code></pre>
+<h3 id="content-data-layer">Content Data Layer</h3>
+<p>One of the portfolio&#39;s most important architectural decisions: <strong>all editable content lives in <code>lib/config/</code>, not in components.</strong></p>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Content</th><th>Edit Frequency</th></tr></thead><tbody><tr><td><code>lib/config/experience.js</code></td><td>Work history (company, role, date, bullets, skills)</td><td>Career changes</td></tr><tr><td><code>lib/config/experience.ts</code></td><td>TypeScript type definitions</td><td>Rare (schema changes)</td></tr><tr><td><code>lib/config/projects.ts</code></td><td>Project showcase (title, description, skills, GitHub URL)</td><td>Project additions</td></tr><tr><td><code>lib/config/skills.ts</code></td><td>Skill taxonomy (name + category)</td><td>Skill acquisition</td></tr><tr><td><code>lib/config/locations.ts</code></td><td>Globe pins (city, coordinates, type, experience bullets)</td><td>Travel / relocation</td></tr><tr><td><code>lib/config/constants.ts</code></td><td>Global constants</td><td>Rare</td></tr><tr><td><code>lib/design/tokens.js</code></td><td>Visual design values (colors, spacing, typography)</td><td>Rebranding</td></tr><tr><td><code>lib/fonts.js</code></td><td>Font configuration</td><td>Rare</td></tr></tbody></table></div>
+<p>To add a new work experience, edit <code>experience.js</code>. The About page, globe info panels, and skill breakdowns update automatically. No component code changes, no props threading, no duplicated data.</p>
+<p>---</p>
+<h2 id="deployment">Deployment</h2>
+<h3 id="vercel-recommended">Vercel (Recommended)</h3>
+<pre><code># Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Production deploy
+vercel --prod</code></pre>
+<p><strong>Build optimization:</strong> Zero configuration required — <code>next.config.mjs</code> is automatically detected.</p>
+<h3 id="build-output-analysis">Build Output Analysis</h3>
+<pre><code>npm run build
+# Route (app)/page.js                         5.8 kB (home page shell)
+# Route (app)/about/page.js                   6.2 kB (about page shell)
+# Route (app)/project/page.js                 4.1 kB (project page shell)
+# chunks/[3d-component-1].js                  ~80 kB (three.js + scene)
+# chunks/[3d-component-2].js                  ~60 kB
+# chunks/[3d-component-3].js                  ~70 kB
+# chunks/three.js                             ~150 kB (shared three.js runtime)
+# chunks/lucide-react                         ~20 kB (tree-shaken icons)</code></pre>
+<p>Three.js is extracted as a shared chunk (not duplicated per scene). Each 3D scene is its own chunk, loaded on demand when scrolled into view.</p>
+<h3 id="environment-variables-on-vercel">Environment Variables on Vercel</h3>
+<p>Set in Vercel Dashboard → Project → Settings → Environment Variables:</p>
+<ul>
+<li><code>GITHUB_TOKEN</code> — encrypted, not exposed to client</li>
+<li><code>WEB3FORMS_ACCESS_KEY</code> — exposed to client via <code>next.config.mjs</code> <code>env</code> block</li>
+</ul>
+<p>---</p>
+<h2 id="contributing">Contributing</h2>
+<p>While this is a personal portfolio, issues and suggestions are welcome.</p>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch: <code>git checkout -b feat/your-feature</code></li>
+<li>Commit changes: <code>git commit -m &amp;quot;feat: add your feature&amp;quot;</code></li>
+<li>Push: <code>git push origin feat/your-feature</code></li>
+<li>Open a Pull Request</li>
+</ol>
+<h3 id="code-conventions">Code Conventions</h3>
+<ul>
+<li><code>&amp;quot;use client&amp;quot;</code> directive on all interactive components</li>
+<li><strong>Design tokens</strong> from <code>lib/design/tokens.js</code> for every visual value (no magic numbers)</li>
+<li><strong>Content data</strong> in <code>lib/config/</code> files, never embedded in JSX</li>
+<li><strong><code>useReducedMotion()</code></strong> wrapper on every animated element</li>
+<li><strong>Three.js disposal</strong> in <code>useEffect</code> cleanup (geometry.dispose(), material.dispose())</li>
+<li><strong>Dynamic imports</strong> with <code>ssr: false</code> for all Three.js components</li>
+<li><strong>No inline styles</strong> in JSX that duplicate token values (use CSS variables)</li>
+</ul>
+<h3 id="commit-convention">Commit Convention</h3>
+<pre><code>&lt;type&gt;: &lt;description&gt;
+
+Types: feat, fix, perf, refactor, style, docs, chore
+Examples:
+  feat: add new project entry for HPC optimizer
+  perf: reduce globe polygon count on Low tier
+  fix: dispose Three.js geometry on route unmount</code></pre>
+<p>---</p>
+<h2 id="license">License</h2>
+<p>Distributed under the <strong>MIT License</strong>. See <a href="https://github.com/johnnietse/personal-portfolio-website/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><code>LICENSE</code></a> for more information.</p>
+<p>Copyright © 2025 Johnnie Tse — Built with Next.js 16, React 19, Three.js r183, Framer Motion 12.</p>
+<p>---</p></details><p><a href="https://github.com/johnnietse/personal-portfolio-website/blob/main/README.md" target="_blank" rel="noopener noreferrer">Open README on main</a></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/personal-portfolio-website/blob/main/src/main.js#L11" target="_blank" rel="noopener noreferrer">src/main.js (line 11)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>
+mobileNav();
+
+document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+    AOS.init({
+        duration: 1000, // Duration of the animation in milliseconds
+        once: true,     // Whether animation should happen only once
+    });
+});
+
+document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+    const footer = document.querySelector(&quot;footer&quot;);
+  
+    // Check for ARM-based or mobile devices using userAgentData if available
+    // const isARM = navigator.userAgentData
+    //   ? navigator.userAgentData.platform.toLowerCase().includes(&quot;arm&quot;)
+    //   : /arm|aarch64/i.test(navigator.userAgent);
+    const isARM = (navigator.userAgentData &amp;&amp; /arm|aarch64/i.test(navigator.userAgentData.platform));
+
+  
+    // Check for mobile user agents
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+    // Function to detect if a mobile device requested the desktop version
+    const isDesktopRequested = () =&gt; {
+        // Check if the user agent includes desktop OS identifiers or if the user agent data indicates a desktop request
+        return window.navigator.userAgent.includes(&quot;Macintosh&quot;) ||
+            window.navigator.userAgent.includes(&quot;Windows&quot;) ||
+            (navigator.userAgentData &amp;&amp; navigator.userAgentData.mobile === false);
+    };
+  
+    if (((isMobile) || (isMobile &amp;&amp; isDesktopRequested()) || (isARM) || (isARM &amp;&amp; isDesktopRequested())) &amp;&amp; footer) {
+      footer.style.display = &quot;none&quot;;
+    }
+});
+  </code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from src/main.js on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`mobileNav`, `document`, `addEventListener`, `DOMContentLoaded`, `AOS`—are useful signposts for following the behavior through the rest of the repository.</p><p>To read a code sample responsibly, I ask three questions: what values enter this block, what state does it change, and where is its result consumed? The source file and linked history give those surrounding call sites. If a README or test file describes the expected behavior, that provides a checkable target; otherwise the snippet is evidence about structure, not a result or benchmark.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><ul>
+<li><a href="#installation" target="_blank" rel="noopener noreferrer">Installation</a></li>
+</ul><span id="installation-2"></span></li><li><ul>
+<li><a href="#environment-variables" target="_blank" rel="noopener noreferrer">Environment Variables</a></li>
+</ul><span id="environment-variables-2"></span></li><li><ul>
+<li><strong>No third-party licensing dependencies</strong> for visual assets</li>
+</ul></li><li><div class="table-scroll"><table><thead><tr><th><strong>R3F Utilities</strong></th><th>@react-three/drei</th><th>10.7.7</th><th>OrbitControls, environment, shadows, text, performance utils</th><th>Industry-standard R3F component library; maintained by Poimandres</th></tr></thead><tbody></tbody></table></div></li><li><div class="table-scroll"><table><thead><tr><th><strong>Icons</strong></th><th>lucide-react</th><th>0.577.0</th><th>Tree-shakeable SVG icon system</th><th>Null-runtime; pure ESM; 1000+ icons; no icon font dependencies</th></tr></thead><tbody></tbody></table></div></li><li><p>├── .env.local                              # Environment variables (GITHUB_TOKEN, WEB3FORMS_ACCESS_KEY)</p></li><li><p>│   ├── textures/                           # 3D environment maps</p></li><li><p>└── package.json                            # Dependencies + scripts</p></li><li><p>subgraph &quot;Shared Dependencies&quot;</p></li><li><p>The portfolio contains <strong>6 distinct WebGL scenes</strong> with zero external 3D model dependencies (except the car body mesh). Every particle, polygon, and shader is procedurally generated.</p></li><li><p>A pure function that classifies the WebGL renderer without any React dependencies:</p></li><li><ul>
+<li><strong>No external dependencies</strong> — zero-byte utility function</li>
+</ul></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/31196edb7f9f206ccafe355f89998c157c3c830b" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>31196ed</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/514b23f4e065d82b83b32fd72fe1b22dba543398" target="_blank" rel="noopener noreferrer">change title</a></strong><code>514b23f</code></div></li><li><time>2025-01-07</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ee62b860db7769c1eb308dda3785ccd3743d62de" target="_blank" rel="noopener noreferrer">remove footer entirely to avoid it appearing on smaller screen sizes</a></strong><code>ee62b86</code></div></li><li><time>2026-03-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/269b0f75e708ed2e6895ad45dfcf98927ded39d9" target="_blank" rel="noopener noreferrer">feat: implement comprehensive security measures including CSP, edge middleware, rate limiting, and honeypots</a></strong><code>269b0f7</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a535f68620a0ab510a6dbb41bf98528ec34c5eed" target="_blank" rel="noopener noreferrer">feat(globe): interactive city zoom — click labels to explore</a></strong><code>a535f68</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/001f80ba73eba9cd2a860bbb861e079e27914de9" target="_blank" rel="noopener noreferrer">Reapply &quot;update About page with LinkedIn profile data — add Solana, split AutoDrive, expand QHPC/EngSoc sub-roles, rewrite Deel/Foresoon/Arista entries&quot;</a></strong><code>001f80b</code></div></li><li><time>2026-07-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7614a6f57fa8d0e2119260f2c21a18d99e90e322" target="_blank" rel="noopener noreferrer">docs: audit and update README against codebase -- fix stale line counts, graphql api ref, missing components, legacy annotations</a></strong><code>7614a6f</code></div></li><li><time>2026-07-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e5be0e068df93928b339a59b02670aecae3efc33" target="_blank" rel="noopener noreferrer">chore: add .opencode/ .tmp/ to .gitignore</a></strong><code>e5be0e0</code></div></li></ol><details class="history-details"><summary>Show all 198 commits on main</summary><ol class="timeline compact"><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/31196edb7f9f206ccafe355f89998c157c3c830b" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>31196ed</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/514b23f4e065d82b83b32fd72fe1b22dba543398" target="_blank" rel="noopener noreferrer">change title</a></strong><code>514b23f</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6bc19ff24ae92d8e6ba0916f1e003caca3bd9adc" target="_blank" rel="noopener noreferrer">aria labels and meta tags added</a></strong><code>6bc19ff</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/8b9e8f67f267e51adbbeb3cc64d51bea2cb45f93" target="_blank" rel="noopener noreferrer">push footer to the bottom</a></strong><code>8b9e8f6</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/670dac698387b8e65faeb460cf9195145cb5c5a3" target="_blank" rel="noopener noreferrer">move footer out of body in html files</a></strong><code>670dac6</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/64301ad3fb5a9dda88ddd2468901eced1efb39d1" target="_blank" rel="noopener noreferrer">add .container to try to fix the footer from not being push to the bottom</a></strong><code>64301ad</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6ec7b224e7e30738db0980c9fab1fe9efcac0b7e" target="_blank" rel="noopener noreferrer">again try to push the footer to the bottom of the page for mobile navigation</a></strong><code>6ec7b22</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b2cfb9f90955c489a2404dd8fa8e4219e7270789" target="_blank" rel="noopener noreferrer">same thing trying to fix the footer and push it to the bottom for mobile nav</a></strong><code>b2cfb9f</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a73f61c1288bab224edf02d5a0c82e18d870efeb" target="_blank" rel="noopener noreferrer">comment out the part of the style.css code which makes the footer not work in the desktop browser</a></strong><code>a73f61c</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3d35bfc348a59ce04de3aa2646f185696d3e0707" target="_blank" rel="noopener noreferrer">try to only fix it for safari only</a></strong><code>3d35bfc</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6554213572a2d2de2d4758200eeb88bfc9157dae" target="_blank" rel="noopener noreferrer">again try to fix the browser for safari only</a></strong><code>6554213</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e0ffee4c2af3877c17347aaa1265afe4011021db" target="_blank" rel="noopener noreferrer">make another chaneg trying to fix the safari browser footer again</a></strong><code>e0ffee4</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/5cd9bf4e789dcf835b82a55b841690c205871374" target="_blank" rel="noopener noreferrer">again doing the same thing as the last commit</a></strong><code>5cd9bf4</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/26106a256dd73d6315d6572b527a8aa9551c6cd0" target="_blank" rel="noopener noreferrer">return back to previous fix first</a></strong><code>26106a2</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ad2687fd713cfb2e336367bde0b4d21d7613895c" target="_blank" rel="noopener noreferrer">add margin-top: auto footer</a></strong><code>ad2687f</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/997d9af26a78c14313a583327513d749c8f71b4a" target="_blank" rel="noopener noreferrer">make small change</a></strong><code>997d9af</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b919ed7f03131bf0519e509eea82463c632f7008" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices</a></strong><code>b919ed7</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/87bb29dcd3d4a2cc02c24fef4b5a79926f97f477" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files</a></strong><code>87bb29d</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/8ff20222f0f6d64f33cc11fbeca27c5a6ba0111e" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Continue to change</a></strong><code>8ff2022</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/1177abf82211a4d73d678f805a36cc57edc8da15" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Continue to change.</a></strong><code>1177abf</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3c7ea22a44505fb8fe8590032698ad51edf3e1ef" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Continue to CHANGE.</a></strong><code>3c7ea22</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/fcb09c345ef1c6399fb9e3e27ae85982b671797b" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Continue TO CHANGE.</a></strong><code>fcb09c3</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/552da4b19f89eec2c7ab1797140d3876752de8f3" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. CONTINUE TO CHANGE.</a></strong><code>552da4b</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/36ae7b36326ae972d2f21c31b169af2a2bc992f0" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. CONTINUE to CHANGE.</a></strong><code>36ae7b3</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ba3fe087b83f442ebdb6f91c2fbceac366d5d9ea" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Add detection of mobile and arm devices to hide the footer for those devices.</a></strong><code>ba3fe08</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/31ba3952ac6bb5f3bfaea23112349203168a79ae" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Add detection of mobile and arm devices to hide the footer for those devices. Last commit forgets to change it from display to visibility.</a></strong><code>31ba395</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/99a3f4c9691ae90a9cfffcad35198fe9c8919995" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Add detection of mobile and arm devices to hide the footer for those devices. Make change to main.js.</a></strong><code>99a3f4c</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/14df4d0c487758d1ac2c28b25569d80b3e5efcae" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Add detection of mobile and arm devices to hide the footer for those devices. Make change to main.js. Add a condition for when there is a mobile device or ARM device requesting for a desktop version of the website, then we hide the footer.</a></strong><code>14df4d0</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/c78e2d344a7a77d6ebe48733237a82b81712dd86" target="_blank" rel="noopener noreferrer">make another small change again to make the footer disappear for smaller mobile devices by changing and adding in and to the html files. Add detection of mobile and arm devices to hide the footer for those devices. Make change to main.js. Add a condition for when there is a mobile device or ARM device requesting for a desktop version of the website, then we hide the footer. Try it again.</a></strong><code>c78e2d3</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d9a234727cd6ad6edc511ae670403d77ecc37c2e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d9a2347</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d2fdcaae164bc3bbdae18f5ab532e96a419b036f" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d2fdcaa</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/8546253f4b246ccac047c7b30066020dfbe3f6ba" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>8546253</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/5ef0434e81e88bdc301c3c682f29f9f4c523674b" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>5ef0434</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/68fe46450b1b5caaad5e5c5375bbfb9bed15239a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>68fe464</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6eb2ea07268d4b40577c60e04a8603d7510d2323" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6eb2ea0</code></div></li><li><time>2025-01-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/26980210fca6b292004916135a0927dac990747e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>2698021</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d5cb029fc6d98616ca135cef8514243b627bfc54" target="_blank" rel="noopener noreferrer">attempt to add images</a></strong><code>d5cb029</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/522bc715cc8e227322baea1b92fb581e19e7c0ee" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>522bc71</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cc8941a73022f6e18393730da1884925dfe0195d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>cc8941a</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cc2eda645926fd788856eb1cb9e7f7b04459af67" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>cc2eda6</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/baec6ceff538e242bb0f0a181e77e2582d9c44c2" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>baec6ce</code></div></li><li><time>2025-01-05</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/253401d6348f401358d734db10522ce3cc9eff32" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>253401d</code></div></li><li><time>2025-01-07</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7544e5459fcd8562adec208b5aa7626d2d7ef6cc" target="_blank" rel="noopener noreferrer">remove footer entirely to avoid it appearing on smaller screen sizes</a></strong><code>7544e54</code></div></li><li><time>2025-01-07</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ee62b860db7769c1eb308dda3785ccd3743d62de" target="_blank" rel="noopener noreferrer">remove footer entirely to avoid it appearing on smaller screen sizes</a></strong><code>ee62b86</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/46fd0aef2cc5ea0e235a87cd55ae1e72acac11ff" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>46fd0ae</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b0e8012d1d9b69309be511c2c173784d61f49f53" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b0e8012</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bae2ba92f3b697afdd5f48f460cdee1cb47db31d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>bae2ba9</code></div></li><li><time>2025-01-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bb79831f383406ee6cc02717606422b8bc67f18a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>bb79831</code></div></li><li><time>2025-01-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/251d8f46515b9aa99ede918185faac07b61b3c2e" target="_blank" rel="noopener noreferrer">commit because of new updates for the project section.</a></strong><code>251d8f4</code></div></li><li><time>2025-01-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b369453c631c851be559f8baa02020325ac4fd1b" target="_blank" rel="noopener noreferrer">commit because of new updates for the project section</a></strong><code>b369453</code></div></li><li><time>2025-01-21</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bccd70fcc2b657155c02c52814a3a1d80aaec03e" target="_blank" rel="noopener noreferrer">update guessmaster project link</a></strong><code>bccd70f</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/1ae4c0a44b9ec4a5ef3d6cc880a92ff56d23fa04" target="_blank" rel="noopener noreferrer">New updates with two new projects for the Projects section</a></strong><code>1ae4c0a</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2895a1a60574fde3bb843bd2d698739693bec760" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>2895a1a</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6cc4796b5c0923deb3c2d048eac2a8a19541f871" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6cc4796</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/aa8bb8c45bd55af284e59ceb44dd09769db8be9e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>aa8bb8c</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a5a08031827bc9ea867eec728f8fee190e58864b" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>a5a0803</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/64d0cb59da2250b4b387279cdddc105e89b2d722" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>64d0cb5</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2c3a22f6f28ec672bd08d6fc14e58caecff2d8f2" target="_blank" rel="noopener noreferrer">Create LICENSE</a></strong><code>2c3a22f</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e479465b9940ccf7b5a7b0576e6d2118bdffeb14" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>e479465</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7bda4837ce30bb4872aa40e261927b67bdaaf0f4" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>7bda483</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2d38f6c19e34ae7b1d7e53e281536f9d31bfac7d" target="_blank" rel="noopener noreferrer">Merge pull request #2 from johnnietse/main2</a></strong><code>2d38f6c</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cdccb8ed8a497718d86c3f4be8db227b8b020a28" target="_blank" rel="noopener noreferrer">Update about.html</a></strong><code>cdccb8e</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ba5df6bbeb761e79253c0bc333dbb37e7f3b0b65" target="_blank" rel="noopener noreferrer">Update project.html</a></strong><code>ba5df6b</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2a9b232db33ea7a3e5ea583fb9ea9847040f8338" target="_blank" rel="noopener noreferrer">Update about.html</a></strong><code>2a9b232</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/5fe5926da40c6d4c376207947ba0c0f29c0c774a" target="_blank" rel="noopener noreferrer">Update project.html</a></strong><code>5fe5926</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e667c632437b0cdf742be741a6e46aaf6d660486" target="_blank" rel="noopener noreferrer">Update about.html</a></strong><code>e667c63</code></div></li><li><time>2025-09-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/dbb3958bf4006275f38bd53b38f46c8c916d1789" target="_blank" rel="noopener noreferrer">Merge pull request #3 from johnnietse/main</a></strong><code>dbb3958</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/8fbe2b87448422d1c714d4a236d01530c51e8d36" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>8fbe2b8</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ba8ea3f07b3462c10cc32f85f50534b92553916e" target="_blank" rel="noopener noreferrer">Update about.html</a></strong><code>ba8ea3f</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/0d00a18fc2e89655f2b6e7d505d572120cd1c8e4" target="_blank" rel="noopener noreferrer">Update project.html</a></strong><code>0d00a18</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3419de634c0d52678c6bac9dc88c8c940fbeeb9a" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>3419de6</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ae4074ccf0653cd058d63adaa5d6322d4387a72c" target="_blank" rel="noopener noreferrer">Update about.html</a></strong><code>ae4074c</code></div></li><li><time>2025-10-20</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/369c446d67a99c198dfed38316202ec8577c648b" target="_blank" rel="noopener noreferrer">Update project.html</a></strong><code>369c446</code></div></li><li><time>2026-03-22</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d4b5b28ad0284eba855e337b7f56ca6bbaf0f310" target="_blank" rel="noopener noreferrer">feat: complete premium glassmorphism ui overhaul</a></strong><code>d4b5b28</code></div></li><li><time>2026-03-22</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/babd42b8088fdc3c3d9559518137b0802ac40aef" target="_blank" rel="noopener noreferrer">feat: complete Phase 3 deep content expansion with lucide-react</a></strong><code>babd42b</code></div></li><li><time>2026-03-23</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cbb87272c48a65729ba919a165d93ca02e413f5a" target="_blank" rel="noopener noreferrer">Exhaustive Portfolio Update: 38 Projects, Sourced Logos, and Experience Refinement</a></strong><code>cbb8727</code></div></li><li><time>2026-03-23</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6beb2e4ff32b6745526c590757c1a271e36201ad" target="_blank" rel="noopener noreferrer">Merge branch &#39;main2&#39;</a></strong><code>6beb2e4</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/c98d57eccd6b9bf8e8c756a3b62be8e3e300452f" target="_blank" rel="noopener noreferrer">feat: integrate ELEC498 PID Molecular Dynamics Proxy Simulation with real-time telemetry dashboard and DVFS coupling</a></strong><code>c98d57e</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d0dc5ab2ac41f95e1a4a745ab2df07cd725c09db" target="_blank" rel="noopener noreferrer">feat: implement global Iron Man Holographic HUD with reactive targeting and 3D environment scanning</a></strong><code>d0dc5ab</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/851e4988d279fa4c2b2191019d76da5978cd798e" target="_blank" rel="noopener noreferrer">feat: implement global performance optimization suite, elastic culling for mobile, and refined technical HUD aesthetics</a></strong><code>851e498</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d154f8a662a084266cb03ce63634188809fbf55e" target="_blank" rel="noopener noreferrer">fix: resolve hydration mismatches and iron man hud hook count error</a></strong><code>d154f8a</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/662de7a23f74f00cf686dad1f3a1268967f9e7ae" target="_blank" rel="noopener noreferrer">fix(stability): resolve react hook-order violation and hydration mismatches across 3d components</a></strong><code>662de7a</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cbc4a03096a9f6cfda33ec73003e9a3b30fbac09" target="_blank" rel="noopener noreferrer">feat(performance): enforce absolute mobile feature gating (disabled by default)</a></strong><code>cbc4a03</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6d68e7fd6a8c093db89b1ae943b57f134047d404" target="_blank" rel="noopener noreferrer">feat(performance): enforce session-locked defaults (Low Spec: ON, Cursor: OFF)</a></strong><code>6d68e7f</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/768f1b1c76e0258de4dba4da90ce0713f0c816d1" target="_blank" rel="noopener noreferrer">fix(performance): resolve ReferenceError in PerformanceHUD destructuring</a></strong><code>768f1b1</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3b8547783347c50c2d8005a917eeca80135b625c" target="_blank" rel="noopener noreferrer">feat(ui): implement Phase 39 Tablet &amp; Zoom optimizations (fluid scaling, viewport stabilization)</a></strong><code>3b85477</code></div></li><li><time>2026-03-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/685d49ad873b503db23aebac610380e136ba574d" target="_blank" rel="noopener noreferrer">feat(ui): implement Mobile Menu and iPad/zoom optimizations</a></strong><code>685d49a</code></div></li><li><time>2026-03-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d33bd660c563b632955a7d2f013257c893905727" target="_blank" rel="noopener noreferrer">feat(ui): refine mobile navigation and update tech icons</a></strong><code>d33bd66</code></div></li><li><time>2026-03-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a619ebd5d4fbdb6a0c50e8efb2d8cc225744ab5d" target="_blank" rel="noopener noreferrer">feat: complete 52-repo project sync, update resume links, and refresh tech stack metadata</a></strong><code>a619ebd</code></div></li><li><time>2026-03-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/269b0f75e708ed2e6895ad45dfcf98927ded39d9" target="_blank" rel="noopener noreferrer">feat: implement comprehensive security measures including CSP, edge middleware, rate limiting, and honeypots</a></strong><code>269b0f7</code></div></li><li><time>2026-03-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/1ab3e0817617d2e92ef79e73099184487bc29d1c" target="_blank" rel="noopener noreferrer">style: remove hyperlink from organization badges to protect NDA repositories</a></strong><code>1ab3e08</code></div></li><li><time>2026-06-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/273a1a1b2a93ad4068c080756661e6b42d1aacc1" target="_blank" rel="noopener noreferrer">chore: add Open Graph image and custom JT logo</a></strong><code>273a1a1</code></div></li><li><time>2026-06-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b76080c93a7e69a5c701208a25bfef27ccd0a14e" target="_blank" rel="noopener noreferrer">chore: update title, description, and OG tags across entire project</a></strong><code>b76080c</code></div></li><li><time>2026-06-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ee4ed65f2671663f08908c0a82282edbc0dd40d6" target="_blank" rel="noopener noreferrer">feat: integrate vLLM EPP professional experience and logo</a></strong><code>ee4ed65</code></div></li><li><time>2026-06-04</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/124bc7d81bb966b2612fc00c180716dda78b1f0d" target="_blank" rel="noopener noreferrer">feat: add vLLM technologies to skills section</a></strong><code>124bc7d</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/c91c537d6a5c068430cca73faf8cac05336e3ce2" target="_blank" rel="noopener noreferrer">feat: added comprehensive cross-device and multi-browser support favicons</a></strong><code>c91c537</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/081e950003a2f27492c6765e6378d0a41edeb07c" target="_blank" rel="noopener noreferrer">Fix global responsiveness, aspect ratio scaling, and eliminate 100vw/100vh scroll overflow bugs</a></strong><code>081e950</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/89f4e771f0cafbfec7100dd9ef3ef183b65aeec6" target="_blank" rel="noopener noreferrer">Fix Safari iOS favicon cache bugs and switch to Next 14 App Router SVG native icons</a></strong><code>89f4e77</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3d0002339351c0ae2c078e2e081564acbcd77f45" target="_blank" rel="noopener noreferrer">Fix responsive layout scaling and horizontal scroll bugs</a></strong><code>3d00023</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b2bd7cc7f805ba6c6ed1e7cfeb15f0c3f621d64d" target="_blank" rel="noopener noreferrer">Fix MiniMDSimulation container height collapse and UI overlap</a></strong><code>b2bd7cc</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/62daf9ea96c85726c95b2e02a9114f3ba0128662" target="_blank" rel="noopener noreferrer">Fix VisibilityWrapper flex collapsing 3D canvas height</a></strong><code>62daf9e</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d3d9bd833b5e144cee0e1ef8916f3c33f85d0a6a" target="_blank" rel="noopener noreferrer">Fix absolute positioning for aspect-ratio containers in Safari, and fix Apple Touch icon</a></strong><code>d3d9bd8</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/0d575b416aa5111b8b57bd409276573860751798" target="_blank" rel="noopener noreferrer">feat: add circuit breaker and exponential backoff utilities</a></strong><code>0d575b4</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f3fba6a9051d47fa48efb85f466e29ffabd72d47" target="_blank" rel="noopener noreferrer">fix: address code review findings - cache fallback, reset completeness, unused catch binding</a></strong><code>f3fba6a</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/9568be1c1ae1f7f3ee680965140c6ab8d887a39c" target="_blank" rel="noopener noreferrer">feat: add Welford online streaming statistics algorithm</a></strong><code>9568be1</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/873086e7e960a4a813f9c4b9e3e7c53d35c10f2f" target="_blank" rel="noopener noreferrer">feat: add WebGL renderer detection utility</a></strong><code>873086e</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/86b20626ff42d192a67ca0e938147540904d2184" target="_blank" rel="noopener noreferrer">feat: add typed config files for skills, projects, locations, constants</a></strong><code>86b2062</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/52f50a66ad61266425c1960b2c959e49567d1817" target="_blank" rel="noopener noreferrer">feat: add useBoundedHistory, useRAF, useRenderBudget hooks</a></strong><code>52f50a6</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e3bdfb02fa5d37e36afefa0b727e7ecfdd95911e" target="_blank" rel="noopener noreferrer">feat: add circuit breaker resilience to GitHubStats and LiveGithubProjects</a></strong><code>e3bdfb0</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7d3f01c5c95336ebe3500f2b3a2fd85ad74ecc8c" target="_blank" rel="noopener noreferrer">refactor: extract hardcoded skills and projects into typed config files</a></strong><code>7d3f01c</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/080c2eb04910015fe0fbcf0e6e797473c58f5bb8" target="_blank" rel="noopener noreferrer">feat: add renderTier to PerformanceManager with WebGL detection</a></strong><code>080c2eb</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3999eaf91ad1ba41744944edc0d16aa0e2347f0c" target="_blank" rel="noopener noreferrer">feat: add dual renderer fallbacks for background WebGL components</a></strong><code>3999eaf</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/1459c932f1102c7188581b193befd5abb70f87c1" target="_blank" rel="noopener noreferrer">feat: add render tier fallback for showroom WebGL components</a></strong><code>1459c93</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2f8af86511b72290d253fea5c8082159fc1c4c20" target="_blank" rel="noopener noreferrer">feat: add input-sensitive render budget to animation loops</a></strong><code>2f8af86</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ec71aa9a2699e14f255791e513c6d8cc2d8f7e46" target="_blank" rel="noopener noreferrer">feat: add bounded history with GC sweep to PerformanceHUD and MiniMDSimulation</a></strong><code>ec71aa9</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/466e136c84776cfe670efd8111ed654ee4aa504e" target="_blank" rel="noopener noreferrer">feat: add Welford online statistics to PerformanceHUD and MiniMDSimulation</a></strong><code>466e136</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a50fe0ef521950a98792607cd09d12d7106fa15f" target="_blank" rel="noopener noreferrer">feat: add WebGL globe component showing global engineering footprint</a></strong><code>a50fe0e</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/12a555b04eb1085ae981301800802ea45224a223" target="_blank" rel="noopener noreferrer">chore: finalize WorldMonitor pattern integration</a></strong><code>12a555b</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f76a73ecd56355dcc10418279337d5aae1e2a425" target="_blank" rel="noopener noreferrer">privacy: make locations config template with public example only</a></strong><code>f76a73e</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/27b1f7e2a17239d1f301e2c4703abedd6d4080c6" target="_blank" rel="noopener noreferrer">feat: force AutonomousCar, EmbeddedController, MiniMDSimulation, GlobeFootprint on mobile (low/economy tiers)</a></strong><code>27b1f7e</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f04e2c8578558205d4c6e3437970e9d21b5bc201" target="_blank" rel="noopener noreferrer">feat: progressive quality scaling - all 3D components now render on all tiers with aggressive mobile optimizations</a></strong><code>f04e2c8</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cb80b36c534b7d545ede996e1a6a147116992143" target="_blank" rel="noopener noreferrer">feat: add RenderOnScroll - 3D components only render when scrolled into viewport</a></strong><code>cb80b36</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a5c1897559df1455e694f97dcb3f3a6ed1c4bb40" target="_blank" rel="noopener noreferrer">feat: interactive Earth globe with textured continents, experience-linked pins, and connection arcs</a></strong><code>a5c1897</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d480cb5ab377e2db114e96baf2a3d7b86894f299" target="_blank" rel="noopener noreferrer">fix: load Earth texture locally with error boundary fallback</a></strong><code>d480cb5</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/924af07ee5ae03d57707cbf37d991fd181a6d9ca" target="_blank" rel="noopener noreferrer">feat: replace R3F globe with globe.gl (World Monitor approach)</a></strong><code>924af07</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/51624bd376ae004a0c3650bf5e73ef818632dffa" target="_blank" rel="noopener noreferrer">fix(globe): add loading placeholder, economy fallback, size-chain stability</a></strong><code>51624bd</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f9a7a5c57f2edf9e5910cea1d7a45d07180a9128" target="_blank" rel="noopener noreferrer">chore: commit stale files from previous sessions</a></strong><code>f9a7a5c</code></div></li><li><time>2026-07-25</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/57b277a1b64ae957cfe3eba39c82d99d7c537d3b" target="_blank" rel="noopener noreferrer">fix(globe): container rendered before effect runs, fix startup timing</a></strong><code>57b277a</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/ad03a6a55d85d3967ff1d7219ab721d294b561d1" target="_blank" rel="noopener noreferrer">feat(globe): World Monitor-quality upgrade — bump map, starfield, water specular, labels, rings, retina, animate-in</a></strong><code>ad03a6a</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/c58d195047378e4c860475178dc154fc9ea5c807" target="_blank" rel="noopener noreferrer">fix(globe): pixelRatio called on wrong object — use renderer().setPixelRatio()</a></strong><code>c58d195</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a9197ac74525f3d07d86822b3218b14dff1f3666" target="_blank" rel="noopener noreferrer">feat(globe): night-mode upgrade — dark earth, country outlines, graticule grid</a></strong><code>a9197ac</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7205596888cd02af22ec745dce03f61f09faa9a6" target="_blank" rel="noopener noreferrer">feat(globe): orbital particle field + stronger atmosphere glow</a></strong><code>7205596</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e7a7dcd71280297543634444843eb498b12b640c" target="_blank" rel="noopener noreferrer">feat(globe): UnrealBloomPass post-processing for cinematic glow</a></strong><code>e7a7dcd</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/83e7cb640473040060d02c5890e1e699bc2f3bdc" target="_blank" rel="noopener noreferrer">feat(globe): geodesic wireframe cage + equatorial ring overlay</a></strong><code>83e7cb6</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a535f68620a0ab510a6dbb41bf98528ec34c5eed" target="_blank" rel="noopener noreferrer">feat(globe): interactive city zoom — click labels to explore</a></strong><code>a535f68</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/666ea5b31668ca3ca2709eb7c58d71d365debc65" target="_blank" rel="noopener noreferrer">feat(globe): animated clouds layer + premium city detail card</a></strong><code>666ea5b</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bc3ed14ed611891bea5a5797417dc67864625b42" target="_blank" rel="noopener noreferrer">fix(globe): replace globe.gl cloud API with custom Three.js cloud mesh</a></strong><code>bc3ed14</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/180d4db3e816b298203056779b5d7e54733f2e1b" target="_blank" rel="noopener noreferrer">feat(globe): pause rotation on hover + emissive city-light pulse</a></strong><code>180d4db</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cdb92a78d9414daec8503b3ea1c57117cf008793" target="_blank" rel="noopener noreferrer">feat(globe): pointer cursor on label hover for interactive UX</a></strong><code>cdb92a7</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/753ea10f08fc6cab1aa135a80dba4db69a348202" target="_blank" rel="noopener noreferrer">feat(globe): keyboard shortcuts — 1, 2, Escape for city navigation</a></strong><code>753ea10</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2c04f522d568ef3ce6b0ef97d7f3663ab8b6366b" target="_blank" rel="noopener noreferrer">feat(globe): focus glow halo on selected city</a></strong><code>2c04f52</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/4ee9b469b37df1c26687165e52764ea5ac19cee0" target="_blank" rel="noopener noreferrer">fix(globe): move THREE-dependent functions inside component to avoid TDZ</a></strong><code>4ee9b46</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/9433ce836d8d8cf8f459e42effc877133d243655" target="_blank" rel="noopener noreferrer">fix(globe): replace THREE namespace import with named imports</a></strong><code>9433ce8</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/2fd5b1a44f67cf05b4337427345002bf73b33fad" target="_blank" rel="noopener noreferrer">fix(globe): back to THREE.* namespace + dynamic import (revert named imports + static Globe)</a></strong><code>2fd5b1a</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a8cc5a6d5734f7607096271d5392b4582c3805eb" target="_blank" rel="noopener noreferrer">fix(globe): dynamic import three inside init block to avoid chunk duplication</a></strong><code>a8cc5a6</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/d232ed1250f8dd4f2f70e5b02d2b500410778649" target="_blank" rel="noopener noreferrer">feat(globe): HTML city badges + World Monitor idle auto-rotate timeout</a></strong><code>d232ed1</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/89bf1531706c8c4584023321141da6bb2c1cac23" target="_blank" rel="noopener noreferrer">feat(globe): World Monitor features — flash, BG pause, glow spheres, cyan light</a></strong><code>89bf153</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b1875bd0a1d2ac0bc2a75f276552f79071990de5" target="_blank" rel="noopener noreferrer">feat(globe): pulsing badges, glow sphere rotation, WM atmosphere, adaptive DPR, country hover</a></strong><code>b1875bd</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cb5641f820c36f0a2ccf420e7af9cb01dcdffd83" target="_blank" rel="noopener noreferrer">feat(globe): PBR specular water + MeshStandardMaterial upgrade</a></strong><code>cb5641f</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e8273ab287cb7c8f4f24da0c77f64fa8e51f50d9" target="_blank" rel="noopener noreferrer">feat(globe): cinematic background + atmosphere overhaul</a></strong><code>e8273ab</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/53961a8320dd943c5479d243602a59029029b3b4" target="_blank" rel="noopener noreferrer">fix: HeroModel bug + remove ParticleBackground + visual upgrades</a></strong><code>53961a8</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e0487ff43fb2fe8d48639ddcfedc99682f78ccb1" target="_blank" rel="noopener noreferrer">feat: visual upgrades across all 3D components + globe section styling</a></strong><code>e0487ff</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a13c36b069720ee6820bf2a194bfe458fc2545d8" target="_blank" rel="noopener noreferrer">feat: design tokens + visual polish across all 3D components</a></strong><code>a13c36b</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f14ba6c4ebde1c7afb8f7e960c799364ec85eb22" target="_blank" rel="noopener noreferrer">revert: restore ParticleBackground (was removed due to globe starfield conflict)</a></strong><code>f14ba6c</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7489fd4ce7801483a93a0b90c36d0d6435e55731" target="_blank" rel="noopener noreferrer">feat: World Monitor engineering patterns + renderTier integration</a></strong><code>7489fd4</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7a1ffd8f513b24c4f5504309c1bf85cdf76009b5" target="_blank" rel="noopener noreferrer">fix: restore normal performance tier detection</a></strong><code>7a1ffd8</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/dd1bdb5f0a19171333500bdf849e45882c01fbbc" target="_blank" rel="noopener noreferrer">fix: center GlobeFootprint in section</a></strong><code>dd1bdb5</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e7feda127761b014c169d881ff4433fff31b7f9e" target="_blank" rel="noopener noreferrer">feat: Complete World Monitor patterns + premium redesign</a></strong><code>e7feda1</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/900ad1d911e948eccfa9f80d0f3175dd7fafc055" target="_blank" rel="noopener noreferrer">feat: Hallmark aesthetic upgrades — Long Document About, Split Studio Projects, ScrollReveal, N5 nav, motion tokens, remove AOS</a></strong><code>900ad1d</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6b05a74c7dcbe0b01269cabcce1a434f61b6a45e" target="_blank" rel="noopener noreferrer">Revert &quot;feat: Hallmark aesthetic upgrades — Long Document About, Split Studio Projects, ScrollReveal, N5 nav, motion tokens, remove AOS&quot;</a></strong><code>6b05a74</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/851defdb10b1f1f3d3558e3d9328a9cf4bea56f9" target="_blank" rel="noopener noreferrer">fix: SolarSystemBackground pointerEvents: none to stop blocking page interaction</a></strong><code>851defd</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/c7b17a344aa18264cbc4786d1fb9c07c9dac4462" target="_blank" rel="noopener noreferrer">Revert &quot;fix: SolarSystemBackground pointerEvents: none to stop blocking page interaction&quot;</a></strong><code>c7b17a3</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f162d6e1d44b5a7d54e756698acf7552cb4a0265" target="_blank" rel="noopener noreferrer">remove SkillConstellation 3D network from About page</a></strong><code>f162d6e</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/8f444f08ad8c154ddf6ef16e4dc9eea8d7cd3a66" target="_blank" rel="noopener noreferrer">restore SkillConstellation as a card in About skills section</a></strong><code>8f444f0</code></div></li><li><time>2026-07-26</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/db74049318675e3f8143798984e5197fde450b3f" target="_blank" rel="noopener noreferrer">update About page with LinkedIn profile data — add Solana, split AutoDrive, expand QHPC/EngSoc sub-roles, rewrite Deel/Foresoon/Arista entries</a></strong><code>db74049</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/15e5c6731e046be2070d4eec01d9c741a2f7aef3" target="_blank" rel="noopener noreferrer">Revert &quot;update About page with LinkedIn profile data — add Solana, split AutoDrive, expand QHPC/EngSoc sub-roles, rewrite Deel/Foresoon/Arista entries&quot;</a></strong><code>15e5c67</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/001f80ba73eba9cd2a860bbb861e079e27914de9" target="_blank" rel="noopener noreferrer">Reapply &quot;update About page with LinkedIn profile data — add Solana, split AutoDrive, expand QHPC/EngSoc sub-roles, rewrite Deel/Foresoon/Arista entries&quot;</a></strong><code>001f80b</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/02e12ce97db5313e5331f5fe55cd421fd436c7f4" target="_blank" rel="noopener noreferrer">Revert &quot;Reapply &quot;update About page with LinkedIn profile data — add Solana, split AutoDrive, expand QHPC/EngSoc sub-roles, rewrite Deel/Foresoon/Arista entries&quot;&quot;</a></strong><code>02e12ce</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/cc148983893693855863b218fb247d83b3d5ad69" target="_blank" rel="noopener noreferrer">update Solana entry, Deel description, and Kubernetes/vLLM dates</a></strong><code>cc14898</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bf92c3fc647cdc55b09155bb5e066fc1190a5f20" target="_blank" rel="noopener noreferrer">add Solana logo SVG and reference in About page</a></strong><code>bf92c3f</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f2c831a01cdf7dce88f1e8000d08cfd7f8169887" target="_blank" rel="noopener noreferrer">update miniMD simulation with ELEC498 before/after phase-aware controller behavior</a></strong><code>f2c831a</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/a172fec89c18cc737bac69719e5780986dcb5d19" target="_blank" rel="noopener noreferrer">fix: rename &#39;PID DVFS&#39; to &#39;Phase-Aware DVFS&#39; — controller is a state machine, not PID</a></strong><code>a172fec</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/bb2b070cef95fe2ea8acdad8e7fce09a5cff6036" target="_blank" rel="noopener noreferrer">fix: particle transforms not pushed to GPU — velocity loop broke before setMatrixAt due to LJ loop consuming entire frame budget</a></strong><code>bb2b070</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/08b5f7298dd9f351436dc643f5016b121d4a7cbd" target="_blank" rel="noopener noreferrer">fix: baseline particles now jitter during MPI communication phases (spin-waste vs freeze) making button toggle visible</a></strong><code>08b5f72</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/834b6c0a0d27796ddd4e66508da1bb864e3a9741" target="_blank" rel="noopener noreferrer">feat: globe enhancements — arc flow particles, mouse-tilt parallax, city entrance animation, auto-highlight tour</a></strong><code>834b6c0</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/db650ceaa36d085831f96e35302c1ce43f4c6e78" target="_blank" rel="noopener noreferrer">fix: rename middleware.js to proxy.js — deprecated in Next.js 16, was causing hard navigations between pages</a></strong><code>db650ce</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/07ca8a25bbe3832e9818ad834ab128fc21817704" target="_blank" rel="noopener noreferrer">chore: silence turbopack root warning — set turbopack.root in next.config.mjs</a></strong><code>07ca8a2</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b218ffc2f26da3784734f11e6e9f90a0cc0fd9a8" target="_blank" rel="noopener noreferrer">feat: comprehensive portfolio improvements - typography, icons, animations, footer, content, code quality</a></strong><code>b218ffc</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/90047e078834551eb32e2bec32ae45f6e052e76b" target="_blank" rel="noopener noreferrer">restore: app/page.js with env var for web3forms key</a></strong><code>90047e0</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/592521a5a987a83b54941bf1d5018b8c8ca965c4" target="_blank" rel="noopener noreferrer">fix: remove hardcoded web3forms key, use env var; purge secret from git history</a></strong><code>592521a</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b383d5bc9f29f37830ede0fe7ff0398d6b36f5f3" target="_blank" rel="noopener noreferrer">Fix invalid Lucide imports, trim experience bullets, add scroll progress bar, enhance 404, add globe city badge photos</a></strong><code>b383d5b</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/db20758febf5e44d5eff20af6ed1110abda9009f" target="_blank" rel="noopener noreferrer">chore: push all remaining changes</a></strong><code>db20758</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/29ad78583f21d411b434a037148a3335baecc1bb" target="_blank" rel="noopener noreferrer">Revert &quot;chore: push all remaining changes&quot;</a></strong><code>29ad785</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/b1aba9e8962abc60cf1e30c54ea095fbcff59113" target="_blank" rel="noopener noreferrer">Revert &quot;Fix invalid Lucide imports, trim experience bullets, add scroll progress bar, enhance 404, add globe city badge photos&quot;</a></strong><code>b1aba9e</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3ed20e35e3a15689d359e9a2bce9d6ae02f73ebb" target="_blank" rel="noopener noreferrer">perf: code-split 3D components, increase rootMargin, add priority hints, restore DESIGN.md, lazy-load sections with VisibilityWrapper</a></strong><code>3ed20e3</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/4b4b6330e8d34cb8b26bd5cffdd22ebf6d6e0716" target="_blank" rel="noopener noreferrer">Revert &quot;perf: code-split 3D components, increase rootMargin, add priority hints, restore DESIGN.md, lazy-load sections with VisibilityWrapper&quot;</a></strong><code>4b4b633</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e30fea5de96f140fda6fdce90259f354963a5966" target="_blank" rel="noopener noreferrer">feat: add Remote globe location, fix og-image.png to 1200x630, add globe legend/key, mobile-friendly</a></strong><code>e30fea5</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/f6edf196609534bc5bfb147810a886ec34fd9ea7" target="_blank" rel="noopener noreferrer">docs: comprehensive enterprise-grade README.md (1142 lines, 14 sections, 41 subsections)</a></strong><code>f6edf19</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7f322c2bda7b230e5ba05f90e5105d53686d814c" target="_blank" rel="noopener noreferrer">feat: make MiniMD telemetry dashboard collapsible on website</a></strong><code>7f322c2</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/64f1bcd696137218b6eb32872421f75636b73101" target="_blank" rel="noopener noreferrer">docs: add collapsible MiniMD telemetry panel to README under Molecular Dynamics section</a></strong><code>64f1bcd</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/6626e89b39240c2860c2ccb21930162cd005e651" target="_blank" rel="noopener noreferrer">fix: resolve client-side navigation crash, RenderOnScroll height bug, and circuit breaker persistence</a></strong><code>6626e89</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/5c234ec0d3561fbdc100d6ea53057b3096358c0b" target="_blank" rel="noopener noreferrer">fix: replace motion whileInView with CSS animation for Live Engineering Intelligence section to guarantee visibility on first load</a></strong><code>5c234ec</code></div></li><li><time>2026-07-27</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/5a690d4f37b16d455c8ebf8e65a6866d3f553f2b" target="_blank" rel="noopener noreferrer">fix: add repoList to API response and reset circuit breaker on mount for Live Github Feed</a></strong><code>5a690d4</code></div></li><li><time>2026-07-28</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/670221587e2377c7b53642b5299780ae1a584723" target="_blank" rel="noopener noreferrer">perf: comprehensive lazy loading across all pages for mobile stability</a></strong><code>6702215</code></div></li><li><time>2026-07-28</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/db8b8057076dce02910cd611c6ef0628ea55c6b1" target="_blank" rel="noopener noreferrer">fix: globe now shows earth image on all tiers + retry logic</a></strong><code>db8b805</code></div></li><li><time>2026-07-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/3c6aa08909d4dde97b7786f648122f65ca3cdf45" target="_blank" rel="noopener noreferrer">docs: update README for mobile stability fixes, ErrorBoundary, circuit breaker, globe fallback</a></strong><code>3c6aa08</code></div></li><li><time>2026-07-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/7614a6f57fa8d0e2119260f2c21a18d99e90e322" target="_blank" rel="noopener noreferrer">docs: audit and update README against codebase -- fix stale line counts, graphql api ref, missing components, legacy annotations</a></strong><code>7614a6f</code></div></li><li><time>2026-07-30</time><div><strong><a href="https://github.com/johnnietse/personal-portfolio-website/commit/e5be0e068df93928b339a59b02670aecae3efc33" target="_blank" rel="noopener noreferrer">chore: add .opencode/ .tmp/ to .gitignore</a></strong><code>e5be0e0</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 198 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (2)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/personal-portfolio-website/tree/main" target="_blank" rel="noopener noreferrer">main</a> · e5be0e0 · 2026-07-30 · chore: add .opencode/ .tmp/ to .gitignore</li><li><a href="https://github.com/johnnietse/personal-portfolio-website/tree/main2" target="_blank" rel="noopener noreferrer">main2</a> · 353d1d2 · 2026-03-23 · Merge branch &#39;main2&#39;</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The history shows that visual polish still depends on resilience: when the globe cannot load or a component fails, the page needs a useful fallback.</p><p>The lasting lesson is specific to this record: I wanted the portfolio to make complex systems feel explorable instead of flattening everything into a list of technologies. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/personal-portfolio-website" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/personal-portfolio-website</a></li><li><a href="https://github.com/johnnietse/personal-portfolio-website" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/personal-portfolio-website/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/personal-portfolio-website/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./keeping-a-legal-document-rag-pipeline-moving-through-real-ci-failures.html"><small>NEWER STORY</small><strong>← Keeping a legal-document RAG pipeline moving through real CI failures</strong></a><a class="older" href="./mapping-the-autodrive-ii-software-ecosystem-in-a-submodule-workspace.html"><small>OLDER STORY</small><strong>Mapping the AutoDrive II software ecosystem in a submodule workspace →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: portfolio · Evidence reviewed November 8, 2026</span></footer></main></body></html>

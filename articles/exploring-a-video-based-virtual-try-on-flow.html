@@ -1,0 +1,209 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="This version accepts a clothing image and a short video of a person facing the camera as the inputs to a virtual try-on experience."><title>Exploring a video-based virtual try-on flow · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>Exploring a video-based virtual try-on flow</h1><p class="dek">This version accepts a clothing image and a short video of a person facing the camera as the inputs to a virtual try-on experience.</p></div><img src="https://github.com/user-attachments/assets/63af3ca5-816d-4e2f-b086-915155f5db1f" alt="Virtual try-on prototype screenshot from the README" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started June 28, 2025</span><span>Updated July 15, 2025</span><span>~11 min read</span></div><div class="tags"><span class="tag">Computer vision</span><span class="tag">Video</span><span class="tag">Web</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>It is a separate experiment from the image-based repository, which makes the two approaches easier to compare.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes This version accepts a clothing image and a short video of a person facing the camera as the inputs to a virtual try-on experience.. The repository history snapshot records 12 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>It is a separate experiment from the image-based repository, which makes the two approaches easier to compare.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The question that caught my interest is whether motion could make the preview feel more useful than a single still image.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: This version accepts a clothing image and a short video of a person facing the camera as the inputs to a virtual try-on experience.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section"><h2>System sketch</h2><figure class="diagram"><figcaption>Documented prototype inputs and output.</figcaption><div class="flow"><div class="flow-node">Person video</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Clothing image</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Image-processing pipeline</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Try-on preview</div></div><small>Conceptual path only; see the linked repository for the complete implementation.</small></figure></section><figure class="project-image"><img src="https://github.com/user-attachments/assets/63af3ca5-816d-4e2f-b086-915155f5db1f" alt="Virtual try-on prototype screenshot from the README" loading="lazy"><figcaption>A screenshot from the prototype documentation; it does not claim validated fit accuracy.</figcaption></figure><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The following is the project’s own public documentation. It is included as technical context, with links back to its original source.</p><h1 id="virtual-clothing-try-on-web-app-video-version">Virtual Clothing Try-On Web App (Video Version)</h1>
+<p>This is a web app that allows users to upload an image of their chosen clothing (with the background removed) and a video of themselves (one person, facing the camera) to virtually try on the clothing. After uploading the necessary files and selecting the desired clothing, users can generate a video where the selected clothing is applied to their image.</p>
+<h3 id="key-features">Key Features:</h3>
+<ul>
+<li><strong>Upload Clothing Image</strong>: Users can upload an image of clothing with the background removed (e.g., PNG format).</li>
+<li><strong>Upload Personal Video</strong>: Users upload a video of themselves facing the camera.</li>
+<li><strong>Virtual Try-On</strong>: The app combines the uploaded video and clothing image to generate a video of the clothing virtually fitting the user.</li>
+<li><strong>Download Processed Video</strong>: After processing, users are notified when the video is ready for download, with a link to download the final video.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To run this project locally, you will need to set up a virtual environment and install the required dependencies. Here&#39;s how to do it:</p>
+<p><strong>Before cloning the repository, change your working directory to the folder where you want the project to be saved:</strong></p>
+<p>Navigate to the directory where you want to store the project:</p>
+<pre><code>cd /path/to/your/directory</code></pre>
+<h3 id="1-clone-the-repository">1. Clone the repository:</h3>
+<pre><code>git clone https://github.com/johnnietse/cloth-virtual-try-on.git
+cd cloth-virtual-try-on</code></pre>
+<h3 id="2-set-up-a-virtual-environment">2. Set up a virtual environment:</h3>
+<p>If you&#39;re using Python 3, you can set up a virtual environment with the following commands:</p>
+<pre><code>python3 -m venv venv</code></pre>
+<h3 id="3-activate-the-virtual-environment">3. Activate the virtual environment:</h3>
+<ul>
+<li>For Windows:</li>
+</ul>
+<pre><code>venv\Scripts\activate</code></pre>
+<ul>
+<li>For macOS/Linux:</li>
+</ul>
+<pre><code>source venv/bin/activate</code></pre>
+<h3 id="4-install-dependencies">4. Install dependencies:</h3>
+<p>Once your virtual environment is activated, install the required dependencies using <strong>requirements.txt</strong>:</p>
+<pre><code>pip install -r requirements.txt</code></pre>
+<h2 id="running-the-app-locally">Running the App Locally</h2>
+<h3 id="1-start-the-flask-server">1. Start the Flask server:</h3>
+<p>After setting up the environment and installing dependencies, you can run the web app using the following command:</p>
+<pre><code>flask run</code></pre>
+<p>This will start a local development server, and you should see an output like this in the terminal:</p>
+<pre><code> * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</code></pre>
+<h3 id="2-access-the-web-app">2. Access the Web App:</h3>
+<p>Once the server is running, open your web browser and go to the following URL:</p>
+<pre><code>http://127.0.0.1:5000</code></pre>
+<p>You should see the web app interface where you can upload your clothing image and personal video.</p>
+<h3 id="3-upload-files-and-process">3. Upload Files and Process:</h3>
+<ul>
+<li>Upload your <strong>clothing image</strong> (make sure the background is removed).</li>
+<li>Upload your <strong>personal video</strong> (where you are facing the camera).</li>
+<li>Select the clothing item you want to try on.</li>
+<li>Click the <strong>&quot;Upload and Process&quot;</strong> button to generate the virtual try-on video.</li>
+</ul>
+<h3 id="4-download-the-processed-video">4. Download the Processed Video:</h3>
+<p>Once the video has been processed, you will see a message:</p>
+<pre><code>Video processing complete! Click the link below to download.</code></pre>
+<p>Click on the <strong>&quot;Download Processed Video&quot;</strong> button to download the generated video.</p>
+<h2 id="sample-files">Sample Files</h2>
+<p>To get an idea of how the app works, you can look at the following sample files within the repository:</p>
+<ul>
+<li>Clothing Images: Sample clothing images can be found in the <strong>Resources/Shirts</strong> folder.</li>
+<li>Uploaded Videos: Sample user videos can be found in the <strong>static/uploads</strong> folder.</li>
+<li>Processed Videos: Sample processed virtual clothing try-on videos are available in the <strong>static/processed</strong> folder.</li>
+</ul>
+<p>These samples demonstrate the input and output for the app&#39;s functionality.</p>
+<h2 id="future-considerations">Future Considerations</h2>
+<ul>
+<li>Deployment to a cloud platform (e.g., Render, Heroku, AWS).</li>
+<li>Enhancements to virtual clothing fitting (e.g., improved image processing and fit accuracy).</li>
+<li>Support for multiple clothing items or different video orientations.</li>
+</ul>
+<p>---</p>
+<h2 id="screenshots">📸 Screenshots</h2>
+<p><img src="https://github.com/user-attachments/assets/63af3ca5-816d-4e2f-b086-915155f5db1f" alt="Screenshot (4065)" loading="lazy"> <img src="https://github.com/user-attachments/assets/bffa13b7-8abc-4c25-87dc-f4ecfc1df3e1" alt="Screenshot (4066)" loading="lazy"></p>
+<p>---</p>
+<h2 id="technical-overview-updated">Technical Overview (Updated)</h2>
+<h3 id="backend-framework">Backend Framework</h3>
+<ul>
+<li><strong>Flask</strong>: Powers the web app with routes for uploading videos/shirts, processing, and downloads. Uses &lt;code&gt;render_template&lt;/code&gt; for dynamic HTML rendering and &lt;code&gt;send_from_directory&lt;/code&gt; for file delivery.</li>
+</ul>
+<ul>
+<li><strong>Dynamic Shirt Management</strong>: Shirt images are stored in &lt;code&gt;Resources/Shirts&lt;/code&gt; and fetched dynamically via &lt;code&gt;get_shirt_list()&lt;/code&gt; for real-time updates.</li>
+</ul>
+<h3 id="pose-detection--advanced-image-processing">Pose Detection &amp; Advanced Image Processing</h3>
+<ul>
+<li><strong>Pose Detection</strong>: Leverages &lt;code&gt;cvzone.PoseModule&lt;/code&gt; to detect body landmarks (shoulders, hips) for precise clothing placement.</li>
+</ul>
+<ul>
+<li><strong>Perspective Transformation</strong>: Uses &lt;code&gt;cv2.getPerspectiveTransform&lt;/code&gt; and &lt;code&gt;cv2.warpPerspective&lt;/code&gt; to warp clothing images onto the user’s body based on detected landmarks, ensuring realistic alignment.</li>
+</ul>
+<ul>
+<li><strong>Green Screen Removal</strong>: The &lt;code&gt;overlay_transparent&lt;/code&gt; function removes green backgrounds from clothing images while applying semi-transparency for natural blending.</li>
+</ul>
+<h3 id="file-handling--storage">File Handling &amp; Storage</h3>
+<ul>
+<li><strong>Filesystem Storage</strong>: Uploaded videos and processed outputs are stored in &lt;code&gt;static/uploads&lt;/code&gt; and &lt;code&gt;static/processed&lt;/code&gt;, respectively. Filenames include timestamps to avoid collisions.</li>
+</ul>
+<ul>
+<li><strong>Direct File Serving</strong>: Processed videos are served directly from the filesystem using &lt;code&gt;send_from_directory&lt;/code&gt;, eliminating the need for a database.</li>
+</ul>
+<h3 id="video-processing-pipeline">Video Processing Pipeline</h3>
+<ol>
+<li><strong>Frame Capture</strong>: Video frames are extracted using &lt;code&gt;cv2.VideoCapture&lt;/code&gt;.</li>
+</ol>
+<ol>
+<li><strong>Landmark Detection</strong>: Shoulder/hip landmarks are identified to define target regions for clothing placement.</li>
+</ol>
+<ol>
+<li><strong>Dynamic Clothing Adjustment</strong>:</li>
+</ol>
+<ul>
+<li>Bounding Box Scaling: Expands the clothing region using a scaling factor for better coverage.</li>
+</ul>
+<ul>
+<li>Perspective Warping: Warps the clothing image to match the user’s pose using a computed transformation matrix.</li>
+</ul>
+<ol>
+<li><strong>Transparency Blending</strong>: Overlays the warped clothing onto each frame with adjustable opacity and green-screen removal.</li>
+</ol>
+<ol>
+<li><strong>Video Reconstruction</strong>: Compiled into an MP4 file using &lt;code&gt;cv2.VideoWriter&lt;/code&gt;.</li>
+</ol>
+<h3 id="key-features-1">Key Features</h3>
+<ul>
+<li><strong>Dynamic Shirt Uploads</strong>: Users can upload new clothing images (PNG/JPG) via &lt;code&gt;/upload_shirt&lt;/code&gt;, which are immediately available for try-on.</li>
+</ul>
+<ul>
+<li><strong>Error Handling</strong>: Basic checks for file validity and pose detection failures, with JSON error responses for API routes.</li>
+</ul>
+<ul>
+<li><strong>Environment Configuration</strong>: Uses &lt;code&gt;python-dotenv&lt;/code&gt; for environment variables (if needed), though PostgreSQL integration is currently inactive.</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li><strong>Core Libraries</strong>:</li>
+</ul>
+<ul>
+<li>&lt;code&gt;Flask&lt;/code&gt;: Web framework.</li>
+</ul>
+<ul>
+<li>&lt;code&gt;OpenCV (cv2)&lt;/code&gt;: Video/image processing.</li>
+</ul>
+<ul>
+<li>&lt;code&gt;cvzone&lt;/code&gt;: Pose detection utilities.</li>
+</ul>
+<ul>
+<li>&lt;code&gt;python-dotenv&lt;/code&gt;: Environment variable management (optional).</li>
+</ul>
+<ul>
+<li><strong>Runtime</strong>: Requires &lt;code&gt;psycopg2&lt;/code&gt; (though not actively used here) and &lt;code&gt;numpy&lt;/code&gt; for array operations.</li>
+</ul>
+<h3 id="deployment-notes">Deployment Notes</h3>
+<ul>
+<li><strong>Development Mode</strong>: Runs with &lt;code&gt;debug=True&lt;/code&gt; for easy testing (not suitable for production).</li>
+</ul>
+<ul>
+<li><strong>Scalability</strong>: Designed for filesystem storage, making it deployable to platforms like Heroku or Render with ephemeral storage. For production, consider cloud storage (AWS S3) and a task queue (Celery) for video processing.</li>
+</ul>
+<p>---</p>
+<p>This revised technical overview reflects the current codebase’s focus on filesystem-based storage, advanced perspective warping, and dynamic clothing management.</p>
+<p>---</p>
+<h2 id="demo-video">🎥 Demo Video</h2>
+<p>A short walkthrough of the application is available below.</p>
+<p>▶️ Watch the full demo here: https://youtu.be/Xz_QCwU1M5I</p>
+<p>---</p>
+<h2 id="image-processing-version-now-available">🎬 Image Processing Version Now Available!</h2>
+<p>We are excited to announce that image support is now available in a separate repository! You can now process full-movement sequences where users upload static images of themselves instead of videos.</p>
+<p>Access the image processing version here: 👉 Virtual Clothing Try-On Web App (Image Version) -&gt; https://github.com/johnnietse/cloth-try-on.git</p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/cloth-virtual-try-on/blob/main/app.py#L27" target="_blank" rel="noopener noreferrer">app.py (line 27)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>os.makedirs(PROCESSED_FOLDER, exist_ok=True)
+os.makedirs(SHIRT_FOLDER, exist_ok=True)
+
+def get_shirt_list():
+    &quot;&quot;&quot;Fetch the list of shirt images dynamically from the directory.&quot;&quot;&quot;
+    return os.listdir(app.config[&#39;SHIRT_FOLDER&#39;])
+
+@app.route(&#39;/&#39;)
+def index():
+    # Render the index page with the list of available shirts
+    listShirts = get_shirt_list()
+    return render_template(&#39;index.html&#39;, shirts=listShirts)
+    # return send_from_directory(app.config[&#39;SHIRT_FOLDER&#39;], &#39;index.html&#39;)
+    # return send_from_directory(&#39;templates&#39;, &#39;index.html&#39;)
+
+@app.route(&#39;/upload_shirt&#39;, methods=[&#39;POST&#39;])
+def upload_shirt():
+    &quot;&quot;&quot;
+    Upload a shirt image to the &#39;Shirts&#39; directory.
+    &quot;&quot;&quot;
+    if &#39;shirt_image&#39; not in request.files:
+        return jsonify({&quot;error&quot;: &quot;No file part&quot;}), 400
+    file = request.files[&#39;shirt_image&#39;]
+    if file.filename == &#39;&#39;:
+        return jsonify({&quot;error&quot;: &quot;No selected file&quot;}), 400
+    if file:
+        # Save the uploaded shirt to the SHIRT_FOLDER directory
+        filepath = os.path.join(app.config[&#39;SHIRT_FOLDER&#39;], file.filename)
+        file.save(filepath)
+        return redirect(url_for(&#39;index&#39;))  # Redirect back to the home page to display the updated list
+
+@app.route(&#39;/upload&#39;, methods=[&#39;POST&#39;])
+def upload_video():
+    &quot;&quot;&quot;
+    Upload and process a video.
+    &quot;&quot;&quot;
+    if &#39;file&#39; not in request.files:
+        return jsonify({&quot;error&quot;: &quot;No file part&quot;}), 400
+    file = request.files[&#39;file&#39;]
+    if file.filename == &#39;&#39;:
+        return jsonify({&quot;error&quot;: &quot;No selected file&quot;}), 400
+    if file:</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from app.py on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`makedirs`, `PROCESSED_FOLDER`, `exist_ok`, `True`, `SHIRT_FOLDER`—are useful signposts for following the behavior through the rest of the repository.</p><p>To read a code sample responsibly, I ask three questions: what values enter this block, what state does it change, and where is its result consumed? The source file and linked history give those surrounding call sites. If a README or test file describes the expected behavior, that provides a checkable target; otherwise the snippet is evidence about structure, not a result or benchmark.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><p>To run this project locally, you will need to set up a virtual environment and install the required dependencies. Here&#39;s how to do it:</p></li><li><h3 id="2-set-up-a-virtual-environment-1">2. Set up a virtual environment:</h3></li><li><p>If you&#39;re using Python 3, you can set up a virtual environment with the following commands:</p></li><li><h3 id="3-activate-the-virtual-environment-1">3. Activate the virtual environment:</h3></li><li><h3 id="4-install-dependencies-1">4. Install dependencies:</h3></li><li><p>Once your virtual environment is activated, install the required dependencies using <strong>requirements.txt</strong>:</p></li><li><p>pip install -r requirements.txt</p></li><li><h2 id="running-the-app-locally-1">Running the App Locally</h2></li><li><p>After setting up the environment and installing dependencies, you can run the web app using the following command:</p></li><li><ul>
+<li>Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</li>
+</ul></li><li><p>Once the server is running, open your web browser and go to the following URL:</p></li><li><ul>
+<li><strong>Environment Configuration</strong>: Uses &lt;code&gt;python-dotenv&lt;/code&gt; for environment variables (if needed), though PostgreSQL integration is currently inactive.</li>
+</ul></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/5a064f8cb7c499f4a6925bfaa031fa7724a2d433" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>5a064f8</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/0e313c414d7ecfa3661a6e6b8b855ba68ca919b7" target="_blank" rel="noopener noreferrer">Clean up ignored files from version control</a></strong><code>0e313c4</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/1055af7eb7d4d985b3a66a001f3a8d23029e42b3" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1055af7</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/b0325c269a9f2700491942c3a22b39b0021792af" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b0325c2</code></div></li><li><time>2025-07-04</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/520f39ca51b2eb9b03d8a5e111294af14fc8e492" target="_blank" rel="noopener noreferrer">attempt push</a></strong><code>520f39c</code></div></li><li><time>2025-07-10</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/5585e847135a18b19786de5c947148ed89f35da0" target="_blank" rel="noopener noreferrer">Update index.html</a></strong><code>5585e84</code></div></li><li><time>2025-07-15</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/af90cad56e24a1354c1fce785223c00bde504c69" target="_blank" rel="noopener noreferrer">Update index.html</a></strong><code>af90cad</code></div></li></ol><details class="history-details"><summary>Show all 12 commits on main</summary><ol class="timeline compact"><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/5a064f8cb7c499f4a6925bfaa031fa7724a2d433" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>5a064f8</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/0e313c414d7ecfa3661a6e6b8b855ba68ca919b7" target="_blank" rel="noopener noreferrer">Clean up ignored files from version control</a></strong><code>0e313c4</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/1055af7eb7d4d985b3a66a001f3a8d23029e42b3" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1055af7</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/6f04e35d6be169a170787554f85ce4df29ddc2c0" target="_blank" rel="noopener noreferrer">add back the .mp4 demo files</a></strong><code>6f04e35</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/cbe06595dc020e9cb9f535617117dc405681f6a5" target="_blank" rel="noopener noreferrer">Merge branch &#39;main&#39; of https://github.com/johnnietse/cloth-virtual-try-on</a></strong><code>cbe0659</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/b0325c269a9f2700491942c3a22b39b0021792af" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b0325c2</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/0011a7ca1a7154b011f86effa91e499561304c04" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>0011a7c</code></div></li><li><time>2025-06-28</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/9980eb5df8cba849ef1df29277ba37cdfb6d506a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>9980eb5</code></div></li><li><time>2025-07-04</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/520f39ca51b2eb9b03d8a5e111294af14fc8e492" target="_blank" rel="noopener noreferrer">attempt push</a></strong><code>520f39c</code></div></li><li><time>2025-07-04</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/c23d2a5759ce0289177c62c646073ee970182794" target="_blank" rel="noopener noreferrer">Delete Downloads/nextjs-tailwind-event-landing-page-main directory</a></strong><code>c23d2a5</code></div></li><li><time>2025-07-10</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/5585e847135a18b19786de5c947148ed89f35da0" target="_blank" rel="noopener noreferrer">Update index.html</a></strong><code>5585e84</code></div></li><li><time>2025-07-15</time><div><strong><a href="https://github.com/johnnietse/cloth-virtual-try-on/commit/af90cad56e24a1354c1fce785223c00bde504c69" target="_blank" rel="noopener noreferrer">Update index.html</a></strong><code>af90cad</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 12 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/cloth-virtual-try-on/tree/main" target="_blank" rel="noopener noreferrer">main</a> · af90cad · 2025-07-15 · Update index.html</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The repository documents the input assumptions. It does not establish a validated fit or user study, so the post treats it as a prototype.</p><p>The lasting lesson is specific to this record: The question that caught my interest is whether motion could make the preview feel more useful than a single still image. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/cloth-virtual-try-on" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/cloth-virtual-try-on</a></li><li><a href="https://github.com/johnnietse/cloth-virtual-try-on" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/cloth-virtual-try-on/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/cloth-virtual-try-on/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./moving-pdf-chat-toward-a-local-language-model.html"><small>NEWER STORY</small><strong>← Moving PDF chat toward a local language model</strong></a><a class="older" href="./seeing-yolo-labels-instead-of-trusting-them-blindly.html"><small>OLDER STORY</small><strong>Seeing YOLO labels instead of trusting them blindly →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: video-try-on · Evidence reviewed November 8, 2026</span></footer></main></body></html>

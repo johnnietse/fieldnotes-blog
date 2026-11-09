@@ -1,0 +1,959 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A web app prototype explores tailored resumes and cover letters, job/company analysis, and ATS-style feedback."><title>A job-application assistant prototype with a full-stack scope · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>A job-application assistant prototype with a full-stack scope</h1><p class="dek">A web app prototype explores tailored resumes and cover letters, job/company analysis, and ATS-style feedback.</p></div><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Chat.png" alt="AI Resume Assistant" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started August 20, 2025</span><span>Updated June 6, 2026</span><span>~8 min read</span></div><div class="tags"><span class="tag">TypeScript</span><span class="tag">AI</span><span class="tag">Full stack</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The repository describes a broad product idea; this post treats it as a prototype rather than repeating its production-readiness claims.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A web app prototype explores tailored resumes and cover letters, job/company analysis, and ATS-style feedback.. The repository history snapshot records 31 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The repository describes a broad product idea; this post treats it as a prototype rather than repeating its production-readiness claims.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The interesting part is connecting several tools into one workflow while keeping generated recommendations reviewable by the applicant.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A web app prototype explores tailored resumes and cover letters, job/company analysis, and ATS-style feedback.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The README contains 4631 words. This visible excerpt keeps the core purpose and setup close to the story, while the full document is available below and at the source repository.</p><p>---</p>
+<h2 id="table-of-contents-1">📋 Table of Contents</h2>
+<ul>
+<li><a href="#overview" target="_blank" rel="noopener noreferrer">Overview</a></li>
+<li><a href="#key-features" target="_blank" rel="noopener noreferrer">Key Features</a></li>
+<li><a href="#system-architecture" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+<li><a href="#tech-stack" target="_blank" rel="noopener noreferrer">Tech Stack</a></li>
+<li><a href="#ai-provider-integration" target="_blank" rel="noopener noreferrer">AI Provider Integration</a></li>
+<li><a href="#database-architecture" target="_blank" rel="noopener noreferrer">Database Architecture</a></li>
+<li><a href="#application-flow" target="_blank" rel="noopener noreferrer">Application Flow</a></li>
+<li><a href="#project-structure" target="_blank" rel="noopener noreferrer">Project Structure</a></li>
+<li><a href="#quick-start" target="_blank" rel="noopener noreferrer">Quick Start</a></li>
+<li><a href="#docker-deployment" target="_blank" rel="noopener noreferrer">Docker Deployment</a></li>
+<li><a href="#environment-configuration" target="_blank" rel="noopener noreferrer">Environment Configuration</a></li>
+<li><a href="#cicd-pipeline" target="_blank" rel="noopener noreferrer">CI/CD Pipeline</a></li>
+<li><a href="#security-model" target="_blank" rel="noopener noreferrer">Security Model</a></li>
+<li><a href="#performance-metrics" target="_blank" rel="noopener noreferrer">Performance Metrics</a></li>
+<li><a href="#demo--screenshots" target="_blank" rel="noopener noreferrer">Demo &amp; Screenshots</a></li>
+<li><a href="#transformation-journey" target="_blank" rel="noopener noreferrer">Transformation Journey</a></li>
+<li><a href="#use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a></li>
+<li><a href="#future-roadmap" target="_blank" rel="noopener noreferrer">Future Roadmap</a></li>
+<li><a href="#contributing" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+<li><a href="#license" target="_blank" rel="noopener noreferrer">License</a></li>
+<li><a href="#acknowledgments" target="_blank" rel="noopener noreferrer">Acknowledgments</a></li>
+</ul>
+<p>---</p>
+<h2 id="overview-1">🚀 Overview</h2>
+<p><strong>ApplicaAI</strong> is a production-grade, AI-powered resume builder and job application assistant that transforms the job application process through intelligent automation. The platform leverages multiple frontier AI models — including OpenAI GPT-5.2, Anthropic Claude Opus 4.5, Google Gemini 3 Pro, and DeepSeek V3.2 — to craft compelling, ATS-optimized resumes and cover letters that significantly increase your chances of landing interviews.</p>
+<p>Built on <strong>Next.js 15</strong> with <strong>React Server Components</strong>, <strong>Supabase</strong> (PostgreSQL + Auth), <strong>Redis</strong> for rate limiting, and <strong>Stripe</strong> for subscription management, ApplicaAI provides an enterprise-grade, full-stack platform designed for scale, security, and developer experience.</p>
+<blockquote><p><strong>From prototype to production:</strong> ApplicaAI evolved from a single-file Streamlit prototype into a modular, containerized, multi-model platform supporting concurrent users with Row Level Security, real-time collaboration, and a CI/CD pipeline via GitHub Actions.</p></blockquote>
+<h3 id="why-applicaai-1">Why ApplicaAI?</h3>
+<div class="table-scroll"><table><thead><tr><th>Problem</th><th>Solution</th><th>Impact</th></tr></thead><tbody><tr><td>75% of resumes never reach human eyes due to ATS filtering</td><td>Proprietary ATS scoring algorithm combining keyword matching with semantic analysis</td><td>40% improved match accuracy vs. keyword-only approaches</td></tr><tr><td>Job seekers use 5+ separate tools for applications</td><td>Unified platform with seamless workflow (resume → cover letter → scoring → tracking)</td><td>60% reduction in job search time</td></tr><tr><td>Generic application materials have 80% lower success rates</td><td>AI personalization based on specific job descriptions and company context</td><td>85% higher relevance scores</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="key-features-1">✨ Key Features</h2>
+<h3 id="core-capabilities-1">Core Capabilities</h3>
+<div class="table-scroll"><table><thead><tr><th>Feature</th><th>Description</th><th>Technical Implementation</th></tr></thead><tbody><tr><td>🤖 <strong>AI Resume Assistant</strong></td><td>Context-aware, real-time content suggestions via an integrated chat interface</td><td>Vercel AI SDK streaming, multi-provider tool calling, structured output with Zod schemas</td></tr><tr><td>📊 <strong>ATS Scoring Engine</strong></td><td>Multi-dimensional resume scoring: completeness, impact, role match, keyword alignment</td><td>7-metric scoring system with granular breakdowns and actionable improvement suggestions</td></tr><tr><td>📝 <strong>Cover Letter Generation</strong></td><td>Job-tailored cover letters generated from resume + job description context</td><td>Structured prompts with chain-of-thought reasoning, JSONB storage for versioning</td></tr><tr><td>🎯 <strong>Resume Tailoring</strong></td><td>Create job-specific resume variants from a master base resume</td><td>Base → tailored workflow with AI-assisted content selection and optimization</td></tr><tr><td>📄 <strong>PDF Export</strong></td><td>Professional PDF generation with customizable document settings</td><td>React-PDF renderer with granular margin, spacing, and typography controls</td></tr><tr><td>💳 <strong>Subscription Management</strong></td><td>Free and Pro tiers with trial support</td><td>Stripe integration with webhook-driven subscription lifecycle management</td></tr><tr><td>🔐 <strong>Enterprise Security</strong></td><td>Row Level Security ensuring complete data isolation per user</td><td>Supabase RLS policies, middleware-based route protection, auth caching</td></tr><tr><td>🐳 <strong>One-Command Local Dev</strong></td><td>Full-stack local development environment via Docker Compose</td><td>12-service Docker Compose stack (PostgreSQL, Kong, GoTrue, Redis, and more)</td></tr></tbody></table></div>
+<h3 id="ai-powered-intelligent-resume-assistant-1">AI-Powered Intelligent Resume Assistant</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Chat.png" alt="AI Resume Assistant" loading="lazy"></p>
+<ul>
+<li>Smart, context-aware content suggestions that match your industry and experience</li>
+<li>Real-time optimization of resume content for ATS algorithms</li>
+<li>Eliminate writer&#39;s block with industry-specific prompts for better results</li>
+<li>ATS-friendly formatting with professional phrasing and keyword optimization</li>
+</ul>
+<h3 id="resume-performance-scoring--analytics-1">Resume Performance Scoring &amp; Analytics</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Score.png" alt="Resume Scoring" loading="lazy"></p>
+<ul>
+<li>Understand exactly how recruiters and ATS systems perceive your resume</li>
+<li>Multi-factor scoring engine analyzing completeness, impact, role match, and keyword alignment</li>
+<li>Detailed improvement recommendations with actionable next steps</li>
+</ul>
+<h3 id="ai-cover-letter-generation-1">AI Cover Letter Generation</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Cover%2520Letter.png" alt="Cover Letter Generator" loading="lazy"></p>
+<ul>
+<li>Generate personalized cover letters tailored to specific job descriptions in seconds</li>
+<li>Professional tone and structure with relevant achievement-focused narratives</li>
+<li>Consistent with your resume content for a unified application package</li>
+</ul>
+<h3 id="resume-dashboard--management-1">Resume Dashboard &amp; Management</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/images/ss4.webp" alt="Resume Dashboard" loading="lazy"></p>
+<ul>
+<li>Centralized resume management with base and tailored resume variants</li>
+<li>Maintain a master resume while creating customized versions for each opportunity</li>
+<li>Version tracking with timestamps and job linkage</li>
+</ul>
+<p>---</p>
+<h2 id="system-architecture-1">🏗 System Architecture</h2>
+<h3 id="high-level-architecture-diagram-1">High-Level Architecture Diagram</h3>
+<pre><code>graph TB
+    subgraph Client[&quot;Client Layer&quot;]
+        Browser[&quot;Browser (React 19)&quot;]
+        RSC[&quot;React Server Components&quot;]
+        CC[&quot;Client Components&quot;]
+    end
+
+    subgraph NextJS[&quot;Application Layer — Next.js 15 (App Router)&quot;]
+        Middleware[&quot;Middleware&lt;br/&gt;(Auth Guard)&quot;]
+        Pages[&quot;Pages &amp; Layouts&quot;]
+        ServerActions[&quot;Server Actions&lt;br/&gt;(Data Mutations)&quot;]
+        APIRoutes[&quot;API Routes&lt;br/&gt;(/api/chat, /api/webhooks)&quot;]
+    end
+
+    subgraph AI[&quot;AI Layer — Multi-Provider&quot;]
+        AISDK[&quot;Vercel AI SDK&quot;]
+        OpenAI[&quot;OpenAI&lt;br/&gt;GPT-5.2 / GPT-5.2 Pro&quot;]
+        Anthropic[&quot;Anthropic&lt;br/&gt;Claude Sonnet 4 / Opus 4.5&quot;]
+        OpenRouter[&quot;OpenRouter&lt;br/&gt;Gemini 3 Pro / DeepSeek V3.2&quot;]
+    end
+
+    subgraph Backend[&quot;Backend Services&quot;]
+        SupabaseAuth[&quot;Supabase Auth&lt;br/&gt;(GoTrue)&quot;]
+        Kong[&quot;Kong API Gateway&quot;]
+        PostgREST[&quot;PostgREST&quot;]
+        Realtime[&quot;Supabase Realtime&quot;]
+        Storage[&quot;Supabase Storage&quot;]
+    end
+
+    subgraph Data[&quot;Data Layer&quot;]
+        PostgreSQL[(&quot;PostgreSQL 15&lt;br/&gt;+ RLS Policies&quot;)]
+        Redis[(&quot;Redis 7&lt;br/&gt;Rate Limiting&quot;)]
+        Stripe[&quot;Stripe API&lt;br/&gt;Subscriptions&quot;]
+    end
+
+    Browser --&gt; Middleware
+    Middleware --&gt; Pages
+    Pages --&gt; RSC
+    Pages --&gt; CC
+    RSC --&gt; ServerActions
+    CC --&gt; APIRoutes
+    APIRoutes --&gt; AISDK
+    AISDK --&gt; OpenAI</code></pre><span id="overview-2"></span><span id="key-features-2"></span><span id="system-architecture-2"></span><span id="tech-stack-1"></span><span id="ai-provider-integration-1"></span><span id="database-architecture-1"></span><span id="application-flow-1"></span><span id="project-structure-1"></span><span id="quick-start-1"></span><span id="docker-deployment-1"></span><span id="environment-configuration-1"></span><span id="cicd-pipeline-1"></span><span id="security-model-1"></span><span id="performance-metrics-1"></span><span id="demo--screenshots-1"></span><span id="transformation-journey-1"></span><span id="use-cases-1"></span><span id="future-roadmap-1"></span><span id="contributing-1"></span><span id="license-1"></span><span id="acknowledgments-1"></span><details class="history-details"><summary>Expand the full repository README (4631 words)</summary><p>---</p>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<ul>
+<li><a href="#overview" target="_blank" rel="noopener noreferrer">Overview</a></li>
+<li><a href="#key-features" target="_blank" rel="noopener noreferrer">Key Features</a></li>
+<li><a href="#system-architecture" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+<li><a href="#tech-stack" target="_blank" rel="noopener noreferrer">Tech Stack</a></li>
+<li><a href="#ai-provider-integration" target="_blank" rel="noopener noreferrer">AI Provider Integration</a></li>
+<li><a href="#database-architecture" target="_blank" rel="noopener noreferrer">Database Architecture</a></li>
+<li><a href="#application-flow" target="_blank" rel="noopener noreferrer">Application Flow</a></li>
+<li><a href="#project-structure" target="_blank" rel="noopener noreferrer">Project Structure</a></li>
+<li><a href="#quick-start" target="_blank" rel="noopener noreferrer">Quick Start</a></li>
+<li><a href="#docker-deployment" target="_blank" rel="noopener noreferrer">Docker Deployment</a></li>
+<li><a href="#environment-configuration" target="_blank" rel="noopener noreferrer">Environment Configuration</a></li>
+<li><a href="#cicd-pipeline" target="_blank" rel="noopener noreferrer">CI/CD Pipeline</a></li>
+<li><a href="#security-model" target="_blank" rel="noopener noreferrer">Security Model</a></li>
+<li><a href="#performance-metrics" target="_blank" rel="noopener noreferrer">Performance Metrics</a></li>
+<li><a href="#demo--screenshots" target="_blank" rel="noopener noreferrer">Demo &amp; Screenshots</a></li>
+<li><a href="#transformation-journey" target="_blank" rel="noopener noreferrer">Transformation Journey</a></li>
+<li><a href="#use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a></li>
+<li><a href="#future-roadmap" target="_blank" rel="noopener noreferrer">Future Roadmap</a></li>
+<li><a href="#contributing" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+<li><a href="#license" target="_blank" rel="noopener noreferrer">License</a></li>
+<li><a href="#acknowledgments" target="_blank" rel="noopener noreferrer">Acknowledgments</a></li>
+</ul>
+<p>---</p>
+<h2 id="overview">🚀 Overview</h2>
+<p><strong>ApplicaAI</strong> is a production-grade, AI-powered resume builder and job application assistant that transforms the job application process through intelligent automation. The platform leverages multiple frontier AI models — including OpenAI GPT-5.2, Anthropic Claude Opus 4.5, Google Gemini 3 Pro, and DeepSeek V3.2 — to craft compelling, ATS-optimized resumes and cover letters that significantly increase your chances of landing interviews.</p>
+<p>Built on <strong>Next.js 15</strong> with <strong>React Server Components</strong>, <strong>Supabase</strong> (PostgreSQL + Auth), <strong>Redis</strong> for rate limiting, and <strong>Stripe</strong> for subscription management, ApplicaAI provides an enterprise-grade, full-stack platform designed for scale, security, and developer experience.</p>
+<blockquote><p><strong>From prototype to production:</strong> ApplicaAI evolved from a single-file Streamlit prototype into a modular, containerized, multi-model platform supporting concurrent users with Row Level Security, real-time collaboration, and a CI/CD pipeline via GitHub Actions.</p></blockquote>
+<h3 id="why-applicaai">Why ApplicaAI?</h3>
+<div class="table-scroll"><table><thead><tr><th>Problem</th><th>Solution</th><th>Impact</th></tr></thead><tbody><tr><td>75% of resumes never reach human eyes due to ATS filtering</td><td>Proprietary ATS scoring algorithm combining keyword matching with semantic analysis</td><td>40% improved match accuracy vs. keyword-only approaches</td></tr><tr><td>Job seekers use 5+ separate tools for applications</td><td>Unified platform with seamless workflow (resume → cover letter → scoring → tracking)</td><td>60% reduction in job search time</td></tr><tr><td>Generic application materials have 80% lower success rates</td><td>AI personalization based on specific job descriptions and company context</td><td>85% higher relevance scores</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="key-features">✨ Key Features</h2>
+<h3 id="core-capabilities">Core Capabilities</h3>
+<div class="table-scroll"><table><thead><tr><th>Feature</th><th>Description</th><th>Technical Implementation</th></tr></thead><tbody><tr><td>🤖 <strong>AI Resume Assistant</strong></td><td>Context-aware, real-time content suggestions via an integrated chat interface</td><td>Vercel AI SDK streaming, multi-provider tool calling, structured output with Zod schemas</td></tr><tr><td>📊 <strong>ATS Scoring Engine</strong></td><td>Multi-dimensional resume scoring: completeness, impact, role match, keyword alignment</td><td>7-metric scoring system with granular breakdowns and actionable improvement suggestions</td></tr><tr><td>📝 <strong>Cover Letter Generation</strong></td><td>Job-tailored cover letters generated from resume + job description context</td><td>Structured prompts with chain-of-thought reasoning, JSONB storage for versioning</td></tr><tr><td>🎯 <strong>Resume Tailoring</strong></td><td>Create job-specific resume variants from a master base resume</td><td>Base → tailored workflow with AI-assisted content selection and optimization</td></tr><tr><td>📄 <strong>PDF Export</strong></td><td>Professional PDF generation with customizable document settings</td><td>React-PDF renderer with granular margin, spacing, and typography controls</td></tr><tr><td>💳 <strong>Subscription Management</strong></td><td>Free and Pro tiers with trial support</td><td>Stripe integration with webhook-driven subscription lifecycle management</td></tr><tr><td>🔐 <strong>Enterprise Security</strong></td><td>Row Level Security ensuring complete data isolation per user</td><td>Supabase RLS policies, middleware-based route protection, auth caching</td></tr><tr><td>🐳 <strong>One-Command Local Dev</strong></td><td>Full-stack local development environment via Docker Compose</td><td>12-service Docker Compose stack (PostgreSQL, Kong, GoTrue, Redis, and more)</td></tr></tbody></table></div>
+<h3 id="ai-powered-intelligent-resume-assistant">AI-Powered Intelligent Resume Assistant</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Chat.png" alt="AI Resume Assistant" loading="lazy"></p>
+<ul>
+<li>Smart, context-aware content suggestions that match your industry and experience</li>
+<li>Real-time optimization of resume content for ATS algorithms</li>
+<li>Eliminate writer&#39;s block with industry-specific prompts for better results</li>
+<li>ATS-friendly formatting with professional phrasing and keyword optimization</li>
+</ul>
+<h3 id="resume-performance-scoring--analytics">Resume Performance Scoring &amp; Analytics</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Score.png" alt="Resume Scoring" loading="lazy"></p>
+<ul>
+<li>Understand exactly how recruiters and ATS systems perceive your resume</li>
+<li>Multi-factor scoring engine analyzing completeness, impact, role match, and keyword alignment</li>
+<li>Detailed improvement recommendations with actionable next steps</li>
+</ul>
+<h3 id="ai-cover-letter-generation">AI Cover Letter Generation</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/SS%2520Cover%2520Letter.png" alt="Cover Letter Generator" loading="lazy"></p>
+<ul>
+<li>Generate personalized cover letters tailored to specific job descriptions in seconds</li>
+<li>Professional tone and structure with relevant achievement-focused narratives</li>
+<li>Consistent with your resume content for a unified application package</li>
+</ul>
+<h3 id="resume-dashboard--management">Resume Dashboard &amp; Management</h3>
+<p><img src="https://raw.githubusercontent.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/main/public/images/ss4.webp" alt="Resume Dashboard" loading="lazy"></p>
+<ul>
+<li>Centralized resume management with base and tailored resume variants</li>
+<li>Maintain a master resume while creating customized versions for each opportunity</li>
+<li>Version tracking with timestamps and job linkage</li>
+</ul>
+<p>---</p>
+<h2 id="system-architecture">🏗 System Architecture</h2>
+<h3 id="high-level-architecture-diagram">High-Level Architecture Diagram</h3>
+<pre><code>graph TB
+    subgraph Client[&quot;Client Layer&quot;]
+        Browser[&quot;Browser (React 19)&quot;]
+        RSC[&quot;React Server Components&quot;]
+        CC[&quot;Client Components&quot;]
+    end
+
+    subgraph NextJS[&quot;Application Layer — Next.js 15 (App Router)&quot;]
+        Middleware[&quot;Middleware&lt;br/&gt;(Auth Guard)&quot;]
+        Pages[&quot;Pages &amp; Layouts&quot;]
+        ServerActions[&quot;Server Actions&lt;br/&gt;(Data Mutations)&quot;]
+        APIRoutes[&quot;API Routes&lt;br/&gt;(/api/chat, /api/webhooks)&quot;]
+    end
+
+    subgraph AI[&quot;AI Layer — Multi-Provider&quot;]
+        AISDK[&quot;Vercel AI SDK&quot;]
+        OpenAI[&quot;OpenAI&lt;br/&gt;GPT-5.2 / GPT-5.2 Pro&quot;]
+        Anthropic[&quot;Anthropic&lt;br/&gt;Claude Sonnet 4 / Opus 4.5&quot;]
+        OpenRouter[&quot;OpenRouter&lt;br/&gt;Gemini 3 Pro / DeepSeek V3.2&quot;]
+    end
+
+    subgraph Backend[&quot;Backend Services&quot;]
+        SupabaseAuth[&quot;Supabase Auth&lt;br/&gt;(GoTrue)&quot;]
+        Kong[&quot;Kong API Gateway&quot;]
+        PostgREST[&quot;PostgREST&quot;]
+        Realtime[&quot;Supabase Realtime&quot;]
+        Storage[&quot;Supabase Storage&quot;]
+    end
+
+    subgraph Data[&quot;Data Layer&quot;]
+        PostgreSQL[(&quot;PostgreSQL 15&lt;br/&gt;+ RLS Policies&quot;)]
+        Redis[(&quot;Redis 7&lt;br/&gt;Rate Limiting&quot;)]
+        Stripe[&quot;Stripe API&lt;br/&gt;Subscriptions&quot;]
+    end
+
+    Browser --&gt; Middleware
+    Middleware --&gt; Pages
+    Pages --&gt; RSC
+    Pages --&gt; CC
+    RSC --&gt; ServerActions
+    CC --&gt; APIRoutes
+    APIRoutes --&gt; AISDK
+    AISDK --&gt; OpenAI
+    AISDK --&gt; Anthropic
+    AISDK --&gt; OpenRouter
+    ServerActions --&gt; Kong
+    Kong --&gt; PostgREST
+    Kong --&gt; SupabaseAuth
+    PostgREST --&gt; PostgreSQL
+    SupabaseAuth --&gt; PostgreSQL
+    APIRoutes --&gt; Redis
+    ServerActions --&gt; Stripe
+    Kong --&gt; Realtime
+    Kong --&gt; Storage
+
+    style Client fill:#fff0f3,stroke:#e94560,stroke-width:2px,color:#000
+    style NextJS fill:#f0f6ff,stroke:#58a6ff,stroke-width:2px,color:#000
+    style AI fill:#f0fff4,stroke:#2ea043,stroke-width:2px,color:#000
+    style Backend fill:#fffdf0,stroke:#d29922,stroke-width:2px,color:#000
+    style Data fill:#fff0f8,stroke:#d8619d,stroke-width:2px,color:#000</code></pre>
+<h3 id="request-lifecycle">Request Lifecycle</h3>
+<pre><code>sequenceDiagram
+    participant U as User (Browser)
+    participant MW as Middleware
+    participant SA as Server Action / API Route
+    participant SB as Supabase (Auth + DB)
+    participant AI as AI Provider (OpenAI / Anthropic / OpenRouter)
+    participant RD as Redis
+    participant ST as Stripe
+
+    U-&gt;&gt;MW: HTTP Request
+    MW-&gt;&gt;SB: Validate Session (updateSession)
+    SB--&gt;&gt;MW: Session Token
+
+    alt Protected Route
+        MW-&gt;&gt;SA: Forward Authenticated Request
+    else Public Route
+        MW-&gt;&gt;U: Serve Page Directly
+    end
+
+    alt AI Chat Request
+        SA-&gt;&gt;RD: Check Rate Limit (Leaky Bucket)
+        RD--&gt;&gt;SA: Rate Limit OK / Exceeded
+        SA-&gt;&gt;AI: Stream AI Response (Vercel AI SDK)
+        AI--&gt;&gt;SA: Streaming Tokens
+        SA--&gt;&gt;U: Server-Sent Events (SSE)
+    end
+
+    alt Data Mutation
+        SA-&gt;&gt;SB: CRUD via PostgREST + RLS
+        SB--&gt;&gt;SA: Query Result
+        SA--&gt;&gt;U: Updated State
+    end
+
+    alt Subscription Event
+        ST-&gt;&gt;SA: Webhook (checkout.completed, subscription.updated)
+        SA-&gt;&gt;SB: Update Subscription Record
+    end</code></pre>
+<h3 id="ai-tool-calling-architecture">AI Tool Calling Architecture</h3>
+<pre><code>flowchart LR
+    subgraph UserRequest[&quot;User Chat Message&quot;]
+        Msg[&quot;&#39;Improve my work experience bullets&#39;&quot;]
+    end
+
+    subgraph AIEngine[&quot;AI Processing Pipeline&quot;]
+        SystemPrompt[&quot;System Prompt&lt;br/&gt;(Chain-of-Thought)&quot;]
+        ToolSelection[&quot;Tool Selection&quot;]
+    end
+
+    subgraph Tools[&quot;Available AI Tools&quot;]
+        T1[&quot;getResume&lt;br/&gt;Read resume sections&quot;]
+        T2[&quot;suggest_work_experience&lt;br/&gt;Improve work entries&quot;]
+        T3[&quot;suggest_project&lt;br/&gt;Improve project entries&quot;]
+        T4[&quot;suggest_skill&lt;br/&gt;Optimize skills&quot;]
+        T5[&quot;suggest_education&lt;br/&gt;Enhance education&quot;]
+        T6[&quot;modifyWholeResume&lt;br/&gt;Batch modifications&quot;]
+    end
+
+    subgraph Output[&quot;Output&quot;]
+        Proposal[&quot;Proposed Changes&lt;br/&gt;(User Approval)&quot;]
+        DirectEdit[&quot;Direct Modifications&quot;]
+    end
+
+    Msg --&gt; SystemPrompt
+    SystemPrompt --&gt; ToolSelection
+    ToolSelection --&gt; T1
+    ToolSelection --&gt; T2
+    ToolSelection --&gt; T3
+    ToolSelection --&gt; T4
+    ToolSelection --&gt; T5
+    ToolSelection --&gt; T6
+    T2 --&gt; Proposal
+    T3 --&gt; Proposal
+    T4 --&gt; Proposal
+    T5 --&gt; Proposal
+    T6 --&gt; DirectEdit</code></pre>
+<p>---</p>
+<h2 id="tech-stack">🛠 Tech Stack</h2>
+<h3 id="frontend">Frontend</h3>
+<div class="table-scroll"><table><thead><tr><th>Technology</th><th>Version</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>Next.js</strong></td><td>15.1</td><td>React framework with App Router, Server Components, Turbopack</td></tr><tr><td><strong>React</strong></td><td>19</td><td>UI rendering with Server/Client Component model</td></tr><tr><td><strong>TypeScript</strong></td><td>5.7+</td><td>Full type safety across the codebase</td></tr><tr><td><strong>Tailwind CSS</strong></td><td>3.4</td><td>Utility-first responsive styling</td></tr><tr><td><strong>Shadcn UI + Radix</strong></td><td>Latest</td><td>Accessible, composable component primitives</td></tr><tr><td><strong>Framer Motion</strong></td><td>11.x</td><td>Smooth animations and micro-interactions</td></tr><tr><td><strong>TipTap</strong></td><td>2.11</td><td>Rich text editing for resume sections</td></tr><tr><td><strong>React-PDF</strong></td><td>4.1</td><td>Client-side PDF document generation</td></tr><tr><td><strong>Lucide React</strong></td><td>0.469</td><td>Consistent iconography</td></tr></tbody></table></div>
+<h3 id="backend--data">Backend &amp; Data</h3>
+<div class="table-scroll"><table><thead><tr><th>Technology</th><th>Version</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>Supabase</strong></td><td>Latest</td><td>Auth (GoTrue), PostgreSQL, Realtime, Storage</td></tr><tr><td><strong>PostgreSQL</strong></td><td>15.x</td><td>Primary relational database with JSONB support</td></tr><tr><td><strong>Redis (Upstash / ioredis)</strong></td><td>7.x</td><td>Rate limiting via leaky bucket algorithm</td></tr><tr><td><strong>Stripe</strong></td><td>18.x</td><td>Subscription billing and payment processing</td></tr><tr><td><strong>Kong</strong></td><td>2.8</td><td>API Gateway for Supabase services</td></tr><tr><td><strong>Zod</strong></td><td>3.24</td><td>Runtime schema validation for all data boundaries</td></tr></tbody></table></div>
+<h3 id="ai-integration">AI Integration</h3>
+<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Models</th><th>Use Case</th></tr></thead><tbody><tr><td><strong>OpenAI</strong></td><td>GPT-5.2, GPT-5.2 Pro, GPT-5.1, GPT-5 Mini</td><td>Frontier-quality content generation (Pro default)</td></tr><tr><td><strong>Anthropic</strong></td><td>Claude Sonnet 4, Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5</td><td>High-quality analysis and structured output</td></tr><tr><td><strong>OpenRouter</strong></td><td>Gemini 3 Pro Preview, DeepSeek V3.2, GPT-OSS 120B/20B, GLM-4.6 Exacto</td><td>Cost-effective and free-tier model access</td></tr></tbody></table></div>
+<h3 id="devops--infrastructure">DevOps &amp; Infrastructure</h3>
+<div class="table-scroll"><table><thead><tr><th>Technology</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>Docker</strong></td><td>Multi-stage production Dockerfile (build-base → deps → builder → production)</td></tr><tr><td><strong>Docker Compose</strong></td><td>12-service local development stack</td></tr><tr><td><strong>GitHub Actions</strong></td><td>CI/CD pipeline for automated Docker image builds and GHCR publishing</td></tr><tr><td><strong>Vercel Analytics</strong></td><td>Production performance monitoring</td></tr><tr><td><strong>pnpm</strong></td><td>Fast, disk-efficient package manager</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="ai-provider-integration">🤖 AI Provider Integration</h2>
+<h3 id="model-selection--routing">Model Selection &amp; Routing</h3>
+<pre><code>flowchart TD
+    subgraph UserType[&quot;User Classification&quot;]
+        Free[&quot;Free User&quot;]
+        Pro[&quot;Pro Subscriber&quot;]
+        BYOK[&quot;BYOK User&lt;br/&gt;(Bring Your Own Key)&quot;]
+    end
+
+    subgraph ModelRouter[&quot;Model Router&quot;]
+        Default[&quot;Default Model Selection&quot;]
+        Custom[&quot;Custom Model Selection&quot;]
+    end
+
+    subgraph Models[&quot;Available Models&quot;]
+        direction LR
+        FreeModels[&quot;Free Models&lt;br/&gt;DeepSeek V3.2&lt;br/&gt;GPT-OSS 120B / 20B&quot;]
+        ProModels[&quot;Pro Models&lt;br/&gt;GPT-5.2 Pro&lt;br/&gt;Claude Opus 4.5&quot;]
+        StandardModels[&quot;Standard Models&lt;br/&gt;GPT-5.2, GPT-5.1&lt;br/&gt;Claude Sonnet 4/4.5&lt;br/&gt;Gemini 3 Pro&quot;]
+    end
+
+    subgraph SDKInit[&quot;SDK Initialization&quot;]
+        OpenAISDK[&quot;@ai-sdk/openai&quot;]
+        AnthropicSDK[&quot;@ai-sdk/anthropic&quot;]
+        OpenRouterSDK[&quot;@openrouter/ai-sdk-provider&quot;]
+    end
+
+    Free --&gt; Default
+    Pro --&gt; Custom
+    BYOK --&gt; Custom
+    Default --&gt; FreeModels
+    Custom --&gt; ProModels
+    Custom --&gt; StandardModels
+    Custom --&gt; FreeModels
+    FreeModels --&gt; OpenRouterSDK
+    ProModels --&gt; OpenAISDK
+    ProModels --&gt; AnthropicSDK
+    StandardModels --&gt; OpenAISDK
+    StandardModels --&gt; AnthropicSDK
+    StandardModels --&gt; OpenRouterSDK</code></pre>
+<h3 id="model-designation-system">Model Designation System</h3>
+<div class="table-scroll"><table><thead><tr><th>Designation</th><th>Model</th><th>Use Case</th></tr></thead><tbody><tr><td><code>FAST_CHEAP</code></td><td>Claude Sonnet 4.5</td><td>Parsing, simple tasks, quick analysis</td></tr><tr><td><code>FAST_CHEAP_FREE</code></td><td>DeepSeek V3.2</td><td>Free-tier alternative for fast tasks</td></tr><tr><td><code>FRONTIER</code></td><td>GPT-5.2</td><td>Complex tasks, deep analysis, best quality</td></tr><tr><td><code>FRONTIER_ALT</code></td><td>Claude Opus 4.5</td><td>Alternative frontier model</td></tr><tr><td><code>BALANCED</code></td><td>Gemini 3 Pro Preview</td><td>Good quality with faster/cheaper inference</td></tr><tr><td><code>VISION</code></td><td>Claude Sonnet 4.5</td><td>Image analysis capabilities</td></tr><tr><td><code>DEFAULT_PRO</code></td><td>GPT-5.2</td><td>Default for Pro subscribers</td></tr><tr><td><code>DEFAULT_FREE</code></td><td>DeepSeek V3.2</td><td>Default for free-tier users</td></tr></tbody></table></div>
+<h3 id="rate-limiting-strategy">Rate Limiting Strategy</h3>
+<p>Rate limiting is implemented via a <strong>leaky bucket algorithm</strong> using Redis:</p>
+<ul>
+<li><strong>Capacity:</strong> 80 messages per 5-hour window (Pro users)</li>
+<li><strong>Leak Rate:</strong> <code>capacity / duration</code> tokens per second</li>
+<li><strong>Storage:</strong> Redis hash per user (<code>rate-limit:pro:{userId}</code>)</li>
+<li><strong>Development:</strong> Rate limiting is skipped in <code>NODE_ENV=development</code></li>
+</ul>
+<p>---</p>
+<h2 id="database-architecture">🗄 Database Architecture</h2>
+<h3 id="entity-relationship-diagram">Entity-Relationship Diagram</h3>
+<pre><code>erDiagram
+    AUTH_USERS ||--o| PROFILES : &quot;has one&quot;
+    AUTH_USERS ||--o| SUBSCRIPTIONS : &quot;has one&quot;
+    AUTH_USERS ||--o{ RESUMES : &quot;owns many&quot;
+    AUTH_USERS ||--o{ JOBS : &quot;owns many&quot;
+    JOBS ||--o{ RESUMES : &quot;linked to&quot;
+
+    AUTH_USERS {
+        uuid id PK
+        string email
+        timestamp created_at
+    }
+
+    PROFILES {
+        uuid user_id PK,FK
+        text first_name
+        text last_name
+        text email
+        text phone_number
+        text location
+        text website
+        text linkedin_url
+        text github_url
+        jsonb work_experience
+        jsonb education
+        jsonb skills
+        jsonb projects
+        jsonb certifications
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    SUBSCRIPTIONS {
+        uuid user_id PK,FK
+        text stripe_customer_id UK
+        text stripe_subscription_id UK
+        text subscription_plan &quot;free | pro&quot;
+        text subscription_status &quot;active | canceled&quot;
+        timestamptz current_period_end
+        timestamptz trial_end
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    RESUMES {
+        uuid id PK
+        uuid user_id FK
+        uuid job_id FK
+        boolean is_base_resume
+        text name
+        text target_role
+        text first_name
+        text last_name
+        text email
+        text phone_number
+        text location
+        text website
+        text linkedin_url
+        text github_url
+        text professional_summary
+        jsonb work_experience
+        jsonb education
+        jsonb skills
+        jsonb projects
+        jsonb certifications
+        jsonb section_order
+        jsonb section_configs
+        jsonb document_settings
+        boolean has_cover_letter
+        jsonb cover_letter
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    JOBS {
+        uuid id PK
+        uuid user_id FK
+        text company_name
+        text position_title
+        text job_url
+        text description
+        text location
+        text salary_range
+        jsonb keywords
+        text work_location &quot;remote | in_person | hybrid&quot;
+        text employment_type &quot;full_time | part_time | co_op | internship | contract&quot;
+        boolean is_active
+        timestamptz created_at
+        timestamptz updated_at
+    }</code></pre>
+<h3 id="core-tables">Core Tables</h3>
+<div class="table-scroll"><table><thead><tr><th>Table</th><th>Purpose</th><th>Key Fields</th><th>Security</th></tr></thead><tbody><tr><td><strong>profiles</strong></td><td>User identity and master resume data</td><td>JSONB fields for <code>work_experience</code>, <code>education</code>, <code>skills</code>, <code>projects</code></td><td>RLS: <code>user_id = auth.uid()</code></td></tr><tr><td><strong>resumes</strong></td><td>Base and job-tailored resume variants</td><td><code>is_base_resume</code> flag, <code>job_id</code> foreign key, <code>document_settings</code> JSONB</td><td>RLS: <code>user_id = auth.uid()</code></td></tr><tr><td><strong>jobs</strong></td><td>Target job positions and descriptions</td><td><code>keywords</code> JSONB, <code>work_location</code> enum, <code>employment_type</code> enum</td><td>RLS: <code>user_id = auth.uid()</code></td></tr><tr><td><strong>subscriptions</strong></td><td>Stripe subscription lifecycle</td><td><code>subscription_plan</code> (free/pro), <code>subscription_status</code>, <code>trial_end</code></td><td>RLS: <code>user_id = auth.uid()</code></td></tr></tbody></table></div>
+<h3 id="jsonb-data-structures">JSONB Data Structures</h3>
+<pre><code>// Work Experience (stored in profiles.work_experience &amp; resumes.work_experience)
+interface WorkExperience {
+  company: string;
+  position: string;
+  location?: string;
+  date: string;
+  description: string[];    // ATS-optimized bullet points
+  technologies?: string[];  // Tech stack tags
+}
+
+// Education (stored in profiles.education &amp; resumes.education)
+interface Education {
+  school: string;
+  degree: string;
+  field: string;
+  location?: string;
+  date: string;
+  gpa?: number | string;
+  achievements?: string[];
+}
+
+// Skills (stored in profiles.skills &amp; resumes.skills)
+interface Skill {
+  category: string;   // e.g., &quot;Programming Languages&quot;, &quot;Frameworks&quot;
+  items: string[];     // e.g., [&quot;TypeScript&quot;, &quot;Python&quot;, &quot;Go&quot;]
+}</code></pre>
+<p>---</p>
+<h2 id="application-flow">🔄 Application Flow</h2>
+<h3 id="resume-management-workflow">Resume Management Workflow</h3>
+<pre><code>flowchart TD
+    Start([User Signs Up]) --&gt; CreateProfile[&quot;Create Profile&lt;br/&gt;(Master Resume Data)&quot;]
+    CreateProfile --&gt; ImportOptions{&quot;Import Method&quot;}
+
+    ImportOptions --&gt;|&quot;Upload PDF/DOCX&quot;| ParseResume[&quot;AI Resume Parser&lt;br/&gt;(Text Extraction + Structuring)&quot;]
+    ImportOptions --&gt;|&quot;Manual Entry&quot;| ManualInput[&quot;Fill Profile Form&quot;]
+    ImportOptions --&gt;|&quot;Paste Text&quot;| TextImport[&quot;AI Text Analyzer&lt;br/&gt;(Extract &amp; Categorize)&quot;]
+
+    ParseResume --&gt; BaseProfile[&quot;Base Profile Created&quot;]
+    ManualInput --&gt; BaseProfile
+    TextImport --&gt; BaseProfile
+
+    BaseProfile --&gt; CreateBase[&quot;Create Base Resume&quot;]
+    CreateBase --&gt; BaseResume[&quot;Base Resume&lt;br/&gt;(is_base_resume = true)&quot;]
+
+    BaseResume --&gt; AddJob[&quot;Add Job Listing&quot;]
+    AddJob --&gt; TailorResume[&quot;Create Tailored Resume&lt;br/&gt;(AI-Assisted)&quot;]
+    TailorResume --&gt; AICurator[&quot;AI Content Curator&lt;br/&gt;(Select relevant items)&quot;]
+    AICurator --&gt; TailoredResume[&quot;Tailored Resume&lt;br/&gt;(is_base_resume = false, job_id linked)&quot;]
+
+    TailoredResume --&gt; AIAssistant[&quot;AI Assistant Chat&lt;br/&gt;(Optimize Content)&quot;]
+    AIAssistant --&gt; ScoreResume[&quot;ATS Score Analysis&lt;br/&gt;(7-metric evaluation)&quot;]
+    ScoreResume --&gt; GenerateCover[&quot;Generate Cover Letter&quot;]
+    GenerateCover --&gt; ExportPDF[&quot;Export PDF&quot;]
+
+    style Start fill:#238636,color:#fff
+    style BaseResume fill:#1f6feb,color:#fff
+    style TailoredResume fill:#8b5cf6,color:#fff
+    style ExportPDF fill:#e94560,color:#fff</code></pre>
+<h3 id="ats-scoring-pipeline">ATS Scoring Pipeline</h3>
+<pre><code>flowchart LR
+    Resume[&quot;Resume Content&quot;] --&gt; Scoring[&quot;ATS Scoring Engine&quot;]
+
+    subgraph Scoring[&quot;Multi-Factor Scoring&quot;]
+        direction TB
+        C[&quot;Completeness&lt;br/&gt;(Contact Info + Detail Level)&quot;]
+        I[&quot;Impact Score&lt;br/&gt;(Active Voice + Quantified Achievements)&quot;]
+        R[&quot;Role Match&lt;br/&gt;(Skills + Experience + Education)&quot;]
+        J[&quot;Job Alignment&lt;br/&gt;(Keywords + Requirements + Company Fit)&quot;]
+    end
+
+    Scoring --&gt; Overall[&quot;Overall Score&lt;br/&gt;(0-100)&quot;]
+    Scoring --&gt; Improvements[&quot;Improvement&lt;br/&gt;Suggestions&quot;]
+    Scoring --&gt; Keywords[&quot;Matched &amp; Missing&lt;br/&gt;Keywords&quot;]
+
+    style Scoring fill:#f0f6ff,stroke:#58a6ff,stroke-width:2px,color:#000</code></pre>
+<p>---</p>
+<h2 id="project-structure">📁 Project Structure</h2>
+<pre><code>ApplicaAI/
+├── .claude/                        # Claude Code AI configuration
+│   └── settings.local.json         # Permission rules
+├── .cursor/rules/                  # Cursor IDE rules
+│   └── db.md                       # Database schema reference
+├── .github/workflows/              # CI/CD pipelines
+│   └── docker-publish.yml          # Docker image build &amp; push to GHCR
+├── docker/                         # Container infrastructure
+│   ├── Dockerfile                  # Multi-stage build (dev + prod)
+│   ├── docker-compose.yml          # 12-service local dev stack
+│   ├── DOCKER.md                   # Docker documentation
+│   ├── entrypoint.sh               # Runtime env injection
+│   ├── scripts/                    # Seeding &amp; setup scripts
+│   └── supabase/                   # Supabase Docker configs
+├── public/                         # Static assets
+│   ├── images/                     # Screenshot assets
+│   ├── logos/                      # AI provider logos
+│   └── *.png, *.webp               # Favicons, thumbnails, OG images
+├── src/
+│   ├── app/                        # Next.js App Router
+│   │   ├── (dashboard)/            # Protected routes
+│   │   │   ├── home/               # Dashboard home
+│   │   │   ├── profile/            # User profile management
+│   │   │   ├── resumes/            # Resume editor &amp; management
+│   │   │   ├── settings/           # User settings
+│   │   │   ├── subscription/       # Subscription management
+│   │   │   └── start-trial/        # Trial onboarding
+│   │   ├── admin/                  # Admin panel (impersonation, etc.)
+│   │   ├── api/
+│   │   │   ├── chat/               # AI streaming chat endpoint
+│   │   │   └── webhooks/           # Stripe webhook handlers
+│   │   ├── auth/                   # Authentication flows
+│   │   ├── blog/                   # MDX blog content
+│   │   ├── stop-impersonation/     # Admin impersonation exit
+│   │   ├── layout.tsx              # Root layout (auth, header, subscription check)
+│   │   ├── page.tsx                # Landing page
+│   │   ├── globals.css             # Global styles &amp; CSS variables
+│   │   ├── loading.tsx             # Global loading state
+│   │   └── error.tsx               # Global error boundary
+│   ├── components/
+│   │   ├── resume/                 # Resume-specific components
+│   │   │   ├── assistant/          # AI chat interface
+│   │   │   ├── editor/             # Resume section editors
+│   │   │   └── management/         # CRUD operations
+│   │   ├── cover-letter/           # Cover letter components
+│   │   ├── dashboard/              # Dashboard widgets
+│   │   ├── jobs/                   # Job listing components
+│   │   ├── landing/                # Landing page components
+│   │   ├── layout/                 # Header, footer, navigation
+│   │   ├── pricing/                # Pricing page components
+│   │   ├── profile/                # Profile management
+│   │   ├── settings/               # Settings page components
+│   │   ├── subscription/           # Subscription UI
+│   │   ├── shared/                 # Shared/common components
+│   │   ├── ui/                     # Shadcn UI primitives
+│   │   └── magicui/                # Animation components
+│   ├── hooks/                      # Custom React hooks
+│   │   ├── use-api-keys.ts         # API key management hook
+│   │   ├── use-custom-prompts.ts   # Custom prompt management
+│   │   ├── use-debounced-value.ts  # Input debouncing
+│   │   └── use-toast.ts            # Toast notification hook
+│   ├── lib/                        # Core business logic
+│   │   ├── ai-models.ts            # AI model registry &amp; configuration
+│   │   ├── prompts.ts              # AI system prompts (7 specialized prompts)
+│   │   ├── schemas.ts              # OpenAI function calling schemas
+│   │   ├── zod-schemas.ts          # Zod validation schemas
+│   │   ├── tools.ts                # AI tool definitions (6 tools)
+│   │   ├── types.ts                # TypeScript interfaces &amp; types
+│   │   ├── rateLimiter.ts          # Redis leaky bucket rate limiter
+│   │   ├── redis.ts                # Unified Redis client (Upstash/ioredis)
+│   │   ├── blog.ts                 # Blog utilities
+│   │   └── utils.ts                # General utilities
+│   ├── types/                      # Global type declarations
+│   │   ├── html2pdf.d.ts           # html2pdf type declarations
+│   │   └── mdx.d.ts                # MDX module declarations
+│   ├── utils/                      # Utility functions
+│   │   ├── actions/                # Server Actions (organized by domain)
+│   │   │   ├── resumes/            # Resume CRUD actions
+│   │   │   ├── profiles/           # Profile CRUD actions
+│   │   │   ├── jobs/               # Job CRUD actions
+│   │   │   ├── cover-letter/       # Cover letter actions
+│   │   │   ├── stripe/             # Stripe checkout actions
+│   │   │   ├── subscriptions/      # Subscription management
+│   │   │   └── utils/              # Shared action utilities
+│   │   ├── supabase/               # Supabase client setup
+│   │   │   ├── client.ts           # Browser client
+│   │   │   ├── server.ts           # Server client
+│   │   │   └── middleware.ts       # Session management middleware
+│   │   ├── actions.ts              # Dashboard data fetching
+│   │   ├── ai-tools.ts             # AI client initialization &amp; SDK routing
+│   │   ├── auth.ts                 # Auth helpers with caching
+│   │   └── auth-cache.ts           # In-memory auth cache
+│   └── middleware.ts               # Root middleware (route protection)
+├── schema.sql                      # Complete database schema
+├── package.json                    # Dependencies &amp; scripts
+├── next.config.ts                  # Next.js configuration (standalone, MDX)
+├── tailwind.config.ts              # Tailwind CSS configuration
+├── tsconfig.json                   # TypeScript configuration
+├── components.json                 # Shadcn UI configuration
+├── .env.example                    # Environment variable template
+├── CLAUDE.md                       # Claude Code project context
+├── LICENSE                         # AGPL-3.0 License
+└── README.md                       # This file</code></pre>
+<p>---</p>
+<h2 id="quick-start">🚀 Quick Start</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<div class="table-scroll"><table><thead><tr><th>Requirement</th><th>Version</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Node.js</strong></td><td>≥ 20.0.0</td><td>Required by Next.js 15</td></tr><tr><td><strong>pnpm</strong></td><td>Latest</td><td>Preferred package manager (or npm)</td></tr><tr><td><strong>PostgreSQL</strong></td><td>15+</td><td>Via Supabase (cloud or Docker)</td></tr><tr><td><strong>Supabase Account</strong></td><td>—</td><td>For Auth and database hosting</td></tr></tbody></table></div>
+<h3 id="installation">Installation</h3>
+<pre><code># 1. Clone the repository
+git clone https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant.git
+cd AI-Powered_Professional_Job_Application_Assistant
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Configure environment variables
+cp .env.example .env.local
+# Edit .env.local with your credentials (see Environment Configuration section)
+
+# 4. Initialize database
+# Execute schema.sql in the Supabase SQL Editor
+# Or via Supabase CLI:
+supabase db push --db-url=your_url schema.sql
+
+# 5. Start development server
+pnpm dev</code></pre>
+<p>Navigate to <code>http://localhost:3000</code> to start building!</p>
+<h3 id="available-scripts">Available Scripts</h3>
+<div class="table-scroll"><table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>pnpm dev</code></td><td>Start development server</td></tr><tr><td><code>pnpm dev:turbo</code></td><td>Start with Turbopack (faster HMR)</td></tr><tr><td><code>pnpm build</code></td><td>Create production build</td></tr><tr><td><code>pnpm start</code></td><td>Start production server</td></tr><tr><td><code>pnpm lint</code></td><td>Run ESLint checks</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="docker-deployment">🐳 Docker Deployment</h2>
+<h3 id="architecture-docker-compose-services">Architecture: Docker Compose Services</h3>
+<pre><code>graph TB
+    subgraph DockerNetwork[&quot;ApplicaAI Docker Network (Bridge)&quot;]
+        subgraph SupabaseStack[&quot;Supabase Stack&quot;]
+            DB[(&quot;PostgreSQL 15&lt;br/&gt;:54322&quot;)]
+            Auth[&quot;GoTrue Auth&lt;br/&gt;:9999&quot;]
+            REST[&quot;PostgREST&lt;br/&gt;:3000&quot;]
+            Realtime[&quot;Realtime&lt;br/&gt;:4000&quot;]
+            Storage[&quot;Storage API&lt;br/&gt;:5000&quot;]
+            ImgProxy[&quot;ImgProxy&lt;br/&gt;:8080&quot;]
+            Meta[&quot;Postgres Meta&lt;br/&gt;:8080&quot;]
+            Kong[&quot;Kong Gateway&lt;br/&gt;:54321&quot;]
+            Studio[&quot;Studio UI&lt;br/&gt;:54323&quot;]
+            Analytics[&quot;Logflare&lt;br/&gt;:4000&quot;]
+            Inbucket[&quot;Inbucket&lt;br/&gt;:54324&quot;]
+        end
+
+        subgraph CacheLayer[&quot;Cache Layer&quot;]
+            Redis[(&quot;Redis 7&lt;br/&gt;:6379&quot;)]
+            RedisCmd[&quot;Redis Commander&lt;br/&gt;:8081&quot;]
+        end
+
+        subgraph AppLayer[&quot;Application (Optional)&quot;]
+            App[&quot;Next.js App&lt;br/&gt;:3000&quot;]
+        end
+
+        Seeder[&quot;DB Seeder&lt;br/&gt;(runs once)&quot;]
+    end
+
+    Kong --&gt; Auth
+    Kong --&gt; REST
+    Kong --&gt; Realtime
+    Kong --&gt; Storage
+    REST --&gt; DB
+    Auth --&gt; DB
+    Realtime --&gt; DB
+    Storage --&gt; DB
+    Storage --&gt; ImgProxy
+    Studio --&gt; Kong
+    Studio --&gt; Meta
+    Meta --&gt; DB
+    Analytics --&gt; DB
+    App --&gt; Kong
+    App --&gt; Redis
+    Seeder --&gt; Auth
+    RedisCmd --&gt; Redis
+
+    style DockerNetwork fill:#f6f8fa,stroke:#d0d7de,stroke-width:2px,color:#24292f
+    style SupabaseStack fill:#f0fdf4,stroke:#3FCF8E,stroke-width:2px,color:#000
+    style CacheLayer fill:#fff1f0,stroke:#DC382D,stroke-width:2px,color:#000
+    style AppLayer fill:#f0f6ff,stroke:#58a6ff,stroke-width:2px,color:#000</code></pre>
+<h3 id="quick-start-with-docker">Quick Start with Docker</h3>
+<pre><code># 1. Configure environment
+cp .env.example .env.local
+# Add at least one AI API key: OPENAI_API_KEY, ANTHROPIC_API_KEY, or OPENROUTER_API_KEY
+
+# 2. Start Docker services
+cd docker
+docker compose --env-file ../.env.local up -d
+
+# 3. Wait ~60 seconds for services to initialize
+docker compose --env-file ../.env.local ps
+
+# 4. Run the app locally (from the project root)
+cd ..
+pnpm dev</code></pre>
+<p><strong>Default Login:</strong> <code>admin@admin.com</code> / <code>Admin123</code> (Pro subscription auto-granted)</p>
+<h3 id="service-endpoints">Service Endpoints</h3>
+<div class="table-scroll"><table><thead><tr><th>Service</th><th>URL</th><th>Description</th></tr></thead><tbody><tr><td><strong>ApplicaAI App</strong></td><td>http://localhost:3000</td><td>Main application</td></tr><tr><td><strong>Supabase API Gateway</strong></td><td>http://localhost:54321</td><td>Backend API endpoints</td></tr><tr><td><strong>Supabase Studio</strong></td><td>http://localhost:54323</td><td>Database admin dashboard</td></tr><tr><td><strong>Redis Commander</strong></td><td>http://localhost:8081</td><td>Redis cache management UI</td></tr><tr><td><strong>Inbucket (Email)</strong></td><td>http://localhost:54324</td><td>Local email testing UI</td></tr><tr><td><strong>PostgreSQL</strong></td><td>localhost:54322</td><td>Direct database access</td></tr></tbody></table></div>
+<h3 id="full-stack-container-mode">Full-Stack Container Mode</h3>
+<pre><code># Run everything in Docker (including the Next.js app)
+docker compose --env-file ../.env.local --profile full up</code></pre>
+<blockquote><p>📖 See <a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/blob/main/docker/DOCKER.md" target="_blank" rel="noopener noreferrer">docker/DOCKER.md</a> for complete Docker documentation.</p></blockquote>
+<p>---</p>
+<h2 id="environment-configuration">⚙ Environment Configuration</h2>
+<h3 id="required-environment-variables">Required Environment Variables</h3>
+<pre><code># ===========================================
+# APPLICATION
+# ===========================================
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# ===========================================
+# AI PROVIDERS (Add at least one)
+# ===========================================
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+OPENROUTER_API_KEY=sk-or-...
+
+# ===========================================
+# SUPABASE
+# ===========================================
+NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# ===========================================
+# REDIS (Choose one)
+# ===========================================
+# Local Redis (Docker):
+USE_LOCAL_REDIS=true
+REDIS_URL=redis://localhost:6379
+
+# Cloud Redis (Upstash):
+# USE_LOCAL_REDIS=false
+# UPSTASH_REDIS_REST_URL=https://your-redis.upstash.io
+# UPSTASH_REDIS_REST_TOKEN=your-upstash-token
+
+# ===========================================
+# STRIPE (Optional — for payment testing)
+# ===========================================
+# STRIPE_SECRET_KEY=sk_test_...
+# STRIPE_WEBHOOK_SECRET=whsec_...
+# NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+# NEXT_PUBLIC_STRIPE_PRO_PRICE_ID=price_...</code></pre>
+<h3 id="environment-variable-reference">Environment Variable Reference</h3>
+<div class="table-scroll"><table><thead><tr><th>Variable</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>NEXT_PUBLIC_SUPABASE_URL</code></td><td>✅</td><td>Supabase project URL</td></tr><tr><td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td><td>✅</td><td>Supabase anonymous key</td></tr><tr><td><code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>✅</td><td>Supabase service role key (server-only)</td></tr><tr><td><code>OPENAI_API_KEY</code></td><td>⚡</td><td>OpenAI API key (at least one AI key required)</td></tr><tr><td><code>ANTHROPIC_API_KEY</code></td><td>⚡</td><td>Anthropic API key</td></tr><tr><td><code>OPENROUTER_API_KEY</code></td><td>⚡</td><td>OpenRouter API key</td></tr><tr><td><code>STRIPE_SECRET_KEY</code></td><td>❌</td><td>Stripe secret key (for payments)</td></tr><tr><td><code>STRIPE_WEBHOOK_SECRET</code></td><td>❌</td><td>Stripe webhook signing secret</td></tr><tr><td><code>UPSTASH_REDIS_REST_URL</code></td><td>❌</td><td>Upstash Redis URL (cloud deployment)</td></tr><tr><td><code>UPSTASH_REDIS_REST_TOKEN</code></td><td>❌</td><td>Upstash Redis token</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="cicd-pipeline">🔄 CI/CD Pipeline</h2>
+<h3 id="github-actions-workflow">GitHub Actions Workflow</h3>
+<pre><code>flowchart LR
+    subgraph Triggers[&quot;Triggers&quot;]
+        Push[&quot;Push to main&quot;]
+        Release[&quot;Release Published&quot;]
+        Manual[&quot;Manual Dispatch&quot;]
+    end
+
+    subgraph Pipeline[&quot;Build Pipeline&quot;]
+        Checkout[&quot;Checkout Code&quot;]
+        Buildx[&quot;Setup Docker Buildx&quot;]
+        Login[&quot;Login to GHCR&quot;]
+        Meta[&quot;Extract Metadata&lt;br/&gt;(Tags &amp; Labels)&quot;]
+        Build[&quot;Build &amp; Push Image&lt;br/&gt;(Multi-stage, cached)&quot;]
+    end
+
+    subgraph Output[&quot;Published Artifacts&quot;]
+        GHCR[&quot;ghcr.io/johnnietse/&lt;br/&gt;ai-powered_professional_&lt;br/&gt;job_application_assistant&quot;]
+        Tags[&quot;Tags:&lt;br/&gt;latest, semver, sha&quot;]
+    end
+
+    Push --&gt; Checkout
+    Release --&gt; Checkout
+    Manual --&gt; Checkout
+    Checkout --&gt; Buildx --&gt; Login --&gt; Meta --&gt; Build --&gt; GHCR
+    GHCR --&gt; Tags</code></pre>
+<div class="table-scroll"><table><thead><tr><th>Trigger</th><th>Tag Strategy</th><th>Example</th></tr></thead><tbody><tr><td>Push to <code>main</code></td><td>Git SHA</td><td><code>ghcr.io/.../:abc1234</code></td></tr><tr><td>Release <code>v1.2.3</code></td><td>Semantic versioning</td><td><code>:1.2.3</code>, <code>:1.2</code>, <code>:1</code>, <code>:latest</code></td></tr><tr><td>Manual dispatch</td><td>Git SHA</td><td><code>ghcr.io/.../:abc1234</code></td></tr></tbody></table></div>
+<h3 id="docker-build-stages">Docker Build Stages</h3>
+<div class="table-scroll"><table><thead><tr><th>Stage</th><th>Base Image</th><th>Purpose</th><th>Included In Production</th></tr></thead><tbody><tr><td><code>build-base</code></td><td><code>node:22-slim</code></td><td>Build tools (python3, make, g++, native deps)</td><td>❌</td></tr><tr><td><code>deps</code></td><td><code>build-base</code></td><td>Install all dependencies (<code>pnpm install --frozen-lockfile</code>)</td><td>❌</td></tr><tr><td><code>development</code></td><td><code>build-base</code></td><td>Dev server with hot reload</td><td>❌</td></tr><tr><td><code>builder</code></td><td><code>build-base</code></td><td>Run <code>pnpm build</code> with placeholder env vars</td><td>❌</td></tr><tr><td><code>production</code></td><td><code>node:22-slim</code></td><td>Minimal runtime with standalone output</td><td>✅</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="security-model">🔒 Security Model</h2>
+<h3 id="defense-in-depth-architecture">Defense-in-Depth Architecture</h3>
+<pre><code>flowchart TB
+    subgraph L1[&quot;Layer 1: Network&quot;]
+        Middleware[&quot;Next.js Middleware&lt;br/&gt;Route Protection&quot;]
+        Kong2[&quot;Kong API Gateway&lt;br/&gt;Request Filtering&quot;]
+    end
+
+    subgraph L2[&quot;Layer 2: Authentication&quot;]
+        GoTrue[&quot;Supabase GoTrue&lt;br/&gt;JWT-based Auth&quot;]
+        Sessions[&quot;Session Management&lt;br/&gt;Cookie-based with Refresh&quot;]
+    end
+
+    subgraph L3[&quot;Layer 3: Authorization&quot;]
+        RLS[&quot;Row Level Security&lt;br/&gt;PostgreSQL Policies&quot;]
+        SubGate[&quot;Subscription Gating&lt;br/&gt;Feature Access Control&quot;]
+    end
+
+    subgraph L4[&quot;Layer 4: Data&quot;]
+        Validation[&quot;Zod Schema Validation&lt;br/&gt;All Data Boundaries&quot;]
+        Encryption[&quot;Supabase Encryption&lt;br/&gt;At Rest &amp; In Transit&quot;]
+    end
+
+    L1 --&gt; L2 --&gt; L3 --&gt; L4
+
+    style L1 fill:#e94560,color:#fff
+    style L2 fill:#d29922,color:#fff
+    style L3 fill:#58a6ff,color:#fff
+    style L4 fill:#238636,color:#fff</code></pre>
+<h3 id="security-features">Security Features</h3>
+<div class="table-scroll"><table><thead><tr><th>Layer</th><th>Mechanism</th><th>Implementation</th></tr></thead><tbody><tr><td><strong>Route Protection</strong></td><td>Next.js Middleware</td><td>Pattern-based matcher excludes static assets, webhooks, and blog; all other routes require auth</td></tr><tr><td><strong>Authentication</strong></td><td>Supabase GoTrue (JWT)</td><td>Cookie-based sessions with automatic refresh via <code>updateSession()</code></td></tr><tr><td><strong>Authorization</strong></td><td>PostgreSQL RLS</td><td>All 4 tables enforce <code>user_id = auth.uid()</code> for both read and write</td></tr><tr><td><strong>Subscription Gating</strong></td><td>Server-side checks</td><td>Pro features gated by subscription plan/status/trial with graceful fallback</td></tr><tr><td><strong>Data Validation</strong></td><td>Zod schemas</td><td>Runtime validation on all API boundaries, server actions, and AI tool outputs</td></tr><tr><td><strong>API Keys</strong></td><td>Environment variables</td><td>Never exposed to client; server-only access via <code>process.env</code></td></tr><tr><td><strong>Rate Limiting</strong></td><td>Redis leaky bucket</td><td>80 requests / 5 hours per Pro user; development mode exempt</td></tr><tr><td><strong>Impersonation Safety</strong></td><td>Cookie-based flag</td><td>Admin impersonation tracked via <code>is_impersonating</code> cookie with visible banner</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="performance-metrics">📊 Performance Metrics</h2>
+<div class="table-scroll"><table><thead><tr><th>Metric</th><th>Target</th><th>Details</th></tr></thead><tbody><tr><td><strong>Page Load Time</strong></td><td>&lt; 2 seconds</td><td>Server-first architecture with React Server Components</td></tr><tr><td><strong>Lighthouse Score</strong></td><td>95+ (mobile)</td><td>Optimized with standalone output and image optimization</td></tr><tr><td><strong>AI Response Latency</strong></td><td>Real-time streaming</td><td>Server-Sent Events via Vercel AI SDK</td></tr><tr><td><strong>Concurrent Users</strong></td><td>100+</td><td>Dockerized with resource limits and connection pooling</td></tr><tr><td><strong>Text Extraction Accuracy</strong></td><td>95%+</td><td>PDF/DOCX/TXT parsing across 50+ resume formats</td></tr><tr><td><strong>Document Processing</strong></td><td>10,000+ words</td><td>Optimized memory usage with streaming</td></tr><tr><td><strong>SEO</strong></td><td>Structured data + meta tags</td><td>OpenGraph, Twitter Cards, JSON-LD ready</td></tr><tr><td><strong>Accessibility</strong></td><td>WCAG 2.1 AA</td><td>Shadcn UI + Radix primitives ensure keyboard and screen reader support</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="demo--screenshots">🎥 Demo &amp; Screenshots</h2>
+<h3 id="demo-videos">Demo Videos</h3>
+<div class="table-scroll"><table><thead><tr><th>Version</th><th>Link</th></tr></thead><tbody><tr><td><strong>Latest (ApplicaAI v2)</strong></td><td>▶️ <a href="https://youtu.be/fDAqn3R4_hY?si=hAvtQmliPQntn63R" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></td></tr><tr><td><strong>Original Prototype</strong></td><td>▶️ <a href="https://youtu.be/OMdhI2n5sB8?si=-GssycEQ7z0jBiJM" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></td></tr></tbody></table></div>
+<h3 id="screenshots">Screenshots</h3>
+<p>---</p>
+<h2 id="transformation-journey">🔄 Transformation Journey</h2>
+<h3 id="before--after">Before &amp; After</h3>
+<div class="table-scroll"><table><thead><tr><th>Aspect</th><th>Initial Version (Prototype)</th><th>Current Version (ApplicaAI)</th></tr></thead><tbody><tr><td><strong>Architecture</strong></td><td>Single-file monolithic Streamlit application</td><td>Modular Next.js 15 App Router with 15+ organized modules</td></tr><tr><td><strong>Code Organization</strong></td><td>500+ lines in one file</td><td>Separation of concerns across <code>src/app</code>, <code>src/lib</code>, <code>src/utils</code>, <code>src/components</code></td></tr><tr><td><strong>AI Integration</strong></td><td>Basic Google Gemini API calls</td><td>Multi-model system (GPT-5.2, Claude 4.5, Gemini 3, DeepSeek) with Vercel AI SDK</td></tr><tr><td><strong>Frontend</strong></td><td>Default Streamlit components</td><td>React 19, Shadcn UI, Framer Motion, TipTap rich text editor</td></tr><tr><td><strong>UI/UX Design</strong></td><td>Default Streamlit styling</td><td>Professional design system with glassmorphism, animations, responsive layouts</td></tr><tr><td><strong>Data Processing</strong></td><td>Simple text extraction</td><td>Advanced parsing pipeline with structured output and Zod validation</td></tr><tr><td><strong>Database</strong></td><td>Local-only, in-memory</td><td>PostgreSQL + Supabase with RLS, JSONB, automated triggers</td></tr><tr><td><strong>Authentication</strong></td><td>None</td><td>Supabase Auth with JWT, cookie sessions, admin impersonation</td></tr><tr><td><strong>Payments</strong></td><td>None</td><td>Stripe integration with subscription lifecycle and webhooks</td></tr><tr><td><strong>Caching</strong></td><td>None</td><td>Redis leaky bucket rate limiting with dual-client support</td></tr><tr><td><strong>Error Handling</strong></td><td>Basic try-catch</td><td>Comprehensive logging, validation, graceful degradation, error boundaries</td></tr><tr><td><strong>Scalability</strong></td><td>Local-only, single user</td><td>Dockerized 12-service stack supporting 100+ concurrent users</td></tr><tr><td><strong>Deployment</strong></td><td><code>streamlit run main.py</code></td><td>Docker multi-stage builds, GitHub Actions CI/CD, GHCR publishing</td></tr><tr><td><strong>PDF Generation</strong></td><td>DOCX export via python-docx</td><td>React-PDF with customizable document settings (margins, fonts, spacing)</td></tr></tbody></table></div>
+<h3 id="technical-innovations--problem-solving">Technical Innovations &amp; Problem-Solving</h3>
+<p><strong>1. Complex Problem: ATS Rejection Rates</strong></p>
+<ul>
+<li><strong>Problem:</strong> 75% of resumes never reach human eyes due to ATS filtering</li>
+<li><strong>Solution:</strong> Developed a multi-factor scoring algorithm combining keyword matching, semantic analysis, impact scoring, and role alignment</li>
+<li><strong>Result:</strong> 40% improved match accuracy compared to basic keyword-only approaches</li>
+</ul>
+<p><strong>2. Complex Problem: Fragmented Job Search Process</strong></p>
+<ul>
+<li><strong>Problem:</strong> Job seekers use 5+ separate tools for resume building, company research, and interview prep</li>
+<li><strong>Solution:</strong> Unified platform with seamless base-to-tailored resume workflow, integrated AI assistant, and cover letter generation</li>
+<li><strong>Result:</strong> Reduced job search preparation time by 60%</li>
+</ul>
+<p><strong>3. Complex Problem: Generic Application Materials</strong></p>
+<ul>
+<li><strong>Problem:</strong> Generic resumes/cover letters have 80% lower success rates</li>
+<li><strong>Solution:</strong> AI personalization based on specific job descriptions with tool-calling architecture for precise modifications</li>
+<li><strong>Result:</strong> Generated materials with 85% higher relevance scores</li>
+</ul>
+<p>---</p>
+<h2 id="use-cases">👥 Use Cases</h2>
+<div class="table-scroll"><table><thead><tr><th>Persona</th><th>Goal</th><th>How ApplicaAI Helps</th></tr></thead><tbody><tr><td>🎓 <strong>New Graduate</strong></td><td>Stand out in first job search</td><td>AI-optimized bullet points, keyword alignment, professional formatting</td></tr><tr><td>🔄 <strong>Career Changer</strong></td><td>Successfully transition to a new field</td><td>Tailored resume variants highlighting transferable skills</td></tr><tr><td>📈 <strong>Professional</strong></td><td>Advance to the next level</td><td>ATS scoring, quantified achievements, impact-driven language</td></tr><tr><td>💼 <strong>Freelancer</strong></td><td>Attract better clients</td><td>Multiple resume versions for different service offerings</td></tr><tr><td>🌍 <strong>Anyone</strong></td><td>Elevate existing resume</td><td>One-click AI improvements, cover letter generation, PDF export</td></tr></tbody></table></div>
+<p>---</p>
+<h2 id="future-roadmap">🗺 Future Roadmap</h2>
+<h3 id="immediate-2026">Immediate (2026)</h3>
+<ul>
+<li>[ ] Enhanced AI customization algorithms</li>
+<li>[ ] Expanded resume template library</li>
+<li>[ ] Advanced PDF styling options</li>
+<li>[ ] Application tracking dashboard with analytics</li>
+<li>[ ] LinkedIn profile synchronization</li>
+</ul>
+<h3 id="long-term-late-2026">Long Term (Late 2026+)</h3>
+<ul>
+<li>[ ] Mock interview preparation with AI feedback</li>
+<li>[ ] Salary benchmarking tools</li>
+<li>[ ] Career trajectory recommendations</li>
+<li>[ ] Native mobile applications (iOS/Android)</li>
+<li>[ ] Multi-language resume support</li>
+<li>[ ] Team/enterprise features</li>
+</ul>
+<p>---</p>
+<h2 id="contributing">🤝 Contributing</h2>
+<p>We welcome contributions from developers of all skill levels!</p>
+<h3 id="ways-to-contribute">Ways to Contribute</h3>
+<div class="table-scroll"><table><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>🐛 <strong>Bug Reports</strong></td><td>Identify and report issues for improvement</td></tr><tr><td>💡 <strong>Feature Ideas</strong></td><td>Share your vision for new capabilities</td></tr><tr><td>💻 <strong>Code Contributions</strong></td><td>Submit pull requests with new features or fixes</td></tr><tr><td>📖 <strong>Documentation</strong></td><td>Improve setup guides, API docs, or tutorials</td></tr><tr><td>🎨 <strong>Design Work</strong></td><td>Refine visual elements and UX flows</td></tr></tbody></table></div>
+<h3 id="contribution-workflow">Contribution Workflow</h3>
+<pre><code># 1. Fork the repository
+# 2. Create your feature branch
+git checkout -b feature/your-idea
+
+# 3. Make your changes and commit
+git commit -m &#39;Add your feature&#39;
+
+# 4. Push to your branch
+git push origin feature/your-idea
+
+# 5. Open a Pull Request with a detailed description</code></pre>
+<p>---</p>
+<h2 id="license">📄 License</h2>
+<p>This project is licensed under the <strong>GNU Affero General Public License v3.0 (AGPL-3.0)</strong> — a strong copyleft license designed to ensure that software remains free and open, even when used over a network.</p>
+<h3 id="what-you-are-allowed-to-do">What You Are Allowed to Do</h3>
+<div class="table-scroll"><table><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td>✅ <strong>Commercial Use</strong></td><td>Use this project and its derivatives for commercial purposes</td></tr><tr><td>✅ <strong>Modify</strong></td><td>Change, adapt, or extend the source code</td></tr><tr><td>✅ <strong>Distribute</strong></td><td>Share the original project or your modified versions</td></tr><tr><td>✅ <strong>Patent Use</strong></td><td>Contributors grant an express patent license for their contributions</td></tr><tr><td>✅ <strong>Private Use</strong></td><td>Use and modify the software privately without distribution</td></tr></tbody></table></div>
+<h3 id="conditions-you-must-follow">Conditions You Must Follow</h3>
+<div class="table-scroll"><table><thead><tr><th>Condition</th><th>Description</th></tr></thead><tbody><tr><td>📋 <strong>Preserve Notices</strong></td><td>Include a copy of the AGPL-3.0 license and retain existing copyright notices</td></tr><tr><td>📝 <strong>Document Changes</strong></td><td>Clearly state any modifications you make to the original code</td></tr><tr><td>📂 <strong>Disclose Source</strong></td><td>Make the complete corresponding source code available when distributing</td></tr><tr><td>🌐 <strong>Network Use = Distribution</strong></td><td>Running a modified version as a network service requires providing source code to users</td></tr><tr><td>🔒 <strong>Same License</strong></td><td>Distributed modifications must be licensed under AGPL-3.0</td></tr></tbody></table></div>
+<p>See the <a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a> file for complete terms.</p>
+<p>---</p>
+<h2 id="acknowledgments">🙏 Acknowledgments</h2>
+<ul>
+<li><strong><a href="https://openai.com" target="_blank" rel="noopener noreferrer">OpenAI</a></strong> — GPT-5.2 and frontier language model capabilities</li>
+<li><strong><a href="https://anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a></strong> — Claude model family for high-quality structured output</li>
+<li><strong><a href="https://deepmind.google" target="_blank" rel="noopener noreferrer">Google DeepMind</a></strong> — Gemini models via OpenRouter</li>
+<li><strong><a href="https://deepseek.com" target="_blank" rel="noopener noreferrer">DeepSeek</a></strong> — Cost-effective AI inference for free-tier access</li>
+<li><strong><a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a></strong> — AI SDK, Next.js framework, and analytics</li>
+<li><strong><a href="https://supabase.com" target="_blank" rel="noopener noreferrer">Supabase</a></strong> — Open-source Firebase alternative (Auth, PostgreSQL, Realtime)</li>
+<li><strong><a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a></strong> — Subscription billing infrastructure</li>
+<li><strong><a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">Shadcn</a></strong> — Beautiful, accessible component primitives</li>
+<li><strong><a href="https://radix-ui.com" target="_blank" rel="noopener noreferrer">Radix UI</a></strong> — Headless UI primitives for accessibility</li>
+</ul>
+<p>---</p>
+<h2 id="disclaimer">⚠️ Disclaimer</h2>
+<p>This tool generates AI-powered content that should be reviewed and customized before use. Results may vary based on input quality and API limitations. Always verify company information from official sources. ApplicaAI does not guarantee job placement or interview outcomes.</p>
+<p>---</p></details><p><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/blob/main/README.md" target="_blank" rel="noopener noreferrer">Open README on main</a></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/blob/main/src/utils/actions/index.ts#L1" target="_blank" rel="noopener noreferrer">src/utils/actions/index.ts (line 1)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>// Main entry point for all server actions
+// export * from &#39;./profiles/actions&#39;;
+// export * from &#39;./resumes/actions&#39;; 
+// export * from &#39;./jobs/actions&#39;;
+// export * from &#39;./subscriptions/actions&#39;; </code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from src/utils/actions/index.ts on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`Main`, `entry`, `point`, `all`, `server`—are useful signposts for following the behavior through the rest of the repository.</p><p>For machine-learning work, the source is only one part of the experiment. Data preparation, labels, split strategy, model configuration, hardware, and evaluation metric determine what the output means. I describe only the pieces visible in code and repository documentation; where the repository does not give a reproducible evaluation setup, I say so instead of inferring model quality from a demo.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li></li><li><ul>
+<li><a href="#environment-configuration" target="_blank" rel="noopener noreferrer">Environment Configuration</a></li>
+</ul><span id="environment-configuration-2"></span></li><li><div class="table-scroll"><table><thead><tr><th>🐳 <strong>One-Command Local Dev</strong></th><th>Full-stack local development environment via Docker Compose</th><th>12-service Docker Compose stack (PostgreSQL, Kong, GoTrue, Redis, and more)</th></tr></thead><tbody></tbody></table></div></li><li><p>items: string[];     // e.g., [&quot;TypeScript&quot;, &quot;Python&quot;, &quot;Go&quot;]</p></li><li><p>J[&quot;Job Alignment&lt;br/&gt;(Keywords + Requirements + Company Fit)&quot;]</p></li><li><p>│   ├── scripts/                    # Seeding &amp; setup scripts</p></li><li><p>│   │   ├── supabase/               # Supabase client setup</p></li><li><p>├── package.json                    # Dependencies &amp; scripts</p></li><li><p>├── .env.example                    # Environment variable template</p></li><li><div class="table-scroll"><table><thead><tr><th><strong>Node.js</strong></th><th>≥ 20.0.0</th><th>Required by Next.js 15</th></tr></thead><tbody></tbody></table></div></li><li><h3 id="installation-1">Installation</h3></li><li><h1 id="2-install-dependencies">2. Install dependencies</h1></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/f5e25689d559374e3fef4325fc5bd3bcf5428ca7" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>f5e2568</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/79e6f2f739828100115b678a2740fed9292cb045" target="_blank" rel="noopener noreferrer">Remove ignored files and folders from tracking</a></strong><code>79e6f2f</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/1389c40e5441fefb2dc3e2858316118e8e9d2a19" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1389c40</code></div></li><li><time>2025-08-24</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/030e86715cf62452cbc98d4b9018484d60f84ce5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>030e867</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/7bd206e11a9407146f29f6c73e4b8f541573c376" target="_blank" rel="noopener noreferrer">trying push</a></strong><code>7bd206e</code></div></li><li><time>2026-01-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/99fb63d6abcbfc3297a30d2d5f6da6edf071cb23" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>99fb63d</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/1ea14f67e963ea431a7f4942a6951e86aa771c98" target="_blank" rel="noopener noreferrer">Fix Dockerfile missing content dir copy and remove STRIPE_SECRET_KEY build warning</a></strong><code>1ea14f6</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/dcac5862f482b51c7dd1a5c522019e3a9bcb93f4" target="_blank" rel="noopener noreferrer">docs: update architecture diagrams for light mode</a></strong><code>dcac586</code></div></li></ol><details class="history-details"><summary>Show all 31 commits on main</summary><ol class="timeline compact"><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/f5e25689d559374e3fef4325fc5bd3bcf5428ca7" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>f5e2568</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/79e6f2f739828100115b678a2740fed9292cb045" target="_blank" rel="noopener noreferrer">Remove ignored files and folders from tracking</a></strong><code>79e6f2f</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/ba46a863f4cf445d461cecd654b0ca540c764b93" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>ba46a86</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/e5daa0c7927f221515653ed5a559f65354549a35" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e5daa0c</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/6a492ce58de231bd51026e97e514a964db3138b1" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6a492ce</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/e3d500b3c74129ecfecbe8deaccb227d923ecf4a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>e3d500b</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/1389c40e5441fefb2dc3e2858316118e8e9d2a19" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1389c40</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/a1e2f948b0a8e2bf9ecd8c411cec5ad456f98a2d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>a1e2f94</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/50de5d1068a91ab9064859a6ad63bae0e1d7d1ac" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>50de5d1</code></div></li><li><time>2025-08-20</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/b64be07cfe178f2fd6c2da4c8df952479a1f5e22" target="_blank" rel="noopener noreferrer">Create LICENSE</a></strong><code>b64be07</code></div></li><li><time>2025-08-24</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/2426eb16665087c8a7b3bcaf59645c70585d1e9c" target="_blank" rel="noopener noreferrer">update README.md</a></strong><code>2426eb1</code></div></li><li><time>2025-08-24</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/17a3df32a099aa1bfcf0e5546023c80ab757daae" target="_blank" rel="noopener noreferrer">update README.md to fix formatting</a></strong><code>17a3df3</code></div></li><li><time>2025-08-24</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/88ac8509b3ae73851575691191bbbbc74a46d072" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>88ac850</code></div></li><li><time>2025-08-24</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/030e86715cf62452cbc98d4b9018484d60f84ce5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>030e867</code></div></li><li><time>2025-12-05</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/56d17028b09346a95fe8c2e05609ad8b0d8a0c1d" target="_blank" rel="noopener noreferrer">save recent big changes to github to keep a copy in case anything happens to the local env</a></strong><code>56d1702</code></div></li><li><time>2025-12-05</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/8fd9955fc26e38bf560389a9ed2878c783c93538" target="_blank" rel="noopener noreferrer">Document project transformation and updates</a></strong><code>8fd9955</code></div></li><li><time>2025-12-05</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/d20a9498d016c2b6692cfcb35243d695c1a026ba" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d20a949</code></div></li><li><time>2026-01-01</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/f5b728bc30783f52fc6157f612e357708912d4ff" target="_blank" rel="noopener noreferrer">new code updates</a></strong><code>f5b728b</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/cfaf24b8bbf511f32646ea9d60b640454051e622" target="_blank" rel="noopener noreferrer">new big updates now we have completely updated ApplicaAI as an SaaS service</a></strong><code>cfaf24b</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/f1966ea066867689e6fff93908893d4d791025f8" target="_blank" rel="noopener noreferrer">commit to fix the directory of files</a></strong><code>f1966ea</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/9d7001733b116b623df23d98f620062da1d2648d" target="_blank" rel="noopener noreferrer">commit to try to remove .vscode/ and ./history from the repo</a></strong><code>9d70017</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/7bd206e11a9407146f29f6c73e4b8f541573c376" target="_blank" rel="noopener noreferrer">trying push</a></strong><code>7bd206e</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/5de9712c6c2006b12332f377920dde41f48029d5" target="_blank" rel="noopener noreferrer">Delete .vscode directory</a></strong><code>5de9712</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/50e26422b61a1489adcb661968e24541580f11e3" target="_blank" rel="noopener noreferrer">fix readme.md, .cursorrules, and add youtube video for demo of our latest updated SaaS webapp</a></strong><code>50e2642</code></div></li><li><time>2026-01-04</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/06f40ab511a7884a03e63bd256c56d8e76fa62bd" target="_blank" rel="noopener noreferrer">fix images</a></strong><code>06f40ab</code></div></li><li><time>2026-01-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/1b2e0c9d2fa7e2114f212b9036606ac353fa9124" target="_blank" rel="noopener noreferrer">Add GNU AGPL v3 license</a></strong><code>1b2e0c9</code></div></li><li><time>2026-01-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/99fb63d6abcbfc3297a30d2d5f6da6edf071cb23" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>99fb63d</code></div></li><li><time>2026-01-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/141f431702ae5a5c115620debc6f0ca12e363218" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>141f431</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/c824afb38b26f2eef4015cfbab9c86244798e0f1" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c824afb</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/1ea14f67e963ea431a7f4942a6951e86aa771c98" target="_blank" rel="noopener noreferrer">Fix Dockerfile missing content dir copy and remove STRIPE_SECRET_KEY build warning</a></strong><code>1ea14f6</code></div></li><li><time>2026-06-06</time><div><strong><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commit/dcac5862f482b51c7dd1a5c522019e3a9bcb93f4" target="_blank" rel="noopener noreferrer">docs: update architecture diagrams for light mode</a></strong><code>dcac586</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 31 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (2)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/tree/main" target="_blank" rel="noopener noreferrer">main</a> · dcac586 · 2026-06-06 · docs: update architecture diagrams for light mode</li><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/tree/cleaned-history" target="_blank" rel="noopener noreferrer">cleaned-history</a> · 3e758ea · 2026-01-04 · trying push</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The June history includes fixing a Docker build that omitted content and removing a secret-key build warning. Deployment configuration matters even when the visible product is mostly text.</p><p>The lasting lesson is specific to this record: The interesting part is connecting several tools into one workflow while keeping generated recommendations reviewable by the applicant. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/AI-Powered_Professional_Job_Application_Assistant</a></li><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/AI-Powered_Professional_Job_Application_Assistant/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./github-skills-pr-clarifying-the-game-over-prompt.html"><small>NEWER STORY</small><strong>← GitHub Skills PR: clarifying the game-over prompt</strong></a><a class="older" href="./prototyping-debian-s-attack-of-the-clones-vulnerability-search.html"><small>OLDER STORY</small><strong>Prototyping Debian&#39;s “Attack of the Clones” vulnerability search →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: job-assistant · Evidence reviewed November 8, 2026</span></footer></main></body></html>

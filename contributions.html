@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="A linked public record of Johnnie Tse's open-source pull requests, issues, comments, and reviews.">
+  <title>Open-source activity — Johnnie Tse</title>
+  <style>
+    :root { color-scheme: light; --paper:#f5f4ef; --surface:#fffefa; --ink:#202721; --muted:#515d53; --line:#d6ddd3; --green:#355b45; --green-strong:#234332; --green-soft:#e8eee6; --orange:#c16d43; --serif:Georgia,"Times New Roman",serif; --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+    [data-theme="dark"] { color-scheme:dark; --paper:#151b17; --surface:#1e2721; --ink:#edf1e9; --muted:#c0c9bf; --line:#465349; --green:#a7c4aa; --green-strong:#c2d8c2; --green-soft:#29392e; --orange:#e3a17c; }
+    * { box-sizing:border-box; } body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.65 var(--sans); } a { color:inherit; text-decoration:none; }
+    .topbar { height:70px; border-bottom:1px solid var(--line); } .topbar-inner { max-width:1100px; height:100%; margin:auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:11px; } .mark { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--green); color:white; font:700 12px var(--mono); } .brand-name { font-size:14px; font-weight:750; letter-spacing:.1em; text-transform:uppercase; } .brand-sub { display:block; color:var(--muted); font:12px var(--mono); }
+    .back-link { color:var(--green); font-size:14px; } .page { max-width:980px; margin:auto; padding:54px 30px 72px; }
+    .eyebrow { margin:0 0 14px; color:var(--green); font:12px var(--mono); letter-spacing:.08em; } h1 { max-width:780px; margin:0; font:500 clamp(40px,7vw,64px)/1.04 var(--serif); letter-spacing:-.045em; } .lede { max-width:780px; color:var(--ink); font-size:16px; line-height:1.75; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); gap:9px; margin:24px 0 30px; } .stat { padding:11px 13px; border:1px solid var(--line); border-radius:7px; background:var(--surface); color:var(--green-strong); font:12px/1.5 var(--sans); } .stat strong { display:block; margin-bottom:3px; font:24px/1.1 var(--serif); }
+    .controls { position:sticky; z-index:2; top:0; padding:14px 0; background:var(--paper); } .search { width:100%; height:48px; padding:0 14px; border:1px solid var(--line); border-radius:7px; outline:0; background:var(--surface); color:var(--ink); font-size:15px; } .search:focus { border-color:var(--green); }
+    .filters { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; } .filter { padding:8px 12px; border:1px solid var(--line); border-radius:99px; background:var(--surface); color:var(--ink); cursor:pointer; font:13px var(--sans); } .filter.active,.filter:hover { border-color:var(--green); background:var(--green-soft); color:var(--green-strong); }
+    .section-label { display:flex; align-items:center; gap:10px; margin:35px 0 12px; color:var(--muted); font:12px var(--mono); letter-spacing:.06em; }
+    .entry { padding:22px 0 24px; border-top:1px solid var(--line); } .entry-head { display:flex; align-items:start; justify-content:space-between; gap:18px; } .entry h2 { margin:0; font:23px/1.3 var(--serif); } .entry h2 a:hover,.entry-links a:hover { color:var(--green); text-decoration:underline; text-underline-offset:3px; } .meta { display:flex; flex-wrap:wrap; gap:7px 12px; margin:7px 0 10px; color:var(--muted); font:12px/1.5 var(--sans); }
+    .kind { flex:none; padding:6px 9px; border-radius:5px; background:var(--green-soft); color:var(--green-strong); font:12px var(--sans); font-weight:650; } .body { max-width:780px; margin:10px 0 0; color:var(--ink); font-size:14px; line-height:1.7; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .entry-body { max-width:800px; margin-top:11px; padding:10px 13px; border:1px solid var(--line); border-radius:7px; background:var(--surface); } .entry-body summary { color:var(--green-strong); cursor:pointer; font-size:14px; font-weight:650; }
+    .entry-links { display:flex; flex-wrap:wrap; gap:15px; margin-top:11px; color:var(--green); font-size:14px; font-weight:600; } .entry[hidden] { display:none; } .empty { display:none; padding:30px; border-top:1px solid var(--line); color:var(--muted); text-align:center; } .empty.show { display:block; }
+    footer { max-width:980px; margin:auto; padding:18px 30px 28px; border-top:1px solid var(--line); color:var(--muted); font:13px var(--sans); }
+    @media(max-width:600px){.topbar-inner,.page,footer{padding-inline:19px}.page{padding-top:40px}.entry-head{display:block}.kind{display:inline-block;margin-top:9px}.back-link{font-size:11px}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner"><a class="brand" href="./index.html"><span class="mark">JT</span><span><span class="brand-name">Fieldnotes</span><span class="brand-sub">Johnnie Tse · engineering notes</span></span></a><a class="back-link" href="./index.html">← Back to the project timeline</a></div></header>
+  <main class="page">
+    <p class="eyebrow">Public contribution archive · scanned November 8, 2026</p>
+    <h1>Open-source contributions &amp; review notes</h1>
+    <p class="lede">This activity ledger keeps the public evidence close: upstream pull requests, related public-fork and self-repository/practice PRs, issues I opened or joined, discussion comments, and inline review notes. Each PR links to its commit list. PR and issue entries show whether they were open, closed, merged, or closed without a recorded merge; comment entries link to the exact public comment where GitHub provides a permalink.</p>
+    <div class="stats" id="stats"></div>
+    <p class="lede">The stories in the main timeline explain the context, environment, debugging path, decisions, and lessons. This page is the source register. Five repositories that were inaccessible in the first scan are now public and included in the project timeline. Private repositories do not need to be made public.</p>
+    <p class="lede">One GitHub reviewed-by search result for <code>johnnietse/skills-review-pull-requests#2</code> had a 404 from the review API. Its PR is listed, but I do not invent review text that could not be verified.</p>
+    <div class="controls"><label for="activity-search" hidden>Search public contributions</label><input class="search" id="activity-search" type="search" placeholder="Search repositories, issues, PRs, comments, or review text…"><div class="filters" id="activity-filters"></div></div>
+    <div class="section-label" id="ledger-heading">Activity · newest first</div>
+    <div id="activity-list"></div>
+    <p class="empty" id="empty-state">No activity matches that search.</p>
+  </main>
+  <footer>Public GitHub record only · <a href="https://github.com/johnnietse">github.com/johnnietse</a> · <a href="./index.html">Return to Fieldnotes</a></footer>
+  <script src="./activity-data.js"></script>
+  <script src="./posts.js"></script>
+  <script src="./contribution-stories.js"></script>
+  <script>
+    const rows = [...window.OPEN_SOURCE_ACTIVITY].sort((a,b) => (b.updated || b.date || "").localeCompare(a.updated || a.date || ""));
+    const storyPosts = window.BLOG_POSTS || [];
+    const categories = ["All", "Pull request", "Fork PR", "Repository PR", "Issue", "Issue discussion", "Comment", "Inline review comment", "Review submission"];
+    const categoryLabels = {"All":"All activity","Pull request":"Upstream PRs","Fork PR":"Public fork PRs","Repository PR":"Personal or practice PRs","Issue":"Issues opened","Issue discussion":"Issue discussions","Comment":"Discussion comments","Inline review comment":"Inline review comments","Review submission":"Review submissions"};
+    const organizationLabels = {"kubernetes-sigs":"Kubernetes SIGs","llm-d":"llm-d","solana-foundation":"Solana Foundation","MLH-Fellowship":"MLH Fellowship","docker":"Docker Desktop","Queen-s-High-Performance-Computing":"Queen's HPC","Mantevo":"Mantevo"};
+    let selected = "All";
+    const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    function storyForActivity(row) {
+      const target = String(row.url || "").match(/^https:\/\/github\.com\/([^/]+\/[^/]+)\/(?:pull|issues)\/(\d+)/i);
+      const repo = target ? target[1] : row.repo;
+      const number = target ? target[2] : String(row.number);
+      return storyPosts.find(post => post.repo === repo && (post.links || []).some(link => {
+        const linked = String(link.url || "").match(/^https:\/\/github\.com\/([^/]+\/[^/]+)\/(?:pull|issues)\/(\d+)/i);
+        return linked && linked[1] === repo && linked[2] === number;
+      }));
+    }
+    function articleSlug(post) {
+      return String(post.title || post.id).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+    const formatDate = value => value ? new Date(value).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric",timeZone:"UTC"}) : "Date unavailable";
+    const stats = [
+      [String(rows.filter(x=>x.kind==="Pull request").length), "Upstream pull requests"],
+      [String(rows.filter(x=>x.kind==="Fork PR").length), "Public fork pull requests"],
+      [String(rows.filter(x=>x.kind==="Repository PR").length), "Personal or practice pull requests"],
+      [String(rows.filter(x=>x.kind==="Issue").length), "Public issues opened"],
+      [String(rows.filter(x=>x.kind==="Issue discussion").length), "Issue discussions joined"],
+      [String(rows.filter(x=>x.kind==="Comment").length), "Discussion comments"],
+      [String(rows.filter(x=>x.kind==="Inline review comment").length), "Inline review comments"],
+      [String(rows.filter(x=>x.kind==="Review submission").length), "Review submissions"]
+    ];
+    document.getElementById("stats").innerHTML = stats.map(([count,label]) => '<span class="stat"><strong>'+escapeHTML(count)+'</strong>'+escapeHTML(label)+'</span>').join("");
+    const filters = document.getElementById("activity-filters");
+    const list = document.getElementById("activity-list");
+    const search = document.getElementById("activity-search");
+    function renderFilters(){
+      filters.innerHTML = categories.map(c=>'<button class="filter '+(c===selected?'active':'')+'" type="button" data-kind="'+escapeHTML(c)+'" aria-pressed="'+(c===selected)+'">'+escapeHTML(categoryLabels[c])+'</button>').join("");
+      filters.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{selected=b.dataset.kind;renderFilters();renderRows();}));
+    }
+    function renderRows(){
+      const term=search.value.trim().toLowerCase();
+      const matching=rows.filter(r=>(selected==="All"||r.kind===selected)&&(!term||[r.kind,r.status,r.repo,r.number,r.title,r.body].join(" ").toLowerCase().includes(term)));
+      list.innerHTML=matching.map(r=>{
+        const title=escapeHTML(r.title||r.kind);
+        const pullLinks=(r.kind==="Pull request"||r.kind==="Fork PR"||r.kind==="Repository PR")?'<a href="'+escapeHTML(r.commitsUrl)+'" target="_blank" rel="noopener noreferrer">View commits</a>':'';
+        const note=r.body?'<details class="entry-body"><summary>Read full '+(r.kind.includes("comment")||r.kind==="Comment"?"comment or review text":"PR or issue description")+'</summary><p class="body">'+escapeHTML(r.body)+'</p></details>':'';
+        const status=r.status?'<span>Status: '+escapeHTML(r.status)+'</span>':'';
+        const story=storyForActivity(r);
+        const storyLink=story?'<a href="./articles/'+escapeHTML(articleSlug(story))+'.html">Read related reflection</a>':'';
+        const parts=String(r.repo||"").split("/");
+        const repoLabel=parts.length>1?(organizationLabels[parts[0]]||parts[0])+" / "+parts.slice(1).join("/"):r.repo;
+        const dateMeta=(r.updated&&r.updated!==r.date&&(r.kind==="Pull request"||r.kind==="Fork PR"||r.kind==="Repository PR"||r.kind==="Issue"))?'<span>Last activity: '+formatDate(r.updated)+'</span><span>Opened: '+formatDate(r.date)+'</span>':'<span>'+formatDate(r.updated||r.date)+'</span>';
+        return '<article class="entry"><div class="entry-head"><div><h2><a href="'+escapeHTML(r.url)+'" target="_blank" rel="noopener noreferrer">'+title+'</a></h2><div class="meta">'+dateMeta+'<span>'+escapeHTML(repoLabel)+'</span><span>#'+escapeHTML(r.number)+'</span>'+status+'</div></div><span class="kind">'+escapeHTML(categoryLabels[r.kind]||r.kind)+'</span></div>'+note+'<div class="entry-links"><a href="'+escapeHTML(r.url)+'" target="_blank" rel="noopener noreferrer">Open GitHub thread</a>'+pullLinks+storyLink+'</div></article>';
+      }).join("");
+      document.getElementById("ledger-heading").textContent="Activity · newest first · "+matching.length+" entries";
+      document.getElementById("empty-state").classList.toggle("show",matching.length===0);
+    }
+    renderFilters();renderRows();search.addEventListener("input",renderRows);
+  </script>
+</body>
+</html>

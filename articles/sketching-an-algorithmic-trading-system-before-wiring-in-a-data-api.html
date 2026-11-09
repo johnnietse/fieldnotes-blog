@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A multi-asset crypto trading framework explores indicators, backtesting, and performance analysis."><title>Sketching an algorithmic trading system before wiring in a data API · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Design &amp; team projects</p><div class="title-cover"><div><h1>Sketching an algorithmic trading system before wiring in a data API</h1><p class="dek">A multi-asset crypto trading framework explores indicators, backtesting, and performance analysis.</p></div><img src="https://github.com/user-attachments/assets/263ef957-6b27-4680-bf73-b66675a6ab6b" alt="download (8)" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started June 2, 2025</span><span>Updated July 11, 2025</span><span>~8 min read</span></div><div class="tags"><span class="tag">Python</span><span class="tag">Trading</span><span class="tag">Backtesting</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The README labels it a design concept for a larger trading system, which is an important scope boundary.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A multi-asset crypto trading framework explores indicators, backtesting, and performance analysis.. The repository history snapshot records 19 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The README labels it a design concept for a larger trading system, which is an important scope boundary.</p><p>This project sits in Design &amp; team projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The interesting part is designing a pipeline that separates data, signals, risk, and evaluation.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A multi-asset crypto trading framework explores indicators, backtesting, and performance analysis.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The following is the project’s own public documentation. It is included as technical context, with links back to its original source.</p><h1 id="cryptocurrency-trading-system">Cryptocurrency Trading System</h1>
+<h2 id="overview">Overview</h2>
+<p>This Cryptocurrency Trading System is a sophisticated Python framework (more like a design concept for an actual system) for algorithmic trading that features multi-asset support, technical indicators, backtesting capabilities, and performance analytics. This system implements a dual moving average crossover strategy to generate trading signals and provides comprehensive portfolio simulation.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="btc-usd">BTC-USD</h3>
+<p><img src="https://github.com/user-attachments/assets/263ef957-6b27-4680-bf73-b66675a6ab6b" alt="download (8)" loading="lazy"> <img src="https://github.com/user-attachments/assets/c7c362ce-bcec-49af-8ade-331c2e43d669" alt="download (9)" loading="lazy"></p>
+<h3 id="eth-usd">ETH-USD</h3>
+<p><img src="https://github.com/user-attachments/assets/21678f29-e8f4-48df-abd6-2b240ac9bf65" alt="download (10)" loading="lazy"> <img src="https://github.com/user-attachments/assets/d6559b6f-ac5d-497e-bf62-8c52298b89e3" alt="download (11)" loading="lazy"></p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li>Multi-Asset Support: Simultaneously analyze multiple cryptocurrencies (BTC, ETH, etc.)</li>
+<li>Technical Indicators: Dual moving average crossover strategy</li>
+<li>Backtesting Engine: Simulate trading strategies with configurable capital</li>
+<li>Performance Metrics: Sharpe ratio, volatility, max drawdown, and more</li>
+<li>Visual Analytics: Professional-grade visualizations of signals and performance</li>
+<li>Modular Architecture: Easily extendable components for custom strategies</li>
+</ul>
+<h2 id="system-architecture">System Architecture</h2>
+<p><code>Data Acquisition</code> --&gt; <code>Technical Analysis</code> --&gt; <code>Backtesting</code> --&gt; <code>Performance Analytics</code> --&gt; <code>Visualization</code></p>
+<h2 id="modules">Modules</h2>
+<ol>
+<li>Data Acquisition with the <code>CryptoDataFetcher</code> function</li>
+</ol>
+<ul>
+<li>Fetches historical market data from Yahoo Finance</li>
+<li>Supports multiple assets and customizable timeframes</li>
+<li>Automatic data cleaning and normalization</li>
+</ul>
+<ol>
+<li>Technical Analysis with the <code>TradingSignalsGenerator</code> function </li>
+</ol>
+<ul>
+<li>Computes fast (10-period) and slow (40-period) moving averages</li>
+<li>Generates buy/sell signals based on MA crossovers</li>
+<li>Signal visualization with entry/exit markers</li>
+</ul>
+<ol>
+<li>Backtesting Framework with the <code>PortfolioSimulator</code> function</li>
+</ol>
+<ul>
+<li>Simulates strategy performance with configurable starting capital</li>
+<li>Tracks strategy returns vs buy-and-hold benchmark</li>
+<li>Calculates position-based returns with realistic assumptions</li>
+</ul>
+<ol>
+<li>Visualization with the <code>TradingVisualizer</code> function</li>
+</ol>
+<ul>
+<li>Professional trading charts with technical indicators</li>
+<li>Portfolio performance comparison visuals</li>
+<li>Publication-quality figures with high DPI settings</li>
+</ul>
+<ol>
+<li>Performance Analytics</li>
+</ol>
+<ul>
+<li>Key metrics: Sharpe ratio, annual volatility, max drawdown</li>
+<li>Strategy vs buy-and-hold comparison</li>
+<li>Risk-adjusted return calculations</li>
+</ul>
+<h2 id="installation--dependencies">Installation &amp; Dependencies</h2>
+<pre><code>pip install yfinance pandas numpy matplotlib seaborn scikit-learn</code></pre>
+<h2 id="usage">Usage</h2>
+<pre><code>if __name__ == &quot;__main__&quot;:
+    # Configuration
+    ASSETS = [&#39;BTC-USD&#39;, &#39;ETH-USD&#39;]  # Add more assets as needed
+    START = &#39;2020-01-01&#39;
+    END = &#39;2020-12-31&#39;
+    INITIAL_CAPITAL = 10000.0
+
+    # Data pipeline
+    data_engine = CryptoDataFetcher(ASSETS, START, END)
+    market_datasets = data_engine.fetch_market_data()
+
+    for symbol, dataset in market_datasets.items():
+        print(f&quot;\nProcessing {symbol}:&quot;)
+        print(&quot;=&quot; * 50)
+
+        # Signal generation
+        analysis_engine = TradingSignalsGenerator(dataset)
+        # Compute moving averages and store them in analysis_engine.data
+        data_with_indicators = analysis_engine.compute_moving_averages(short_window=10, long_window=40)
+        signal_data = analysis_engine.generate_trading_signals()
+
+        # Backtesting
+        simulator = PortfolioSimulator(INITIAL_CAPITAL)
+        # The portfolio simulation uses the original dataset for returns calculation,
+        # but the trading strategy logic relies on signal_data which was derived
+        # from the data with indicators. This part is okay as is.
+        portfolio_results = simulator.simulate_strategy(dataset, signal_data)
+
+        # Performance analysis
+        performance = calculate_performance_metrics(portfolio_results)
+        print(&quot;\nPerformance Metrics:&quot;)
+        for metric, value in performance.items():
+            print(f&quot;{metric}: {value:.4f}&quot;)
+
+        # Visualization
+        # Pass the DataFrame containing the indicators (Fast_MA and Slow_MA)
+        TradingVisualizer.plot_price_signals(data_with_indicators, signal_data, symbol)
+        TradingVisualizer.plot_performance_comparison(portfolio_results)
+
+    plt.show()</code></pre>
+<h2 id="sample-output">Sample Output</h2>
+<p>Processing BTC-USD: ==================================================</p>
+<p>Performance Metrics: Total Return: 3.2878 Annual Volatility: 0.4030 Sharpe Ratio: 2.6966 Max Drawdown: -0.2296 MSE vs Buy&amp;Hold: 1882237.5880</p>
+<p>Processing ETH-USD: ==================================================</p>
+<p>Performance Metrics: Total Return: 5.4548 Annual Volatility: 0.5688 Sharpe Ratio: 2.5508 Max Drawdown: -0.3017 MSE vs Buy&amp;Hold: 23582755.0118</p>
+<h2 id="visualizations">Visualizations</h2>
+<ol>
+<li>Price Action with Trading Signals:</li>
+</ol>
+<ul>
+<li>Closing price with fast/slow moving averages</li>
+<li>Green triangles for buy signals</li>
+<li>Red triangles for sell signals</li>
+</ul>
+<ol>
+<li>Portfolio Performance Comparison:</li>
+</ol>
+<ul>
+<li>Strategy performance vs buy-and-hold approach</li>
+<li>Annotated final portfolio values</li>
+<li>Equity curve visualization</li>
+</ul>
+<h2 id="risk-disclosure">Risk Disclosure</h2>
+<p>Cryptocurrency trading involves substantial risk of loss and is not suitable for every investor. Past performance is not indicative of future results. This system is for educational purposes only and should not be considered financial advice.</p>
+<p>Note: This is a simulation framework only - not financial advice. Always test strategies with historical data before live trading.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the Apache License 2.0. See the LICENSE file for details.</p>
+<p>---</p>
+<h2 id="major-system-upgrades--improvements-june-20th-2025">Major System Upgrades &amp; Improvements (June 20th, 2025)</h2>
+<p>This new repository (https://github.com/johnnietse/cryptocurrency-trading-system-with-coingecko-api.git) now features a significantly enhanced cryptocurrency trading system with these key upgrades from the original Yahoo Finance-based version:</p>
+<ol>
+<li>Premium Data Source Migration</li>
+</ol>
+<ul>
+<li>Replaced Yahoo Finance with CoinGecko API for more reliable, institutional-grade cryptocurrency data</li>
+<li>Added support for 28+ cryptocurrencies with proper coin ID mapping</li>
+</ul>
+<ol>
+<li>Intelligent API Management</li>
+</ol>
+<ul>
+<li>Implemented robust rate limit handling with automatic throttling (50 calls/min)</li>
+<li>Added exponential backoff during rate limit errors (5s → 10s → 20s)</li>
+<li>Integrated API usage tracking with detailed performance reporting</li>
+</ul>
+<ol>
+<li>Enhanced Data Processing</li>
+</ol>
+<ul>
+<li>Added missing data imputation (forward/backward filling)</li>
+<li>Implemented daily OHLC resampling from raw API data</li>
+<li>Added trading volume integration where available</li>
+</ul>
+<ol>
+<li>Professional Visualization Upgrades</li>
+</ol>
+<ul>
+<li>Improved signal annotation styling with clear buy/sell markers</li>
+<li>Enhanced portfolio comparison charts with value callouts</li>
+<li>Added professional formatting for publication-quality outputs</li>
+</ul>
+<ol>
+<li>Advanced Error Handling</li>
+</ol>
+<ul>
+<li>Implemented network timeout resilience</li>
+<li>Added comprehensive API error diagnostics</li>
+<li>Created empty dataset safeguards</li>
+</ul>
+<ol>
+<li>Performance Optimizations</li>
+</ol>
+<ul>
+<li>Reduced data pipeline runtime through smart request batching</li>
+<li>Added concurrent processing for multi-asset analysis</li>
+</ul>
+<ol>
+<li>Risk Management Features</li>
+</ol>
+<ul>
+<li>Implemented data validation checks throughout pipeline</li>
+<li>Added retry mechanisms for failed API calls (3 attempts)</li>
+</ul>
+<p>Expanded Asset Support</p>
+<pre><code>### Original (2 assets)
+ASSETS = [&#39;BTC-USD&#39;, &#39;ETH-USD&#39;]
+
+### Enhanced (28+ assets)
+ASSETS = [ &#39;BTC-USD&#39;, &#39;ETH-USD&#39;, &#39;LTC-USD&#39;, &#39;XRP-USD&#39;, &#39;ADA-USD&#39;, &#39;DOGE-USD&#39;, &#39;SOL-USD&#39;, &#39;BNB-USD&#39;, &#39;DOT-USD&#39;, &#39;AVAX-USD&#39;, &#39;MATIC-USD&#39;, &#39;SHIB-USD&#39;, &#39;TRX-USD&#39;, &#39;LINK-USD&#39;, &#39;ATOM-USD&#39;]</code></pre>
+<p><strong>Key System Advantage</strong>: The new CoinGecko integration provides more consistent historical data, especially for newer altcoins, while the rate limit handling ensures reliable operation under the free API tier.</p>
+<p>This upgraded system maintains all original features (dual MA strategy, backtesting, performance metrics) while delivering professional-grade reliability and expanded cryptocurrency coverage. The core architecture remains modular for easy extension, but now with enterprise-level robustness.</p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/cryptocurrency-trading-system/blob/main/advanced_crypto_trading_system.py#L28" target="_blank" rel="noopener noreferrer">advanced_crypto_trading_system.py (line 28)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>
+
+# DATA ACQUISITION MODULE
+class CryptoDataFetcher:
+    def __init__(self, assets, start_date, end_date):
+        self.tickers = assets
+        self.start = start_date
+        self.end = end_date
+        self.datasets = {}
+
+    def fetch_market_data(self, interval=&#39;1d&#39;):
+        &quot;&quot;&quot;Retrieve multi-asset historical data&quot;&quot;&quot;
+        for symbol in self.tickers:
+            self.datasets[symbol] = market_data.download(
+                symbol,
+                start=self.start,
+                end=self.end,
+                interval=interval
+            ).dropna()
+        return self.datasets
+
+
+# TECHNICAL ANALYSIS ENGINE
+class TradingSignalsGenerator:
+    def __init__(self, price_data):
+        self.data = price_data.copy()
+        self.signals = pd.DataFrame(index=self.data.index)
+
+    def compute_moving_averages(self, short_window=10, long_window=40):
+        &quot;&quot;&quot;Calculate dual moving averages&quot;&quot;&quot;
+        self.data[&#39;Fast_MA&#39;] = self.data[&#39;Close&#39;].rolling(window=short_window, min_periods=1).mean()
+        self.data[&#39;Slow_MA&#39;] = self.data[&#39;Close&#39;].rolling(window=long_window, min_periods=1).mean()
+        return self.data
+
+    def generate_trading_signals(self):
+        &quot;&quot;&quot;Create position-based trading signals&quot;&quot;&quot;
+        self.signals[&#39;Position&#39;] = np.where(self.data[&#39;Fast_MA&#39;] &gt; self.data[&#39;Slow_MA&#39;], 1.0, 0.0)
+        self.signals[&#39;Entry&#39;] = self.signals[&#39;Position&#39;].diff()
+        return self.signals
+
+
+# BACKTESTING FRAMEWORK</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from advanced_crypto_trading_system.py on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`DATA`, `ACQUISITION`, `MODULE`, `CryptoDataFetcher`, `def`—are useful signposts for following the behavior through the rest of the repository.</p><p>To read a code sample responsibly, I ask three questions: what values enter this block, what state does it change, and where is its result consumed? The source file and linked history give those surrounding call sites. If a README or test file describes the expected behavior, that provides a checkable target; otherwise the snippet is evidence about structure, not a result or benchmark.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><p>This Cryptocurrency Trading System is a sophisticated Python framework (more like a design concept for an actual system) for algorithmic trading that features multi-asset support, technical indicators, backtesting capabilities, and performance analytics. This system implements a dual moving average crossover strategy to generate trading signals and provides comprehensive portfolio simulation.</p></li><li><h2 id="installation--dependencies-1">Installation &amp; Dependencies</h2></li><li><p>pip install yfinance pandas numpy matplotlib seaborn scikit-learn</p></li><li><pre><code></code></pre></li><li><pre><code></code></pre></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/b41b26cd2365646941498c48f8051510fd0faef3" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>b41b26c</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/436f154084dffb9064c146ac3800ef781d7c4d19" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>436f154</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/6ea69405aee429c1b066b7328aa6f4fbd91d7abc" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6ea6940</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/925a88cc0f8233007216647c51473025378f1717" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>925a88c</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/5be9fe201fd8d73c947083367960822b6309d83b" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>5be9fe2</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/c3ec5796806e6aa2e2fc8fa309fbcb35fb4d8ee1" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c3ec579</code></div></li><li><time>2025-07-08</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/52a6bac1a2b2cbebe893394ed8d47087a5881348" target="_blank" rel="noopener noreferrer">Create LICENSE</a></strong><code>52a6bac</code></div></li><li><time>2025-07-11</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/83d365e9eb84948a2097c0669eb0dc9e3d696c3c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>83d365e</code></div></li></ol><details class="history-details"><summary>Show all 19 commits on main</summary><ol class="timeline compact"><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/b41b26cd2365646941498c48f8051510fd0faef3" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>b41b26c</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/436f154084dffb9064c146ac3800ef781d7c4d19" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>436f154</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/064dc6e582802658e3fb6815f4afd7f68e6fa6d9" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>064dc6e</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/1b65826d0393df64ebd6a7053c0cc24031560011" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1b65826</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/6ea69405aee429c1b066b7328aa6f4fbd91d7abc" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6ea6940</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/7d9ee49d97a10c373bb6c2419f8c0daf6a0e7afb" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>7d9ee49</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/247c55a042db8b246978d9cecdfdf2f3a9828820" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>247c55a</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/78ba8bb4904f8a5d9ffac5063ca4da3647b8367d" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>78ba8bb</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/925a88cc0f8233007216647c51473025378f1717" target="_blank" rel="noopener noreferrer">Add files via upload</a></strong><code>925a88c</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/b97f8f66f26c13ef86c918f9880ad48bcc8231fa" target="_blank" rel="noopener noreferrer">Delete advanced_crypto_trading_system_api.py</a></strong><code>b97f8f6</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/807302b1cc794a406374f3ee6d5bb7c9605ce67c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>807302b</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/7f4fb5365f5d954a021afbf38b8622e11ac65a25" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>7f4fb53</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/5be9fe201fd8d73c947083367960822b6309d83b" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>5be9fe2</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/c7f970a42ec3d18d351c2001d3672a99b1aed0ab" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c7f970a</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/c6504b6e4a0e2a8ab991f8798e8218ac4df15a1e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c6504b6</code></div></li><li><time>2025-06-20</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/c3ec5796806e6aa2e2fc8fa309fbcb35fb4d8ee1" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c3ec579</code></div></li><li><time>2025-07-08</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/cf1c6d668445b7c72a7c9b355deaee1e2d58185f" target="_blank" rel="noopener noreferrer">Delete LICENSE</a></strong><code>cf1c6d6</code></div></li><li><time>2025-07-08</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/52a6bac1a2b2cbebe893394ed8d47087a5881348" target="_blank" rel="noopener noreferrer">Create LICENSE</a></strong><code>52a6bac</code></div></li><li><time>2025-07-11</time><div><strong><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commit/83d365e9eb84948a2097c0669eb0dc9e3d696c3c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>83d365e</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 19 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/cryptocurrency-trading-system/tree/main" target="_blank" rel="noopener noreferrer">main</a> · 83d365e · 2025-07-11 · Update README.md</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>This project provides a contrast point for the later CoinGecko version: strategy ideas are easier to reason about once data ingestion and rate limits become real constraints.</p><p>The lasting lesson is specific to this record: The interesting part is designing a pipeline that separates data, signals, risk, and evaluation. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/cryptocurrency-trading-system" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/cryptocurrency-trading-system</a></li><li><a href="https://github.com/johnnietse/cryptocurrency-trading-system" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/cryptocurrency-trading-system/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/cryptocurrency-trading-system/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./seeing-yolo-labels-instead-of-trusting-them-blindly.html"><small>NEWER STORY</small><strong>← Seeing YOLO labels instead of trusting them blindly</strong></a><a class="older" href="./practicing-formal-reasoning-about-software.html"><small>OLDER STORY</small><strong>Practicing formal reasoning about software →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: crypto-concept · Evidence reviewed November 8, 2026</span></footer></main></body></html>

@@ -1,0 +1,218 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A second document-chat experiment explores a local model deployment with a browser interface, worker, and Dockerfile."><title>Moving PDF chat toward a local language model · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Independent &amp; interest projects</p><div class="title-cover"><div><h1>Moving PDF chat toward a local language model</h1><p class="dek">A second document-chat experiment explores a local model deployment with a browser interface, worker, and Dockerfile.</p></div><img src="https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094" alt="Screenshot (2135)" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started May 31, 2025</span><span>Updated September 10, 2025</span><span>~8 min read</span></div><div class="tags"><span class="tag">Python</span><span class="tag">Local LLM</span><span class="tag">Docker</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The repository separates this from the earlier hosted GPT-3.5 PDF chatbot, making it a useful comparison between hosted and local inference.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A second document-chat experiment explores a local model deployment with a browser interface, worker, and Dockerfile.. The repository history snapshot records 43 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The repository separates this from the earlier hosted GPT-3.5 PDF chatbot, making it a useful comparison between hosted and local inference.</p><p>This project sits in Independent &amp; interest projects. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>The spark is control over where documents and model work run, and what the deployment tradeoffs look like.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A second document-chat experiment explores a local model deployment with a browser interface, worker, and Dockerfile.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section"><h2>System sketch</h2><figure class="diagram"><figcaption>The repository separates the browser, document worker, and local model runtime.</figcaption><div class="flow"><div class="flow-node">PDF upload</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Document worker</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Local model</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Answer in browser</div></div><small>Conceptual path only; see the linked repository for the complete implementation.</small></figure></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The following is the project’s own public documentation. It is included as technical context, with links back to its original source.</p><h1 id="local-llm-pdf-chatbot">Local LLM PDF Chatbot</h1>
+<h2 id="web-framework">Web Framework</h2>
+<p><img src="https://img.shields.io/badge/Flask-3.0.3-000000?logo=flask" alt="Flask" loading="lazy"> <img src="https://img.shields.io/badge/Flask_CORS-4.0.0-000000" alt="Flask-CORS" loading="lazy"></p>
+<h2 id="aiml-libraries">AI/ML Libraries</h2>
+<p><img src="https://img.shields.io/badge/LangChain-0.1.16-00A67E" alt="LangChain" loading="lazy"> <img src="https://img.shields.io/badge/ChromaDB-0.4.24-EF4784" alt="ChromaDB" loading="lazy"> <img src="https://img.shields.io/badge/SentenceTransformers-3.0.0-FF6B6B" alt="SentenceTransformers" loading="lazy"> <img src="https://img.shields.io/badge/CTransformers-0.2.27-8A2BE2" alt="CTransformers" loading="lazy"></p>
+<h2 id="system-utilities">System Utilities</h2>
+<p><img src="https://img.shields.io/badge/py--cpuinfo-9.0.0-5D8AA8" alt="py-cpuinfo" loading="lazy"></p>
+<p>This project is a chatbot that allows you to upload PDF documents and ask questions about their content. It uses a locally run, quantized, fine-tuned Large Language Model (LLM) such as TinyLlama-1.1B-Chat or Mistral-7B-Instruct (which are optimized for performance and memory efficiency) to generate responses without needing expensive API keys. While local models offer privacy and cost savings, using a cloud-based API (e.g., OpenAI or DeepSeek) still provides the best performance and accuracy.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>📄 Upload and process PDF documents</li>
+<li>💬 Chat with your documents using natural language</li>
+<li>🧠 Powered by local LLMs (no API costs)</li>
+<li>🌙 Light/dark mode toggle</li>
+<li>🔄 Conversation history</li>
+<li>♻️ Reset chat functionality</li>
+</ul>
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+<li><strong>Python</strong> (Flask backend)</li>
+<li><strong>JavaScript</strong> (Frontend interface)</li>
+<li><strong>LangChain</strong> (Document processing)</li>
+<li><strong>ChromaDB</strong> (Vector storage)</li>
+<li><strong>Sentence Transformers</strong> (Text embeddings)</li>
+<li><strong>CTransformers</strong> (Local LLM interface)</li>
+<li><strong>TinyLlama</strong> (1.1B parameter LLM)</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Python 3.10+</li>
+<li>8GB RAM (minimum)</li>
+<li>2GB free disk space</li>
+</ul>
+<h2 id="setup-instructions">Setup Instructions</h2>
+<ol>
+<li>Clone the repository</li>
+</ol>
+<pre><code>git clone https://github.com/johnnietse/localLLM-pdf-chatbot.git
+cd localLLM-pdf-chatbot</code></pre>
+<ol>
+<li>Create a virtual environment</li>
+</ol>
+<pre><code>python -m venv .venv</code></pre>
+<ul>
+<li>For Linux/Mac:</li>
+</ul>
+<pre><code>source .venv/bin/activate</code></pre>
+<ul>
+<li>For Windows:</li>
+</ul>
+<pre><code>.venv\Scripts\activate</code></pre>
+<ol>
+<li>Install dependencies</li>
+</ol>
+<pre><code>pip install flask flask-cors langchain chromadb sentence-transformers ctransformers py-cpuinfo</code></pre>
+<p>or by installing the required packages by</p>
+<pre><code>pip install --upgrade pip
+pip install -r requirements.txt</code></pre>
+<ol>
+<li>Download the TinyLlama model</li>
+</ol>
+<pre><code># You can certainly change this to your project&#39;s directory, but if you clone this repository you would run this command: `cd build_chatbot_for_your_data`
+cd build_chatbot_for_your_data
+
+# Create models directory
+mkdir models
+
+# Download TinyLlama (Windows PowerShell)
+# by this
+curl -Uri &quot;https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf&quot; `
+     -OutFile &quot;models\tinyllama.gguf&quot;
+
+# or by this through running the PowerShell script file (download_models.ps1) to download the local LLM models into your project&#39;s directory
+.\download_models.ps1</code></pre>
+<ol>
+<li>Project Structure</li>
+</ol>
+<p>chatbot-pdf/ │ ├── build_chatbot_for_your_data/   # Main application folder │   ├── static/                    # Frontend assets: Static files (JS, CSS) │   │   ├── script.js              # Client-side JavaScript (chat logic) │   │   └── style.css              # CSS styling │   │ │   ├── templates/                 # HTML templates │   │   └── index.html             # Main chat interface │   │ │   ├── Dockerfile                 # Docker - Containerization config │   ├── requirements.txt           # Python dependencies │   ├── server.py                  # Main server logic (Flask server) │   ├── server_exercise.py         # For testing or development - Development/test version │   └── worker.py                  # Background task processing, particularly LLM and document processing │ ├── models/                        # Folder/Directory for local LLM models (currently empty) │ ├── .gitattributes                 # Git attributes config ├── .gitignore                     # Files and folders to ignore in Git ├── LICENSE                        # Usage rights ├── README.md                      # Project documentation ├── deployment.yaml                # Kubernetes deployment config ├── download_models.ps1            # PowerShell script to download models ├── pvc.yaml                       # Kubernetes storage config └── service.yaml                   # Kubernetes service definition</p>
+<ol>
+<li>Run the Application</li>
+</ol>
+<pre><code>python build_chatbot_for_your_data/server.py</code></pre>
+<p>Open your web browser and visit: <code>http://localhost:8000</code></p>
+<h2 id="usage-guide">Usage Guide</h2>
+<ol>
+<li>Start Chatting: The chatbot will greet you and ask for a PDF upload</li>
+<li>Upload PDF: Click &quot;Upload File&quot; and select a PDF document</li>
+<li>Ask Questions: Type your questions in the input field</li>
+</ol>
+<p>4.Reset Chat: Use the refresh button to start a new conversation</p>
+<ol>
+<li>Toggle Theme: Switch between light/dark mode using the toggle</li>
+</ol>
+<h2 id="customization-options">Customization Options</h2>
+<h3 id="using-different-models">Using Different Models</h3>
+<ol>
+<li>Download any GGUF format model from TheBloke&#39;s Hugging Face</li>
+<li>Place it in the <code>models/</code> directory</li>
+<li>Update <code>worker.py</code> with the new model path and type:</li>
+</ol>
+<pre><code># For Mistral model
+llm = AutoModelForCausalLM.from_pretrained(
+    &quot;../models/mistral-7b.Q4_K_M.gguf&quot;,
+    model_type=&quot;mistral&quot;,
+    max_new_tokens=1024,
+    temperature=0.1
+    context_length=2048
+)
+
+# For Llama2 model
+llm = AutoModelForCausalLM.from_pretrained(
+    &quot;../models/llama-2-7b.Q4_K_M.gguf&quot;,
+    model_type=&quot;llama&quot;,
+    max_new_tokens=1024,
+    temperature=0.1
+    context_length=2048
+)
+
+# For tinyllama model
+llm = AutoModelForCausalLM.from_pretrained(
+    &quot;../models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf&quot;,
+    model_type=&quot;llama&quot;,
+    max_new_tokens=1024,
+    temperature=0.1
+    context_length=2048
+)</code></pre>
+<h3 id="performance-tuning">Performance Tuning</h3>
+<p>Adjust these parameters in <code>worker.py</code> for better performance:</p>
+<pre><code>llm = AutoModelForCausalLM.from_pretrained(
+    model_path,
+    model_type=&quot;llama&quot;,
+    max_new_tokens=1024,      # Increase for longer responses
+    temperature=0.3,          # Increase for more creative responses
+    context_length=4096,      # Increase for larger documents
+    gpu_layers=40,            # Enable if you have NVIDIA GPU
+    threads=8                 # Use more CPU cores
+)</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li>Model not found:</li>
+</ol>
+<ul>
+<li>Verify model is in <code>models/</code> directory</li>
+<li>Check filename in <code>worker.py</code></li>
+</ul>
+<ol>
+<li>Slow responses:</li>
+</ol>
+<ul>
+<li>Reduce <code>max_new_tokens</code></li>
+<li>Use smaller model</li>
+<li>Add <code>gpu_layers=40</code> if you have NVIDIA GPU</li>
+</ul>
+<ol>
+<li>Memory errors:</li>
+</ol>
+<ul>
+<li>Reduce <code>chunk_size</code> in <code>process_document()</code></li>
+<li>Use smaller model</li>
+<li>Close other memory-intensive applications</li>
+</ul>
+<h3 id="error-messages">Error Messages</h3>
+<ul>
+<li><strong>&quot;Please upload a PDF document first!&quot;</strong>: Upload a document before asking questions</li>
+<li><strong>&quot;File not uploaded correctly&quot;</strong>: Try a different PDF file</li>
+<li><strong>&quot;Error processing document&quot;</strong>: The PDF might be corrupted or encrypted</li>
+</ul>
+<h2 id="screenshots">📸 Screenshots</h2>
+<p><img src="https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094" alt="Screenshot (2135)" loading="lazy"></p>
+<p><img src="https://github.com/user-attachments/assets/36bd5927-bedc-44b5-982a-9cad26139755" alt="Screenshot (2136)" loading="lazy"></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/localLLM-pdf-chatbot/blob/main/build_chatbot_for_your_data/server.py#L10" target="_blank" rel="noopener noreferrer">build_chatbot_for_your_data/server.py (line 10)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>
+
+@app.route(&#39;/&#39;, methods=[&#39;GET&#39;])
+def index():
+    return render_template(&#39;index.html&#39;)
+
+
+@app.route(&#39;/process-message&#39;, methods=[&#39;POST&#39;])
+def process_message_route():
+    user_message = request.json[&#39;userMessage&#39;]
+    bot_response = worker.process_prompt(user_message)
+    return jsonify({&quot;botResponse&quot;: bot_response})
+
+
+@app.route(&#39;/process-document&#39;, methods=[&#39;POST&#39;])
+def process_document_route():
+    if &#39;file&#39; not in request.files:
+        return jsonify({
+            &quot;botResponse&quot;: &quot;File not uploaded correctly. Please try again.&quot;
+        }), 400
+
+    file = request.files[&#39;file&#39;]
+    file_path = file.filename
+    file.save(file_path)
+
+    try:
+        worker.process_document(file_path)
+        return jsonify({
+            &quot;botResponse&quot;: &quot;PDF analyzed! You can now ask questions about the document.&quot;
+        })
+    except Exception as e:
+        return jsonify({
+            &quot;botResponse&quot;: f&quot;Error processing document: {str(e)}&quot;
+        }), 500
+
+
+if __name__ == &quot;__main__&quot;:
+    app.run(debug=True, port=8000, host=&#39;0.0.0.0&#39;)</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from build_chatbot_for_your_data/server.py on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`app`, `route`, `methods`, `GET`, `def`—are useful signposts for following the behavior through the rest of the repository.</p><p>For machine-learning work, the source is only one part of the experiment. Data preparation, labels, split strategy, model configuration, hardware, and evaluation metric determine what the output means. I describe only the pieces visible in code and repository documentation; where the repository does not give a reproducible evaluation setup, I say so instead of inferring model quality from a demo.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><ul>
+<li><strong>Python</strong> (Flask backend)</li>
+</ul></li><li><ul>
+<li>Python 3.10+</li>
+</ul></li><li><h2 id="setup-instructions-1">Setup Instructions</h2></li><li><ol>
+<li>Create a virtual environment</li>
+</ol></li><li><p>python -m venv .venv</p></li><li><ol>
+<li>Install dependencies</li>
+</ol></li><li><p>pip install flask flask-cors langchain chromadb sentence-transformers ctransformers py-cpuinfo</p></li><li><p>pip install --upgrade pip</p></li><li><p>pip install -r requirements.txt</p></li><li><h1 id="or-by-this-through-running-the-powershell-script-file-downloadmodelsps1-to-download-the-local-llm-models-into-your-projects-directory">or by this through running the PowerShell script file (download_models.ps1) to download the local LLM models into your project&#39;s directory</h1></li><li><p>│   ├── requirements.txt           # Python dependencies</p></li><li><ol>
+<li>Run the Application</li>
+</ol></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/1eeec0fcf8ee8feba1ae53afaf91aa744e335c11" target="_blank" rel="noopener noreferrer">Initial clean commit</a></strong><code>1eeec0f</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/cb6b844f3e93fb18562952f7aed5397a50778310" target="_blank" rel="noopener noreferrer">Clean start</a></strong><code>cb6b844</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/6ef733a6e8148abebf390e1449d33c54639c2195" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6ef733a</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/537c09f135be271a0c83083494e154848f5d799d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>537c09f</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/857c7325376e7b922ab033eebdcfe5e3e320aee9" target="_blank" rel="noopener noreferrer">Exclude IDE configs</a></strong><code>857c732</code></div></li><li><time>2025-06-13</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/b76de19b7350009a5e2a0f62326e3da49cc6700b" target="_blank" rel="noopener noreferrer">trying out</a></strong><code>b76de19</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/83980cb3e0903a4cf3213710c08ea2943f4ad1d4" target="_blank" rel="noopener noreferrer">Update Dockerfile</a></strong><code>83980cb</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/a642bca3a959dd53e42b8a505e0925ea2e81c246" target="_blank" rel="noopener noreferrer">Update worker.py</a></strong><code>a642bca</code></div></li></ol><details class="history-details"><summary>Show all 43 commits on main</summary><ol class="timeline compact"><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/1eeec0fcf8ee8feba1ae53afaf91aa744e335c11" target="_blank" rel="noopener noreferrer">Initial clean commit</a></strong><code>1eeec0f</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/cb6b844f3e93fb18562952f7aed5397a50778310" target="_blank" rel="noopener noreferrer">Clean start</a></strong><code>cb6b844</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/8d54f2949a17e0775da6c22b31acd65b2d65592a" target="_blank" rel="noopener noreferrer">Re-add chatbot folder as regular directory</a></strong><code>8d54f29</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/07b3a1875d37dd129bfd89fff04dffc8721dce71" target="_blank" rel="noopener noreferrer">Update .gitignore</a></strong><code>07b3a18</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/fb40e575e981010e7306099a2728af8042e7a890" target="_blank" rel="noopener noreferrer">Update .env</a></strong><code>fb40e57</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/b0c48b3ba21a4619e23ac60b3acf2f872c1e67f1" target="_blank" rel="noopener noreferrer">Redesign the UI</a></strong><code>b0c48b3</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/e85d9e7cf1f9a02257dbdbe60af3f3418d145a63" target="_blank" rel="noopener noreferrer">Create README.md</a></strong><code>e85d9e7</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/c5f9c97f5c55eb0aef4817ca1a40509640c5a227" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c5f9c97</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/33603182ba3cd39a8688b5f56d18b0595f80c8fd" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3360318</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/6ef733a6e8148abebf390e1449d33c54639c2195" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>6ef733a</code></div></li><li><time>2025-05-31</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/3560c470212368ff90dae1c580caafc6a21ba2eb" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3560c47</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/757f01b9eeee3ed6d22ed65799a5454092b88038" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>757f01b</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/8e453494346e0488861101716675938131375542" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>8e45349</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/1e9343a5c359948b3c5af9b27fb07ff9028b223d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1e9343a</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/c703b93de276f401f99ccdb9836631207cb87787" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>c703b93</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/a358f781b960ada94f0a44590c6e004c54981543" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>a358f78</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/fa8903491e259f442f89473d696eb12732da8126" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fa89034</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/ace10a7e1581c6b26b1a5b343bba8ca43cf5f6df" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>ace10a7</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/b119c334e646cdd703a5e99e255b2c610e073aa9" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>b119c33</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/537c09f135be271a0c83083494e154848f5d799d" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>537c09f</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/50199a019549f11bf61c9cc7757fa0211539f9a5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>50199a0</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/3b61bc0bd25bf1379ea422848377f14e48a3c1d9" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3b61bc0</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/40387c20de534c9e1857a84df54dbed492d5c103" target="_blank" rel="noopener noreferrer">Delete main.py</a></strong><code>40387c2</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/4606746fdea03c50f927a1aa7a11e36f7a7686da" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>4606746</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/79c23f7af7673cf433ace72f072b4986ec1cd2e2" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>79c23f7</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/3bedc4ae687fdc78e3616e38032412234a6e7bd6" target="_blank" rel="noopener noreferrer">modify the server_exercise.py script</a></strong><code>3bedc4a</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/0648a6f802be8aef0438677ce4182e478ff1b70c" target="_blank" rel="noopener noreferrer">Create LICENSE</a></strong><code>0648a6f</code></div></li><li><time>2025-06-02</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/ebd98ff5f608c6076e4bf65839a7dc4674dc7ca5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>ebd98ff</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/35359807334037689d93329514a431932946adc8" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3535980</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/857c7325376e7b922ab033eebdcfe5e3e320aee9" target="_blank" rel="noopener noreferrer">Exclude IDE configs</a></strong><code>857c732</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/028cff6c218ac905e01e1c6db0ad6e1883afb43c" target="_blank" rel="noopener noreferrer">Delete build_chatbot_for_your_data/.env</a></strong><code>028cff6</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/de982b04c412700bc53e37eca949e7e7b53fb745" target="_blank" rel="noopener noreferrer">put __pycache__ into .gitignore</a></strong><code>de982b0</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/422f3cdd9c62652252a7272323748dfb2095bbe1" target="_blank" rel="noopener noreferrer">Exclude .idea and __pycache__</a></strong><code>422f3cd</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/fd1d8cf52b8acae1dc34b097c93a85ed2fb2f9b5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>fd1d8cf</code></div></li><li><time>2025-06-03</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/51347e4e7e10d85ea1e7e58e12c10478895b6694" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>51347e4</code></div></li><li><time>2025-06-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/5aa1869647c713a4706d8d05942ef1ce841db637" target="_blank" rel="noopener noreferrer">deploy</a></strong><code>5aa1869</code></div></li><li><time>2025-06-13</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/b76de19b7350009a5e2a0f62326e3da49cc6700b" target="_blank" rel="noopener noreferrer">trying out</a></strong><code>b76de19</code></div></li><li><time>2025-07-09</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/ea11df1e841d2efa1b45d26e04403603396ae63c" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>ea11df1</code></div></li><li><time>2025-07-09</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/7e4949136b49bc8f3305794d6d2c29f86882cf6e" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>7e49491</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/57f7d1ae359e77c61ab4f98ed8c16a0ee7554557" target="_blank" rel="noopener noreferrer">Update script.js</a></strong><code>57f7d1a</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/a1f90d60456e883409156fe43961e1ee72bbf2bf" target="_blank" rel="noopener noreferrer">Update index.html</a></strong><code>a1f90d6</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/83980cb3e0903a4cf3213710c08ea2943f4ad1d4" target="_blank" rel="noopener noreferrer">Update Dockerfile</a></strong><code>83980cb</code></div></li><li><time>2025-09-10</time><div><strong><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commit/a642bca3a959dd53e42b8a505e0925ea2e81c246" target="_blank" rel="noopener noreferrer">Update worker.py</a></strong><code>a642bca</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 43 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/tree/main" target="_blank" rel="noopener noreferrer">main</a> · a642bca · 2025-09-10 · Update worker.py</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The September commits touch the UI, worker, and container setup. The project naturally raises questions about hardware needs, latency, and answer quality that should be measured before making claims.</p><p>The lasting lesson is specific to this record: The spark is control over where documents and model work run, and what the deployment tradeoffs look like. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/localLLM-pdf-chatbot" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/localLLM-pdf-chatbot</a></li><li><a href="https://github.com/johnnietse/localLLM-pdf-chatbot" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/localLLM-pdf-chatbot/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./reworking-the-fyic-2025-event-website-for-its-attendees.html"><small>NEWER STORY</small><strong>← Reworking the FYIC 2025 event website for its attendees</strong></a><a class="older" href="./exploring-a-video-based-virtual-try-on-flow.html"><small>OLDER STORY</small><strong>Exploring a video-based virtual try-on flow →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: local-pdf-chatbot · Evidence reviewed November 8, 2026</span></footer></main></body></html>

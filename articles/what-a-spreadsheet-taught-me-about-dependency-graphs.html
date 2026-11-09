@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A small terminal spreadsheet in C supports cell navigation, formula evaluation, dependency tracking, and circular-reference detection."><title>What a spreadsheet taught me about dependency graphs · Fieldnotes</title><link rel="stylesheet" href="../article.css"></head><body><main class="article"><a class="back" href="../index.html">← All Fieldnotes</a><header class="article-head"><p class="kicker">Coursework &amp; capstone</p><div class="title-cover"><div><h1>What a spreadsheet taught me about dependency graphs</h1><p class="dek">A small terminal spreadsheet in C supports cell navigation, formula evaluation, dependency tracking, and circular-reference detection.</p></div><img src="https://github.com/user-attachments/assets/aa722b36-39ef-4b66-95c4-24ba89b1972b" alt="Fundamental-cell-excel-spreadsheet" loading="eager" decoding="async"></div><div class="meta"><span>Project</span><span>Started January 16, 2025</span><span>Updated March 24, 2026</span><span>~7 min read</span></div><div class="tags"><span class="tag">C</span><span class="tag">Data structures</span><span class="tag">Testing</span></div></header><nav class="toc" aria-label="In this post"><strong>In this post</strong><a href="#why-this-began">Why it began</a><a href="#the-spark">The spark</a><a href="#what-i-learned-and-what-i-would-carry-forward">What I learned</a><a href="#sources-and-related-reading">Sources</a></nav><article class="prose"><section class="story-section"><h2>Before and after, with the evidence boundary visible</h2><div class="before-after"><article><h3>Before · the starting point</h3><p>The README identifies it as a practical software engineering assignment about data structures and algorithms.</p></article><article><h3>After · what the record shows</h3><p>The current public project summary describes A small terminal spreadsheet in C supports cell navigation, formula evaluation, dependency tracking, and circular-reference detection.. The repository history snapshot records 12 default-branch commits. This is the visible documented result; it is not a claim that the system was independently rebuilt, tested, or measured for this article.</p></article></div></section><section class="story-section"><h2 id="why-this-began">Why this began</h2><p>The README identifies it as a practical software engineering assignment about data structures and algorithms.</p><p>This project sits in Coursework &amp; capstone. The account below follows the original brief into the visible implementation and documentation, then uses the repository timeline to separate what the artifacts show from what a retrospective can only infer.</p></section><section class="story-section"><h2 id="the-spark">The spark</h2><p>A spreadsheet looks simple until one cell depends on another. That hidden graph is the interesting part.</p><p>What makes this one hold my attention is that the motivating question has a concrete surface: A small terminal spreadsheet in C supports cell navigation, formula evaluation, dependency tracking, and circular-reference detection.. That gives the work a way to be inspected. A reader can follow a requirement, trace its path into a file or drawing, and ask whether the artifact answers the original need. This is a more useful reason to care than the tool list by itself.</p></section><section class="story-section"><h2>System sketch</h2><figure class="diagram"><figcaption>A spreadsheet is a dependency graph with a user-facing grid.</figcaption><div class="flow"><div class="flow-node">Cell input or formula</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Dependency graph</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Recalculated values</div><span class="arrow" aria-hidden="true">→</span><div class="flow-node">Terminal spreadsheet view</div></div><small>Conceptual path only; see the linked repository for the complete implementation.</small></figure></section><section class="story-section readme"><h2>What the project README actually specifies</h2><p class="small-note">The following is the project’s own public documentation. It is included as technical context, with links back to its original source.</p><h1 id="fundamental-cell-excel-spreadsheet-project">fundamental-cell-excel-spreadsheet-project</h1>
+<p>fundamental-cell-excel-spreadsheet-project is a lightweight spreadsheet application designed to implement core features such as cell navigation, data storage, and formula evaluation. This project was developed as part of a practical software engineering assignment, focusing on designing data structures and algorithms to manage spreadsheet content.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Text, Number, and Formula Support</strong>:  </li>
+<li>Enter text, numeric values, or formulas starting with <code>=</code> in cells.  </li>
+<li>Formulas can reference other cells (e.g., <code>=A1+B2+5</code>).</li>
+</ul>
+<ul>
+<li><strong>Dynamic Cell Updates</strong>:  </li>
+<li>When a cell&#39;s value changes, all dependent cells update automatically.  </li>
+</ul>
+<ul>
+<li><strong>Error Handling</strong>:  </li>
+<li>Handles invalid formulas gracefully.  </li>
+<li>Detects and prevents circular dependencies.</li>
+</ul>
+<ul>
+<li><strong>Editable Cell Representation</strong>:  </li>
+<li>View computed values directly in cells.  </li>
+<li>Edit formulas in the top content bar.</li>
+</ul>
+<h2 id="functional-requirements">Functional Requirements</h2>
+<p>The application fulfills these core requirements:</p>
+<ol>
+<li>Navigate and modify spreadsheet cells.  </li>
+<li>Store text, numbers, and formulas in memory.  </li>
+<li>Evaluate formulas referencing other cells or constants.  </li>
+<li>Update dependent cells dynamically when referenced cells change.  </li>
+</ol>
+<h2 id="non-functional-requirements">Non-Functional Requirements</h2>
+<ul>
+<li><strong>Optimal Algorithms</strong>: Implements the best achievable time complexity based on course-provided tools.  </li>
+<li><strong>Memory Management</strong>: Ensures proper allocation and freeing of memory for dynamic structures.  </li>
+<li><strong>Maintainable Code</strong>: Code is organized, readable, and documented for future maintenance.</li>
+</ul>
+<h2 id="project-structure">Project Structure</h2>
+<ul>
+<li><strong><code>defs.h</code></strong>: Shared type definitions.  </li>
+<li><strong><code>interface.c</code> &amp; <code>interface.h</code></strong>: Code for UI display and user interaction (pre-provided).  </li>
+<li><strong><code>model.c</code> &amp; <code>model.h</code></strong>: Core implementation of spreadsheet features.  </li>
+<li><strong><code>testrunner.c</code> &amp; <code>testrunner.h</code></strong>: Support code for running automated tests.  </li>
+<li><strong><code>tests.c</code> &amp; <code>tests.h</code></strong>: Unit tests for the spreadsheet features.</li>
+</ul>
+<h2 id="usagesetup">Usage/Setup</h2>
+<p><strong>Before cloning the repository, change your working directory to the folder where you want the project to be saved:</strong></p>
+<p>Navigate to the directory where you want to store the project:</p>
+<pre><code>cd /path/to/your/directory</code></pre>
+<ol>
+<li>Clone the repository:  </li>
+</ol>
+<pre><code>git clone https://github.com/johnnietse/fundamental-cell-excel-spreadsheet-project.git
+cd fundamental-cell-excel-spreadsheet-project</code></pre>
+<ol>
+<li>Build the project using CMake:</li>
+</ol>
+<ul>
+<li>Create a build/ directory to keep the build artifacts separate:</li>
+</ul>
+<pre><code>mkdir build
+cd build</code></pre>
+<ul>
+<li>Run CMake to configure the project using the CMakeLists.txt file in the root directory:</li>
+</ul>
+<pre><code>cmake ..</code></pre>
+<ul>
+<li>After configuring the project, build it using:</li>
+</ul>
+<pre><code>cmake --build .</code></pre>
+<h2 id="design-and-implementation">Design and Implementation</h2>
+<ul>
+<li>Data Structures:</li>
+<li>Cells are stored in a structured format to support efficient access and updates.</li>
+<li>Formulas are parsed into components for evaluation and reconstruction.</li>
+</ul>
+<ul>
+<li>Algorithms:</li>
+<li>Handles dependency updates with efficient traversal.</li>
+<li>Detects errors (e.g., circular dependencies, invalid references) robustly.</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>Comprehensive tests validate the following:</p>
+<ul>
+<li>Accurate storage and retrieval of cell contents.</li>
+<li>Proper formula parsing and evaluation.</li>
+<li>Dynamic updates for dependent cells.</li>
+<li>Robust error handling.</li>
+</ul>
+<p>---</p>
+<h2 id="screenshot">📸 Screenshot</h2>
+<p><img src="https://github.com/user-attachments/assets/aa722b36-39ef-4b66-95c4-24ba89b1972b" alt="Fundamental-cell-excel-spreadsheet" loading="lazy"></p></section><section class="story-section"><h2>A small, real code sample</h2><p class="small-note">Excerpt from <a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/blob/main/model.c#L1" target="_blank" rel="noopener noreferrer">model.c (line 1)</a>. Kept short enough to discuss; open the file for context.</p><pre class="code"><code>#include &quot;model.h&quot;
+#include &quot;interface.h&quot;
+#include &lt;ctype.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+static char *my_strndup(const char *s, size_t n) {
+  size_t len = 0;
+  while (len &lt; n &amp;&amp; s[len])
+    len++;
+  char *res = malloc(len + 1);
+  if (!res)
+    return NULL;
+  memcpy(res, s, len);
+  res[len] = &#39;\0&#39;;
+  return res;
+}
+
+typedef enum {
+  CELL_BLANK,
+  CELL_TEXT,
+  CELL_NUMBER,
+  CELL_FORMULA,
+  CELL_FORMULA_ERROR
+} CellType;
+
+typedef enum { TOK_NUMBER, TOK_CELL } TokenType;
+
+typedef struct {
+  TokenType type;
+  double number;
+  struct Cell *cell;
+} Token;
+
+typedef struct Cell {
+  ROW row;
+  COL col;
+  CellType type;
+  char *raw_text; // string user entered</code></pre><section class="story-section"><h2>How to read the code excerpt</h2><p>The excerpt is taken from model.c on the main branch. It is an entry point into the implementation, not a claim that this small window proves the whole system works. The names visible here—`model`, `interface`, `ctype`, `stdbool`, `stddef`—are useful signposts for following the behavior through the rest of the repository.</p><p>To read a code sample responsibly, I ask three questions: what values enter this block, what state does it change, and where is its result consumed? The source file and linked history give those surrounding call sites. If a README or test file describes the expected behavior, that provides a checkable target; otherwise the snippet is evidence about structure, not a result or benchmark.</p></section></section><section class="story-section"><h2>Tools and environment</h2><p>The setup notes below are what the repository documents. They establish the intended environment, not an independent rerun during the archive build.</p><ul><li><ul>
+<li>Detects and prevents circular dependencies.</li>
+</ul></li><li><h2 id="functional-requirements-1">Functional Requirements</h2></li><li><p>The application fulfills these core requirements:</p></li><li><h2 id="non-functional-requirements-1">Non-Functional Requirements</h2></li><li><ul>
+<li><strong><code>testrunner.c</code> &amp; <code>testrunner.h</code></strong>: Support code for running automated tests.  </li>
+</ul></li><li><h2 id="usagesetup-1">Usage/Setup</h2></li><li><ol>
+<li>Build the project using CMake:</li>
+</ol></li><li><ul>
+<li>Run CMake to configure the project using the CMakeLists.txt file in the root directory:</li>
+</ul></li><li><p>cmake ..</p></li><li><p>cmake --build .</p></li><li><ul>
+<li>Detects errors (e.g., circular dependencies, invalid references) robustly.</li>
+</ul></li></ul><p class="small-note">No new build or test was run while generating this article archive.</p></section><section class="story-section"><h2>Reading the commit trail</h2><p>The repository history is a sequence of dated records, not a transcript of every decision. I use it to describe what changed in order, then keep claims about motivation and results tied to the README, source, and discussion. The first and latest changes are linked directly; titles that only say “Update README” are kept as records rather than overinterpreted as technical milestones.</p><ol class="timeline"><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/08411e2dfc30643ef812eb9d9e9a30cc717df602" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>08411e2</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/f4074b5070965c897e98f19c812300fc868debb7" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>f4074b5</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/978c9b99c5765eec3c699d0f0b289e5014fe3616" target="_blank" rel="noopener noreferrer">Remove build directory and update .gitignore</a></strong><code>978c9b9</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/819ff6ae983a9b0bc98c0bd806663b5ad2d9c395" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>819ff6a</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/d42c12ac4db1be6fbdf6bb25365b2faffbaae343" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d42c12a</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/3f521f6333a39112360cd840dcfca48fa22da476" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3f521f6</code></div></li><li><time>2026-03-24</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/68dd24fe77fa1d7c9e32681e5057a13b64763f22" target="_blank" rel="noopener noreferrer">Fix: resolve cascading formula crash and add input validation</a></strong><code>68dd24f</code></div></li></ol><details class="history-details"><summary>Show all 12 commits on main</summary><ol class="timeline compact"><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/08411e2dfc30643ef812eb9d9e9a30cc717df602" target="_blank" rel="noopener noreferrer">Initial commit</a></strong><code>08411e2</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/f4074b5070965c897e98f19c812300fc868debb7" target="_blank" rel="noopener noreferrer">first commit</a></strong><code>f4074b5</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/978c9b99c5765eec3c699d0f0b289e5014fe3616" target="_blank" rel="noopener noreferrer">Remove build directory and update .gitignore</a></strong><code>978c9b9</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/9d2db087d422fd692284e41c2a6fdeb1e9014a66" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>9d2db08</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/ac0ca0e2f7afc9f2c86f101e53d7bee2679cce0a" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>ac0ca0e</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/819ff6ae983a9b0bc98c0bd806663b5ad2d9c395" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>819ff6a</code></div></li><li><time>2025-01-16</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/98b25ca507029b7ad5df4002de7b75a5d8e86133" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>98b25ca</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/21f24951d7a748c55bb83428178ea49125b49edf" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>21f2495</code></div></li><li><time>2025-01-19</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/d42c12ac4db1be6fbdf6bb25365b2faffbaae343" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>d42c12a</code></div></li><li><time>2025-04-22</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/1862b2b1ac203c4cb0dcab7cb434289482c353c5" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>1862b2b</code></div></li><li><time>2025-06-01</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/3f521f6333a39112360cd840dcfca48fa22da476" target="_blank" rel="noopener noreferrer">Update README.md</a></strong><code>3f521f6</code></div></li><li><time>2026-03-24</time><div><strong><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commit/68dd24fe77fa1d7c9e32681e5057a13b64763f22" target="_blank" rel="noopener noreferrer">Fix: resolve cascading formula crash and add input validation</a></strong><code>68dd24f</code></div></li></ol></details></section><section class="story-section"><h2>What the history can—and cannot—tell me</h2><p>For this repository, the recorded default branch is <code>main</code> with 12 commits in the scan snapshot. Branch heads show parallel work and the point each branch had reached. A commit title can establish sequence and scope, but it cannot prove a test passed, a physical prototype worked, or a design was selected for a particular reason; those claims need an artifact or discussion link.</p><details class="history-details"><summary>Branches and scanned branch heads (1)</summary><ul class="branch-list"><li><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/tree/main" target="_blank" rel="noopener noreferrer">main</a> · 68dd24f · 2026-03-24 · Fix: resolve cascading formula crash and add input validation</li></ul></details></section><section class="story-section"><h2 id="what-i-learned-and-what-i-would-carry-forward">What I learned and what I would carry forward</h2><p>The March 2026 commit fixes a cascading formula crash and adds input validation. It is a concrete lesson: reactive behavior needs careful invalid-input and dependency handling.</p><p>The lasting lesson is specific to this record: A spreadsheet looks simple until one cell depends on another. That hidden graph is the interesting part. The next time I meet a similar problem, I would start by writing down the observable behavior, the constraints that define a correct result, and the smallest check that would distinguish a real fix from a plausible-looking change. For a design project, that means making requirements and drawings traceable. For a code contribution, it means connecting the issue, patch, review response, commit, and test output so a maintainer can follow the reasoning without reconstructing it from memory.</p><p>This is also why I keep the limits in the story. A portfolio entry is more credible when it identifies what was done, what the evidence confirms, and which environment or outcome still needs a fresh check. The public history is useful precisely because it lets a reader inspect those boundaries.</p></section><section class="story-section"><h2 id="sources-and-related-reading">Sources and related reading</h2><p>Use these links to inspect the source, original discussion, and primary artifacts. This article is a reflective reading of that public record.</p><ul><li><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet" target="_blank" rel="noopener noreferrer">Original repository · johnnietse/fundamental-cell-excel-spreadsheet</a></li><li><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet" target="_blank" rel="noopener noreferrer">Repository</a></li><li><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/commits/main" target="_blank" rel="noopener noreferrer">Commit history</a></li><li><a href="https://github.com/johnnietse/fundamental-cell-excel-spreadsheet/branches/all" target="_blank" rel="noopener noreferrer">Branches</a></li></ul></section></article><nav class="post-nav" aria-label="Browse posts"><a href="./portfolio-pr-2-updating-the-r-sum-document.html"><small>NEWER STORY</small><strong>← Portfolio PR #2: updating the résumé document</strong></a><a class="older" href="./representing-routes-aircraft-and-airports-in-a-c-flight-planner.html"><small>OLDER STORY</small><strong>Representing routes, aircraft, and airports in a C flight planner →</strong></a></nav><footer class="article-foot"><a href="../index.html">Back to Fieldnotes archive</a><span>Article ID: fundamental-cell · Evidence reviewed November 8, 2026</span></footer></main></body></html>
